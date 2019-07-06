@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>VedSoft.Service</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VedSoft.Utility\VedSoft.Utility.csproj" />
+    <ProjectReference Include="..\VedSoft.Data.Contracts\VedSoft.Data.Contracts.csproj" />
+    <ProjectReference Include="..\VedSoft.Data.Repository\VedSoft.Data.Repository.csproj" />
+    <ProjectReference Include="..\VedSoft.Model\VedSoft.Model.csproj" />
+  </ItemGroup>
+
+</Project>
