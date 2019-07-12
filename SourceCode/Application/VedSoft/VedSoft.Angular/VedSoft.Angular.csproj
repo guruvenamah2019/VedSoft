@@ -1,0 +1,269 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2574F603-4B6C-4A30-BFDD-E3BC09EEDFDF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TypeScriptHTMLApp1</RootNamespace>
+    <AssemblyName>TypeScriptHTMLApp1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.4</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="src\app\admin\model\" />
+    <Folder Include="src\app\admin\services\" />
+    <Folder Include="src\app\core\constant\utility\" />
+    <Folder Include="src\app\public\model\" />
+    <Folder Include="src\app\public\services\" />
+    <Folder Include="src\app\users\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\app\admin\components\admin-index.component.html" />
+    <Content Include="src\app\admin\components\dashboard\dashboard.component.html" />
+    <Content Include="src\app\admin\components\nav\nav.component.html" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\public\components\about\about.component.html" />
+    <Content Include="src\app\public\components\contact\contact.component.html" />
+    <Content Include="src\app\public\components\home\home.component.html" />
+    <Content Include="src\app\public\components\login\login.component.html" />
+    <Content Include="src\app\public\components\nav\nav.component.html" />
+    <Content Include="src\app\public\components\public-index.component.html" />
+    <Content Include="src\app\public\components\services\services.component.html" />
+    <Content Include="src\assets\images\logo.svg" />
+    <Content Include="src\assets\images\logo_mini.svg" />
+    <Content Include="src\assets\images\profile\female\image_1.png" />
+    <Content Include="src\assets\images\profile\female\image_10.png" />
+    <Content Include="src\assets\images\profile\female\image_2.png" />
+    <Content Include="src\assets\images\profile\female\image_3.png" />
+    <Content Include="src\assets\images\profile\female\image_4.png" />
+    <Content Include="src\assets\images\profile\female\image_5.png" />
+    <Content Include="src\assets\images\profile\female\image_6.png" />
+    <Content Include="src\assets\images\profile\female\image_7.png" />
+    <Content Include="src\assets\images\profile\female\image_8.png" />
+    <Content Include="src\assets\images\profile\female\image_9.png" />
+    <Content Include="src\assets\images\profile\male\image_1.png" />
+    <Content Include="src\assets\images\profile\male\image_10.png" />
+    <Content Include="src\assets\images\profile\male\image_2.png" />
+    <Content Include="src\assets\images\profile\male\image_3.png" />
+    <Content Include="src\assets\images\profile\male\image_4.png" />
+    <Content Include="src\assets\images\profile\male\image_5.png" />
+    <Content Include="src\assets\images\profile\male\image_6.png" />
+    <Content Include="src\assets\images\profile\male\image_7.png" />
+    <Content Include="src\assets\images\profile\male\image_8.png" />
+    <Content Include="src\assets\images\profile\male\image_9.png" />
+    <Content Include="src\assets\images\pro_features_bg.svg" />
+    <Content Include="src\assets\images\social-icons\dribbble.svg" />
+    <Content Include="src\assets\images\social-icons\facebook.svg" />
+    <Content Include="src\assets\images\social-icons\instagram.svg" />
+    <Content Include="src\assets\images\social-icons\linkedin.svg" />
+    <Content Include="src\assets\images\social-icons\messenger.svg" />
+    <Content Include="src\assets\images\social-icons\twitter.svg" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\admin\admin-route.ts" />
+    <TypeScriptCompile Include="src\app\admin\admin.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\components\admin-index.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\components\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\components\index.ts" />
+    <TypeScriptCompile Include="src\app\admin\components\nav\nav.component.ts" />
+    <TypeScriptCompile Include="src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\core\constant\service-url\controller-name.constant.ts" />
+    <TypeScriptCompile Include="src\app\core\constant\service-url\index.ts" />
+    <TypeScriptCompile Include="src\app\core\constant\service-url\shared-url.constant.ts" />
+    <TypeScriptCompile Include="src\app\core\directive\string-limit.directive.ts" />
+    <TypeScriptCompile Include="src\app\core\enums\language.enum.ts" />
+    <TypeScriptCompile Include="src\app\core\guards\auth.guard.ts" />
+    <TypeScriptCompile Include="src\app\core\guards\index.ts" />
+    <TypeScriptCompile Include="src\app\core\guards\admin.guard.ts" />
+    <TypeScriptCompile Include="src\app\core\interceptor\error.interceptor.ts" />
+    <TypeScriptCompile Include="src\app\core\interceptor\fake-backend.ts" />
+    <TypeScriptCompile Include="src\app\core\interceptor\index.ts" />
+    <TypeScriptCompile Include="src\app\core\interceptor\response-interceptor.ts" />
+    <TypeScriptCompile Include="src\app\core\interceptor\token.interceptor.ts" />
+    <TypeScriptCompile Include="src\app\core\models\growl-message-configuration.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\boolean.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\index.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\integer-response.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\language.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\module-url.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\option.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\request-input-id.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\request.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\response.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\result.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\status.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\shared-model\tokens.model.ts" />
+    <TypeScriptCompile Include="src\app\core\models\user-model\index.ts" />
+    <TypeScriptCompile Include="src\app\core\models\user-model\user-base.model.ts" />
+    <TypeScriptCompile Include="src\app\core\pipes\limit-to.pipe.ts" />
+    <TypeScriptCompile Include="src\app\core\pipes\orderby.pipe.ts" />
+    <TypeScriptCompile Include="src\app\core\pipes\parse-html.pipe.ts" />
+    <TypeScriptCompile Include="src\app\core\pipes\string-search.pipe.ts" />
+    <TypeScriptCompile Include="src\app\core\services\auth.service.ts" />
+    <TypeScriptCompile Include="src\app\core\services\base.service.ts" />
+    <TypeScriptCompile Include="src\app\core\services\index.ts" />
+    <TypeScriptCompile Include="src\app\core\services\sort-by.service.ts" />
+    <TypeScriptCompile Include="src\app\core\services\user.service.ts" />
+    <TypeScriptCompile Include="src\app\public\components\about\about.component.ts" />
+    <TypeScriptCompile Include="src\app\public\components\contact\contact.component.ts" />
+    <TypeScriptCompile Include="src\app\public\components\home\home.component.ts" />
+    <TypeScriptCompile Include="src\app\public\components\index.ts" />
+    <TypeScriptCompile Include="src\app\public\components\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\public\components\nav\nav.component.ts" />
+    <TypeScriptCompile Include="src\app\public\components\public-index.component.ts" />
+    <TypeScriptCompile Include="src\app\public\components\services\services.component.ts" />
+    <TypeScriptCompile Include="src\app\public\public-route.ts" />
+    <TypeScriptCompile Include="src\app\public\public.module.ts" />
+    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="src\environments\environment.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\test.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\app\app.component.scss" />
+    <Content Include="src\assets\.gitkeep" />
+    <Content Include="src\styles.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="angular.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\assets\fonts\Label\Label-Regular.ttf" />
+    <Content Include="src\assets\scss\demo_1\partials\_footer.scss" />
+    <Content Include="src\assets\scss\demo_1\partials\_header.scss" />
+    <Content Include="src\assets\scss\demo_1\partials\_sidebar.scss" />
+    <Content Include="src\assets\scss\demo_1\style.scss" />
+    <Content Include="src\assets\scss\demo_1\_layout.scss" />
+    <Content Include="src\assets\scss\demo_1\_variables.scss" />
+    <Content Include="src\assets\scss\shared\components\_badge.scss" />
+    <Content Include="src\assets\scss\shared\components\_breadcrumb.scss" />
+    <Content Include="src\assets\scss\shared\components\_button.scss" />
+    <Content Include="src\assets\scss\shared\components\_card.scss" />
+    <Content Include="src\assets\scss\shared\components\_checkbox-radio.scss" />
+    <Content Include="src\assets\scss\shared\components\_dropdown.scss" />
+    <Content Include="src\assets\scss\shared\components\_input.scss" />
+    <Content Include="src\assets\scss\shared\components\_progress.scss" />
+    <Content Include="src\assets\scss\shared\components\_table.scss" />
+    <Content Include="src\assets\scss\shared\components\_timeline.scss" />
+    <Content Include="src\assets\scss\shared\components\_tooltip.scss" />
+    <Content Include="src\assets\scss\shared\core\mixins\vendors\_no-ui-slider.scss" />
+    <Content Include="src\assets\scss\shared\core\mixins\_animation.scss" />
+    <Content Include="src\assets\scss\shared\core\mixins\_background.scss" />
+    <Content Include="src\assets\scss\shared\core\mixins\_misc.scss" />
+    <Content Include="src\assets\scss\shared\core\mixins\_mixins.scss" />
+    <Content Include="src\assets\scss\shared\core\mixins\_modularscale.scss" />
+    <Content Include="src\assets\scss\shared\core\mixins\_typography.scss" />
+    <Content Include="src\assets\scss\shared\core\_animation.scss" />
+    <Content Include="src\assets\scss\shared\core\_fonts.scss" />
+    <Content Include="src\assets\scss\shared\core\_reset.scss" />
+    <Content Include="src\assets\scss\shared\core\_spacing.scss" />
+    <Content Include="src\assets\scss\shared\core\_typography.scss" />
+    <Content Include="src\assets\scss\shared\core\_variables.scss" />
+    <Content Include="src\assets\scss\shared\pages\_auth-theme.scss" />
+    <Content Include="src\assets\scss\shared\pages\_dashboard.scss" />
+    <Content Include="src\assets\scss\shared\pages\_docs.scss" />
+    <Content Include="src\assets\scss\shared\pages\_error.scss" />
+    <Content Include="src\assets\scss\shared\style.scss" />
+    <Content Include="src\assets\scss\shared\_demo.scss" />
+    <Content Include="src\assets\scss\shared\_template.scss" />
+    <Content Include="src\assets\scss\shared\_utilities.scss" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10202</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50325/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
