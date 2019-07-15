@@ -6,10 +6,10 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core'
 })
 
 
-export class DashboardComponent  {
+export class AdminDashboardComponent  {
    
     constructor() {
-        console.log("DashboardComponent")
+        console.log("AdminDashboardComponent")
     }
    
 
