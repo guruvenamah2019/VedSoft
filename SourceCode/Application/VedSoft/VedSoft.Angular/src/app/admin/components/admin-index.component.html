@@ -1,2 +1,16 @@
-﻿<router-outlet></router-outlet>
+﻿<nav class="t-header">
+    <ved-admin-header></ved-admin-header>
+</nav>
+<div class="page-body">
+    <div class="sidebar">
+        <ved-admin-sidebar></ved-admin-sidebar>
+    </div>
+    <div class="page-content-wrapper">
+            <div class="page-content-wrapper-inner">
+                    <router-outlet></router-outlet>
+            </div>
+
+            <ved-admin-footer></ved-admin-footer>
+    </div>
+</div>
 

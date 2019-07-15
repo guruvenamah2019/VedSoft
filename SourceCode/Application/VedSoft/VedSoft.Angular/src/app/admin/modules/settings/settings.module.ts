@@ -14,14 +14,11 @@ import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettin
         SubjectSettingsComponent
     ],
     imports: [
-        RouterModule.forChild([
-            // { path: 'requisitioning', redirectTo: "requisitioning/dashboard", pathMatch: "full" },
-           //  { path: '', component: AdminSettingsIndexComponent, children: ADMIN_SETTINGS_ROUTES, canActivate: [AdminGuard] }
-         ])
+        RouterModule.forChild(ADMIN_SETTINGS_ROUTES)
     ],
     providers: [
     ],
-    exports: [AdminSettingsIndexComponent]
+    exports: [AdminSettingsIndexComponent, RouterModule]
 
 })
 export class AdminSettingsModule {
