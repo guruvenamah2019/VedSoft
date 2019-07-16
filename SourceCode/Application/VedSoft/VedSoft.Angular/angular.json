@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/scss/shared/style.scss",
+              "src/assets/scss/shared/style.scss" ,
               "src/assets/scss/demo_1/style.scss",
               "node_modules/@mdi/font/scss/materialdesignicons.scss"
             ],
