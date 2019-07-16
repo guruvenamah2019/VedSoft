@@ -1,9 +1,15 @@
-﻿<div class="grid">
+﻿<div class="modal-header new_p0p_qq">
+    <button type="button" class="close clsebtn_newdesign" (click)="bsModalRef.hide()" data-dismiss="modal" >&times;</button>
+    <h4 class="modal-title">Add Standard</h4>
+</div>
+<div class="modal-body feedback-modal-body">
+
+<div class="grid">
         <p class="grid-header demo-wrapper">
             <span >Standards Settings</span>  
             <span class="float-right  btn btn-dark has-icon btn-rounded">
                 <i class="mdi mdi-import"></i>Import</span>
-            <span (click)="addStandard()" class="float-right btn btn-success has-icon btn-rounded">
+            <span class="float-right btn btn-success has-icon btn-rounded">
                 <i class="mdi mdi-account-plus-outline"></i>Add</span>
                 <span class="float-none"></span>
 
@@ -139,3 +145,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="modal-footer height56px">
+        <button type="button" class="buttonClass floatRight margin-top-5px margin-right10px  btn-new-disabled"  ><span>
+          Submit
+        </span></button>
+     </div>

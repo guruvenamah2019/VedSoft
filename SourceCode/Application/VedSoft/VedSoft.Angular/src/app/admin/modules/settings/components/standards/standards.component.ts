@@ -1,5 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AddStandardComponent } from '../add-standard/add-standard.component';
+
 
 
 @Component({
@@ -7,22 +10,21 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class StandardsSettingsComponent implements OnInit {
-    pageTitle: string = "login";
-    id: string;
-    //constructor(private _router: Router, private _activatedRoute: ActivatedRoute) {
-    //    this.id = _activatedRoute.snapshot.params["id"];
-    //}
-    //ngOnInit() {
-    //}
-
-    onNavigate() {
-        this._router.navigate(['/'], { queryParams: { "ram": 1 } });
-    }
-    constructor(private _router: Router, private _activatedRoute: ActivatedRoute) {
+   
+    bsModalRef: BsModalRef;
+    constructor(private modalService: BsModalService) {
         console.log("AdminDashboardIndexComponent");
         
     }
     ngOnInit() {
+    }
+
+    addStandard():void{
+        const initialState = {
+           // model: model
+        };
+        this.bsModalRef = this.modalService.show(AddStandardComponent, { ignoreBackdropClick: true, initialState });
+
     }
     
 }

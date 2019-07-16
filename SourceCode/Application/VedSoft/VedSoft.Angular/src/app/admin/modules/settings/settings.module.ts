@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthGuard, AdminGuard } from "../../../core/guards/index";
 import { ADMIN_SETTINGS_ROUTES } from "./settings-route"
-import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettingsComponent, CourseSettingsComponent, StandardsSettingsComponent } from "./components/index"
+import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettingsComponent, 
+    CourseSettingsComponent, StandardsSettingsComponent, AddStandardComponent } from "./components/index"
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 
 
@@ -13,10 +15,15 @@ import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettin
         OrganizationSettingsComponent,
         SubjectSettingsComponent,
         CourseSettingsComponent,
-        StandardsSettingsComponent
+        StandardsSettingsComponent,
+        AddStandardComponent
     ],
     imports: [
+        ModalModule.forRoot(),
         RouterModule.forChild(ADMIN_SETTINGS_ROUTES)
+    ],
+    entryComponents: [
+        AddStandardComponent
     ],
     providers: [
     ],
