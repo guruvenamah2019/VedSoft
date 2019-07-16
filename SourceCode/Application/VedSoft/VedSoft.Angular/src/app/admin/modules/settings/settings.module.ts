@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthGuard, AdminGuard } from "../../../core/guards/index";
 import { ADMIN_SETTINGS_ROUTES } from "./settings-route"
-import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettingsComponent } from "./components/index"
+import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettingsComponent, CourseSettingsComponent, StandardsSettingsComponent } from "./components/index"
 
 
 
@@ -11,7 +11,9 @@ import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettin
     declarations: [
         AdminSettingsIndexComponent,
         OrganizationSettingsComponent,
-        SubjectSettingsComponent
+        SubjectSettingsComponent,
+        CourseSettingsComponent,
+        StandardsSettingsComponent
     ],
     imports: [
         RouterModule.forChild(ADMIN_SETTINGS_ROUTES)
