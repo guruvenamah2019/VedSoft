@@ -4,10 +4,7 @@ import { AuthGuard, AdminGuard } from "../../../core/guards/index";
 import { ADMIN_SETTINGS_ROUTES } from "./settings-route"
 import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettingsComponent, 
     CourseSettingsComponent, StandardsSettingsComponent, AddStandardComponent } from "./components/index"
-import { ModalModule, BsModalService,BsDropdownModule  } from 'ngx-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-
+import { SharedModule } from "../../../shared/shared.module"
 
 
 
@@ -23,10 +20,7 @@ import { CommonModule } from '@angular/common';
         AddStandardComponent
     ],
     imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        ModalModule.forRoot(),
-        BsDropdownModule.forRoot(),
+        SharedModule,
         RouterModule.forChild(ADMIN_SETTINGS_ROUTES)
     ],
     entryComponents: [

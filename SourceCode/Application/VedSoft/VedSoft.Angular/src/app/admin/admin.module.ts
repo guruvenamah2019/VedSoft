@@ -3,7 +3,8 @@ import { AdminIndexComponent,AdminFooterComponent,AdminHeaderComponent,AdminSide
 import { RouterModule } from '@angular/router';
 import { AuthGuard, AdminGuard } from "../core/guards/index";
 import {AdminSettingsModule} from "./modules/settings/settings.module";
-import { ADMIN_ROUTES } from "./admin-route"
+import { ADMIN_ROUTES } from "./admin-route";
+import { SharedModule } from "../shared/shared.module"
 
 
 
@@ -13,6 +14,7 @@ import { ADMIN_ROUTES } from "./admin-route"
         AdminFooterComponent,AdminHeaderComponent,AdminSidebarComponent, AdminDashboardComponent
     ],
     imports: [
+        SharedModule,
         AdminSettingsModule,
         RouterModule.forChild(ADMIN_ROUTES)
     ],

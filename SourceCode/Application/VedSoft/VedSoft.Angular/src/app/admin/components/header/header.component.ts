@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class AdminHeaderComponent implements OnInit {
-
+    searchForm:FormGroup;
     constructor(private _router: Router, private _activatedRoute: ActivatedRoute) {
         console.log("AdminHeaderComponent");
         
