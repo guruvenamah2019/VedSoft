@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -10,11 +10,15 @@ import { FormGroup } from '@angular/forms';
 
 export class AdminHeaderComponent implements OnInit {
     searchForm:FormGroup;
-    constructor(private _router: Router, private _activatedRoute: ActivatedRoute) {
+    constructor(  private formBuilder: FormBuilder) {
         console.log("AdminHeaderComponent");
         
     }
     ngOnInit() {
-    }
+        this.searchForm = this.formBuilder.group({
+          searchKey: ['', Validators.required]
+        });
     
+      }
+      get f() { return this.searchForm.controls; }
 }
