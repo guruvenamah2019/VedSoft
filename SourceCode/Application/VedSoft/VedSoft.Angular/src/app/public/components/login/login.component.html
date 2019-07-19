@@ -12,28 +12,28 @@
               <div class="col-lg-7 col-md-8 col-sm-9 col-12 mx-auto form-wrapper">
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                   <div class="form-group input-rounded">
-                    <input type="text" formControlName="username" class="form-control" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <input type="text" formControlName="username" class="form-control" placeholder="{{'PUBLIC.LOGIN_PAGE.USERNAME'|translate}}" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                      <div *ngIf="f.username.errors.required">Username is required</div>
+                      <div *ngIf="f.username.errors.required">{{'PUBLIC.LOGIN_PAGE.MGS_USERNAME_REQUIRED'|translate}}</div>
                     </div>
                   </div>
                   <div class="form-group input-rounded">
-                    <input type="password" formControlName="password" placeholder="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <input type="password" formControlName="password" placeholder="{{'PUBLIC.LOGIN_PAGE.PASSWORD'|translate}}" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <div *ngIf="f.password.errors.required">Password is required</div>
+                      <div *ngIf="f.password.errors.required">{{'PUBLIC.LOGIN_PAGE.MGS_PASSWORD_REQUIRED'|translate}}</div>
                     </div>
                   </div>
                   <div class="form-inline">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" class="form-check-input" />Remember me <i class="input-frame"></i>
+                        <input type="checkbox" class="form-check-input" />{{'PUBLIC.LOGIN_PAGE.REMEMBER_ME'|translate}} <i class="input-frame"></i>
                       </label>
                     </div>
                   </div>
 
                   <button [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
+                    {{'PUBLIC.LOGIN'|translate}}
                   </button>
                   <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
                 </form>

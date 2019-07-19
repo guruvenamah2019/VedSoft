@@ -7,6 +7,7 @@ import { AuthGuard, AdminGuard } from './core/guards/index';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptor/index';
 import { fakeBackendProvider } from '../app/core/interceptor/fake-backend';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,19 +15,20 @@ import { fakeBackendProvider } from '../app/core/interceptor/fake-backend';
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
-    HttpClientModule
+    //HttpClientModule
   ],
   providers: [
-    BaseService,
-    UserService,
+    //BaseService,
+    //UserService,
     //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    AuthGuard,
-    AdminGuard,
-    AuthService,
-    fakeBackendProvider
+    //{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    //AuthGuard,
+    //AdminGuard,
+    //AuthService,
+    //fakeBackendProvider
 
   ],
   bootstrap: [AppComponent]

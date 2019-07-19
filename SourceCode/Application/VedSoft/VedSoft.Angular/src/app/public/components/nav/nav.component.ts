@@ -1,5 +1,6 @@
 ﻿
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     templateUrl: 'nav.component.html',
@@ -9,8 +10,11 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core'
 
 export class PublicNavigationComponent  {
    
-    constructor() {
+    constructor(public translate: TranslateService) {
         console.log("PublicNavigationComponent")
+    }
+    userLanguage(lan:string){
+        this.translate.use(lan);
     }
    
 
