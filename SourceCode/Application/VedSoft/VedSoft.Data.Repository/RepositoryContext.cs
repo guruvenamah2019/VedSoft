@@ -14,5 +14,8 @@ namespace VedSoft.Data.Repository
         }
 
         public DbSet<CustomerModelDB> Customer { get; set; }
+        public DbSet<UserDetailsDB> UserDetails { get; set; }
+        public DbSet<UserMasterDB> User { get; set; }
+        public DbSet<UserLoginDetailsDB> UserLoginDetails { get; set; }
     }
 }

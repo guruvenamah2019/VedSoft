@@ -12,4 +12,12 @@ namespace VedSoft.Utility.Constants
 
         public const string ActionGetCustomerDetails = "GetCustomerDetails";
     }
+
+    public class LoginAPIAction
+    {
+        public const string RoutePrefixLogin = "api/Login";
+
+        public const string ActionAuthenticate = "Authenticate";
+        public const string ActionRefreshToken = "RefreshToken";
+    }
 }

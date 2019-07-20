@@ -47,9 +47,19 @@ namespace VedSoft.Business.Master
                                     .FindByCondition(x => x.CustomerId == input.CustomerId)
                                     .FirstOrDefault();
             
-            return new CustomerModel { Code=customerDetails.Code, Address=customerDetails.Address, Active=customerDetails.Active, ContactNumber=customerDetails.ContactNumber,
-             CreatedBy=customerDetails.CreatedBy, CreatedDate=customerDetails.CreatedDate, CustomerId=customerDetails.CustomerId, Description=customerDetails.Description,
-             Name=customerDetails.Name, OtherInfo=customerDetails.OtherInfo, SubDomain=customerDetails.SubDomain};
+            return new CustomerModel {
+                Code =customerDetails.Code,
+                Address =customerDetails.Address,
+                Active =customerDetails.Active,
+                ContactNumber =customerDetails.ContactNumber,
+                CreatedBy=customerDetails.CreatedBy,
+                CreatedDate =customerDetails.CreatedDate,
+                CustomerId =customerDetails.CustomerId,
+                Description =customerDetails.Description,
+                Name=customerDetails.Name,
+                OtherInfo =customerDetails.OtherInfo,
+                SubDomain =customerDetails.SubDomain
+            };
 
         }
     }

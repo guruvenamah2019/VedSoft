@@ -11,6 +11,7 @@ using VedSoft.Business.Engine.Master;
 using VedSoft.Business.Master;
 using VedSoft.Utility.Constants;
 using VedSoft.Logger;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VedSoft.API.Controllers
 {
@@ -81,6 +82,21 @@ namespace VedSoft.API.Controllers
             });
 
             return result;
+        }
+
+        [HttpGet]
+        [Route("TestForToken")]
+        [Authorize]
+        public string TestForToken()
+        {
+            return "TestForToken Success";
+        }
+
+        [HttpGet]
+        [Route("Test")]
+        public string Test()
+        {
+            return "Test Success";
         }
     }
 }

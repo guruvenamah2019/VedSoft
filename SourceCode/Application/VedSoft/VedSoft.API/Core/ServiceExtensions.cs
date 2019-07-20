@@ -12,6 +12,13 @@ using VedSoft.Logger;
 using Swashbuckle.AspNetCore.Swagger;
 using VedSoft.Business.Engine.Master;
 using VedSoft.Business.Master;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using VedSoft.API.Util;
+using VedSoft.Business.Login;
+using VedSoft.Business.Login;
+using VedSoft.API.Util.Token;
 
 namespace VedSoft.API.Core
 {
@@ -89,7 +96,51 @@ namespace VedSoft.API.Core
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IMasterBusinessEngine, MasterBusinessEngine>();
             services.AddScoped<IMasterBusiness, MasterBusiness>();
+            services.AddScoped<ILoginBusinessEngine, LoginBusinessEngine>();
+            services.AddScoped<ILoginBusiness, LoginBusiness>();
+            services.AddTransient<ITokenService, TokenService>();
             services.AddSingleton<IVedSoftLogger, Logger.Logger>();
+        }
+
+        //To configure the JWT token
+        public static void ConfigureJWTToken(this IServiceCollection services)
+        {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "bearer";
+            }).AddJwtBearer("bearer", options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigKey.JWTSecurityKey)),
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero //the default for this setting is 5 minutes
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                        {
+                            context.Response.Headers.Add("Token-Expired", "true");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+        }
+
+        public static void ConfigureAppSettings(this IServiceCollection services, IConfiguration config)
+        {
+            var appConfigValue = config.GetSection("AppSettings");
+            ConfigKey.JWTSecurityKey= appConfigValue.GetSection("JWTSecurityKey").Value;
+            ConfigKey.JWTAccessTokenDurationInSeconds= Convert.ToInt32(appConfigValue.GetSection("JWTAccessTokenDurationInSeconds").Value);
+            ConfigKey.JWTTokenAudience= appConfigValue.GetSection("JWTTokenAudience").Value;
+            ConfigKey.JWTTokenIssuer = appConfigValue.GetSection("JWTTokenIssuer").Value;
         }
     }
 }

@@ -22,6 +22,25 @@ namespace VedSoft.Utility.Constants
         {
             get { return "en-US"; }
         }
-
     }
+
+    public enum LoginStatusConstants
+    {
+        Success=1,
+        InvalidCredentials=2,
+        PasswordExpired=3,
+        LoginAttemptExceeded=4,
+        TemproryPassword=5,
+        InActive = 6,
+        InvalidRefreshToken=7
+    }
+
+    public class CommonConstants
+    {
+        public const int UserLoginAttemptsCountExceeded = 5;
+        public const int ActiveStatus = 1;
+        public const int Success = 1;
+        public const string UserLoginDetailsIdClaim  = "UserLoginDetailsIdClaim";
+    }
+        
 }

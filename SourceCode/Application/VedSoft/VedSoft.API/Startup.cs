@@ -37,6 +37,11 @@ namespace VedSoft.API
             services.ConfigureMySqlContext(Configuration);
             //services.ConfigureRepositoryWrapper();
             services.ConfigureDependencyInjection();
+            services.ConfigureJWTToken();
+            //services.AddSingleton<IConfiguration>(Configuration);
+            services.ConfigureAppSettings(Configuration);
+
+            //VedSoft.API.Util.ConfigKey.Config = Configuration;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +52,7 @@ namespace VedSoft.API
                 app.UseDeveloperExceptionPage();
             }
 
-            
+            app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

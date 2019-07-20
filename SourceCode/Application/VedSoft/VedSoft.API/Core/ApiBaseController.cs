@@ -72,7 +72,6 @@ namespace VedSoft.API.Controllers
                 httpStatusCodeOnError = HttpStatusCode.Unauthorized;
                 isExceptionOccured = true;
             }
-             
             catch (WebException ex)
             {
                 if (ex.Response != null)
@@ -105,7 +104,7 @@ namespace VedSoft.API.Controllers
             //Log the content
             if (isExceptionOccured)
             {
-           this.ILogger.LogError(logDescription);
+                this.ILogger.LogError(logDescription);
             }
             else
             {

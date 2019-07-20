@@ -6,6 +6,8 @@ using VedSoft.Data.Contracts.Wrapper;
 using VedSoft.Data.Repository.Repository;
 using Microsoft.EntityFrameworkCore;
 using VedSoft.Data.Contracts.Master;
+using VedSoft.Data.Repository.Repository.User;
+using VedSoft.Data.Contracts.User;
 
 namespace VedSoft.Data.Repository
 {
@@ -13,6 +15,9 @@ namespace VedSoft.Data.Repository
     {
         private RepositoryContext _repoContext;
         private ICustomerRepository _customerRepository;
+        private IUserRepository _userRepository;
+        private IUserDetailsRepository _userDetailsRepository;
+        private IUserLoginDetailsRepository _userLoginDetailsRepository;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -33,7 +38,31 @@ namespace VedSoft.Data.Repository
         {
             get
             {
-                return _customerRepository == null ? new CustomerRepository(_repoContext) : _customerRepository;
+                return _customerRepository ?? new CustomerRepository(_repoContext);
+            }
+        }
+
+        public IUserRepository UserRepository
+        {
+            get
+            {
+                return _userRepository ?? new UserRepository(_repoContext);
+            }
+        }
+
+        public IUserDetailsRepository UserDetailsRepository
+        {
+            get
+            {
+                return _userDetailsRepository ?? new UserDetailsRepository(_repoContext);
+            }
+        }
+
+        public IUserLoginDetailsRepository UserLoginDetailsRepository
+        {
+            get
+            {
+                return _userLoginDetailsRepository ?? new UserLoginDetailsRepository(_repoContext);
             }
         }
     }
