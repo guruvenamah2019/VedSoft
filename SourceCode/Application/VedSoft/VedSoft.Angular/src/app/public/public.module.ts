@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from "../core/guards/auth.guard";
 import { SharedModule } from "../shared/shared.module"
 import { PUBLIC_ROUTES } from "./public-route"
+import { EncryptionModule } from '../encryption/encryption.module';
 
 
 
@@ -16,6 +17,7 @@ import { PUBLIC_ROUTES } from "./public-route"
     ],
   imports: [
     SharedModule,
+    EncryptionModule,
         RouterModule.forChild([
             // { path: 'requisitioning', redirectTo: "requisitioning/dashboard", pathMatch: "full" },
              { path: '', redirectTo: "login" },

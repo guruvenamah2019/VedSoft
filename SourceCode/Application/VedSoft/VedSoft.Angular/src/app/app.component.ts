@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BrowserInfoService } from './core/services';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'login-template';
+
+
+  constructor(private browserInfo: BrowserInfoService, public translate: TranslateService) {
+
+
+    browserInfo.getClinetIdAddress().subscribe(x => {
+      console.log(JSON.stringify(x));
+    });
+  }
+
 }

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { Tokens } from "../models/shared-model/tokens.model"
+import { TokenModel } from "../models/shared-model/tokens.model"
 
-import { UserBaseModel } from "../models/user-model";
+import { LoginRequestModel } from "../models/user-model";
 import { Token } from '@angular/compiler';
 
-const users: UserBaseModel[] = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+const users: LoginRequestModel[] = [{  Username: 'Vedsoft', Password: '65f73b60bcaef6644f0ad34b8dc59b564a652c8c' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -30,22 +30,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
-            }    
+            }
         }
 
         // route functions
 
-      function authenticate() {
-        const { username, password } = body;
-        const user = users.find(x => x.username === username && x.password === password);
-        if (!user) return error('Username or password is incorrect');
-        let authTokan: Tokens = {
-          jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-          refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-        };
+        function authenticate() {
+            const {LoginSourceInfo, Username, Password } = body;
+            const user = users.find(x => x.Username === Username && x.Password === Password);
+            if (!user) return error('Username or password is incorrect');
+            let authTokan: TokenModel = {
+                jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+                refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+            };
 
-        return ok(authTokan);
-      }
+            return ok(authTokan);
+        }
 
         function getUsers() {
             if (!isLoggedIn()) return unauthorized();
