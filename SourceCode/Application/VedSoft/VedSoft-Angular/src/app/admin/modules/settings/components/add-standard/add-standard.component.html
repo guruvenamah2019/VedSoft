@@ -1,0 +1,33 @@
+﻿<div class="modal-header new_p0p_qq">
+  <button type="button" class="close clsebtn_newdesign" (click)="bsModalRef.hide()"
+    data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body feedback-modal-body">
+
+  <div class="grid">
+    <p class="grid-header">Add/Edit Standard</p>
+    <div class="grid-body">
+      <div class="item-wrapper">
+        <form [formGroup]="standardForm" (ngSubmit)="onSubmit()">
+          <div class="form-group input-rounded">
+            <input type="text" formControlName="standard" class="form-control" placeholder="standard" [ngClass]="{ 'is-invalid': submitted && f.standard.errors }" />
+            <div *ngIf="submitted && f.standard.errors" class="invalid-feedback">
+              <div *ngIf="f.standard.errors.required">standard is required</div>
+            </div>
+          </div>
+          
+
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Submit
+          </button>
+          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer height56px">
+
+</div>

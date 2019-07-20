@@ -1,0 +1,61 @@
+/*!
+
+=========================================================
+* Paper Dashboard Angular - v2.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/paper-dashboard-angular
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-angular/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+@import 'vedsoft/variables';
+@import 'vedsoft/mixins';
+
+// Plugins CSS
+@import "vedsoft/plugins/plugin-animate-bootstrap-notify";
+@import "vedsoft/plugins/plugin-perfect-scrollbar";
+
+// Core CSS
+@import "vedsoft/buttons";
+@import "vedsoft/inputs";
+@import "vedsoft/typography";
+@import "vedsoft/misc";
+@import "vedsoft/checkboxes-radio";
+
+
+// components
+@import "vedsoft/navbar";
+@import "vedsoft/page-header";
+@import "vedsoft/dropdown";
+@import "vedsoft/alerts";
+@import "vedsoft/images";
+@import "vedsoft/nucleo-outline";
+@import "vedsoft/tables";
+@import "vedsoft/sidebar-and-main-panel";
+@import "vedsoft/footers";
+@import "vedsoft/fixed-plugin";
+
+// cards
+@import "vedsoft/cards";
+@import "vedsoft/cards/card-plain";
+@import "vedsoft/cards/card-chart";
+@import "vedsoft/cards/card-user";
+@import "vedsoft/cards/card-map";
+@import "vedsoft/cards/card-stats";
+
+// angular differences
+@import "vedsoft/angular/plugin-ngx-toastr";
+@import "vedsoft/angular/sidebar-and-main-panel";
+@import "vedsoft/angular/dropdown";
+@import "vedsoft/angular/inputs";
+@import "vedsoft/angular/fixed-plugin";
+
+@import "vedsoft/responsive";

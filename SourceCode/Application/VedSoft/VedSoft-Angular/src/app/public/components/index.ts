@@ -1,0 +1,7 @@
+export {PublicIndexComponent} from "./public-index.component"
+export {LoginComponent} from "./login/login.component"
+export {PublicNavigationComponent} from "./nav/nav.component"
+export{PublicAboutComponent } from "./about/about.component"
+export{ PublicHomeComponent} from "./home/home.component"
+export{PublicContactComponent} from "./contact/contact.component"
+export{PublicServicesComponent} from "./services/services.component"

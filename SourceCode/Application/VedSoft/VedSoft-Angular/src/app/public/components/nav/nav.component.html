@@ -1,0 +1,47 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['./home']" [routerLinkActive]="'is-active'">
+          <img src="http://placehold.it/150x50?text=Logo" alt="">
+        </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['./home']" [routerLinkActive]="'is-active'">{{'PUBLIC.HOME'|translate}}
+               
+              </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['./about']" [routerLinkActive]="'is-active'">{{'PUBLIC.ABOUT'|translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"[routerLink]="['./services']" [routerLinkActive]="'is-active'">{{'PUBLIC.SERVICES'|translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['./contact']" [routerLinkActive]="'is-active'">{{'PUBLIC.CONTACT'|translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['./login']" [routerLinkActive]="'is-active'">{{'PUBLIC.LOGIN'|translate}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-group" dropdown>
+      <button id="btnLanguage" dropdownToggle type="button"
+        class="btn btn-trasnparent action-btn btn-xs component-flat pr-0 dropdown-toggle"
+        aria-controls="ddlLanguage">
+        <i class="mdi mdi-dots-vertical">Language</i>
+
+      </button>
+      <ul id="btnLanguage" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="ddlLanguage"
+        x-placement="bottom-end">
+        <li role="menuitem" class="dropdown-item" (click)="userLanguage('en')" >English</li>
+        <li role="menuitem" class="dropdown-item" (click)="userLanguage('hi')" >Hindi</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

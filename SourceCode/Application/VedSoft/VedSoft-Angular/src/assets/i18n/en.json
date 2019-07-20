@@ -1,0 +1,17 @@
+{
+    "PUBLIC": {
+      "LOGIN": "Login",
+      "HOME": "Home",
+      "ABOUT": "About",
+      "CONTACT": "Contact",
+      "SERVICES": "Services",
+      "LOGIN_PAGE":{
+          "USERNAME":"Username",
+          "PASSWORD":"Password",
+          "MGS_USERNAME_REQUIRED":"Username is required",
+          "MGS_PASSWORD_REQUIRED":"Password is required",
+          "REMEMBER_ME":"Remember me"
+          
+      }
+    }
+  }

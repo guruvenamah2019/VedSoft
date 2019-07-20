@@ -1,0 +1,68 @@
+﻿
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <a href="#" class="simple-text logo-mini">
+      <div class="logo-image-small">
+        <img src="assets/img/angular2-logo.png">
+      </div>
+    </a>
+    <a href="#" class="simple-text logo-normal">
+      Creative Tim
+    </a>
+  </div>
+    <ul class="nav">
+      
+      <li>
+          <a class="nav-link" [routerLink]="['./dashboard']" [routerLinkActive]="'active'">
+              <span>Dashboard</span> 
+              <i class="nc-icon nc-bank"></i>
+          </a>
+        
+      </li>
+      <li>
+        <a class="nav-link" (click)="logout()" >
+            <span>Logout</span> 
+            <i class="fa fa-sign-out" aria-hidden="true"></i>        </a>
+      
+    </li>
+      <li>
+        <a  href="#settings-pages" data-toggle="collapse" aria-expanded="false">
+          <span class="link-title">Settings</span>
+          <i class="fa fa-cog fa-2x"></i>
+        </a>
+        <ul class="collapse navigation-submenu" id="settings-pages">
+          <li>
+              <a class="nav-link" [routerLink]="['./settings/org']" [routerLinkActive]="'is-active'">
+                <span>Organization</span> 
+                <i class="fa fa-sitemap fa-sm" aria-hidden="true"></i>
+              </a>
+          
+          </li>
+          <li>
+              <a class="nav-link" [routerLink]="['./settings/standards']" [routerLinkActive]="'is-active'">
+                <span>Standards</span> 
+                
+            </a>
+          </li>
+          <li>
+              <a class="nav-link" [routerLink]="['./settings/course']" [routerLinkActive]="'is-active'">
+                <span>Course</span> 
+                
+            </a>
+          </li>
+          <li>
+              <a class="nav-link" [routerLink]="['./settings/subject']" [routerLinkActive]="'is-active'">
+                <span>Subject</span> 
+                
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+</div>
+
+
+
+
+  
+  
