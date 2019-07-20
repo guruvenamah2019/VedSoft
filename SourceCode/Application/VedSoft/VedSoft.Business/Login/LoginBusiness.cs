@@ -53,10 +53,22 @@ namespace VedSoft.Business.Login
                     };
                     //Save in database
                     RepositoryWrapper.UserLoginDetailsRepository.SaveUserLoginDetails(userLoginDetails);
+
+                    //Successfully logged in...make lock attempt to 0
+                    user.LockAttempts = 0;
+                    this.RepositoryWrapper.UserDetailsRepository.UpdateUserLoginLockAttempt(user);
                 }
-                else if ((user.LockAttempts.GetValueOrDefault() + 1) == CommonConstants.UserLoginAttemptsCountExceeded)
+                else 
                 {
-                    this.RepositoryWrapper.UserDetailsRepository.IncrementUserLoginLockAttempt(user.UserDetailsId);
+                    if (user.LockAttempts.GetValueOrDefault() > CommonConstants.UserLoginAttemptsCountExceeded)
+                    {
+                        loginStatus = (int)LoginStatusConstants.LoginAttemptExceeded;
+                    }
+                    else
+                    {
+                        user.LockAttempts = user.LockAttempts.GetValueOrDefault()+1;
+                        this.RepositoryWrapper.UserDetailsRepository.UpdateUserLoginLockAttempt(user);
+                    }
                 }
             }
             else

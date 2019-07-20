@@ -14,13 +14,14 @@ namespace VedSoft.Data.Repository.Repository.User
         {
         }
 
-        public bool IncrementUserLoginLockAttempt(int userDetailsId)
+        public bool UpdateUserLoginLockAttempt(UserModel userDetailsReceived)
         {
-            UserDetailsDB userDetails = this.RepositoryContext.UserDetails.Where(x => x.Id == userDetailsId).FirstOrDefault();
+            UserDetailsDB userDetails = this.RepositoryContext.UserDetails.Where(x => x.Id == userDetailsReceived.Id).FirstOrDefault();
             if(userDetails!=null)
             {
-                userDetails.LockAttemptCount++;
+                userDetails.LockAttemptCount= userDetailsReceived.LockAttempts;
                 this.RepositoryContext.Update(userDetails);
+                this.RepositoryContext.SaveChanges();
             }
 
             return true;

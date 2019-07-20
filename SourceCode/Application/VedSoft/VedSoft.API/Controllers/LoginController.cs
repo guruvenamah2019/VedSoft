@@ -53,6 +53,7 @@ namespace VedSoft.API.Controllers
                 {
                     result = _loginBusinessEngine.Authenticate(input);
 
+                    //If success...then only create the token
                     if (result.ResponseData.LoginResponseDetails.LoginStatus == CommonConstants.Success)
                     {
                         #region Token process
@@ -102,6 +103,7 @@ namespace VedSoft.API.Controllers
                     var userLoginDetailsId= principal.FindFirst(CommonConstants.UserLoginDetailsIdClaim).Value;
                     result = new ResponseModel<LoginResponseModel>();
                     result.ResponseData = input.RequestParameter;
+                    input.RequestParameter.LoginDetailsId = Convert.ToInt64(userLoginDetailsId);
 
                     string refreshToken = _loginBusinessEngine.GetRefreshTokenByUserLoginDetailsId(input.RequestParameter);
                     result.ResponseData.LoginStatus = (int)LoginStatusConstants.InvalidRefreshToken;
