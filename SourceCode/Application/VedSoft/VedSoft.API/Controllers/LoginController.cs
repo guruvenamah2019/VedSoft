@@ -12,11 +12,13 @@ using VedSoft.Model.Login;
 using System.Security.Claims;
 using VedSoft.API.Util.Token;
 using VedSoft.API.Util;
+using Microsoft.AspNetCore.Cors;
 
 namespace VedSoft.API.Controllers
 {
     [Route(LoginAPIAction.RoutePrefixLogin)]
     [ApiController]
+    [EnableCors("CorsPolicy")]
     public class LoginController : ApiBaseController
     {
         private ILoginBusinessEngine _loginBusinessEngine;
