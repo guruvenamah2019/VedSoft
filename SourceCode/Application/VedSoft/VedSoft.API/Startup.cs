@@ -15,6 +15,7 @@ using VedSoft.API.Core;
 using VedSoft.Data.Contracts.Wrapper;
 using VedSoft.Data.Repository;
 using VedSoft.Logger;
+using Newtonsoft.Json.Serialization;
 
 namespace VedSoft.API
 {
@@ -31,7 +32,8 @@ namespace VedSoft.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureCors();
-            services.AddMvc();
+            services.AddMvc()
+        .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.ConfigureSwagger();
             services.ConfigureMySqlContext(Configuration);
             //services.ConfigureRepositoryWrapper();
