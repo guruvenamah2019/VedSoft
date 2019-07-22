@@ -2,9 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
-import { TokenModel, RequestModel } from '../models/shared-model/index';
+import { TokenModel, RequestModel, ResponseModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
-import { LoginRequestModel } from '../models/user-model';
+import { LoginRequestModel, AuthenticationModel, UserMasterModel, LoginResponseModel } from '../models/user-model';
+import { LOGIN_SERVICE_URL } from "../constant/service-url";
+import { post } from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class AuthenticationService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  private loggedUser: string;
+  private loggedUser: UserMasterModel;
 
   constructor(private http: HttpClient, private baseService: BaseService) {
 
@@ -22,18 +24,21 @@ export class AuthenticationService {
   public login(user: LoginRequestModel): Observable<boolean> {
 
     let input: RequestModel<LoginRequestModel> = {
-      CustomerID: this.baseService.appInfo.CustomerId,
+      CustomerId: this.baseService.appInfo.CustomerId,
+      LanguageId: this.baseService.appInfo.LanguageId,
       RequestParameter: user
     };
 
-    let url = `${this.baseService.appInfo.apiUrl}/users/authenticate`;
+    let url = `${this.baseService.appInfo.apiUrl}/${LOGIN_SERVICE_URL.AUTHENTICATE}`;
 
-    return this.http.post<any>(url, user)
+    return this.http.post<ResponseModel<AuthenticationModel>>(url, input)
       .pipe(
-        tap(tokens => this.doLoginUser(user.Username, tokens)),
+        tap(tokens =>{ 
+          if(tokens!=null && tokens.ResponseData!=null)
+          this.doLoginUser(tokens.ResponseData)}),
         mapTo(true),
         catchError(error => {
-          console.log( JSON.stringify( error.error));
+          alert( JSON.stringify( error.error));
           return of(false);
         }));
   }
@@ -68,9 +73,9 @@ export class AuthenticationService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  private doLoginUser(username: string, tokens: TokenModel) {
-    this.loggedUser = username;
-    this.storeTokens(tokens);
+  private doLoginUser(user:AuthenticationModel) {
+    this.loggedUser = user.UserDetails;
+    this.storeTokens(user.LoginResponseDetails);
   }
 
   private doLogoutUser() {
@@ -86,9 +91,9 @@ export class AuthenticationService {
     localStorage.setItem(this.JWT_TOKEN, jwt);
   }
 
-  private storeTokens(tokens: TokenModel) {
-    localStorage.setItem(this.JWT_TOKEN, tokens.jwt);
-    localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
+  private storeTokens(tokens:LoginResponseModel ) {
+    localStorage.setItem(this.JWT_TOKEN, tokens.Token);
+    localStorage.setItem(this.REFRESH_TOKEN, tokens.RefreshToken);
   }
 
   private removeTokens() {

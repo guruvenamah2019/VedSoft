@@ -18,6 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
   imports: [
     BrowserModule,
     SharedModule,
+    //HttpClientModule,
     AppRoutingModule,
     DeviceDetectorModule.forRoot(),
     //HttpClientModule
@@ -33,7 +34,7 @@ import { TranslateService } from '@ngx-translate/core';
     AuthGuard,
     AdminGuard,
     AuthenticationService,
-    fakeBackendProvider,
+   // fakeBackendProvider,
     BrowserInfoService
 
   ],

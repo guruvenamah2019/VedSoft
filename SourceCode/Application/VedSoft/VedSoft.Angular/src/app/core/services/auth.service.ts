@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { Tokens } from '../models/shared-model/tokens.model';
+import { TokenModel } from '../models/shared-model/tokens.model'
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +46,7 @@ export class AuthService {
   public refreshToken() {
     return this.http.post<any>(`${environment.apiUrl}/refresh`, {
       'refreshToken': this.getRefreshToken()
-    }).pipe(tap((tokens: Tokens) => {
+    }).pipe(tap((tokens: TokenModel) => {
       this.storeJwtToken(tokens.jwt);
     }));
   }
@@ -55,7 +55,7 @@ export class AuthService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  private doLoginUser(username: string, tokens: Tokens) {
+  private doLoginUser(username: string, tokens: TokenModel) {
     this.loggedUser = username;
     this.storeTokens(tokens);
   }
@@ -73,7 +73,7 @@ export class AuthService {
     localStorage.setItem(this.JWT_TOKEN, jwt);
   }
 
-  private storeTokens(tokens: Tokens) {
+  private storeTokens(tokens: TokenModel) {
     localStorage.setItem(this.JWT_TOKEN, tokens.jwt);
     localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
   }

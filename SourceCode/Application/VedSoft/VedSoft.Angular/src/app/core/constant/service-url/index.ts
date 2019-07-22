@@ -1,5 +1,3 @@
 ﻿
-import { SHARED_SERVICE_URL } from "./shared-url.constant";
-
-
-export {  SHARED_SERVICE_URL }
+export * from "./login-url.constant"
+export * from "./shared-url.constant"

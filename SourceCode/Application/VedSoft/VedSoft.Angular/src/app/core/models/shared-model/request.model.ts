@@ -1,5 +1,8 @@
 ﻿export class RequestModel<T>  {
     RequestParameter: T;
-    CustomerID?: number;    
+    APIClientId?: number;
+    CustomerId?: number;
+    RequestTxnID?: string;
+    LanguageId?: number;
 }
 

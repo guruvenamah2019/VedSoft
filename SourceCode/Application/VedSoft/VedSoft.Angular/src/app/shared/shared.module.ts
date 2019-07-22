@@ -12,7 +12,7 @@ import { createTranslateLoader } from './loader/translate.loader';
     ],
   imports: [
     ReactiveFormsModule,
-    HttpClientModule,
+   HttpClientModule,
     CommonModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
