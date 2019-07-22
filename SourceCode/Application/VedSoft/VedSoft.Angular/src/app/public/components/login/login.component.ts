@@ -6,6 +6,7 @@ import { AuthenticationService, BrowserInfoService } from "../../../core/service
 import { first } from 'rxjs/operators';
 import { EncryptionService } from 'src/app/encryption/service/encryption.service';
 import { LoginRequestModel } from 'src/app/core/models/user-model';
+import { LoginStatusEnum } from 'src/app/core/enums/login-status.enum';
 
 @Component({
   templateUrl: 'login.component.html',
@@ -39,7 +40,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.submitted = true;
-
+    this.error = "";
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
@@ -55,12 +56,16 @@ export class LoginComponent {
 
     this.loading = true;
     this.authService.login(loginInput)
-      .pipe(first())
       .subscribe(
         data => {
           this.loading = false;
-          if (data) {
-            this.router.navigate(["/admin/dashboard"]);
+          if (data != null && data.ResponseData != null) {
+            if (data.ResponseData.LoginResponseDetails.LoginStatus == LoginStatusEnum.Success) {
+              this.router.navigate(["/admin/dashboard"]);
+            }
+            else {
+              this.error = "User name and password do not match";
+            }
           }
         },
         error => {

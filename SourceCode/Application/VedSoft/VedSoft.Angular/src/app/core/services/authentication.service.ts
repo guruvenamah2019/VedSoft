@@ -7,6 +7,7 @@ import { BaseService } from './base.service';
 import { LoginRequestModel, AuthenticationModel, UserMasterModel, LoginResponseModel } from '../models/user-model';
 import { LOGIN_SERVICE_URL } from "../constant/service-url";
 import { post } from 'selenium-webdriver/http';
+import { LoginStatusEnum } from '../enums/login-status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AuthenticationService {
 
   }
 
-  public login(user: LoginRequestModel): Observable<boolean> {
+  public login(user: LoginRequestModel): Observable<ResponseModel<AuthenticationModel>> {
 
     let input: RequestModel<LoginRequestModel> = {
       CustomerId: this.baseService.appInfo.CustomerId,
@@ -36,10 +37,9 @@ export class AuthenticationService {
         tap(tokens =>{ 
           if(tokens!=null && tokens.ResponseData!=null)
           this.doLoginUser(tokens.ResponseData)}),
-        mapTo(true),
         catchError(error => {
           alert( JSON.stringify( error.error));
-          return of(false);
+          return of(null);
         }));
   }
 
@@ -74,8 +74,11 @@ export class AuthenticationService {
   }
 
   private doLoginUser(user:AuthenticationModel) {
+    if(user.LoginResponseDetails!=null && user.LoginResponseDetails.LoginStatus==LoginStatusEnum.Success)
+    {
     this.loggedUser = user.UserDetails;
     this.storeTokens(user.LoginResponseDetails);
+    }
   }
 
   private doLogoutUser() {
