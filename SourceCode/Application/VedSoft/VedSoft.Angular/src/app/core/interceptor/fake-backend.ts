@@ -25,6 +25,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             switch (true) {
                 case url.endsWith('/users/authenticate') && method === 'POST':
                     return authenticate();
+                    case url.endsWith('/users/logout') && method === 'POST':
+                        return logout();
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
                 default:
@@ -45,6 +47,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             };
 
             return ok(authTokan);
+        }
+
+        function logout(){
+            return ok(true);
         }
 
         function getUsers() {

@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import jQuery from "jquery"
 
 
 @Component({
@@ -21,4 +22,9 @@ export class AdminHeaderComponent implements OnInit {
     
       }
       get f() { return this.searchForm.controls; }
+
+      mobieViewClieck() {
+        jQuery(".page-body").toggleClass("sidebar-collpased");
+      }
+      
 }
