@@ -63,10 +63,25 @@ export class LoginComponent {
             if (data.responseData.loginResponseDetails.loginStatus == LoginStatusEnum.Success) {
               this.router.navigate(["/admin/dashboard"]);
             }
-            else {
+            else if (data.responseData.loginResponseDetails.loginStatus == LoginStatusEnum.InActive) {
+              this.error = "User name is inactive";
+            }
+            else if (data.responseData.loginResponseDetails.loginStatus == LoginStatusEnum.InvalidCredentials) {
               this.error = "User name and password do not match";
             }
+            else if (data.responseData.loginResponseDetails.loginStatus == LoginStatusEnum.LoginAttemptExceeded) {
+              this.error = "Your account has been locked";
+            }
+            else if (data.responseData.loginResponseDetails.loginStatus == LoginStatusEnum.PasswordExpired) {
+              this.error = "Your password has been expired";
+            }
+            else if (data.responseData.loginResponseDetails.loginStatus == LoginStatusEnum.TemproryPassword) {
+              this.error = "You are using temporory password";
+            }
+            else
+              this.error = "User name and password do not match";
           }
+          
         },
         error => {
           this.error = error;

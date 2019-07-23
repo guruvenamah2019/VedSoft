@@ -16,7 +16,7 @@ export class AuthenticationService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  private loggedUser: UserMasterModel;
+  public loggedUser: UserMasterModel;
 
   constructor(private http: HttpClient, private baseService: BaseService) {
 
@@ -34,11 +34,12 @@ export class AuthenticationService {
 
     return this.http.post<ResponseModel<AuthenticationModel>>(url, input)
       .pipe(
-        tap(tokens =>{ 
-          if(tokens!=null && tokens.responseData!=null)
-          this.doLoginUser(tokens.responseData)}),
+        tap(tokens => {
+          if (tokens != null && tokens.responseData != null)
+            this.doLoginUser(tokens.responseData)
+        }),
         catchError(error => {
-          alert( JSON.stringify( error.error));
+          alert(JSON.stringify(error.error));
           return of(null);
         }));
   }
@@ -73,11 +74,10 @@ export class AuthenticationService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  private doLoginUser(user:AuthenticationModel) {
-    if(user.loginResponseDetails!=null && user.loginResponseDetails.loginStatus==LoginStatusEnum.Success)
-    {
-    this.loggedUser = user.userDetails;
-    this.storeTokens(user.loginResponseDetails);
+  private doLoginUser(user: AuthenticationModel) {
+    if (user.loginResponseDetails != null && user.loginResponseDetails.loginStatus == LoginStatusEnum.Success) {
+      this.loggedUser = user.userDetails;
+      this.storeTokens(user.loginResponseDetails);
     }
   }
 
@@ -94,7 +94,7 @@ export class AuthenticationService {
     localStorage.setItem(this.JWT_TOKEN, jwt);
   }
 
-  private storeTokens(tokens:LoginResponseModel ) {
+  private storeTokens(tokens: LoginResponseModel) {
     localStorage.setItem(this.JWT_TOKEN, tokens.token);
     localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
   }

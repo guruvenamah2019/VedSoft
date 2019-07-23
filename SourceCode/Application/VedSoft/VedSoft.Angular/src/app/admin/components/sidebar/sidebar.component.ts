@@ -15,6 +15,7 @@ export class AdminSidebarComponent implements OnInit {
 
     }
     ngOnInit() {
+        
     }
 
     signOut() {
@@ -24,6 +25,13 @@ export class AdminSidebarComponent implements OnInit {
             }
 
         })
+
+    }
+
+    get userName():string{
+
+        return this.auth.loggedUser.firstName +" "+this.auth.loggedUser.middleName+" " +this.auth.loggedUser.lastName; 
+
 
     }
 

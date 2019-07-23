@@ -34,7 +34,7 @@ import { TranslateService } from '@ngx-translate/core';
     AuthGuard,
     AdminGuard,
     AuthenticationService,
-   // fakeBackendProvider,
+    fakeBackendProvider,
     BrowserInfoService
 
   ],
