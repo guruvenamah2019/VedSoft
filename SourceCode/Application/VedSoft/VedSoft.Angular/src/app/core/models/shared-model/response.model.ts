@@ -1,4 +1,4 @@
 ﻿export class ResponseModel<T>  {
-    ResponseData: T;
+    responseData: T;
     UniqueID?: string;
 }

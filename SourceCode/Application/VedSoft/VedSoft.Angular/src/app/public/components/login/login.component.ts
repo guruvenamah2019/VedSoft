@@ -46,12 +46,12 @@ export class LoginComponent {
       return;
     }
 
-    let pwd: string = this.encryptService.EncryptionSHA1(this.f.password.value);
+    let pwd: string = this.f.password.value;/// this.encryptService.EncryptionSHA1(this.f.password.value);
 
     let loginInput: LoginRequestModel = {
-      Username: this.f.username.value,
-      Password: pwd,
-      LoginSourceInfo: JSON.stringify(this.browserService.clinetInfo)
+      username: this.f.username.value,
+      password: pwd,
+      loginSourceInfo: JSON.stringify(this.browserService.clinetInfo)
     };
 
     this.loading = true;
@@ -59,8 +59,8 @@ export class LoginComponent {
       .subscribe(
         data => {
           this.loading = false;
-          if (data != null && data.ResponseData != null) {
-            if (data.ResponseData.LoginResponseDetails.LoginStatus == LoginStatusEnum.Success) {
+          if (data != null && data.responseData != null) {
+            if (data.responseData.loginResponseDetails.loginStatus == LoginStatusEnum.Success) {
               this.router.navigate(["/admin/dashboard"]);
             }
             else {

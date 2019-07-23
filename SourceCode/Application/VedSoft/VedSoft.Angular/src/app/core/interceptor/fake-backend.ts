@@ -7,7 +7,7 @@ import { TokenModel } from "../models/shared-model/tokens.model"
 import { LoginRequestModel } from "../models/user-model";
 import { Token } from '@angular/compiler';
 
-const users: LoginRequestModel[] = [{  Username: 'Vedsoft', Password: '65f73b60bcaef6644f0ad34b8dc59b564a652c8c' }];
+const users: LoginRequestModel[] = [{  username: 'Vedsoft', password: '65f73b60bcaef6644f0ad34b8dc59b564a652c8c' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -39,7 +39,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function authenticate() {
             const {LoginSourceInfo, Username, Password } = body;
-            const user = users.find(x => x.Username === Username && x.Password === Password);
+            const user = users.find(x => x.username === Username && x.password === Password);
             if (!user) return error('Username or password is incorrect');
             let authTokan: TokenModel = {
                 jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',

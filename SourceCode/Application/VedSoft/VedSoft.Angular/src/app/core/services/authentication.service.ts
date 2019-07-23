@@ -27,7 +27,7 @@ export class AuthenticationService {
     let input: RequestModel<LoginRequestModel> = {
       CustomerId: this.baseService.appInfo.CustomerId,
       LanguageId: this.baseService.appInfo.LanguageId,
-      RequestParameter: user
+      requestParameter: user
     };
 
     let url = `${this.baseService.appInfo.apiUrl}/${LOGIN_SERVICE_URL.AUTHENTICATE}`;
@@ -35,8 +35,8 @@ export class AuthenticationService {
     return this.http.post<ResponseModel<AuthenticationModel>>(url, input)
       .pipe(
         tap(tokens =>{ 
-          if(tokens!=null && tokens.ResponseData!=null)
-          this.doLoginUser(tokens.ResponseData)}),
+          if(tokens!=null && tokens.responseData!=null)
+          this.doLoginUser(tokens.responseData)}),
         catchError(error => {
           alert( JSON.stringify( error.error));
           return of(null);
@@ -74,10 +74,10 @@ export class AuthenticationService {
   }
 
   private doLoginUser(user:AuthenticationModel) {
-    if(user.LoginResponseDetails!=null && user.LoginResponseDetails.LoginStatus==LoginStatusEnum.Success)
+    if(user.loginResponseDetails!=null && user.loginResponseDetails.loginStatus==LoginStatusEnum.Success)
     {
-    this.loggedUser = user.UserDetails;
-    this.storeTokens(user.LoginResponseDetails);
+    this.loggedUser = user.userDetails;
+    this.storeTokens(user.loginResponseDetails);
     }
   }
 
@@ -95,8 +95,8 @@ export class AuthenticationService {
   }
 
   private storeTokens(tokens:LoginResponseModel ) {
-    localStorage.setItem(this.JWT_TOKEN, tokens.Token);
-    localStorage.setItem(this.REFRESH_TOKEN, tokens.RefreshToken);
+    localStorage.setItem(this.JWT_TOKEN, tokens.token);
+    localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
   }
 
   private removeTokens() {

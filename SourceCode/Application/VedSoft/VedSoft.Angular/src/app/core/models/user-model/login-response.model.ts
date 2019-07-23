@@ -1,8 +1,8 @@
 export class LoginResponseModel {
-    LoginDetailsId ?: number;
-    Token ?: string;
-    RefreshToken ?:string;
-    LoginStatus ?:number
+    loginDetailsId ?: number;
+    token ?: string;
+    refreshToken ?:string;
+    loginStatus ?:number
     constructor() {
   
     }

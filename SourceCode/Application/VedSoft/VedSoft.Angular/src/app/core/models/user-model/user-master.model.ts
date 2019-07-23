@@ -1,13 +1,15 @@
 export class UserMasterModel {
-  ID?: number;
-  Username?: string;
-  FirstName?: string;
-  LastName?: string;
-  EmailId?: string;
-  NotificationEmailId?: string;
+  id?: number;
+  username?: string;
+  firstName?: string;
+  middleName?:string;
+  lastName?: string;
+  notificationEmailId?: string;
+userDetailsId ?:string;
+
   constructor() {
-    this.ID = 1;
-    this.Username = "Admin";
+    this.id = 1;
+    this.username = "Admin";
 
   }
 }
