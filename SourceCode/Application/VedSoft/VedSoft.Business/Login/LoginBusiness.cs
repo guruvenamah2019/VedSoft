@@ -97,5 +97,33 @@ namespace VedSoft.Business.Login
         {
             return RepositoryWrapper.UserLoginDetailsRepository.UpdateUserLoginDetails(input);
         }
+
+        public int UpdatePassword(RequestModel<SetPasswordRequestModel> input)
+        {
+            //  int loginStatus = (int)LoginStatusConstants.InvalidCredentials;
+            UserModel user = RepositoryWrapper.UserRepository.GetUserIdByLoginId(input.RequestParameter.UserId);
+
+            int status;
+            if (user != null && user.Password == input.RequestParameter.OldPassword)
+            {
+                var result = RepositoryWrapper.UserRepository.UpdatePassword(input.RequestParameter);
+                status = result ? 1 : 0;
+                if (result)
+                {
+                    //Successfully logged in...make lock attempt to 0
+                    user.LockAttempts = 0;
+                    this.RepositoryWrapper.UserDetailsRepository.UpdateUserLoginLockAttempt(user);
+                }
+            }
+            else
+            {
+                status = 2;
+            }
+
+            return status;
+            //return RepositoryWrapper.UserLoginDetailsRepository.UpdateUserLoginDetails(input);
+        }
+
+       
     }
 }

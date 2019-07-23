@@ -19,5 +19,6 @@ namespace VedSoft.Utility.Constants
 
         public const string ActionAuthenticate = "Authenticate";
         public const string ActionRefreshToken = "RefreshToken";
+        public const string SetPassword = "SetPassword";
     }
 }

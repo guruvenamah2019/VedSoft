@@ -27,4 +27,12 @@ namespace VedSoft.Model.Login
         public LoginResponseModel LoginResponseDetails { get; set; }
         public UserModel UserDetails { get; set; }
     }
+
+    public class SetPasswordRequestModel
+    {
+        public int UserId { get; set; }
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }//Browser, IP etc in JSON format
+        public int LoginUserId { get; set; }
+    }
 }

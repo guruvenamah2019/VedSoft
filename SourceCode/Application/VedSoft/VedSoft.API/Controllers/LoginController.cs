@@ -13,6 +13,7 @@ using System.Security.Claims;
 using VedSoft.API.Util.Token;
 using VedSoft.API.Util;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VedSoft.API.Controllers
 {
@@ -71,7 +72,8 @@ namespace VedSoft.API.Controllers
                             RefreshToken = refreshToken,
                             Token = token,
                             CurrentDateTime = DateTime.Now,
-                            UserId = result.ResponseData.UserDetails.Id
+                            UserId = result.ResponseData.UserDetails.Id,
+                            LoginStatus = result.ResponseData.LoginResponseDetails.LoginStatus
                         };
                         #endregion
 
@@ -102,18 +104,18 @@ namespace VedSoft.API.Controllers
                 return GetResponse(Request, () =>
                 {
                     var principal = _tokenService.GetPrincipalFromExpiredToken(input.RequestParameter.Token);
-                    var userLoginDetailsId= principal.FindFirst(CommonConstants.UserLoginDetailsIdClaim).Value;
+                    var userLoginDetailsId = principal.FindFirst(CommonConstants.UserLoginDetailsIdClaim).Value;
                     result = new ResponseModel<LoginResponseModel>();
                     result.ResponseData = input.RequestParameter;
                     input.RequestParameter.LoginDetailsId = Convert.ToInt64(userLoginDetailsId);
 
                     string refreshToken = _loginBusinessEngine.GetRefreshTokenByUserLoginDetailsId(input.RequestParameter);
                     result.ResponseData.LoginStatus = (int)LoginStatusConstants.InvalidRefreshToken;
-                    if ( refreshToken==input.RequestParameter.RefreshToken)
+                    if (refreshToken == input.RequestParameter.RefreshToken)
                     {
                         var newJwtToken = _tokenService.GenerateAccessToken(principal.Claims);
                         var newRefreshToken = _tokenService.GenerateRefreshToken();
-                        
+
                         result.ResponseData.RefreshToken = newRefreshToken;
                         result.ResponseData.Token = newJwtToken;
                         result.ResponseData.CurrentDateTime = DateTime.Now;
@@ -129,5 +131,42 @@ namespace VedSoft.API.Controllers
 
             return result;
         }
+
+        /// <summary>
+        /// To authenticate the user
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(LoginAPIAction.SetPassword)]
+        [Authorize]
+        public async Task<ResponseModel<ResultModel>> UpdatePassword([FromBody] RequestModel<SetPasswordRequestModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    var response = _loginBusinessEngine.UpdatePassword(input);
+                    result = new ResponseModel<ResultModel>
+                    {
+                        ResponseData = new ResultModel
+                        {
+                            StatusId = response
+                        }
+                    };
+
+
+                    return result;
+                });
+
+            });
+
+            return result;
+        }
+
     }
 }

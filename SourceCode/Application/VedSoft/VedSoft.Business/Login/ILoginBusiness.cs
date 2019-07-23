@@ -12,5 +12,6 @@ namespace VedSoft.Business.Login
         AuthenticationModel Authenticate(RequestModel<LoginRequestModel> input);
         bool UpdateLoginToken(LoginResponseModel input);
         string GetRefreshTokenByUserLoginDetailsId(LoginResponseModel input);
+        int UpdatePassword(RequestModel<SetPasswordRequestModel> input);
     }
 }

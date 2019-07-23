@@ -11,6 +11,7 @@ namespace VedSoft.Data.Contracts.User
     public interface IUserRepository : IRepositoryBase<UserMasterDB>
     {
         UserModel Authenticate(LoginRequestModel loginRequestModel);
-        int GetUserIdByLoginId(LoginRequestModel loginRequestModel);
+        UserModel GetUserIdByLoginId(int UserId);
+        bool UpdatePassword(SetPasswordRequestModel input);
     }
 }

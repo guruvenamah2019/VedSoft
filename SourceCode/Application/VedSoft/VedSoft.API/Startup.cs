@@ -32,8 +32,8 @@ namespace VedSoft.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureCors();
-            services.AddMvc()
-        .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddMvc();
+        //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.ConfigureSwagger();
             services.ConfigureMySqlContext(Configuration);
             //services.ConfigureRepositoryWrapper();

@@ -27,5 +27,9 @@ namespace VedSoft.Business.Login
         {
             return LoginBusiness.GetRefreshTokenByUserLoginDetailsId(input);
         }
+        public int UpdatePassword(RequestModel<SetPasswordRequestModel> input)
+        {
+            return LoginBusiness.UpdatePassword(input);
+        }
     }
 }

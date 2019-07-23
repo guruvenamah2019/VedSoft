@@ -7,18 +7,15 @@ namespace VedSoft.Model.Common
     public class ResultModel
     {
         public bool IsException { get; set; }
-        public int ResultValue { get; set; }
-        public object ReturnValue { get; set; }
-        public IList<object> Returnlist { get; set; }
-
+        public int StatusId { get; set; }
+        public object ResponseValue { get; set; }
         public int PrimaryKey { get; set; }
 
         public ResultModel()
         {
-            ResultValue = 0;
-            ReturnValue = false;
+            StatusId = 0;
+            ResponseValue = false;
             IsException = false;
-            Returnlist = null;
         }
     }
 }

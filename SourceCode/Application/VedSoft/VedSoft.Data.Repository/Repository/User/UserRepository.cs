@@ -34,7 +34,7 @@ namespace VedSoft.Data.Repository.Repository.User
                          MiddleName = u.MiddleName,
                          UserName = u.LoginId,
                          LastLoginDate = udd.LastLoginDate,
-                         PasswordExpiryDate = udd.PasswordExpirationDate,
+                         PasswordExpiryDate = udd.PasswordExpirationDate??DateTime.Now.AddDays(100),
                          TemproryPassword = udd.IsTemproryPassword,
                          LockAttempts = udd.LockAttemptCount,
                          Password = u.Password,
@@ -45,13 +45,20 @@ namespace VedSoft.Data.Repository.Repository.User
             return userModel;
         }
 
-        public int GetUserIdByLoginId(LoginRequestModel loginRequestModel)
+        public UserModel GetUserIdByLoginId(int userId)
         {
-            return this.RepositoryContext
-                            .User
-                            .Where(x => x.LoginId.ToLower() == loginRequestModel.UserName)
-                            .Select(x => x.UserId)
-                            .FirstOrDefault();
+            var userModel = this.RepositoryContext.User.Where(x => x.UserId == userId).Select(u => new UserModel
+            {
+                Id = u.UserId,
+                NotificationEmailId = u.NotificationEmailId,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                MiddleName = u.MiddleName,
+                UserName = u.LoginId,
+                Password = u.Password,
+                Active = u.Active,
+            }).FirstOrDefault();
+            return userModel;
         }
 
         public bool UpdateLockAttempt(int userId)
@@ -66,6 +73,21 @@ namespace VedSoft.Data.Repository.Repository.User
 
             return true;
         }
+
+        public bool UpdatePassword(SetPasswordRequestModel input) {
+            var user = this.RepositoryContext.User.Where(x => x.UserId == input.UserId).FirstOrDefault();
+            if (user != null)
+            {
+                user.Password = input.NewPassword;
+                user.ModifiedBy = input.LoginUserId;
+                user.ModifiedDate = DateTime.Now;
+            }
+            this.RepositoryContext.Update(user);
+
+            return true;
+        }
+
+
 
     }
 }
