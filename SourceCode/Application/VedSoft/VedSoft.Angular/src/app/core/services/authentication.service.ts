@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
-import { TokenModel, RequestModel, ResponseModel } from '../models/shared-model/index';
+import { TokenModel, RequestModel, ResponseModel, ResultModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
 import { LoginRequestModel, AuthenticationModel, UserMasterModel, LoginResponseModel } from '../models/user-model';
 import { LOGIN_SERVICE_URL } from "../constant/service-url";
@@ -44,18 +44,25 @@ export class AuthenticationService {
         }));
   }
 
-  public logout() {
-    let url = `${this.baseService.appInfo.apiUrl}/users/logout`;
-    return this.http.post<any>(url, {
-      'refreshToken': this.getRefreshToken()
-    }).pipe(
+  public logout():Observable<ResponseModel<ResultModel>> {
+
+    let input: RequestModel<LoginResponseModel> = {
+      CustomerId: this.baseService.appInfo.CustomerId,
+      LanguageId: this.baseService.appInfo.LanguageId,
+      requestParameter: {
+        refreshToken: this.getRefreshToken(),
+        token: this.getJwtToken()
+      }
+    };
+
+    let url = `${this.baseService.appInfo.apiUrl}/${LOGIN_SERVICE_URL.LOGOUT}`;
+    return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(
       tap(() => this.doLogoutUser()),
-      mapTo(true),
       catchError(error => {
         alert(error.error);
-        return of(false);
+        return of(null);
       }));
-  }
+    }
 
   public isLoggedIn() {
     return !!this.getJwtToken();
