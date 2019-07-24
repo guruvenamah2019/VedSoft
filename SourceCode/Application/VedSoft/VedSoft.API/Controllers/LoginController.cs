@@ -14,6 +14,7 @@ using VedSoft.API.Util.Token;
 using VedSoft.API.Util;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
+using VedSoft.Model.User;
 
 namespace VedSoft.API.Controllers
 {
@@ -156,6 +157,35 @@ namespace VedSoft.API.Controllers
                         ResponseData = new ResultModel
                         {
                             StatusId = response
+                        }
+                    };
+
+
+                    return result;
+                });
+
+            });
+
+            return result;
+        }
+
+        [HttpPost]
+        [Route(LoginAPIAction.Logout)]
+        [Authorize]
+        public async Task<ResponseModel<ResultModel>> Logout(RequestModel<LoginResponseModel> input)
+        {
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    //var response = _loginBusinessEngine.UpdatePassword(input);
+                    result = new ResponseModel<ResultModel>
+                    {
+                        ResponseData = new ResultModel
+                        {
+                            StatusId = 1
                         }
                     };
 
