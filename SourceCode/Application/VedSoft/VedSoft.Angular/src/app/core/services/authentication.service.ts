@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { TokenModel, RequestModel, ResponseModel, ResultModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
-import { LoginRequestModel, AuthenticationModel, UserMasterModel, LoginResponseModel } from '../models/user-model';
+import { LoginRequestModel, AuthenticationModel, UserMasterModel, LoginResponseModel, SetPasswordRequestModel } from '../models/user-model';
 import { LOGIN_SERVICE_URL } from "../constant/service-url";
 import { post } from 'selenium-webdriver/http';
 import { LoginStatusEnum } from '../enums/login-status.enum';
@@ -68,12 +68,20 @@ export class AuthenticationService {
     return !!this.getJwtToken();
   }
 
-  public refreshToken() {
-    let url = `${this.baseService.appInfo.apiUrl}/users/logout`;
-    return this.http.post<any>(url, {
-      'refreshToken': this.getRefreshToken()
-    }).pipe(tap((tokens: TokenModel) => {
-      this.storeJwtToken(tokens.jwt);
+  public refreshToken():Observable<ResponseModel<LoginResponseModel>> {
+//    let url = `${this.baseService.appInfo.apiUrl}/users/logout`;
+    let url = `${this.baseService.appInfo.apiUrl}/${LOGIN_SERVICE_URL.REFRESH_TOKEN}`;
+
+    let input: RequestModel<LoginResponseModel> = {
+      CustomerId: this.baseService.appInfo.CustomerId,
+      LanguageId: this.baseService.appInfo.LanguageId,
+      requestParameter: {
+        refreshToken: this.getRefreshToken(),
+        token: this.getJwtToken()
+      }
+    };
+    return this.http.post<ResponseModel<LoginResponseModel>>(url, input).pipe(tap((tokens: ResponseModel<LoginResponseModel>) => {
+      this.storeJwtToken(tokens.responseData.token);
     }));
   }
 
@@ -109,5 +117,22 @@ export class AuthenticationService {
   private removeTokens() {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
+  }
+
+  public changePassword(user: SetPasswordRequestModel): Observable<ResponseModel<ResultModel>> {
+
+    let input: RequestModel<SetPasswordRequestModel> = {
+      CustomerId: this.baseService.appInfo.CustomerId,
+      LanguageId: this.baseService.appInfo.LanguageId,
+      requestParameter: user
+    };
+
+    let url = `${this.baseService.appInfo.apiUrl}/${LOGIN_SERVICE_URL.UPDATE_PASSWORD}`;
+
+    return this.http.post<ResponseModel<ResultModel>>(url, input)
+      .pipe(
+        catchError(error => {
+          return of(null);
+        }));
   }
 }

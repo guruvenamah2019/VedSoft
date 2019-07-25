@@ -54,20 +54,23 @@
         </ul>
       </li>
       <li>
-        <a href="#ui-elements" data-toggle="collapse" aria-expanded="false">
-          <span class="link-title">UI Elements</span>
+        <a href="#ui-profile" data-toggle="collapse" aria-expanded="false">
+          <span class="link-title">Profile</span>
           <i class="mdi mdi-bullseye link-icon"></i>
         </a>
-        <ul class="collapse navigation-submenu" id="ui-elements">
+        <ul class="collapse navigation-submenu" id="ui-profile">
           <li>
-            <a >Buttons</a>
-          </li>
-          <li>
-            <a >Tables</a>
-          </li>
-          <li>
-            <a >Typography</a>
-          </li>
+            <a class="nav-link" [routerLink]="['/profile/me']" [routerLinkActive]="'is-active'">
+              <span>My Profile</span> 
+              
+          </a>
+        </li>
+        <li>
+            <a class="nav-link" [routerLink]="['/profile/password']" [routerLinkActive]="'is-active'">
+              <span>Password</span> 
+              
+          </a>
+        </li>
         </ul>
       </li>
       <li>
