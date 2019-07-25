@@ -171,7 +171,6 @@ namespace VedSoft.API.Controllers
 
         [HttpPost]
         [Route(LoginAPIAction.Logout)]
-        [Authorize]
         public async Task<ResponseModel<ResultModel>> Logout(RequestModel<LoginResponseModel> input)
         {
             ResponseModel<ResultModel> result = null;
