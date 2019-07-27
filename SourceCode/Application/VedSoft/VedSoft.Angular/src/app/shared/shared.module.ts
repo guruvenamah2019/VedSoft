@@ -7,6 +7,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { createTranslateLoader } from './loader/translate.loader';
 import { FooterComponent, HeaderComponent, SidebarComponent } from "./components/index"
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -15,10 +18,12 @@ import { FooterComponent, HeaderComponent, SidebarComponent } from "./components
   imports: [
     ReactiveFormsModule,
     HttpClientModule,
+    
     CommonModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
-
+    
+    
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

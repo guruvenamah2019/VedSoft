@@ -10,6 +10,7 @@ import { PasswordStrengthCheck, SetPasswordRequestModel } from "src/app/core/mod
 import { LoginStatusEnum } from 'src/app/core/enums/login-status.enum';
 import { PasswordStrengthConst } from 'src/app/core/constant/password-strength.const';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   templateUrl: 'change-password.component.html',
@@ -25,10 +26,10 @@ export class ChangePasswordComponent {
   error = '';
   PwdStrengthPower: PasswordStrengthCheck = new PasswordStrengthCheck();
   constructor(private authService: AuthenticationService, private router: Router, private formBuilder: FormBuilder,
-    private route: ActivatedRoute, private encryptService: EncryptionService, private browserService: BrowserInfoService,
-    private translate: TranslateService
+    private route: ActivatedRoute, private encryptService: EncryptionService, 
+    private translate: TranslateService,
+    private toastr: ToastrService
   ) {
-    console.log("LoginComponent" + JSON.stringify(browserService.clinetInfo));
   }
 
   ngOnInit() {
@@ -79,15 +80,16 @@ export class ChangePasswordComponent {
           data => {
             this.loading = false;
             if (data != null && data.responseData != null) {
-              if (data.responseData.ResultValue == LoginStatusEnum.Success) {
-                this.error = "Password has been change successfully";
+              if (data.responseData.statusId == LoginStatusEnum.Success) {
+
+                this.toastr.success("Password has been change successfully",);
               }
-              else if (data.responseData.ResultValue == LoginStatusEnum.InvalidCredentials) {
-                this.error = "Old Password not matched";
+              else if (data.responseData.statusId == LoginStatusEnum.InvalidCredentials) {
+                this.toastr.error("Old Password not matched");
               }
               else
               {
-                this.error = "Error occured";
+                this.toastr.error("Error occured");
               }
             }
 

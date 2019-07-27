@@ -10,17 +10,27 @@ import { fakeBackendProvider } from '../app/core/interceptor/fake-backend';
 import { SharedModule } from './shared/shared.module';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { TranslateService } from '@ngx-translate/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    //BrowserModule,
     SharedModule,
     //HttpClientModule,
     AppRoutingModule,
     DeviceDetectorModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut:5000,
+      preventDuplicates:true,
+      positionClass:"toast-top-center",
+
+    }),
+
     //HttpClientModule
   ],
   providers: [

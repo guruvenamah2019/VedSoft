@@ -1,5 +1,7 @@
 ﻿export class ResultModel {
-    IsException?: boolean;
-    ResultValue?: number;
-    ReturnValue?: any;
+    isException?: boolean;
+    statusId?: number;
+    responseValue?: any;
+    primaryKey?:number;
+    
 }

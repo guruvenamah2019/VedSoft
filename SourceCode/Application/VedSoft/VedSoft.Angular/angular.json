@@ -28,7 +28,7 @@
             ],
             "styles": [
               "src/assets/scss/shared/style.scss" ,
-              "src/assets/scss/demo_1/style.scss",
+              "src/assets/scss/ved-soft/style.scss",
               "node_modules/@mdi/font/scss/materialdesignicons.scss"
             ],
             "scripts": [
