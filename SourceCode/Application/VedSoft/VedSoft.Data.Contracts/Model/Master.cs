@@ -44,6 +44,8 @@ namespace VedSoft.Data.Contracts.Model
         public string Name { get; set; }
         [Column("CUSTOMER_ID")]
         public int CustomerId { get; set; }
+        [Column("HIERACHY_LEVEL")]
+        public int? HierarchyLevel { get; set; }
         [Column("PARENT_ID")]
         public int? ParentId { get; set; }
         [Column("CREATED_DATE")]

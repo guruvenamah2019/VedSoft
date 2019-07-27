@@ -10,6 +10,7 @@ namespace VedSoft.Model.Master
         public string Name { get; set; }
         public int? ParentId { get; set; }
         public int UserId { get; set; }
+        public int? HierarchyLevel { get; set; }
     }
 
 }

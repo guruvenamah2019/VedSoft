@@ -27,6 +27,7 @@ namespace VedSoft.Data.Repository.Repository.Master
                 Active = CommonConstants.ActiveStatus,
                 CustomerId = input.CustomerId.GetValueOrDefault(),
                 Name = input.RequestParameter.Name,
+                HierarchyLevel=input.RequestParameter.HierarchyLevel,
                 ParentId = input.RequestParameter.ParentId == 0 ? null : input.RequestParameter.ParentId
             };
 
@@ -74,7 +75,7 @@ namespace VedSoft.Data.Repository.Repository.Master
                     Id = courseHierarchy.Id,
                     Name = courseHierarchy.Name,
                     ParentId = courseHierarchy.ParentId,
-
+                    HierarchyLevel=courseHierarchy.HierarchyLevel
                 });
             }
 
