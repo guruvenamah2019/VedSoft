@@ -21,5 +21,6 @@ namespace VedSoft.Utility.Constants
         public const string ActionRefreshToken = "RefreshToken";
         public const string SetPassword = "SetPassword";
         public const string Logout = "Logout";
+        public const string UserDetailsByToken = "GetUserDetailsByToken";
     }
 }

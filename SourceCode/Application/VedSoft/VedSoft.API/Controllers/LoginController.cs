@@ -15,6 +15,8 @@ using VedSoft.API.Util;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
 using VedSoft.Model.User;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace VedSoft.API.Controllers
 {
@@ -188,6 +190,34 @@ namespace VedSoft.API.Controllers
                         }
                     };
 
+
+                    return result;
+                });
+
+            });
+
+            return result;
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route(LoginAPIAction.UserDetailsByToken)]
+        public async Task<ResponseModel<UserModel>> GetUserDetailsByToken([FromBody] RequestModel<LoginResponseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<UserModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    var principal = _tokenService.GetPrincipalFromExpiredToken(input.RequestParameter.Token);
+                    var userLoginDetailsId = principal.FindFirst(CommonConstants.UserLoginDetailsIdClaim).Value;
+                    result = new ResponseModel<UserModel>();
+                    input.RequestParameter.LoginDetailsId = Convert.ToInt64(userLoginDetailsId);
+
+                    result = _loginBusinessEngine.GetUserDetailsByLoginDetailsId(input);
 
                     return result;
                 });

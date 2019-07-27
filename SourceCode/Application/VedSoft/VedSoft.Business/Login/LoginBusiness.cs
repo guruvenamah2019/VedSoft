@@ -54,9 +54,12 @@ namespace VedSoft.Business.Login
                     //Save in database
                     RepositoryWrapper.UserLoginDetailsRepository.SaveUserLoginDetails(userLoginDetails);
 
-                    //Successfully logged in...make lock attempt to 0
-                    user.LockAttempts = 0;
-                    this.RepositoryWrapper.UserDetailsRepository.UpdateUserLoginLockAttempt(user);
+                    //Successfully logged in...make lock attempt to 0..if >0 then only
+                    if (user.LockAttempts.GetValueOrDefault() > 0)
+                    {
+                        user.LockAttempts = 0;
+                        this.RepositoryWrapper.UserDetailsRepository.UpdateUserLoginLockAttempt(user);
+                    }
                 }
                 else 
                 {
@@ -124,6 +127,12 @@ namespace VedSoft.Business.Login
             //return RepositoryWrapper.UserLoginDetailsRepository.UpdateUserLoginDetails(input);
         }
 
-       
+        public UserModel GetUserDetailsByLoginDetailsId(RequestModel<LoginResponseModel> input)
+        {
+            UserModel user = RepositoryWrapper.UserLoginDetailsRepository.GetUserDetailsByLoginDetailsId(input.RequestParameter);
+            return user;
+        }
+
+
     }
 }

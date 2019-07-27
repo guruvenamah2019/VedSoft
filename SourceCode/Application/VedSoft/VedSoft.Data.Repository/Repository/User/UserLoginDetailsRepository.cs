@@ -54,5 +54,35 @@ namespace VedSoft.Data.Repository.Repository.User
 
             return true;
         }
+
+        public UserModel GetUserDetailsByLoginDetailsId(LoginResponseModel input)
+        {
+            var userLoginDetails = this.RepositoryContext.UserLoginDetails;
+            var user = this.RepositoryContext.User;
+            var userDetails = this.RepositoryContext.UserDetails;
+            var userModel = (from ul in userLoginDetails where ul.Id==input.LoginDetailsId
+                             join u in user on ul.UserId equals u.UserId
+                             //&& u.Password == loginRequestModel.Password
+                             join ud in userDetails on u.UserId equals ud.UserId into usr
+                             from udd in usr.DefaultIfEmpty()
+                             select new UserModel
+                             {
+                                 Id = u.UserId,
+                                 NotificationEmailId = u.NotificationEmailId,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName,
+                                 MiddleName = u.MiddleName,
+                                 UserName = u.LoginId,
+                                 LastLoginDate = udd.LastLoginDate,
+                                 PasswordExpiryDate = udd.PasswordExpirationDate ?? DateTime.Now.AddDays(100),
+                                 TemproryPassword = udd.IsTemproryPassword,
+                                 LockAttempts = udd.LockAttemptCount,
+                                 Password = u.Password,
+                                 Active = u.Active,
+                                 UserDetailsId = udd.Id
+                             }).FirstOrDefault();
+
+            return userModel;
+        }
     }
 }

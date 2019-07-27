@@ -12,5 +12,6 @@ namespace VedSoft.Data.Contracts.User
     {
         int SaveUserLoginDetails(UserLoginDetails input);
         bool UpdateUserLoginDetails(LoginResponseModel input);
+        UserModel GetUserDetailsByLoginDetailsId(LoginResponseModel input);
     }
 }

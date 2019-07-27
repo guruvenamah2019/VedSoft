@@ -31,5 +31,13 @@ namespace VedSoft.Business.Login
         {
             return LoginBusiness.UpdatePassword(input);
         }
+
+        public ResponseModel<UserModel> GetUserDetailsByLoginDetailsId(RequestModel<LoginResponseModel> input)
+        {
+            ResponseModel<UserModel> responseModel = new ResponseModel<UserModel>();
+            responseModel.ResponseData= LoginBusiness.GetUserDetailsByLoginDetailsId(input);
+
+            return responseModel;
+        }
     }
 }

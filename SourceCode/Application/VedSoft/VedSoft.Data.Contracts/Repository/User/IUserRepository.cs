@@ -13,5 +13,7 @@ namespace VedSoft.Data.Contracts.User
         UserModel Authenticate(LoginRequestModel loginRequestModel);
         UserModel GetUserIdByLoginId(int UserId);
         bool UpdatePassword(SetPasswordRequestModel input);
+
+        
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using VedSoft.Model.Common;
 using VedSoft.Model.Login;
+using VedSoft.Model.User;
 
 namespace VedSoft.Business.Login
 {
@@ -13,6 +14,8 @@ namespace VedSoft.Business.Login
         bool UpdateLoginToken(LoginResponseModel input);
         string GetRefreshTokenByUserLoginDetailsId(LoginResponseModel input);
         int UpdatePassword(RequestModel<SetPasswordRequestModel> input);
+
+        ResponseModel<UserModel> GetUserDetailsByLoginDetailsId(RequestModel<LoginResponseModel> input);
 
     }
 }

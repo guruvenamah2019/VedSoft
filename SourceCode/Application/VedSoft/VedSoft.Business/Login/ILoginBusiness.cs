@@ -13,5 +13,6 @@ namespace VedSoft.Business.Login
         bool UpdateLoginToken(LoginResponseModel input);
         string GetRefreshTokenByUserLoginDetailsId(LoginResponseModel input);
         int UpdatePassword(RequestModel<SetPasswordRequestModel> input);
+        UserModel GetUserDetailsByLoginDetailsId(RequestModel<LoginResponseModel> input);
     }
 }
