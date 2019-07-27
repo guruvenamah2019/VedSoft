@@ -1,6 +1,6 @@
 export class UserMasterModel {
   id?: number;
-  username?: string;
+  userName?: string;
   firstName?: string;
   middleName?:string;
   lastName?: string;
@@ -9,7 +9,7 @@ userDetailsId ?:string;
 
   constructor() {
     this.id = 1;
-    this.username = "Admin";
+    this.userName = "Admin";
 
   }
 }

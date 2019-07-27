@@ -4,15 +4,14 @@
     "HOME": "Home",
     "ABOUT": "About",
     "CONTACT": "Contact",
-    "SERVICES": "Services",
-    "LOGIN_PAGE": {
-      "USERNAME": "Username",
-      "PASSWORD": "Password",
-      "MGS_USERNAME_REQUIRED": "Username is required",
-      "MGS_PASSWORD_REQUIRED": "Password is required",
-      "REMEMBER_ME": "Remember me"
-    }
+    "SERVICES": "Services"
+  
   },
+  "USERNAME": "Username",
+  "PASSWORD": "Password",
+  "MGS_USERNAME_REQUIRED": "Username is required",
+  "MGS_PASSWORD_REQUIRED": "Password is required",
+  "REMEMBER_ME": "Remember me",
   "CHANGE_PWD": "Change Password",
   "CURRENT_PWD": "Current Password",
   "NEW_PWD": "New Password",
@@ -34,8 +33,12 @@
   "PWD_LWR_CHAR": "at least one lowercase (a-z) character, and ",
   "PWD_SPL_CHAR": "at least one Special character (!, @, #, $, %, ^, &, *, _), and",
   "PWD_DGT_CHAR": "at least one digit (0,1,2,3,4,5,6,7,8,9)",
-  "PWD_SAME":"The new password cannot be same as the old password",
-  "PWD_TOO_SHORT":"The password length is too short",
-  "PWD_WEAK":"The password strength is weak"
-
+  "PWD_SAME": "The new password cannot be same as the old password",
+  "PWD_TOO_SHORT": "The password length is too short",
+  "PWD_WEAK": "The password strength is weak",
+  "FISRT_NAME": "First Name",
+  "MIDDLE_NAME": "Middle Name",
+  "LAST_NAME": "Last Name",
+  "EMAIL": "Email"
+ 
 }
