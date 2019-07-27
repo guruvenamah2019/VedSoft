@@ -64,7 +64,12 @@ namespace VedSoft.Data.Repository.Repository.Master
         {
             List<CourseHiearchyModel> courseHiearchyModelList = new List<CourseHiearchyModel>();
             var courseHierarchyList = this.RepositoryContext.CustomerCourseHierarchy
-                                      .Where(x => x.CustomerId == input.CustomerId && x.Active == CommonConstants.ActiveStatus)
+                                      .Where(x => x.CustomerId == input.CustomerId 
+                                      && 
+                                        (input.RequestParameter.HierarchyLevel==0 
+                                        || input.RequestParameter.HierarchyLevel == null
+                                        || x.HierarchyLevel==input.RequestParameter.HierarchyLevel)
+                                      && x.Active == CommonConstants.ActiveStatus)
                                       .Page(input.PageSize,input.PageNumber);
 
 

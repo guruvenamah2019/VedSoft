@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace VedSoft.API.Controllers
 {
     //[Route(CourseAPIAction.RoutePrefixCourse)]
+    [Authorize]
     public partial class MasterAPIController : ApiBaseController
     {
         /// <summary>
