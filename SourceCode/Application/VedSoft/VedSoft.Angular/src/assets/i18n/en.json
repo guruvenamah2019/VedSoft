@@ -1,17 +1,41 @@
 {
-    "PUBLIC": {
-      "LOGIN": "Login",
-      "HOME": "Home",
-      "ABOUT": "About",
-      "CONTACT": "Contact",
-      "SERVICES": "Services",
-      "LOGIN_PAGE":{
-          "USERNAME":"Username",
-          "PASSWORD":"Password",
-          "MGS_USERNAME_REQUIRED":"Username is required",
-          "MGS_PASSWORD_REQUIRED":"Password is required",
-          "REMEMBER_ME":"Remember me"
-          
-      }
+  "PUBLIC": {
+    "LOGIN": "Login",
+    "HOME": "Home",
+    "ABOUT": "About",
+    "CONTACT": "Contact",
+    "SERVICES": "Services",
+    "LOGIN_PAGE": {
+      "USERNAME": "Username",
+      "PASSWORD": "Password",
+      "MGS_USERNAME_REQUIRED": "Username is required",
+      "MGS_PASSWORD_REQUIRED": "Password is required",
+      "REMEMBER_ME": "Remember me"
     }
-  }
+  },
+  "CHANGE_PWD": "Change Password",
+  "CURRENT_PWD": "Current Password",
+  "NEW_PWD": "New Password",
+  "CONFIRM_PWD": "Confirm Password",
+  "ENTER_CURRENT_PWD": "Enter your current password",
+  "ENTER_NEW_PWD": "Enter your new password",
+  "ENTER_CONFIRM_PWD": "Enter confirm password",
+  "SUBMIT": "Submit",
+  "MGS_CUR_PWD_REQUIRED": "Current password is required",
+  "MGS_NEW_PWD_REQUIRED": "New password is required",
+  "MGS_CONFIRM_PWD_REQUIRED": "Confirm password is required",
+  "v_TooShort": "Too short",
+  "v_Weak": "Weak",
+  "v_Good": "Fair",
+  "v_Strong": "Strong",
+  "PWD_POLICY": "Password Policy",
+  "PWD_MAX_CHAR": "The password must have a minimum length of ten characters and include:",
+  "PWD_UPR_CHAR": "at least one UPPERCASE (A-Z) character, and",
+  "PWD_LWR_CHAR": "at least one lowercase (a-z) character, and ",
+  "PWD_SPL_CHAR": "at least one Special character (!, @, #, $, %, ^, &, *, _), and",
+  "PWD_DGT_CHAR": "at least one digit (0,1,2,3,4,5,6,7,8,9)",
+  "PWD_SAME":"The new password cannot be same as the old password",
+  "PWD_TOO_SHORT":"The password length is too short",
+  "PWD_WEAK":"The password strength is weak"
+
+}

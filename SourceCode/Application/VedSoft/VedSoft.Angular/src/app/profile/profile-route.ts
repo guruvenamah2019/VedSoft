@@ -1,7 +1,7 @@
 ﻿import { NgModule } from '@angular/core';
 import { ProfileIndexComponent,ChangePasswordComponent, ProfileComponent } from './components/index';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminGuard } from '../core/guards';
+import { AdminGuard, AuthGuard } from '../core/guards';
 
 export const PROFILE_ROUTES: Routes = [
 
@@ -17,7 +17,7 @@ export const PROFILE_ROUTES: Routes = [
                 path: '', redirectTo: 'me', pathMatch: 'full'
             },
         ],
-        canActivate: [AdminGuard]
+        canActivate: [AuthGuard]
 
     }
 ];

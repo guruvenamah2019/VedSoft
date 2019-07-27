@@ -5,6 +5,7 @@ import { AuthGuard } from "../core/guards/auth.guard";
 import { SharedModule } from "../shared/shared.module"
 import { PUBLIC_ROUTES } from "./public-route"
 import { EncryptionModule } from '../encryption/encryption.module';
+import { AdminGuard } from '../core/guards';
 
 
 
@@ -21,7 +22,7 @@ import { EncryptionModule } from '../encryption/encryption.module';
         RouterModule.forChild([
             // { path: 'requisitioning', redirectTo: "requisitioning/dashboard", pathMatch: "full" },
              { path: '', redirectTo: "login" },
-          { path: '', component: PublicIndexComponent, children: PUBLIC_ROUTES, canActivate: [AuthGuard] }
+          { path: '', component: PublicIndexComponent, children: PUBLIC_ROUTES }
          ])
     ],
     providers: [

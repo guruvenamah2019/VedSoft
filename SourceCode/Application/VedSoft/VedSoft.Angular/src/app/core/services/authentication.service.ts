@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, mapTo, tap } from 'rxjs/operators';
+import { catchError, mapTo, tap, map } from 'rxjs/operators';
 import { TokenModel, RequestModel, ResponseModel, ResultModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
-import { LoginRequestModel, AuthenticationModel, UserMasterModel, LoginResponseModel, SetPasswordRequestModel } from '../models/user-model';
+import { LoginRequestModel, AuthenticationModel, UserMasterModel, LoginResponseModel } from '../models/user-model';
 import { LOGIN_SERVICE_URL } from "../constant/service-url";
 import { post } from 'selenium-webdriver/http';
 import { LoginStatusEnum } from '../enums/login-status.enum';
+import { SetPasswordRequestModel } from '../models/login';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,7 @@ export class AuthenticationService {
         }));
   }
 
-  public logout():Observable<ResponseModel<ResultModel>> {
+  public logout(): Observable<ResponseModel<ResultModel>> {
 
     let input: RequestModel<LoginResponseModel> = {
       CustomerId: this.baseService.appInfo.CustomerId,
@@ -62,14 +63,15 @@ export class AuthenticationService {
         alert(error.error);
         return of(null);
       }));
-    }
+  }
 
   public isLoggedIn() {
+
     return !!this.getJwtToken();
   }
 
-  public refreshToken():Observable<ResponseModel<LoginResponseModel>> {
-//    let url = `${this.baseService.appInfo.apiUrl}/users/logout`;
+  public refreshToken(): Observable<ResponseModel<LoginResponseModel>> {
+    //    let url = `${this.baseService.appInfo.apiUrl}/users/logout`;
     let url = `${this.baseService.appInfo.apiUrl}/${LOGIN_SERVICE_URL.REFRESH_TOKEN}`;
 
     let input: RequestModel<LoginResponseModel> = {
@@ -81,7 +83,16 @@ export class AuthenticationService {
       }
     };
     return this.http.post<ResponseModel<LoginResponseModel>>(url, input).pipe(tap((tokens: ResponseModel<LoginResponseModel>) => {
-      this.storeJwtToken(tokens.responseData.token);
+      if (tokens != null && tokens.responseData != null && tokens.responseData.loginStatus == LoginStatusEnum.Success) {
+        this.storeJwtToken(tokens.responseData.token);
+      }
+      else {
+        this.removeTokens();
+        this.logout().subscribe(x => { 
+          location.reload(true);
+        });
+        
+      }
     }));
   }
 
@@ -134,5 +145,34 @@ export class AuthenticationService {
         catchError(error => {
           return of(null);
         }));
+  }
+
+  private getUserDetailsByToken(): Observable<ResponseModel<UserMasterModel>> {
+
+    //    let url = `${this.baseService.appInfo.apiUrl}/users/logout`;
+    let url = `${this.baseService.appInfo.apiUrl}/${LOGIN_SERVICE_URL.USER_DETAILS_BY_TOKEN}`;
+
+    let input: RequestModel<LoginResponseModel> = {
+      CustomerId: this.baseService.appInfo.CustomerId,
+      LanguageId: this.baseService.appInfo.LanguageId,
+      requestParameter: {
+        refreshToken: this.getRefreshToken(),
+        token: this.getJwtToken()
+      }
+    };
+    return this.http.post<ResponseModel<UserMasterModel>>(url, input).pipe();
+
+  }
+
+  public IsUserAuthenticate(): Observable<boolean> {
+
+    return this.getUserDetailsByToken().pipe(
+      map((result: ResponseModel<UserMasterModel>) => {
+
+        if (result != null && result.responseData != null)
+          this.loggedUser = result.responseData;
+        return this.loggedUser != null && this.loggedUser.id > 0
+      }));
+
   }
 }
