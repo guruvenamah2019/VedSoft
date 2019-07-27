@@ -35,6 +35,12 @@ namespace VedSoft.Business.Login
                     {
                         loginStatus = (int)LoginStatusConstants.TemproryPassword;
                     }
+                    else if (user.LockAttempts.GetValueOrDefault() >= CommonConstants.UserLoginAttemptsCountExceeded
+                            && user.LastLoginDate.GetValueOrDefault().AddMinutes(CommonConstants.AccountLockedTimeInMiutes) < DateTime.Now
+                        )
+                    {
+                        loginStatus = (int)LoginStatusConstants.AccontLocked;
+                    }
                     else
                     {
                         loginStatus = (int)LoginStatusConstants.Success;
@@ -55,7 +61,7 @@ namespace VedSoft.Business.Login
                     RepositoryWrapper.UserLoginDetailsRepository.SaveUserLoginDetails(userLoginDetails);
 
                     //Successfully logged in...make lock attempt to 0..if >0 then only
-                    if (user.LockAttempts.GetValueOrDefault() > 0)
+                    if (user.LockAttempts.GetValueOrDefault() > 0 && loginStatus == (int)LoginStatusConstants.Success)
                     {
                         user.LockAttempts = 0;
                         this.RepositoryWrapper.UserDetailsRepository.UpdateUserLoginLockAttempt(user);

@@ -32,7 +32,8 @@ namespace VedSoft.Utility.Constants
         LoginAttemptExceeded=4,
         TemproryPassword=5,
         InActive = 6,
-        InvalidRefreshToken=7
+        InvalidRefreshToken=7,
+        AccontLocked = 8
     }
 
     public class CommonConstants
@@ -41,6 +42,7 @@ namespace VedSoft.Utility.Constants
         public const int ActiveStatus = 1;
         public const int Success = 1;
         public const string UserLoginDetailsIdClaim  = "UserLoginDetailsIdClaim";
+        public const int AccountLockedTimeInMiutes = 30;
     }
         
 }

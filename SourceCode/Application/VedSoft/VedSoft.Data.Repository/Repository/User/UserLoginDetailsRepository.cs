@@ -26,7 +26,7 @@ namespace VedSoft.Data.Repository.Repository.User
                 LoginDate = input.LoginDate,
                 LoginSourceDetails = input.LoginSourceDetails,
                 StatusId = input.Status,
-                UserId = input.UserId
+                UserId = input.UserId,
             };
 
             //Save in database

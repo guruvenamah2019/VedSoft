@@ -20,6 +20,7 @@ namespace VedSoft.Data.Repository.Repository.User
             if(userDetails!=null)
             {
                 userDetails.LockAttemptCount= userDetailsReceived.LockAttempts;
+                userDetails.LastLoginDate = DateTime.Now;
                 this.RepositoryContext.Update(userDetails);
                 this.RepositoryContext.SaveChanges();
             }
