@@ -40,9 +40,12 @@ namespace VedSoft.Utility.Constants
     {
         public const int UserLoginAttemptsCountExceeded = 5;
         public const int ActiveStatus = 1;
+        public const int InActiveStatus = 0;
         public const int Success = 1;
         public const string UserLoginDetailsIdClaim  = "UserLoginDetailsIdClaim";
         public const int AccountLockedTimeInMiutes = 30;
+        public const int DuplicateRecord = -1;
+        public const int InvalidRecord = -2;
     }
         
 }

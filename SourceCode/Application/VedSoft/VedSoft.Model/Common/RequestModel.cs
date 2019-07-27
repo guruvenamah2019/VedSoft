@@ -15,6 +15,12 @@ namespace VedSoft.Model.Common
         public int? LanguageId { get; set; }        
     }
 
+    public class SearchRequestModel<T> : RequestModel<T> where T : class
+    {
+        public int PageSize { get; set; }
+        public int PageNumber { get; set; }
+    }
+
     public class Address
     {
         public string AddressLine1 { get; set; }

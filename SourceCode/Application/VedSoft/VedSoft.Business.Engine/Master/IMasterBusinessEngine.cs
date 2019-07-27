@@ -13,5 +13,9 @@ namespace VedSoft.Business.Engine.Master
         IMasterBusiness MasterBusiness { get; set; }
         ResponseModel<ResultModel> AddCustomer(RequestModel<CustomerModel> input);
         ResponseModel<CustomerModel> GetCustomerDetailsById(RequestModel<CustomerModel> input);
+        ResponseModel<ResultModel> AddCourseHierarchy(RequestModel<CourseHiearchyModel> input);
+        ResponseModel<ResultModel> UpdateCourseHierarchy(RequestModel<CourseHiearchyModel> input);
+        ResponseModel<List<CourseHiearchyModel>>  GetCourseHierarchy(SearchRequestModel<CourseHiearchyModel> input);
+        ResponseModel<ResultModel> MakeInActiveCourseHierarchy(RequestModel<CourseHiearchyModel> input);
     }
 }

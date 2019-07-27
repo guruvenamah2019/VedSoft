@@ -17,7 +17,7 @@ namespace VedSoft.API.Controllers
 {
     [Route(MasterAPIAction.RoutePrefixMaster)]
     [ApiController]
-    public class MasterAPIController : ApiBaseController
+    public partial class MasterAPIController : ApiBaseController
     {
 
         private IMasterBusinessEngine _masterBusinessEngine;

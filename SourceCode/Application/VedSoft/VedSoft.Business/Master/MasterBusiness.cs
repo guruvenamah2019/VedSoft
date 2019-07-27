@@ -62,6 +62,53 @@ namespace VedSoft.Business.Master
             };
 
         }
+
+        public int AddCourseHierarchy(RequestModel<CourseHiearchyModel> input)
+        {
+            if(!RepositoryWrapper.MasterRepository.DoesCourseHieararchyExist(input))
+            {
+                return RepositoryWrapper.MasterRepository.AddCourseHierarchy(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateCourseHierarchy(RequestModel<CourseHiearchyModel> input)
+        {
+            if (RepositoryWrapper.MasterRepository.DoesCourseHieararchyIdExist(input))
+            {
+                if (!RepositoryWrapper.MasterRepository.DoesCourseHieararchyExistUpdate(input))
+                {
+                    return RepositoryWrapper.MasterRepository.UpdateCourseHierarchy(input);
+                }
+                else
+                {
+                    return CommonConstants.DuplicateRecord;
+                }
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<CourseHiearchyModel> GetCourseHierarchy(SearchRequestModel<CourseHiearchyModel> input)
+        {
+            return RepositoryWrapper.MasterRepository.GetCourseHierarchy(input);
+        }
+
+        public int MakeInActiveCourseHierarchy(RequestModel<CourseHiearchyModel> input)
+        {
+            if (RepositoryWrapper.MasterRepository.DoesCourseHieararchyIdExist(input))
+            {
+                return RepositoryWrapper.MasterRepository.MakeInActiveCourseHierarchy(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
     }
 }
 

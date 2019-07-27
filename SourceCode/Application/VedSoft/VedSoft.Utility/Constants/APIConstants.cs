@@ -23,4 +23,14 @@ namespace VedSoft.Utility.Constants
         public const string Logout = "Logout";
         public const string UserDetailsByToken = "GetUserDetailsByToken";
     }
+
+    public class CourseAPIAction
+    {
+        public const string RoutePrefixCourse = "api/Course";
+
+        public const string ActionAddCourseHierarchy = "AddCourseHierarchy";
+        public const string ActionUpdateCourseHierarchy = "UpdateCourseHierarchy";
+        public const string ActionGetCourseHierarchy = "GetCourseHierarchy";
+        public const string ActionMakeInActiveCourseHierarchy = "MakeInActiveCourseHierarchy";
+    }
 }
