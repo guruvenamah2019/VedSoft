@@ -12,11 +12,13 @@ using VedSoft.Business.Master;
 using VedSoft.Utility.Constants;
 using VedSoft.Logger;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace VedSoft.API.Controllers
 {
     //[Route(CourseAPIAction.RoutePrefixCourse)]
     [Authorize]
+    [EnableCors("CorsPolicy")]
     public partial class MasterAPIController : ApiBaseController
     {
         /// <summary>
