@@ -1,6 +1,6 @@
 
 import { Injectable, Inject } from "@angular/core";
-import { ApplicationModel } from '../models/shared-model';
+import { ApplicationModel, RequestModel, SearchRequestModel } from '../models/shared-model';
 import { HttpErrorResponse, HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
 
@@ -19,5 +19,22 @@ export class BaseService {
 
   }
 
+  public getRequestModel<T>(requestModel:T):RequestModel<T>{
+    var obj:RequestModel<T> = new RequestModel<T>();
+    obj.CustomerId= this.appInfo.CustomerId,
+    obj.LanguageId= this.appInfo.LanguageId,
+    obj.requestParameter = requestModel;
+    return obj;
+
+  }
+
+  public getSearchRequestModel<T>(requestModel:T):SearchRequestModel<T>{
+    var obj:SearchRequestModel<T> = new SearchRequestModel<T>();
+    obj.CustomerId= this.appInfo.CustomerId,
+    obj.LanguageId= this.appInfo.LanguageId,
+    obj.requestParameter = requestModel;
+    return obj;
+
+  }
 
 }

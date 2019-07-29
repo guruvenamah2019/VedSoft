@@ -6,7 +6,6 @@
     <span (click)="addStandard()" class="float-right btn btn-success has-icon btn-rounded">
       <i class="mdi mdi-account-plus-outline"></i>Add</span>
     <span class="float-none"></span>
-
   </p>
 
 
@@ -14,12 +13,12 @@
 
   <div class="item-wrapper">
     <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-hover" *ngIf="courseList">
         <thead>
           <tr>
             <th>Select All|None
 
-              <label class="badge badge-info">4 Standards</label>
+              <label class="badge badge-info">{{courseList.length}} Standards</label>
             </th>
 
 
@@ -43,24 +42,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let course of courseList">
             <td>
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">10th Standard</label>
+                <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+course.id}}">
+                <label class="custom-control-label" for="{{'customCheck1'+course.id}}">{{course.name}}</label>
               </div>
             </td>
 
 
             <td class="actions">
               <div class="btn-group" dropdown>
-                <button id="btn1" dropdownToggle type="button"
+                <button id="{{'btn1'+course.id}}" dropdownToggle type="button"
                   class="btn btn-trasnparent action-btn btn-xs component-flat pr-0 dropdown-toggle"
-                  aria-controls="ddl1">
+                  [attr.aria-controls]="'ddl1'+course.id">
                   <i class="mdi mdi-dots-vertical"></i>
 
                 </button>
-                <ul id="ddl1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="btn1"
+                <ul id="{{'ddl1'+course.id}}" *dropdownMenu class="dropdown-menu" role="menu" [attr.aria-labelledby]="'btn1'+course.id"
                   x-placement="bottom-end">
                   <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline">Edit</i></li>
                   <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever">Delete</i></li>
@@ -69,55 +68,7 @@
               </div>
             </td>
           </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                <label class="custom-control-label" for="customCheck2">11th Standard</label>
-              </div>
-            </td>
-            <td class="actions">
-
-              <div class="btn-group" dropdown>
-                <button id="btn2" dropdownToggle type="button"
-                  class="btn btn-trasnparent action-btn btn-xs component-flat pr-0 dropdown-toggle"
-                  aria-controls="ddl2">
-                  <i class="mdi mdi-dots-vertical"></i>
-
-                </button>
-                <ul id="ddl2" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="btn2"
-                  x-placement="bottom-end">
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline">Edit</i></li>
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever">Delete</i></li>
-
-                </ul>
-              </div>
-
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                <label class="custom-control-label" for="customCheck3">12th Standard</label>
-              </div>
-            </td>
-            <td class="actions">
-              <i class="mdi mdi-dots-vertical"></i>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck4" checked>
-                <label class="custom-control-label" for="customCheck4">Bsc</label>
-              </div>
-            </td>
-
-            <td class="actions">
-              <i class="mdi mdi-dots-vertical"></i>
-            </td>
-          </tr>
+          
 
         </tbody>
       </table>

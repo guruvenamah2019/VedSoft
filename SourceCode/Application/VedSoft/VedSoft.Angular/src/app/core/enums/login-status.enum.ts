@@ -6,5 +6,6 @@ export enum LoginStatusEnum
         LoginAttemptExceeded=4,
         TemproryPassword=5,
         InActive = 6,
-        InvalidRefreshToken=7
+        InvalidRefreshToken=7,
+        AccontLocked = 8
     }

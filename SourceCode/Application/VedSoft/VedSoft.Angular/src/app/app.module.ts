@@ -12,6 +12,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { TranslateService } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CourseHiearchyService } from './core/services/course.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { ToastrModule } from 'ngx-toastr';
     AdminGuard,
     AuthenticationService,
     fakeBackendProvider,
-    BrowserInfoService
+    BrowserInfoService,
+    CourseHiearchyService,
+    
 
   ],
   bootstrap: [AppComponent]
