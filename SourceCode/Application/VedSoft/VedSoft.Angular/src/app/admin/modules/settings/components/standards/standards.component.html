@@ -32,7 +32,7 @@
                 </button>
                 <ul id="ddlAll" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="btnAll"
                   x-placement="bottom-end">
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline">Edit</i></li>
+                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline"  >Edit</i></li>
                   <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever">Delete</i></li>
 
                 </ul>
@@ -61,7 +61,7 @@
                 </button>
                 <ul id="{{'ddl1'+course.id}}" *dropdownMenu class="dropdown-menu" role="menu" [attr.aria-labelledby]="'btn1'+course.id"
                   x-placement="bottom-end">
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline">Edit</i></li>
+                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline" (click)="editStandard(course)" >Edit</i></li>
                   <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever">Delete</i></li>
 
                 </ul>

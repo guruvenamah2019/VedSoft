@@ -5,6 +5,7 @@ import { RequestModel, ResponseModel, ResultModel, SearchRequestModel } from '..
 import { BaseService } from './base.service';
 import { COURCE_SERVICE_URL } from "../constant/service-url";
 import { CourseHiearchyModel } from '../models/master-model/course-hiearchy.model';
+import { AuthenticationService } from '.';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ import { CourseHiearchyModel } from '../models/master-model/course-hiearchy.mode
 export class CourseHiearchyService {
 
 
-    constructor(private http: HttpClient, private baseService: BaseService) {
+    constructor(private http: HttpClient, public baseService: BaseService,  public userSerice:AuthenticationService) {
 
     }
 
