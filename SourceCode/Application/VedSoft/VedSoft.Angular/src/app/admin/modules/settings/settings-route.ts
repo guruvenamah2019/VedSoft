@@ -16,6 +16,12 @@ export const ADMIN_SETTINGS_ROUTES: Routes = [
               {
                 path: 'standards', component: StandardsSettingsComponent
               },
+              {
+                path: 'topics', component: StandardsSettingsComponent
+              },
+              {
+                path: 'streams', component: StandardsSettingsComponent
+              },
               
             
           ]

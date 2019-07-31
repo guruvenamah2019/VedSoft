@@ -8,6 +8,10 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { createTranslateLoader } from './loader/translate.loader';
 import { FooterComponent, HeaderComponent, SidebarComponent } from "./components/index"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRippleModule, MatMenuModule} from "@angular/material"
 import { ToastrModule } from 'ngx-toastr';
 
 
@@ -31,7 +35,13 @@ import { ToastrModule } from 'ngx-toastr';
         deps: [HttpClient]
       }
     }),
-    RouterModule
+    RouterModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatMenuModule
+    
   ],
   exports: [
     ReactiveFormsModule,
@@ -39,8 +49,12 @@ import { ToastrModule } from 'ngx-toastr';
     ModalModule,
     BsDropdownModule,
     TranslateModule,
-    FooterComponent, HeaderComponent, SidebarComponent
-
+    FooterComponent, HeaderComponent, SidebarComponent,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatMenuModule
   ],
   providers: [
 
