@@ -34,6 +34,22 @@ export class AddStandardComponent implements OnInit {
     });
 
   }
+
+
+  get levelName():string{
+
+    let levelName= this.courseService.getLevelName(this.model.hierarchyLevel);
+
+    
+    return levelName;
+}
+
+get parentLevelName():string{
+    let levelName= this.courseService.getLevelName(this.model.hierarchyLevel-1);
+    return levelName;
+
+}
+
   get f() { return this.standardForm.controls; }
 
   onSubmit() {

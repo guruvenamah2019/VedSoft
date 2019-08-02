@@ -5,82 +5,45 @@
 <div class="modal-body feedback-modal-body">
 
   <div class="grid">
-    <p class="grid-header">Add/Edit Standard</p>
+    <p class="grid-header">Add/Edit {{levelName}}</p>
     <div class="grid-body">
       <div class="item-wrapper">
-        <div>
-            <button mat-button [matMenuTriggerFor]="animals">Animal index</button>
 
-            <mat-menu #animals="matMenu">
-              <button mat-menu-item [matMenuTriggerFor]="vertebrates">Vertebrates</button>
-              <button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>
-            </mat-menu>
-            
-            <mat-menu #vertebrates="matMenu">
-              <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
-              <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
-              <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button>
-              <button mat-menu-item>Birds</button>
-              <button mat-menu-item>Mammals</button>
-            </mat-menu>
-            
-            <mat-menu #invertebrates="matMenu">
-              <button mat-menu-item>Insects</button>
-              <button mat-menu-item>Molluscs</button>
-              <button mat-menu-item>Crustaceans</button>
-              <button mat-menu-item>Corals</button>
-              <button mat-menu-item>Arachnids</button>
-              <button mat-menu-item>Velvet worms</button>
-              <button mat-menu-item>Horseshoe crabs</button>
-            </mat-menu>
-            
-            <mat-menu #fish="matMenu">
-              <button mat-menu-item>Baikal oilfish</button>
-              <button mat-menu-item>Bala shark</button>
-              <button mat-menu-item>Ballan wrasse</button>
-              <button mat-menu-item>Bamboo shark</button>
-              <button mat-menu-item>Banded killifish</button>
-            </mat-menu>
-            
-            <mat-menu #amphibians="matMenu">
-              <button mat-menu-item>Sonoran desert toad</button>
-              <button mat-menu-item>Western toad</button>
-              <button mat-menu-item>Arroyo toad</button>
-              <button mat-menu-item>Yosemite toad</button>
-            </mat-menu>
-            
-            <mat-menu #reptiles="matMenu">
-              <button mat-menu-item>Banded Day Gecko</button>
-              <button mat-menu-item>Banded Gila Monster</button>
-              <button mat-menu-item>Black Tree Monitor</button>
-              <button mat-menu-item>Blue Spiny Lizard</button>
-              <button mat-menu-item disabled>Velociraptor</button>
-            </mat-menu>
-
-
-        </div>
         <form [formGroup]="standardForm" (ngSubmit)="onSubmit()">
-          <div class="form-group input-rounded">
 
-              
-          </div>
-
-          <div class="form-group input-rounded">
-
-
-            <input type="text" formControlName="standard" class="form-control" placeholder="standard"
-              [ngClass]="{ 'is-invalid': submitted && f.standard.errors }" />
-            <div *ngIf="submitted && f.standard.errors" class="invalid-feedback">
-              <div *ngIf="f.standard.errors.required">standard is required</div>
+          <div class="row mb-3">
+            <div class="col-md-8 mx-auto">
+                <div *ngIf="this.model.hierarchyLevel>1" class="form-group row showcase_row_area">
+                    <div class="col-md-3 showcase_text_area">
+                      <label for="inputType5">{{parentLevelName|translate}}</label>
+                    </div>
+                    <div class="col-md-9 showcase_content_area">
+                      
+                    </div>
+                  </div>
+              <div class="form-group row showcase_row_area">
+                <div class="col-md-3 showcase_text_area">
+                  <label for="inputType5">{{levelName|translate}}</label>
+                </div>
+                <div class="col-md-9 showcase_content_area">
+                  <input type="text" formControlName="standard" class="form-control" placeholder="{{levelName}}"
+                    [ngClass]="{ 'is-invalid': submitted && f.standard.errors }" />
+                  <div *ngIf="submitted && f.standard.errors" class="invalid-feedback">
+                    <div *ngIf="f.standard.errors.required">{{levelName}} is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row showcase_row_area">
+                <button [disabled]="loading" class="btn btn-primary">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Submit
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+              </div>
             </div>
           </div>
 
 
-          <button [disabled]="loading" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Submit
-          </button>
-          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </form>
 
       </div>

@@ -1,10 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AddStandardComponent } from '../add-standard/add-standard.component';
 import { CourseHiearchyModel } from 'src/app/core/models/master-model/course-hiearchy.model';
 import { CourseHiearchyService, BaseService } from 'src/app/core/services';
-import { servicesVersion } from 'typescript';
 import { RequestModel } from 'src/app/core/models/shared-model';
 import { CommonConstants } from 'src/app/core/enums';
 
@@ -19,25 +18,51 @@ export class StandardsSettingsComponent implements OnInit {
     level: number = 1;
     bsModalRef: BsModalRef;
     courseList: CourseHiearchyModel[] = [];
-    constructor(private modalService: BsModalService, private courseService: CourseHiearchyService, private baseService: BaseService) {
+    constructor(private modalService: BsModalService, private courseService: CourseHiearchyService, private baseService: BaseService,private router: Router,
+        private activatedRoute: ActivatedRoute) {
         console.log("StandardsSettingsComponent");
 
     }
     ngOnInit() {
+        
+          this.activatedRoute.data.subscribe(x=>{
+              this.level = x.level;
+          })
         this.getCourseList();
     }
+
+    get parentLevel():number{
+        return this.level-1;
+    }
+    get levelName():string{
+
+        let levelName= this.courseService.getLevelName(this.level);
+
+        
+        return levelName;
+    }
+
+    get parentLevelName():string{
+        let levelName= this.courseService.getLevelName(this.parentLevel);
+        
+        return levelName;
+
+
+    }
+
+   
+
 
     getCourseList() {
         let course: CourseHiearchyModel = new CourseHiearchyModel();
         course.hierarchyLevel = this.level;
-
         let searchInput = this.baseService.getSearchRequestModel(course);
         searchInput.pageNumber = 1;
         searchInput.pageSize = 100;
 
         this.courseService.getCourseHierarchy(searchInput).subscribe(x => {
-            if (x.responseData != null) {
-                this.courseList = x.responseData;
+            if (x != null) {
+                this.courseList = x;
             }
         })
 

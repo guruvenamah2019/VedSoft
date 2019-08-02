@@ -7,21 +7,23 @@ export const ADMIN_SETTINGS_ROUTES: Routes = [
             {
               path: 'org', component: OrganizationSettingsComponent
             },
-            {
-              path: 'subject', component: SubjectSettingsComponent
-            },
+            
             {
                 path: 'course', component: CourseSettingsComponent
               },
               {
-                path: 'standards', component: StandardsSettingsComponent
+                path: 'standards', component: StandardsSettingsComponent,data:{level:1}
               },
               {
-                path: 'topics', component: StandardsSettingsComponent
+                path: 'streams', component: StandardsSettingsComponent,data:{level:2}
               },
               {
-                path: 'streams', component: StandardsSettingsComponent
+                path: 'subject', component: StandardsSettingsComponent, data:{level:3}
               },
+              {
+                path: 'topics', component: StandardsSettingsComponent,data:{level:4}
+              },
+              
               
             
           ]
