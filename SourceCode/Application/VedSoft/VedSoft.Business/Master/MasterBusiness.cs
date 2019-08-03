@@ -63,6 +63,30 @@ namespace VedSoft.Business.Master
 
         }
 
+        public CustomerModel GetCustomerDetailsBySubDomain(CustomerModel input)
+        {
+            var customerDetails = RepositoryWrapper
+                                    .CustomerRepository
+                                    .FindByCondition(x => x.SubDomain.ToLower() == input.SubDomain.ToLower())
+                                    .FirstOrDefault();
+
+            return new CustomerModel
+            {
+                Code = customerDetails.Code,
+                Address = customerDetails.Address,
+                Active = customerDetails.Active,
+                ContactNumber = customerDetails.ContactNumber,
+                CreatedBy = customerDetails.CreatedBy,
+                CreatedDate = customerDetails.CreatedDate,
+                CustomerId = customerDetails.CustomerId,
+                Description = customerDetails.Description,
+                Name = customerDetails.Name,
+                OtherInfo = customerDetails.OtherInfo,
+                SubDomain = customerDetails.SubDomain
+            };
+
+        }
+
         public int AddCourseHierarchy(RequestModel<CourseHiearchyModel> input)
         {
             if(!RepositoryWrapper.MasterRepository.DoesCourseHieararchyExist(input))

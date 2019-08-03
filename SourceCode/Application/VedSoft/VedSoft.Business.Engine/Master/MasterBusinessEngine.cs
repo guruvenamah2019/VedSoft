@@ -82,5 +82,14 @@ namespace VedSoft.Business.Engine.Master
 
             return responseModel;
         }
+
+        public ResponseModel<CustomerModel> GetCustomerDetailsBySubDomain(RequestModel<CustomerModel> input)
+        {
+            ResponseModel<CustomerModel> responseModel = new ResponseModel<CustomerModel>();
+            responseModel.ResponseData = MasterBusiness.GetCustomerDetailsBySubDomain(input.RequestParameter);
+
+
+            return responseModel;
+        }
     }
 }

@@ -84,6 +84,33 @@ namespace VedSoft.API.Controllers
             return result;
         }
 
+        /// <summary>
+        /// To get the customer details by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(MasterAPIAction.ActionGetCustomerDetailsBySubDomain)]
+        [AllowAnonymous]
+        public async Task<ResponseModel<CustomerModel>> GetCustomerDetailsBySubDomain([FromBody] RequestModel<CustomerModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<CustomerModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _masterBusinessEngine.GetCustomerDetailsBySubDomain(input);
+                    return result;
+
+                });
+            });
+
+            return result;
+        }
+
         [HttpGet]
         [Route("TestForToken")]
         [Authorize]

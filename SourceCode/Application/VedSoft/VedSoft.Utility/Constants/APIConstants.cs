@@ -11,6 +11,7 @@ namespace VedSoft.Utility.Constants
         public const string ActionAddCustomer ="AddCustomer";
 
         public const string ActionGetCustomerDetails = "GetCustomerDetails";
+        public const string ActionGetCustomerDetailsBySubDomain = "GetCustomerDetailsBySubDomain";
     }
 
     public class LoginAPIAction

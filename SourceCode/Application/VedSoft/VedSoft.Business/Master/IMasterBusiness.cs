@@ -15,5 +15,7 @@ namespace VedSoft.Business.Master
         int UpdateCourseHierarchy(RequestModel<CourseHiearchyModel> input);
         List<CourseHiearchyModel> GetCourseHierarchy(SearchRequestModel<CourseHiearchyModel> input);
         int MakeInActiveCourseHierarchy(RequestModel<CourseHiearchyModel> input);
+
+        CustomerModel GetCustomerDetailsBySubDomain(CustomerModel input);
     }
 }

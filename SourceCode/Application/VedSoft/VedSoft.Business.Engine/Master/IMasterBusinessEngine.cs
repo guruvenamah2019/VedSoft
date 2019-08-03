@@ -17,5 +17,6 @@ namespace VedSoft.Business.Engine.Master
         ResponseModel<ResultModel> UpdateCourseHierarchy(RequestModel<CourseHiearchyModel> input);
         ResponseModel<List<CourseHiearchyModel>>  GetCourseHierarchy(SearchRequestModel<CourseHiearchyModel> input);
         ResponseModel<ResultModel> MakeInActiveCourseHierarchy(RequestModel<CourseHiearchyModel> input);
+        ResponseModel<CustomerModel> GetCustomerDetailsBySubDomain(RequestModel<CustomerModel> input);
     }
 }

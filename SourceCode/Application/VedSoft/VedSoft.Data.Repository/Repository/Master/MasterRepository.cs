@@ -112,6 +112,7 @@ namespace VedSoft.Data.Repository.Repository.Master
             input.RequestParameter.ParentId = input.RequestParameter.ParentId == 0 ? null : input.RequestParameter.ParentId;
             return this.RepositoryContext.CustomerCourseHierarchy
                                   .Where(x => x.CustomerId==input.CustomerId 
+                                  && x.Active== CommonConstants.ActiveStatus
                                   && (x.ParentId == input.RequestParameter.ParentId || (x.ParentId==null && input.RequestParameter.ParentId==null))
                                   && x.Name.ToLower() == input.RequestParameter.Name.ToLower())
                                   .Count() >0;
@@ -122,6 +123,7 @@ namespace VedSoft.Data.Repository.Repository.Master
             return this.RepositoryContext.CustomerCourseHierarchy
                                   .Where(x => x.CustomerId == input.CustomerId 
                                   && x.Name.ToLower() == input.RequestParameter.Name.ToLower()
+                                  && x.Active == CommonConstants.ActiveStatus
                                   && (x.ParentId == input.RequestParameter.ParentId || (x.ParentId == null && input.RequestParameter.ParentId == null))
                                   && x.Active == CommonConstants.ActiveStatus
                                   && x.Id != input.RequestParameter.Id)
