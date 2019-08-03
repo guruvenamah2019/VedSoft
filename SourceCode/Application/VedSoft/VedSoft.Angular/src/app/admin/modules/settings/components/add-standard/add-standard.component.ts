@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CourseHiearchyService, BaseService, AuthenticationService } from 'src/app/core/services';
 import { CourseHiearchyModel } from 'src/app/core/models/master-model/course-hiearchy.model';
 import { CommonConstants } from 'src/app/core/enums';
@@ -29,26 +29,46 @@ export class AddStandardComponent implements OnInit {
 
   }
   ngOnInit() {
+
+    let parent = this.courseService.CourseHiearchy.filter(x => x.id == this.model.parentId);
+    parent = parent.length == 0 ? null : parent;
+
+
     this.standardForm = this.formBuilder.group({
-      standard: [this.model.name, Validators.required]
+      standard: new FormControl(this.model.name, [Validators.required, Validators.minLength(3)]),
+      parent: new FormControl(parent, []),
     });
+
+    if (this.model.id == 0 && this.model.hierarchyLevel > 1) {
+      this.standardForm.controls.parent.setValidators([Validators.required]);
+    }
+
+
 
   }
 
 
-  get levelName():string{
+  get levelName(): string {
 
-    let levelName= this.courseService.getLevelName(this.model.hierarchyLevel);
+    let levelName = this.courseService.getLevelName(this.model.hierarchyLevel);
 
-    
+
     return levelName;
-}
+  }
 
-get parentLevelName():string{
-    let levelName= this.courseService.getLevelName(this.model.hierarchyLevel-1);
+
+
+  getParentList() {
+
+    return this.courseService.CourseHiearchy.filter(x => x.hierarchyLevel == (this.model.hierarchyLevel - 1));
+
+  }
+
+  get parentLevelName(): string {
+    let levelName = this.courseService.getLevelName(this.model.hierarchyLevel - 1);
     return levelName;
 
-}
+  }
 
   get f() { return this.standardForm.controls; }
 
@@ -58,25 +78,26 @@ get parentLevelName():string{
     if (this.standardForm.invalid) {
       return;
     }
+    let parent: CourseHiearchyModel = this.model.id > 0 ? this.courseService.CourseHiearchy.find(x => x.id == this.model.parentId) : this.f.parent.value;
+
     let courseInput: CourseHiearchyModel = {
-      parentId: this.model.parentId,
+      parentId: parent? parent.id:0,
       name: this.f.standard.value,
       userId: this.courseService.userSerice.loggedUser.id,
       hierarchyLevel: this.model.hierarchyLevel,
       id: this.model.id
     };
-   
-if(this.model.id>0)
-{
-  this.editStandard(courseInput);
-}
-else {
-  this.addStandard(courseInput);
-}
+
+    if (this.model.id > 0) {
+      this.editStandard(courseInput);
+    }
+    else {
+      this.addStandard(courseInput);
+    }
 
   }
 
-  addStandard(courseInput:CourseHiearchyModel){
+  addStandard(courseInput: CourseHiearchyModel) {
     this.courseService.addCourseHierarchy(courseInput).subscribe(x => {
       if (x.responseData != null) {
         if (x.responseData.statusId == CommonConstants.success) {
@@ -98,7 +119,7 @@ else {
 
   }
 
-  editStandard(courseInput:CourseHiearchyModel){
+  editStandard(courseInput: CourseHiearchyModel) {
     this.courseService.updateCourseHierarchy(courseInput).subscribe(x => {
       if (x.responseData != null) {
         if (x.responseData.statusId == CommonConstants.success) {

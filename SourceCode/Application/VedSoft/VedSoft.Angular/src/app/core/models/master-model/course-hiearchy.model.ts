@@ -4,6 +4,7 @@ export class CourseHiearchyModel {
     parentId?:number;
     userId?:number;
     hierarchyLevel?:number;
+    parent?:CourseHiearchyModel
     constructor() {
 
     };

@@ -18,6 +18,9 @@
 
               <label class="badge badge-info">{{courseList.length}} {{levelName}}</label>
             </th>
+            <th *ngIf="level>1">
+
+            </th>
 
 
             <th>
@@ -47,7 +50,9 @@
                 <label class="custom-control-label" for="{{'customCheck1'+course.id}}">{{course.name}}</label>
               </div>
             </td>
-
+          <td *ngIf="level>1">
+            <small > {{getParentName(course.parent)}} </small>
+          </td>
 
             <td class="actions">
               <div class="btn-group" dropdown>

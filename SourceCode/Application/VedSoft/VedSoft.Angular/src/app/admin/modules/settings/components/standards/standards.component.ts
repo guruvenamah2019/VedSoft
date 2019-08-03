@@ -18,39 +18,39 @@ export class StandardsSettingsComponent implements OnInit {
     level: number = 1;
     bsModalRef: BsModalRef;
     courseList: CourseHiearchyModel[] = [];
-    constructor(private modalService: BsModalService, private courseService: CourseHiearchyService, private baseService: BaseService,private router: Router,
+    constructor(private modalService: BsModalService, private courseService: CourseHiearchyService, private baseService: BaseService, private router: Router,
         private activatedRoute: ActivatedRoute) {
         console.log("StandardsSettingsComponent");
 
     }
     ngOnInit() {
-        
-          this.activatedRoute.data.subscribe(x=>{
-              this.level = x.level;
-          })
+
+        this.activatedRoute.data.subscribe(x => {
+            this.level = x.level;
+        })
         this.getCourseList();
     }
 
-    get parentLevel():number{
-        return this.level-1;
+    get parentLevel(): number {
+        return this.level - 1;
     }
-    get levelName():string{
+    get levelName(): string {
 
-        let levelName= this.courseService.getLevelName(this.level);
+        let levelName = this.courseService.getLevelsName(this.level);
 
-        
+
         return levelName;
     }
 
-    get parentLevelName():string{
-        let levelName= this.courseService.getLevelName(this.parentLevel);
-        
+    get parentLevelName(): string {
+        let levelName = this.courseService.getLevelsName(this.parentLevel);
+
         return levelName;
 
 
     }
 
-   
+
 
 
     getCourseList() {
@@ -78,6 +78,18 @@ export class StandardsSettingsComponent implements OnInit {
         };
         this.standardOpen(inputModel);
 
+    }
+
+    getParentName(item: CourseHiearchyModel) {
+        let name = "";
+        if (item) {
+            name = item.name;
+            if (item.parent) {
+                return name+ "->" + this.getParentName(item.parent)
+            }
+        }
+
+        return name;
     }
 
     editStandard(inputModel: CourseHiearchyModel): void {
