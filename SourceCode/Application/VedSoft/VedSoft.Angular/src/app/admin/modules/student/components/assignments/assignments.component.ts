@@ -17,7 +17,7 @@ export class StudentAssignmentsComponent implements OnInit {
   onNavigate() {
   }
   constructor(private userService: AuthenticationService) {
-    console.log("AdminDashboardIndexComponent");
+    console.log("StudentAssignmentsComponent");
 
   }
   ngOnInit() {

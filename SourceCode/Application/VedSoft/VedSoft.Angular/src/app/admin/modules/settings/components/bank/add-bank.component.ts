@@ -24,7 +24,7 @@ export class AddBankComponent implements OnInit {
   submitted: boolean = false;
   onNavigate() {
   }
-  constructor(private bsModalRef: BsModalRef, private formBuilder: FormBuilder, private bankService: BankService, private userService: AuthenticationService) {
+  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private bankService: BankService, private userService: AuthenticationService) {
     console.log("AdminDashboardIndexComponent");
 
   }

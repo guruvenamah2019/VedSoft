@@ -19,7 +19,7 @@ export class OrganizationSettingsComponent implements OnInit {
     onNavigate() {
         this._router.navigate(['/'], { queryParams: { "ram": 1 } });
     }
-    constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private baseService: BaseService ) {
+    constructor(private _router: Router, private _activatedRoute: ActivatedRoute, public baseService: BaseService ) {
         console.log("AdminDashboardIndexComponent");
         
         

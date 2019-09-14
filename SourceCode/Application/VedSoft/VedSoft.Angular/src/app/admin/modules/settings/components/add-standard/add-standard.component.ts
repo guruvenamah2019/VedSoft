@@ -24,7 +24,7 @@ export class AddStandardComponent implements OnInit {
   submitted: boolean = false;
   onNavigate() {
   }
-  constructor(private bsModalRef: BsModalRef, private formBuilder: FormBuilder, private courseService: CourseHiearchyService) {
+  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private courseService: CourseHiearchyService) {
     console.log("AdminDashboardIndexComponent");
 
   }

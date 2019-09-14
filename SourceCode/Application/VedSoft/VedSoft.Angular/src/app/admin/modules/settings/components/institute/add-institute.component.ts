@@ -24,7 +24,7 @@ export class AddInstituteComponent implements OnInit {
   submitted: boolean = false;
   onNavigate() {
   }
-  constructor(private bsModalRef: BsModalRef, private formBuilder: FormBuilder, private instituteService: InstituteService, private userService: AuthenticationService) {
+  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private instituteService: InstituteService, private userService: AuthenticationService) {
     console.log("AddInstituteComponent");
 
   }

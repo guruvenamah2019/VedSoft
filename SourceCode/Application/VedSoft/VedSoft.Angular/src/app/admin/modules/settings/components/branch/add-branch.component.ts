@@ -24,7 +24,7 @@ export class AddBranchComponent implements OnInit {
   submitted: boolean = false;
   onNavigate() {
   }
-  constructor(private bsModalRef: BsModalRef, private formBuilder: FormBuilder, private branchService: BranchService) {
+  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private branchService: BranchService) {
     console.log("AddBranchComponent");
 
   }

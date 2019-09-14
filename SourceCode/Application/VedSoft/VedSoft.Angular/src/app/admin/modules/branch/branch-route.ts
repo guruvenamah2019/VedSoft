@@ -1,5 +1,5 @@
 ﻿import { Routes } from '@angular/router';
-import { BranchIndexComponent, StudentListComponent, StudentComponent } from './components';
+import { BranchIndexComponent} from './components';
 export const BRANCH_ROUTES: Routes = [
     { 
         path: '', component: BranchIndexComponent, children: [

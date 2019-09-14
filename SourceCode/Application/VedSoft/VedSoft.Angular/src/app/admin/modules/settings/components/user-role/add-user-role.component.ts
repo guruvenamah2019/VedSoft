@@ -24,7 +24,7 @@ export class AddUserRoleComponent implements OnInit {
   submitted: boolean = false;
   onNavigate() {
   }
-  constructor(private bsModalRef: BsModalRef, private formBuilder: FormBuilder, private roleService: UserRoleService) {
+  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private roleService: UserRoleService) {
     console.log("AddUserRoleComponent");
 
   }
