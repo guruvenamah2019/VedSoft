@@ -7,7 +7,6 @@ namespace VedSoft.Utility.Constants
     public class MasterAPIAction
     {
         public const string RoutePrefixMaster = "api/Customer";
-
         public const string ActionAddCustomer ="AddCustomer";
 
         public const string ActionGetCustomerDetails = "GetCustomerDetails";
@@ -33,5 +32,21 @@ namespace VedSoft.Utility.Constants
         public const string ActionUpdateCourseHierarchy = "UpdateCourseHierarchy";
         public const string ActionGetCourseHierarchy = "GetCourseHierarchy";
         public const string ActionMakeInActiveCourseHierarchy = "MakeInActiveCourseHierarchy";
+    }
+
+    public class CustomerBranchAPIAction
+    {
+        public const string ActionAddCustomerBranch = "AddBranch";
+        public const string ActionUpdateCustomerBranch = "UpdateBranch";
+        public const string ActionGetCustomerBranch = "GetBranches";
+        public const string ActionMakeInActiveCustomerBranch = "MakeInActiveBranch";
+    }
+
+    public class UserRoleAPIAction
+    {
+        public const string ActionAddCustomerRole = "AddRole";
+        public const string ActionUpdateCustomerRole = "UpdateRole";
+        public const string ActionGetCustomerRole = "GetRole";
+        public const string ActionMakeInActiveCustomerRole = "MakeInActiveRole";
     }
 }

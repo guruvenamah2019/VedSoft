@@ -14,5 +14,7 @@ namespace VedSoft.Data.Contracts.Wrapper
         IUserRepository UserRepository { get; }
         IUserLoginDetailsRepository UserLoginDetailsRepository { get; }
         IMasterRepository MasterRepository { get; }
+        ICustomerBranchRepository CustomerBranchRepository { get; }
+        IUserRoleRepository UserRoleRepository { get; }
     }
 }

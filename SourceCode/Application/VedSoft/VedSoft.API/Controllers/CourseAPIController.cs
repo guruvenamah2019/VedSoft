@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Cors;
 namespace VedSoft.API.Controllers
 {
     //[Route(CourseAPIAction.RoutePrefixCourse)]
-    [Authorize]
+    [AllowAnonymous]
     [EnableCors("CorsPolicy")]
     public partial class MasterAPIController : ApiBaseController
     {

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using VedSoft.Model.Login;
 using VedSoft.Model.User;
+using VedSoft.Model.Common;
 
 namespace VedSoft.Data.Repository.Repository.User
 {
@@ -16,12 +17,13 @@ namespace VedSoft.Data.Repository.Repository.User
         {
             
         }
-        public UserModel Authenticate(LoginRequestModel loginRequestModel)
+        public UserModel Authenticate(RequestModel<LoginRequestModel> loginRequestModel)
         {
             var user = this.RepositoryContext.User;
             var userDetails = this.RepositoryContext.UserDetails;
             var userModel = (from u in user
-                     where u.LoginId.ToLower() == loginRequestModel.UserName.ToLower()
+                     where u.LoginId.ToLower() == loginRequestModel.RequestParameter.UserName.ToLower()
+                     && u.CustomerId == loginRequestModel.CustomerId
                            //&& u.Password == loginRequestModel.Password
                      join ud in userDetails on u.UserId equals ud.UserId into usr
                      from udd in usr.DefaultIfEmpty()

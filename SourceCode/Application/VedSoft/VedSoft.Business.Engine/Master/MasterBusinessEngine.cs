@@ -3,6 +3,7 @@ using VedSoft.Business.Master;
 using VedSoft.Model;
 using VedSoft.Model.Common;
 using VedSoft.Model.Master;
+using VedSoft.Model.User;
 using VedSoft.Utility.Constants;
 
 namespace VedSoft.Business.Engine.Master
@@ -26,7 +27,6 @@ namespace VedSoft.Business.Engine.Master
         {
             ResponseModel<CustomerModel> responseModel = new ResponseModel<CustomerModel>();
             responseModel.ResponseData = MasterBusiness.GetCustomerDetailsById(input.RequestParameter);
-            
 
             return responseModel;
         }
@@ -88,6 +88,110 @@ namespace VedSoft.Business.Engine.Master
             ResponseModel<CustomerModel> responseModel = new ResponseModel<CustomerModel>();
             responseModel.ResponseData = MasterBusiness.GetCustomerDetailsBySubDomain(input.RequestParameter);
 
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> AddCustomerBranch(RequestModel<CustomerBranchModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.PrimaryKey = MasterBusiness.AddCustomerBranch(input);
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
+
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> UpdateCustomerBranch(RequestModel<CustomerBranchModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.UpdateCustomerBranch(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<List<CustomerBranchModel>> GetCustomerBranches(SearchRequestModel<CustomerBranchModel> input)
+        {
+            ResponseModel<List<CustomerBranchModel>> responseModel = new ResponseModel<List<CustomerBranchModel>>();
+            responseModel.ResponseData = MasterBusiness.GetCustomerBranches(input);
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> MakeInActiveCustomerBranch(RequestModel<CustomerBranchModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.MakeInActiveCustomerBranch(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> AddUserRole(RequestModel<UserRoleModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.PrimaryKey = MasterBusiness.AddUserRole(input);
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
+
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> UpdateUserRole(RequestModel<UserRoleModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.UpdateUserRole(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<List<UserRoleModel>> GetUserRole(SearchRequestModel<UserRoleModel> input)
+        {
+            ResponseModel<List<UserRoleModel>> responseModel = new ResponseModel<List<UserRoleModel>>();
+            responseModel.ResponseData = MasterBusiness.GetUserRoles(input);
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> MakeInActiveUserRole(RequestModel<UserRoleModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.MakeInActiveUserRole(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
 
             return responseModel;
         }

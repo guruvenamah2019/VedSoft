@@ -21,4 +21,12 @@ namespace VedSoft.Model.User
         public int? Active { get; set; }
         public int UserDetailsId { get; set; }
     }
+
+    public class UserRoleModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int UserId { get; set; }
+    }
 }

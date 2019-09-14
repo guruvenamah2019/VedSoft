@@ -21,5 +21,6 @@ namespace VedSoft.Data.Contracts.Repository.Master
         bool DoesCourseHieararchyExistUpdate(RequestModel<CourseHiearchyModel> input);
 
         bool DoesCourseHieararchyIdExist(RequestModel<CourseHiearchyModel> input);
+       
     }
 }

@@ -18,5 +18,7 @@ namespace VedSoft.Data.Repository
         public DbSet<UserMasterDB> User { get; set; }
         public DbSet<UserLoginDetailsDB> UserLoginDetails { get; set; }
         public DbSet<CustomerCourseHierarchyDB> CustomerCourseHierarchy { get; set; }
+        public DbSet<CustomerBranchesDB> CustomerBranch { get; set; }
+        public DbSet<UserRoleDB> UserRole { get; set; }
     }
 }

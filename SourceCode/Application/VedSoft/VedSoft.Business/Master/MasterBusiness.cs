@@ -10,6 +10,7 @@ using VedSoft.Model.Master;
 using VedSoft.Utility.APIHandler;
 using VedSoft.Utility.Constants;
 using VedSoft.Data.Contracts.Model;
+using VedSoft.Model.User;
 
 namespace VedSoft.Business.Master
 {
@@ -127,6 +128,100 @@ namespace VedSoft.Business.Master
             if (RepositoryWrapper.MasterRepository.DoesCourseHieararchyIdExist(input))
             {
                 return RepositoryWrapper.MasterRepository.MakeInActiveCourseHierarchy(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public int AddCustomerBranch(RequestModel<CustomerBranchModel> input)
+        {
+            if (!RepositoryWrapper.CustomerBranchRepository.DoesCustomerBranchExist(input))
+            {
+                return RepositoryWrapper.CustomerBranchRepository.AddCustomerBranch(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateCustomerBranch(RequestModel<CustomerBranchModel> input)
+        {
+            if (RepositoryWrapper.CustomerBranchRepository.DoesCustomerBranchIdExist(input))
+            {
+                if (!RepositoryWrapper.CustomerBranchRepository.DoesCustomerBranchExistUpdate(input))
+                {
+                    return RepositoryWrapper.CustomerBranchRepository.UpdateCustomerBranch(input);
+                }
+                else
+                {
+                    return CommonConstants.DuplicateRecord;
+                }
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<CustomerBranchModel> GetCustomerBranches(SearchRequestModel<CustomerBranchModel> input)
+        {
+            return RepositoryWrapper.CustomerBranchRepository.GetCustomerBranches(input);
+        }
+
+        public int MakeInActiveCustomerBranch(RequestModel<CustomerBranchModel> input)
+        {
+            if (RepositoryWrapper.CustomerBranchRepository.DoesCustomerBranchIdExist(input))
+            {
+                return RepositoryWrapper.CustomerBranchRepository.MakeInActiveCustomerBranch(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public int AddUserRole(RequestModel<UserRoleModel> input)
+        {
+            if (!RepositoryWrapper.UserRoleRepository.DoesUserRoleExist(input))
+            {
+                return RepositoryWrapper.UserRoleRepository.AddUserRole(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateUserRole(RequestModel<UserRoleModel> input)
+        {
+            if (RepositoryWrapper.UserRoleRepository.DoesUserRoleIdExist(input))
+            {
+                if (!RepositoryWrapper.UserRoleRepository.DoesUserRoleExistUpdate(input))
+                {
+                    return RepositoryWrapper.UserRoleRepository.UpdateUserRole(input);
+                }
+                else
+                {
+                    return CommonConstants.DuplicateRecord;
+                }
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<UserRoleModel> GetUserRoles(SearchRequestModel<UserRoleModel> input)
+        {
+            return RepositoryWrapper.UserRoleRepository.GetUserRoles(input);
+        }
+
+        public int MakeInActiveUserRole(RequestModel<UserRoleModel> input)
+        {
+            if (RepositoryWrapper.UserRoleRepository.DoesUserRoleIdExist(input))
+            {
+                return RepositoryWrapper.UserRoleRepository.MakeInActiveUserRole(input);
             }
             else
             {

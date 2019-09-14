@@ -15,7 +15,7 @@ namespace VedSoft.Business.Login
         {
             AuthenticationModel authenticateModel = new AuthenticationModel();
             int loginStatus = (int)LoginStatusConstants.InvalidCredentials;
-            UserModel user= RepositoryWrapper.UserRepository.Authenticate(input.RequestParameter);
+            UserModel user= RepositoryWrapper.UserRepository.Authenticate(input);
             UserLoginDetails userLoginDetails = new UserLoginDetails();
             
             if(user!=null)

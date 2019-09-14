@@ -4,18 +4,37 @@ using System.Text;
 using VedSoft.Model;
 using VedSoft.Model.Common;
 using VedSoft.Model.Master;
+using VedSoft.Model.User;
 
 namespace VedSoft.Business.Master
 {
    public interface IMasterBusiness:IBusinessBase
    {
+        #region Customer
         ResultModel AddCustomer(CustomerModel input);
         CustomerModel GetCustomerDetailsById(CustomerModel input);
+        CustomerModel GetCustomerDetailsBySubDomain(CustomerModel input);
+        #endregion
+
+        #region CourseHierarchy
         int AddCourseHierarchy(RequestModel<CourseHiearchyModel> input);
         int UpdateCourseHierarchy(RequestModel<CourseHiearchyModel> input);
         List<CourseHiearchyModel> GetCourseHierarchy(SearchRequestModel<CourseHiearchyModel> input);
         int MakeInActiveCourseHierarchy(RequestModel<CourseHiearchyModel> input);
+        #endregion
 
-        CustomerModel GetCustomerDetailsBySubDomain(CustomerModel input);
+        #region Customer Branch
+        int AddCustomerBranch(RequestModel<CustomerBranchModel> input);
+        int UpdateCustomerBranch(RequestModel<CustomerBranchModel> input);
+        List<CustomerBranchModel> GetCustomerBranches(SearchRequestModel<CustomerBranchModel> input);
+        int MakeInActiveCustomerBranch(RequestModel<CustomerBranchModel> input);
+        #endregion
+
+        #region User Role
+        int AddUserRole(RequestModel<UserRoleModel> input);
+        int UpdateUserRole(RequestModel<UserRoleModel> input);
+        List<UserRoleModel> GetUserRoles(SearchRequestModel<UserRoleModel> input);
+        int MakeInActiveUserRole(RequestModel<UserRoleModel> input);
+        #endregion
     }
 }

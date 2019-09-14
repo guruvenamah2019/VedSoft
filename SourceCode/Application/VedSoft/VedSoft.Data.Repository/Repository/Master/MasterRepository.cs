@@ -95,7 +95,6 @@ namespace VedSoft.Data.Repository.Repository.Master
             if (courseHierarchy != null)
             {
                 courseHierarchy.Active = CommonConstants.InActiveStatus;
-                courseHierarchy.ParentId = input.RequestParameter.ParentId == 0 ? null : input.RequestParameter.ParentId;
                 courseHierarchy.ModifiedBy = input.RequestParameter.UserId;
                 courseHierarchy.ModifiedDate = DateTime.Now;
             }

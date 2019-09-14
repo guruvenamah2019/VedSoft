@@ -21,6 +21,8 @@ namespace VedSoft.Data.Repository
         private IUserDetailsRepository _userDetailsRepository;
         private IUserLoginDetailsRepository _userLoginDetailsRepository;
         private IMasterRepository _masterRepository;
+        private ICustomerBranchRepository _customerBranchRepository;
+        private IUserRoleRepository _userRoleRepository;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -73,6 +75,22 @@ namespace VedSoft.Data.Repository
             get
             {
                 return _masterRepository ?? new MasterRepository(_repoContext);
+            }
+        }
+
+        public ICustomerBranchRepository CustomerBranchRepository
+        {
+            get
+            {
+                return _customerBranchRepository ?? new CustomerBranchRepository(_repoContext);
+            }
+        }
+
+        public IUserRoleRepository UserRoleRepository
+        {
+            get
+            {
+                return _userRoleRepository ?? new UserRoleRepository(_repoContext);
             }
         }
     }

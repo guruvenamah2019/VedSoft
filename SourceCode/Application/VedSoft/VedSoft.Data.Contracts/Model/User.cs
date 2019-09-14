@@ -40,6 +40,8 @@ namespace VedSoft.Data.Contracts.Model
         public DateTime? ModifiedDate { get; set; }
         [Column("ACTIVE")]
         public int? Active { get; set; }
+        [Column("CUSTOMER_ID")]
+        public int? CustomerId { get; set; }
     }
 
     [Table("USER_DETAILS")]

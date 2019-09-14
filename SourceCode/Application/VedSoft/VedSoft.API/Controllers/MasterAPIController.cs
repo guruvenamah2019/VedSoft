@@ -110,21 +110,6 @@ namespace VedSoft.API.Controllers
 
             return result;
         }
-
-        [HttpGet]
-        [Route("TestForToken")]
-        [Authorize]
-        public string TestForToken()
-        {
-            return "TestForToken Success";
-        }
-
-        [HttpGet]
-        [Route("Test")]
-        public string Test()
-        {
-            return "Test Success";
-        }
     }
 }
 
