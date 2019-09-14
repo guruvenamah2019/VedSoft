@@ -8,8 +8,8 @@ import { BranchIndexComponent, StudentComponent, StudentListComponent } from './
 @NgModule({
     declarations: [
         BranchIndexComponent,
-        StudentComponent,
-        StudentListComponent
+        //StudentComponent,
+        //StudentListComponent
     ],
     imports: [
         SharedModule,

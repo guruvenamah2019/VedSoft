@@ -6,11 +6,17 @@ export const BRANCH_ROUTES: Routes = [
           {
             path: '', redirectTo:"students"
           },
-            {
+
+
+          /*  {
               path: 'students', component: StudentListComponent
             },
             { path: 'student/:id', component: StudentComponent}
-            
+            */
+
+           { path: 'students', loadChildren: () => import('../student/student.module').then(m => m.StudentModule) },
+
+
           ]
     },
     
