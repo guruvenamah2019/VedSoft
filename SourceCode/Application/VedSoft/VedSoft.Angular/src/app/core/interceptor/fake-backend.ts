@@ -4,10 +4,11 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { TokenModel } from "../models/shared-model/tokens.model"
 
-import { LoginRequestModel } from "../models/user-model";
+import { LoginRequestModel, AuthenticationModel } from "../models/user-model";
 import { Token } from '@angular/compiler';
+import { ResponseModel, ResultModel } from '../models/shared-model';
 
-const users: LoginRequestModel[] = [{  username: 'Vedsoft', password: '65f73b60bcaef6644f0ad34b8dc59b564a652c8c' }];
+const users: LoginRequestModel[] = [{ username: 'Ram', password: 'Ram' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -23,10 +24,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function handleRoute() {
             switch (true) {
-                case url.endsWith('/users/authenticate') && method === 'POST':
+                case url.endsWith('/api/Login/Authenticate') && method === 'POST':
                     return authenticate();
-                    case url.endsWith('/users/logout') && method === 'POST':
-                        return logout();
+                case url.endsWith('/api/Login/Logout') && method === 'POST':
+                    return logout();
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
                 default:
@@ -38,19 +39,45 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // route functions
 
         function authenticate() {
-            const {LoginSourceInfo, Username, Password } = body;
-            const user = users.find(x => x.username === Username && x.password === Password);
-            if (!user) return error('Username or password is incorrect');
+            //const {LoginSourceInfo, Username, Password } = body;
+            //const user = users.find(x => x.username === Username && x.password === Password);
+            //if (!user) return error('Username or password is incorrect');
+            let auth: AuthenticationModel = {
+                loginResponseDetails: {
+                    loginDetailsId: 11,
+                    loginStatus: 1,
+                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+                    refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+
+                },
+                userDetails: {
+                    firstName: "Ram",
+                    id: 1,
+                    lastName: "Patidar",
+                    userName: "Ram"
+                }
+            };
+
             let authTokan: TokenModel = {
                 jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
                 refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
             };
 
-            return ok(authTokan);
+            let resp: ResponseModel<AuthenticationModel> = {
+                responseData: auth
+            };
+
+            return ok(resp);
         }
 
-        function logout(){
-            return ok(true);
+        function logout() {
+            let res: ResponseModel<ResultModel> = {
+                responseData: {
+                    statusId: 1
+                }
+            }
+
+            return ok(res);
         }
 
         function getUsers() {

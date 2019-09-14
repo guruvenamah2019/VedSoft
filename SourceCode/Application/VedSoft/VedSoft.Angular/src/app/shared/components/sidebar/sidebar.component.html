@@ -12,7 +12,7 @@
       </div>
     </div>
     <ul class="navigation-menu">
-      <li class="nav-category-divider">MAIN</li>
+      <li class="nav-category-divider">Main</li>
       <li>
           <a class="nav-link" [routerLink]="['/admin/dashboard']" [routerLinkActive]="'is-active'">
               <span>Dashboard</span> 
@@ -23,83 +23,91 @@
       <li>
         <a  href="#settings-pages" data-toggle="collapse" aria-expanded="false">
           <span class="link-title">Settings</span>
-          <i class="mdi mdi-flask link-icon"></i>
+          <i class="mdi mdi-settings link-icon"></i>
         </a>
         <ul class="collapse navigation-submenu" id="settings-pages">
           <li>
               <a class="nav-link" [routerLink]="['/admin/settings/org']" [routerLinkActive]="'is-active'">
-                <span>Organization</span> 
+                <i class="mdi mdi-domain link-icon"></i> <span>Organization</span> 
+
                 
             </a>
           
           </li>
           <li>
+            <a class="nav-link" [routerLink]="['/admin/settings/branch']" [routerLinkActive]="'is-active'">
+              <i class="mdi mdi-home-variant link-icon"></i> <span>Branchs</span> 
+              
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/admin/settings/roles']" [routerLinkActive]="'is-active'">
+            <i class="mdi mdi-plus-box link-icon"></i> <span>Roles</span> 
+            
+        </a>
+      </li>
+          <li>
               <a class="nav-link" [routerLink]="['/admin/settings/standards']" [routerLinkActive]="'is-active'">
-                <span>Standards</span> 
+               <i class="mdi mdi-label link-icon"></i> <span>Standards</span> 
                 
             </a>
           </li>
           <li>
               <a class="nav-link" [routerLink]="['/admin/settings/streams']" [routerLinkActive]="'is-active'">
-                <span>Streams</span> 
+                <i class="mdi mdi-steam link-icon"></i> <span>Streams</span> 
                 
             </a>
           </li>
           <li>
               <a class="nav-link" [routerLink]="['/admin/settings/subject']" [routerLinkActive]="'is-active'">
-                <span>Subject</span> 
+                <i class="mdi mdi-text-subject link-icon"></i><span>Subject</span> 
                 
             </a>
           </li>
           <li>
               <a class="nav-link" [routerLink]="['/admin/settings/topics']" [routerLinkActive]="'is-active'">
-                <span>Topics</span> 
+                <i class="mdi mdi-label link-icon"></i><span>Topics</span> 
                 
             </a>
           </li>
+          <li>
+            <a class="nav-link" [routerLink]="['/admin/settings/bank']" [routerLinkActive]="'is-active'">
+              <i class="mdi mdi-bank link-icon"></i> <span>Banks</span> 
+              
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/admin/settings/institute']" [routerLinkActive]="'is-active'">
+            <i class="mdi mdi-school link-icon"></i> <span>Institutes</span> 
+            
+        </a>
+      </li>
           
          
         </ul>
       </li>
+      
+      
+      <li class="nav-category-divider">User</li>
       <li>
         <a href="#ui-profile" data-toggle="collapse" aria-expanded="false">
           <span class="link-title">Profile</span>
-          <i class="mdi mdi-bullseye link-icon"></i>
+          <i class="mdi mdi-account-box link-icon"></i>
         </a>
         <ul class="collapse navigation-submenu" id="ui-profile">
           <li>
             <a class="nav-link" [routerLink]="['/profile/me']" [routerLinkActive]="'is-active'">
-              <span>My Profile</span> 
+              <i class="mdi mdi-account link-icon"></i> <span>Profile</span> 
               
           </a>
         </li>
         <li>
             <a class="nav-link" [routerLink]="['/profile/password']" [routerLinkActive]="'is-active'">
-              <span>Password</span> 
-              
+              <i class="mdi mdi-key link-icon"></i> <span>Password</span> 
           </a>
         </li>
         </ul>
       </li>
-      <li>
-        <a href="pages/forms/form-elements.html">
-          <span class="link-title">Forms</span>
-          <i class="mdi mdi-clipboard-outline link-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="pages/charts/chartjs.html">
-          <span class="link-title">Charts</span>
-          <i class="mdi mdi-chart-donut link-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="pages/icons/material-icons.html">
-          <span class="link-title">Icons</span>
-          <i class="mdi mdi-flower-tulip-outline link-icon"></i>
-        </a>
-      </li>
-      <li class="nav-category-divider">User</li>
       <li>
         <a (click)="signOut()" >
           <span class="link-title">Logout</span>

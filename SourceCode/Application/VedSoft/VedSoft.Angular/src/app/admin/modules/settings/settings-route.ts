@@ -1,4 +1,4 @@
-﻿import { AdminSettingsIndexComponent,CourseSettingsComponent, OrganizationSettingsComponent, SubjectSettingsComponent, StandardsSettingsComponent } from "./components/index"
+﻿import { AdminSettingsIndexComponent,CourseSettingsComponent, OrganizationSettingsComponent, SubjectSettingsComponent, StandardsSettingsComponent, BranchSettingComponent, UserRoleSettingComponent, BankSettingsComponent, InstituteSettingsComponent } from "./components/index"
 import { Routes } from '@angular/router';
 export const ADMIN_SETTINGS_ROUTES: Routes = [
     { 
@@ -7,7 +7,9 @@ export const ADMIN_SETTINGS_ROUTES: Routes = [
             {
               path: 'org', component: OrganizationSettingsComponent
             },
-            
+            {
+              path: 'branch', component: BranchSettingComponent
+            },
             {
                 path: 'course', component: CourseSettingsComponent
               },
@@ -23,8 +25,15 @@ export const ADMIN_SETTINGS_ROUTES: Routes = [
               {
                 path: 'topics', component: StandardsSettingsComponent,data:{level:4}
               },
-              
-              
+              {
+                path: 'roles', component: UserRoleSettingComponent,data:{level:4}
+              },
+              {
+                path: 'bank', component: BankSettingsComponent
+              },
+              {
+                path: 'institute', component: InstituteSettingsComponent
+              },
             
           ]
     },

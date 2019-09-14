@@ -1,0 +1,75 @@
+﻿    <div class="content-viewport">
+      <div class="row">
+        <div class="col-12 py-5">
+            <p class="grid-header demo-wrapper">
+                <span>Role(s) Settings</span>
+                <label class="badge badge-info">{{roleList.length}} Role(s)</label>
+                <button (click)="addRole()" class="float-right btn btn-success has-icon btn-rounded">
+                  <i class="mdi mdi-plus-box"></i>Add</button>
+                <span class="float-none"></span>
+              </p>
+          <p class="text-gray"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div  *ngFor="let role of roleList"  class="col-md-3 col-sm-6 col-6 equel-grid">
+          <div class="grid">
+            <div class="grid-body text-gray">
+              <div class="d-flex justify-content-between">
+                <p class="card-title">{{role.name}}</p>
+                <button class="btn action-btn btn-xs component-flat pr-0" type="button" (click)="editRole(role)" >
+                    <i class="mdi mdi-pencil-box"></i></button>
+              </div>
+              <p class="text-black">{{role.name}}</p>
+              <div class="wrapper w-1 mt-1">
+                <canvas height="10" id="stat-line_1"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="col-md-3 col-sm-6 col-6 equel-grid">
+          <div class="grid">
+            <div class="grid-body text-gray">
+              <div class="d-flex justify-content-between">
+                <p>43%</p>
+                <p>+15.7%</p>
+              </div>
+              <p class="text-black">Conversion</p>
+              <div class="wrapper w-50 mt-4">
+                <canvas height="45" id="stat-line_2"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6 equel-grid">
+          <div class="grid">
+            <div class="grid-body text-gray">
+              <div class="d-flex justify-content-between">
+                <p>23%</p>
+                <p>+02.7%</p>
+              </div>
+              <p class="text-black">Bounce Rate</p>
+              <div class="wrapper w-50 mt-4">
+                <canvas height="45" id="stat-line_3"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6 equel-grid">
+          <div class="grid">
+            <div class="grid-body text-gray">
+              <div class="d-flex justify-content-between">
+                <p>75%</p>
+                <p>- 53.34%</p>
+              </div>
+              <p class="text-black">Marketing</p>
+              <div class="wrapper w-50 mt-4">
+                <canvas height="45" id="stat-line_4"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>-->
+       
+      </div>
+    </div>
+

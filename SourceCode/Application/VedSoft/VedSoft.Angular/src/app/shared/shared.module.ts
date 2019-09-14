@@ -6,18 +6,20 @@ import { ModalModule, BsModalService, BsDropdownModule } from 'ngx-bootstrap';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { createTranslateLoader } from './loader/translate.loader';
-import { FooterComponent, HeaderComponent, SidebarComponent } from "./components/index"
+import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component, Error500Component } from "./components/index"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
-  MatRippleModule, MatMenuModule} from "@angular/material"
+  MatRippleModule, MatMenuModule, MatTabsModule} from "@angular/material"
 import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
   declarations: [
-    FooterComponent, HeaderComponent, SidebarComponent
+    FooterComponent, HeaderComponent, SidebarComponent,
+    Error404Component,
+    Error500Component
   ],
   imports: [
     ReactiveFormsModule,
@@ -40,7 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTabsModule
     
   ],
   exports: [
@@ -54,7 +57,10 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatMenuModule
+    MatMenuModule,
+    Error404Component,
+    Error500Component,
+    MatTabsModule
   ],
   providers: [
 

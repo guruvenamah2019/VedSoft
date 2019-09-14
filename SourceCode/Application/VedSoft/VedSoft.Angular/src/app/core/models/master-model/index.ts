@@ -1,0 +1,6 @@
+export * from "./course-hiearchy.model"
+export * from "./customer-branch.model"
+export * from "./customer-model"
+export * from "./user-role.model"
+export * from "./bank.model"
+export * from "./institute.model"

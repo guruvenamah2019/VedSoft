@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BaseService } from 'src/app/core/services';
 
 
 @Component({
@@ -18,8 +19,9 @@ export class OrganizationSettingsComponent implements OnInit {
     onNavigate() {
         this._router.navigate(['/'], { queryParams: { "ram": 1 } });
     }
-    constructor(private _router: Router, private _activatedRoute: ActivatedRoute) {
+    constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private baseService: BaseService ) {
         console.log("AdminDashboardIndexComponent");
+        
         
     }
     ngOnInit() {

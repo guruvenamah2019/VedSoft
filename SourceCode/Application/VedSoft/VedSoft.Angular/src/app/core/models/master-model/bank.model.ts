@@ -1,0 +1,10 @@
+export class BankModel
+{
+    id?: number | null;
+    code?: string;
+    name?: string;
+    contactNumber?: string;
+    address?: string;
+    otherInfo?: string;
+    userId?: number;
+}

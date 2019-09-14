@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { RequestModel, ResponseModel, ResultModel, SearchRequestModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
-import { COURCE_SERVICE_URL } from "../constant/service-url";
+import { COURSE_SERVICE_URL } from "../constant/service-url";
 import { CourseHiearchyModel } from '../models/master-model/course-hiearchy.model';
-import { AuthenticationService } from '.';
+import { AuthenticationService } from './authentication.service';
 import { map, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class CourseHiearchyService {
 
         let input: RequestModel<CourseHiearchyModel> = this.baseService.getRequestModel(course);
 
-        let url = `${this.baseService.appInfo.apiUrl}/${COURCE_SERVICE_URL.ACTION_ADD_COURSE_HIERARCHY}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_ADD_COURSE_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.courseHiearchy = [];
         }));
@@ -37,7 +37,7 @@ export class CourseHiearchyService {
 
         let input: RequestModel<CourseHiearchyModel> = this.baseService.getRequestModel(course);
 
-        let url = `${this.baseService.appInfo.apiUrl}/${COURCE_SERVICE_URL.ACTION_UPDATE_COURSE_HIERARCHY}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_UPDATE_COURSE_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.courseHiearchy = [];
         }));
@@ -45,13 +45,41 @@ export class CourseHiearchyService {
     }
     public getCourseHierarchy(input: SearchRequestModel<CourseHiearchyModel>): Observable<CourseHiearchyModel[]> {
 
+        this.courseHiearchy.push({
+            hierarchyLevel:1,
+            id:1,
+            name:"12th",
+           parentId:0,
+        });
+        this.courseHiearchy.push({
+            hierarchyLevel:2,
+            id:2,
+            name:"Maths",
+           parentId:1,
+        });
+        this.courseHiearchy.push({
+            hierarchyLevel:3,
+            id:3,
+            name:"Mathematics",
+           parentId:2,
+        });
+        this.courseHiearchy.push({
+            hierarchyLevel:4,
+            id:4,
+            name:"Algebra",
+           parentId:3,
+        });
+        this.courseHiearchy.forEach(x=>{
+            x.parent =  this.courseHiearchy.find(p=>p.id ==x.parentId)
+        });
+
         let level = input.requestParameter.hierarchyLevel;
         if (this.courseHiearchy != null && this.courseHiearchy.length > 0) {
             return of(this.courseHiearchy.filter(x => x.hierarchyLevel == level))
         }
         else {
             input.requestParameter.hierarchyLevel = 0;
-            let url = `${this.baseService.appInfo.apiUrl}/${COURCE_SERVICE_URL.ACTION_GET_COURSE_HIERARCHY}`;
+            let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_GET_COURSE_HIERARCHY}`;
             return this.http.post<ResponseModel<CourseHiearchyModel[]>>(url, input).pipe(
                 map((data: ResponseModel<CourseHiearchyModel[]>) => {
                     if (data != null && data.responseData != null) {
@@ -71,7 +99,7 @@ export class CourseHiearchyService {
     }
     public makeInActiveCourseHierarchy(input: RequestModel<CourseHiearchyModel>): Observable<ResponseModel<ResultModel>> {
 
-        let url = `${this.baseService.appInfo.apiUrl}/${COURCE_SERVICE_URL.ACTION_MAKE_INACTIVE_COURSE_HIERARCHY}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_MAKE_INACTIVE_COURSE_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.courseHiearchy = [];
         }));

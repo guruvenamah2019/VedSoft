@@ -4,10 +4,10 @@
     LanguageId: number;
     apiUrl: string;
     customerPath: string;
-    CustomerId: number;
+    //CustomerId: number;
     constructor() {
         this.LanguageId = 1;
-        this.CustomerId = 1;
+        //this.CustomerId = 1;
 
     };
 }

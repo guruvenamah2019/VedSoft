@@ -15,6 +15,8 @@ export const ADMIN_ROUTES: Routes = [
             {
                 path: '', redirectTo: 'dashboard', pathMatch: 'full'
             },
+            { path: 'branchs/:branchId', loadChildren: () => import('./modules/branch/branch.module').then(m => m.BranchModule) },
+            
         ],
 
         canActivate: [AdminGuard]
