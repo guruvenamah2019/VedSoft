@@ -37,6 +37,7 @@ export const ADMIN_SETTINGS_ROUTES: Routes = [
               {
                 path: 'academicyear', component: AcademicYearSettingsComponent
               },
+              { path: 'students', loadChildren: () => import('../student/student.module').then(m => m.StudentModule) },
             
           ]
     },
