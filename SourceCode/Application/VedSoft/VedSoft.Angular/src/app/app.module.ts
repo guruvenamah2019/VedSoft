@@ -47,7 +47,7 @@ import { CustomerGuard } from './core/guards/customer.guard';
     AdminGuard,
     CustomerGuard,
     AuthenticationService,
-    fakeBackendProvider,
+    //fakeBackendProvider,
     BrowserInfoService,
     CourseHiearchyService,
     BranchService,

@@ -58,20 +58,21 @@ export class BaseService {
   }
 
   public getCustomer(subDomain: string): Observable<boolean> {
+    /*
     this.CustomerInfo ={
       customerId:1,
       name:"Ram",
       contactNumber:"111111",
       code:"1111"
     };
-
+*/
     if (this.CustomerInfo && this.CustomerInfo.customerId) {
       return of(true);
     }
     else {
 
       let urlName:string = window.location.hostname;
-      subDomain = "cust-02";
+      subDomain = "cust-01";
       let input: RequestModel<CustomerModel> = {
         CustomerId: 0,
         LanguageId: this.appInfo.LanguageId,

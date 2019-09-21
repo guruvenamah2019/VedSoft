@@ -44,7 +44,7 @@ export class BranchService {
 
     }
     public getBranch(input: SearchRequestModel<CustomerBranchModel>): Observable<CustomerBranchModel[]> {
-
+/*
         this.branchList.push({
             id:1,
             name:"Branch 1",
@@ -87,6 +87,7 @@ export class BranchService {
             contactNumber:"87655444",
             otherInfo:"123"
         });
+        */
 
         if (this.branchList != null && this.branchList.length > 0) {
             return of(this.branchList)

@@ -19,7 +19,7 @@ export class InstituteService {
     }
 
     constructor(private http: HttpClient, public baseService: BaseService) {
-
+/*
         this._instituteList.push({
             id:1,
             name:"DAVV Indore",
@@ -40,7 +40,7 @@ export class InstituteService {
             name:"IPS",
             type:1
         });
-      
+  */    
 
     }
 

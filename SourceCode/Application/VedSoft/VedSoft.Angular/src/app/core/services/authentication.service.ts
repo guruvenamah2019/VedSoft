@@ -152,6 +152,7 @@ export class AuthenticationService {
   }
 
   public IsUserAuthenticate(): Observable<boolean> {
+    /*
     this.loggedUser = {
       firstName:'Ram',
       id:1,
@@ -160,6 +161,7 @@ export class AuthenticationService {
       userName:'Ram',
 
     };
+    */
     if(this.loggedUser!=null && this.loggedUser.id>0)
     {
       return of(true)

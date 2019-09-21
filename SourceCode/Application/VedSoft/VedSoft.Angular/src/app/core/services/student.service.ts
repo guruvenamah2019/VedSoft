@@ -19,7 +19,7 @@ export class StudentService {
     }
 
     constructor(private http: HttpClient, public baseService: BaseService) {
-
+/*
         this._studentList.push({
             id:1,
             firstName:"Ram",
@@ -38,7 +38,7 @@ export class StudentService {
             firstName:"Karan",
         });
       
-
+*/
     }
 
     public addStudent(course: StudentModel): Observable<ResponseModel<ResultModel>> {

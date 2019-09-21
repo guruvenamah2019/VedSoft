@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { BankService, AuthenticationService } from 'src/app/core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -86,8 +88,12 @@ export class StudentComponent implements OnInit {
 
   }
   ngOnInit() {
+
+
     this.router.events.subscribe((res) => {
+
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
+
   });
 
 

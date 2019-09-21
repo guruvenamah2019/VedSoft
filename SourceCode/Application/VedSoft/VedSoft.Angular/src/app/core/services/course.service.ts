@@ -44,7 +44,7 @@ export class CourseHiearchyService {
 
     }
     public getCourseHierarchy(input: SearchRequestModel<CourseHiearchyModel>): Observable<CourseHiearchyModel[]> {
-
+/*
         this.courseHiearchy.push({
             hierarchyLevel:1,
             id:1,
@@ -68,7 +68,7 @@ export class CourseHiearchyService {
             id:4,
             name:"Algebra",
            parentId:3,
-        });
+        });*/
         this.courseHiearchy.forEach(x=>{
             x.parent =  this.courseHiearchy.find(p=>p.id ==x.parentId)
         });

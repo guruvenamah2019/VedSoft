@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard, AdminGuard } from "../../../core/guards/index";
 import { ADMIN_SETTINGS_ROUTES } from "./settings-route"
 import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettingsComponent, 
-    CourseSettingsComponent, StandardsSettingsComponent, AddStandardComponent, BranchSettingComponent, AddBranchComponent, UserRoleSettingComponent, AddUserRoleComponent, BankSettingsComponent, AddBankComponent, InstituteSettingsComponent, AddInstituteComponent } from "./components/index"
+    CourseSettingsComponent, StandardsSettingsComponent, AddStandardComponent, BranchSettingComponent, AddBranchComponent, UserRoleSettingComponent, AddUserRoleComponent, BankSettingsComponent, AddBankComponent, InstituteSettingsComponent, AddInstituteComponent, 
+    AcademicYearSettingsComponent, AddAcademicYearComponent } from "./components/index"
 import { SharedModule } from "../../../shared/shared.module"
 
 
@@ -25,7 +26,9 @@ import { SharedModule } from "../../../shared/shared.module"
         BankSettingsComponent,
         AddBankComponent,
         InstituteSettingsComponent,
-        AddInstituteComponent
+        AddInstituteComponent,
+        AcademicYearSettingsComponent,
+        AddAcademicYearComponent
         
     ],
     imports: [
@@ -37,7 +40,8 @@ import { SharedModule } from "../../../shared/shared.module"
         AddBranchComponent,
         AddUserRoleComponent,
         AddBankComponent,
-        AddInstituteComponent
+        AddInstituteComponent,
+        AddAcademicYearComponent
     ],
     providers: [
     ],

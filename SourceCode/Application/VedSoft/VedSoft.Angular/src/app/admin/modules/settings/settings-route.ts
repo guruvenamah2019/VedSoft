@@ -1,4 +1,4 @@
-﻿import { AdminSettingsIndexComponent,CourseSettingsComponent, OrganizationSettingsComponent, SubjectSettingsComponent, StandardsSettingsComponent, BranchSettingComponent, UserRoleSettingComponent, BankSettingsComponent, InstituteSettingsComponent } from "./components/index"
+﻿import { AdminSettingsIndexComponent,CourseSettingsComponent, OrganizationSettingsComponent, SubjectSettingsComponent, StandardsSettingsComponent, BranchSettingComponent, UserRoleSettingComponent, BankSettingsComponent, InstituteSettingsComponent, AcademicYearSettingsComponent } from "./components/index"
 import { Routes } from '@angular/router';
 export const ADMIN_SETTINGS_ROUTES: Routes = [
     { 
@@ -33,6 +33,9 @@ export const ADMIN_SETTINGS_ROUTES: Routes = [
               },
               {
                 path: 'institute', component: InstituteSettingsComponent
+              },
+              {
+                path: 'academicyear', component: AcademicYearSettingsComponent
               },
             
           ]

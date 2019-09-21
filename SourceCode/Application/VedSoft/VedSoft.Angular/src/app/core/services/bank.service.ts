@@ -19,7 +19,7 @@ export class BankService {
     }
 
     constructor(private http: HttpClient, public baseService: BaseService) {
-
+/*
         this._bankList.push({
             id:1,
             name:"SBI",
@@ -36,7 +36,7 @@ export class BankService {
             id:4,
             name:"AXIS",
         });
-      
+  */    
 
     }
 
