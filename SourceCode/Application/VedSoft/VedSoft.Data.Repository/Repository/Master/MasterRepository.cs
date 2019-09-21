@@ -255,4 +255,120 @@ namespace VedSoft.Data.Repository.Repository.Master
                                   .Count() > 0;
         }
     }
+
+    public class BankRepository : RepositoryBase<BankDB>, IBankRepository
+    {
+        public BankRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        public int AddBank(RequestModel<BankModel> input)
+        {
+            //Make db object
+            BankDB bankDB = new BankDB
+            {
+                CreatedBy = input.RequestParameter.UserId,
+                CreatedDate = DateTime.Now,
+                Active = CommonConstants.ActiveStatus,
+                BankName = input.RequestParameter.BankName,
+                CustomerId = input.CustomerId.GetValueOrDefault()
+            };
+
+            //Save in database
+            this.RepositoryContext.Add(bankDB);
+            this.RepositoryContext.SaveChanges();
+
+            input.RequestParameter.Id = bankDB.Id;
+
+            return bankDB.Id;
+        }
+
+        public int UpdateBank(RequestModel<BankModel> input)
+        {
+            var bankYear = this.RepositoryContext.Bank
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                            .FirstOrDefault();
+            if (bankYear != null)
+            {
+                bankYear.BankName = input.RequestParameter.BankName;
+                bankYear.ModifiedBy = input.RequestParameter.UserId;
+                bankYear.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(bankYear);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public List<BankModel> GetBankList(SearchRequestModel<BankModel> input)
+        {
+            List<BankModel> bankModelList = new List<BankModel>();
+            var bankList = this.RepositoryContext.Bank
+                                      .Where(x => x.CustomerId == input.CustomerId
+                                      && x.Active == CommonConstants.ActiveStatus)
+                                      .Page(input.PageSize, input.PageNumber);
+
+
+            foreach (var bank in bankList.ToList())
+            {
+                bankModelList.Add(new BankModel
+                {
+                    Id = bank.Id,
+                    BankName = bank.BankName
+                });
+            }
+
+            return bankModelList;
+        }
+
+        public int MakeInActiveBank(RequestModel<BankModel> input)
+        {
+            var bank = this.RepositoryContext.Bank
+                                    .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                                    .FirstOrDefault();
+            if (bank != null)
+            {
+                bank.Active = CommonConstants.InActiveStatus;
+                bank.ModifiedBy = input.RequestParameter.UserId;
+                bank.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(bank);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public bool DoesBankExist(RequestModel<BankModel> input)
+        {
+            return this.RepositoryContext.Bank
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.BankName == input.RequestParameter.BankName
+                                  && x.Active == CommonConstants.ActiveStatus)
+                                  .Count() > 0;
+        }
+
+        public bool DoesBankExistUpdate(RequestModel<BankModel> input)
+        {
+            return this.RepositoryContext.Bank
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Active == CommonConstants.ActiveStatus
+                                  && x.BankName == input.RequestParameter.BankName
+                                  && x.Id != input.RequestParameter.Id)
+                                  .Count() > 0;
+        }
+
+        public bool DoesBankIdExist(RequestModel<BankModel> input)
+        {
+            return this.RepositoryContext.Bank
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Id == input.RequestParameter.Id
+                                   && x.Active == CommonConstants.ActiveStatus
+                                  )
+                                  .Count() > 0;
+        }
+    }
 }

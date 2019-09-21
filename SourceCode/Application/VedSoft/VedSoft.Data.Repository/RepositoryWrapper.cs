@@ -24,6 +24,7 @@ namespace VedSoft.Data.Repository
         private ICustomerBranchRepository _customerBranchRepository;
         private IUserRoleRepository _userRoleRepository;
         private IAcademicYearRepository _academicYearRepository;
+        private IBankRepository _bankRepository;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -100,6 +101,14 @@ namespace VedSoft.Data.Repository
             get
             {
                 return _academicYearRepository ?? new AcademicYearRepository(_repoContext);
+            }
+        }
+
+        public IBankRepository BankRepository
+        {
+            get
+            {
+                return _bankRepository ?? new BankRepository(_repoContext);
             }
         }
     }

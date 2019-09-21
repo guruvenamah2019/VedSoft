@@ -37,4 +37,19 @@ namespace VedSoft.Data.Contracts.Repository.Master
 
         bool DoesAcademicYearIdExist(RequestModel<AcademicYearModel> input);
     }
+
+    public interface IBankRepository : IRepositoryBase<BankDB>
+    {
+        int AddBank(RequestModel<BankModel> input);
+        int UpdateBank(RequestModel<BankModel> input);
+        List<BankModel> GetBankList(SearchRequestModel<BankModel> input);
+
+        int MakeInActiveBank(RequestModel<BankModel> input);
+
+        bool DoesBankExist(RequestModel<BankModel> input);
+
+        bool DoesBankExistUpdate(RequestModel<BankModel> input);
+
+        bool DoesBankIdExist(RequestModel<BankModel> input);
+    }
 }

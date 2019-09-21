@@ -43,5 +43,12 @@ namespace VedSoft.Business.Master
         List<AcademicYearModel> GetAcademicYears(SearchRequestModel<AcademicYearModel> input);
         int MakeInActiveAcademicYear(RequestModel<AcademicYearModel> input);
         #endregion
+
+        #region Bank
+        int AddBank(RequestModel<BankModel> input);
+        int UpdateBank(RequestModel<BankModel> input);
+        List<BankModel> GetBankList(SearchRequestModel<BankModel> input);
+        int MakeInActiveBank(RequestModel<BankModel> input);
+        #endregion
     }
 }

@@ -57,4 +57,12 @@ namespace VedSoft.Utility.Constants
         public const string ActionGetAcademicYears = "GetAcademicYears";
         public const string ActionMakeInActiveAcademicYear = "MakeInActiveAcademicYear";
     }
+
+    public class BankAPIAction
+    {
+        public const string ActionAddBank = "AddBank";
+        public const string ActionUpdateBank = "UpdateBank";
+        public const string ActionGetBankList = "GetBankList";
+        public const string ActionMakeInActiveBank = "MakeInActiveBank";
+    }
 }

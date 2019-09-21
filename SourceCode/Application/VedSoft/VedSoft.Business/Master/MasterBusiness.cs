@@ -275,9 +275,58 @@ namespace VedSoft.Business.Master
 
         public int MakeInActiveAcademicYear(RequestModel<AcademicYearModel> input)
         {
-            if (RepositoryWrapper.AcademicYearRepository.DoesAcademicYearExist(input))
+            if (RepositoryWrapper.AcademicYearRepository.DoesAcademicYearIdExist(input))
             {
                 return RepositoryWrapper.AcademicYearRepository.MakeInActiveAcademicYear(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+        #endregion
+
+        #region Bank
+        public int AddBank(RequestModel<BankModel> input)
+        {
+            if (!RepositoryWrapper.BankRepository.DoesBankExist(input))
+            {
+                return RepositoryWrapper.BankRepository.AddBank(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateBank(RequestModel<BankModel> input)
+        {
+            if (RepositoryWrapper.BankRepository.DoesBankIdExist(input))
+            {
+                if (!RepositoryWrapper.BankRepository.DoesBankExistUpdate(input))
+                {
+                    return RepositoryWrapper.BankRepository.UpdateBank(input);
+                }
+                else
+                {
+                    return CommonConstants.DuplicateRecord;
+                }
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<BankModel> GetBankList(SearchRequestModel<BankModel> input)
+        {
+            return RepositoryWrapper.BankRepository.GetBankList(input);
+        }
+
+        public int MakeInActiveBank(RequestModel<BankModel> input)
+        {
+            if (RepositoryWrapper.BankRepository.DoesBankIdExist(input))
+            {
+                return RepositoryWrapper.BankRepository.MakeInActiveBank(input);
             }
             else
             {

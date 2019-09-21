@@ -31,4 +31,11 @@ namespace VedSoft.Model.Master
         public int UserId { get; set; }
     }
 
+    public class BankModel
+    {
+        public int? Id { get; set; }
+        public string BankName { get; set; }
+        public int UserId { get; set; }
+    }
+
 }

@@ -258,5 +258,59 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
         #endregion
+
+        #region bank
+        public ResponseModel<ResultModel> AddBank(RequestModel<BankModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.PrimaryKey = MasterBusiness.AddBank(input);
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
+
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> UpdateBank(RequestModel<BankModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.UpdateBank(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<List<BankModel>> GetBankList(SearchRequestModel<BankModel> input)
+        {
+            ResponseModel<List<BankModel>> responseModel = new ResponseModel<List<BankModel>>();
+            responseModel.ResponseData = MasterBusiness.GetBankList(input);
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> MakeInActiveBank(RequestModel<BankModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.MakeInActiveBank(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+
+            return responseModel;
+        }
+        #endregion
     }
 }

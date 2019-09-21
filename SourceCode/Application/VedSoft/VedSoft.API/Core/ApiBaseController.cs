@@ -105,6 +105,7 @@ namespace VedSoft.API.Controllers
             if (isExceptionOccured)
             {
                 this.ILogger.LogError(logDescription);
+                throw new Exception(logDescription);
             }
             else
             {

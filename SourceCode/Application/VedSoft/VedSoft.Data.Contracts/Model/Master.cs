@@ -111,4 +111,26 @@ namespace VedSoft.Data.Contracts.Model
         [Column("MODIFIED_DATE")]
         public DateTime? ModifiedDate { get; set; }
     }
+
+    [Table("BANK")]
+    public class BankDB
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("NAME")]
+        public string BankName { get; set; }
+        [Column("CUSTOMER_ID")]
+        public int CustomerId { get; set; }
+        [Column("ACTIVE")]
+        public int? Active { get; set; }
+        [Column("CREATED_DATE")]
+        public DateTime CreatedDate { get; set; }
+        [Column("CREATED_BY")]
+        public int CreatedBy { get; set; }
+        [Column("MODIFIED_BY")]
+        public int? ModifiedBy { get; set; }
+        [Column("MODIFIED_DATE")]
+        public DateTime? ModifiedDate { get; set; }
+    }
 }
