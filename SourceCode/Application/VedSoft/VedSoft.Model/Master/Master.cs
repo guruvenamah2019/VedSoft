@@ -38,4 +38,12 @@ namespace VedSoft.Model.Master
         public int UserId { get; set; }
     }
 
+    public class EducationInstituteModel
+    {
+        public int? Id { get; set; }
+        public string Name { get; set; }
+        public int InstituteTypeId { get; set; }
+        public int UserId { get; set; }
+    }
+
 }

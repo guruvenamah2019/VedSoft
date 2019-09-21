@@ -65,4 +65,12 @@ namespace VedSoft.Utility.Constants
         public const string ActionGetBankList = "GetBankList";
         public const string ActionMakeInActiveBank = "MakeInActiveBank";
     }
+
+    public class EducationInstituteAPIAction
+    {
+        public const string ActionAddEducationInstitute = "AddEducationInstitute";
+        public const string ActionUpdateEducationInstitute = "UpdateEducationInstitute";
+        public const string ActionGetEducationInstituteList = "GetEducationInstituteList";
+        public const string ActionMakeInActiveEducationInstitute = "MakeInActiveEducationInstitute";
+    }
 }

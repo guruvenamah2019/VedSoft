@@ -371,4 +371,123 @@ namespace VedSoft.Data.Repository.Repository.Master
                                   .Count() > 0;
         }
     }
+
+    public class EducationalInstituteRepository : RepositoryBase<EducationInstituteDB>, IEducationInstituteRepository
+    {
+        public EducationalInstituteRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        public int AddEducationInstitute(RequestModel<EducationInstituteModel> input)
+        {
+            //Make db object
+            EducationInstituteDB educationInstitute = new EducationInstituteDB
+            {
+                CreatedBy = input.RequestParameter.UserId,
+                CreatedDate = DateTime.Now,
+                Active = CommonConstants.ActiveStatus,
+                InstitutionTypeId = input.RequestParameter.InstituteTypeId,
+                CustomerId = input.CustomerId.GetValueOrDefault(),
+                Name = input.RequestParameter.Name,
+            };
+
+            //Save in database
+            this.RepositoryContext.Add(educationInstitute);
+            this.RepositoryContext.SaveChanges();
+
+            input.RequestParameter.Id = educationInstitute.Id;
+
+            return educationInstitute.Id;
+        }
+
+        public int UpdateEducationInstitute(RequestModel<EducationInstituteModel> input)
+        {
+            var educationalInstitute = this.RepositoryContext.EducationInstitute
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                            .FirstOrDefault();
+            if (educationalInstitute != null)
+            {
+                educationalInstitute.Name = input.RequestParameter.Name;
+                educationalInstitute.InstitutionTypeId = input.RequestParameter.InstituteTypeId;
+                educationalInstitute.ModifiedBy = input.RequestParameter.UserId;
+                educationalInstitute.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(educationalInstitute);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public List<EducationInstituteModel> GetEducationInstituteList(SearchRequestModel<EducationInstituteModel> input)
+        {
+            List<EducationInstituteModel> educationalInstituteList = new List<EducationInstituteModel>();
+            var educationInstituteList = this.RepositoryContext.EducationInstitute
+                                      .Where(x => x.CustomerId == input.CustomerId
+                                      && x.Active == CommonConstants.ActiveStatus)
+                                      .Page(input.PageSize, input.PageNumber);
+
+
+            foreach (var institute in educationInstituteList.ToList())
+            {
+                educationalInstituteList.Add(new EducationInstituteModel
+                {
+                    Id = institute.Id,
+                    InstituteTypeId = institute.InstitutionTypeId,
+                    Name = institute.Name
+                });
+            }
+
+            return educationalInstituteList;
+        }
+
+        public int MakeInActiveEducationInstitute(RequestModel<EducationInstituteModel> input)
+        {
+            var educationalInstitute = this.RepositoryContext.EducationInstitute
+                                    .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                                    .FirstOrDefault();
+            if (educationalInstitute != null)
+            {
+                educationalInstitute.Active = CommonConstants.InActiveStatus;
+                educationalInstitute.ModifiedBy = input.RequestParameter.UserId;
+                educationalInstitute.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(educationalInstitute);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public bool DoesEducationInstituteExist(RequestModel<EducationInstituteModel> input)
+        {
+            return this.RepositoryContext.EducationInstitute
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Name == input.RequestParameter.Name
+                                  && x.Active == CommonConstants.ActiveStatus)
+                                  .Count() > 0;
+        }
+
+        public bool DoesEducationInstituteExistUpdate(RequestModel<EducationInstituteModel> input)
+        {
+            return this.RepositoryContext.EducationInstitute
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Active == CommonConstants.ActiveStatus
+                                  && x.Name == input.RequestParameter.Name
+                                  && x.Id != input.RequestParameter.Id)
+                                  .Count() > 0;
+        }
+
+        public bool DoesEducationInstituteIdExist(RequestModel<EducationInstituteModel> input)
+        {
+            return this.RepositoryContext.EducationInstitute
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Id == input.RequestParameter.Id
+                                   && x.Active == CommonConstants.ActiveStatus
+                                  )
+                                  .Count() > 0;
+        }
+    }
 }

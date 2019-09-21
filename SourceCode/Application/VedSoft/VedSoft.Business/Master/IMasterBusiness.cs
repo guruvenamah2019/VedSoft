@@ -50,5 +50,12 @@ namespace VedSoft.Business.Master
         List<BankModel> GetBankList(SearchRequestModel<BankModel> input);
         int MakeInActiveBank(RequestModel<BankModel> input);
         #endregion
+
+        #region Education Institute
+        int AddEducationInstitute(RequestModel<EducationInstituteModel> input);
+        int UpdateEducationInstitute(RequestModel<EducationInstituteModel> input);
+        List<EducationInstituteModel> GetEducationInstituteList(SearchRequestModel<EducationInstituteModel> input);
+        int MakeInActiveEducationInstitute(RequestModel<EducationInstituteModel> input);
+        #endregion
     }
 }

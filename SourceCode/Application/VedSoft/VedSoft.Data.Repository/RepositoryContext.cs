@@ -22,5 +22,6 @@ namespace VedSoft.Data.Repository
         public DbSet<UserRoleDB> UserRole { get; set; }
         public DbSet<AcademicYearsDB> AcademicYears { get; set; }
         public DbSet<BankDB> Bank { get; set; }
+        public DbSet<EducationInstituteDB> EducationInstitute { get; set; }
     }
 }

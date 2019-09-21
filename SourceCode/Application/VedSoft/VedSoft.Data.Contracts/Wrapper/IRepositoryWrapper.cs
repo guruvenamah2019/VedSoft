@@ -18,5 +18,6 @@ namespace VedSoft.Data.Contracts.Wrapper
         IUserRoleRepository UserRoleRepository { get; }
         IAcademicYearRepository AcademicYearRepository { get; }
         IBankRepository BankRepository { get; }
+        IEducationInstituteRepository EducationInstituteRepository { get; }
     }
 }

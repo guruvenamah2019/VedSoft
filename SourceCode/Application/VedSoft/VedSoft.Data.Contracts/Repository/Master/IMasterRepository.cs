@@ -52,4 +52,19 @@ namespace VedSoft.Data.Contracts.Repository.Master
 
         bool DoesBankIdExist(RequestModel<BankModel> input);
     }
+
+    public interface IEducationInstituteRepository : IRepositoryBase<EducationInstituteDB>
+    {
+        int AddEducationInstitute(RequestModel<EducationInstituteModel> input);
+        int UpdateEducationInstitute(RequestModel<EducationInstituteModel> input);
+        List<EducationInstituteModel> GetEducationInstituteList(SearchRequestModel<EducationInstituteModel> input);
+
+        int MakeInActiveEducationInstitute(RequestModel<EducationInstituteModel> input);
+
+        bool DoesEducationInstituteExist(RequestModel<EducationInstituteModel> input);
+
+        bool DoesEducationInstituteExistUpdate(RequestModel<EducationInstituteModel> input);
+
+        bool DoesEducationInstituteIdExist(RequestModel<EducationInstituteModel> input);
+    }
 }

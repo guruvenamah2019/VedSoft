@@ -29,4 +29,40 @@ namespace VedSoft.Model.User
         public string Description { get; set; }
         public int UserId { get; set; }
     }
+
+    public class Student
+    {
+        public int UserId { get; set; }
+        public int FatherUserId { get; set; }
+        public int MotherUserId { get; set; }
+        public int GuardianUserId { get; set; }
+        public int IsEnrolled { get; set; }
+    }
+
+    public class StudentAdmissionDetails
+    {
+        public int StudentId { get; set; }
+        public int BranchId { get; set; }
+        public int AcademicYearId { get; set; }
+        public int DateOfAdmission { get; set; }
+        public int AdmissionTypeId { get; set; }
+    }
+
+    public class StudentC
+    {
+        public int StudentId { get; set; }
+        public int BranchId { get; set; }
+        public int AcademicYearId { get; set; }
+        public int DateOfAdmission { get; set; }
+        public int AdmissionTypeId { get; set; }
+    }
+
+    public class UserDetailsModel
+    {
+        public int UserId { get; set; }
+        public int CustomerId { get; set; }
+        public int FatherUserId { get; set; }
+        public int MotherUserId { get; set; }
+    }
+        
 }

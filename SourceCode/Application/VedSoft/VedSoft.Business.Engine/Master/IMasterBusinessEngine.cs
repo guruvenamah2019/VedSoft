@@ -53,5 +53,12 @@ namespace VedSoft.Business.Engine.Master
         ResponseModel<List<BankModel>> GetBankList(SearchRequestModel<BankModel> input);
         ResponseModel<ResultModel> MakeInActiveBank(RequestModel<BankModel> input);
         #endregion
+
+        #region Education institute
+        ResponseModel<ResultModel> AddEducationInstitute(RequestModel<EducationInstituteModel> input);
+        ResponseModel<ResultModel> UpdateEducationInstitute(RequestModel<EducationInstituteModel> input);
+        ResponseModel<List<EducationInstituteModel>> GetEducationInstituteList(SearchRequestModel<EducationInstituteModel> input);
+        ResponseModel<ResultModel> MakeInActiveEducationInstitute(RequestModel<EducationInstituteModel> input);
+        #endregion
     }
 }

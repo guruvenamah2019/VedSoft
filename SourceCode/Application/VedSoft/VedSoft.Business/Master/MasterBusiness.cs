@@ -334,6 +334,55 @@ namespace VedSoft.Business.Master
             }
         }
         #endregion
+
+        #region Education Institute
+        public int AddEducationInstitute(RequestModel<EducationInstituteModel> input)
+        {
+            if (!RepositoryWrapper.EducationInstituteRepository.DoesEducationInstituteExist(input))
+            {
+                return RepositoryWrapper.EducationInstituteRepository.AddEducationInstitute(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateEducationInstitute(RequestModel<EducationInstituteModel> input)
+        {
+            if (RepositoryWrapper.EducationInstituteRepository.DoesEducationInstituteIdExist(input))
+            {
+                if (!RepositoryWrapper.EducationInstituteRepository.DoesEducationInstituteExistUpdate(input))
+                {
+                    return RepositoryWrapper.EducationInstituteRepository.UpdateEducationInstitute(input);
+                }
+                else
+                {
+                    return CommonConstants.DuplicateRecord;
+                }
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<EducationInstituteModel> GetEducationInstituteList(SearchRequestModel<EducationInstituteModel> input)
+        {
+            return RepositoryWrapper.EducationInstituteRepository.GetEducationInstituteList(input);
+        }
+
+        public int MakeInActiveEducationInstitute(RequestModel<EducationInstituteModel> input)
+        {
+            if (RepositoryWrapper.EducationInstituteRepository.DoesEducationInstituteIdExist(input))
+            {
+                return RepositoryWrapper.EducationInstituteRepository.MakeInActiveEducationInstitute(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+        #endregion
     }
 }
 
