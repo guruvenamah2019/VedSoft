@@ -13,45 +13,42 @@
 
           <div class="row mb-3">
             <div class="col-md-12 mx-auto">
-                <div *ngIf="this.model.hierarchyLevel>1 && model.id==0" class="form-group row showcase_row_area">
-                    <div class="col-md-3 showcase_text_area">
-                      <label for="inputType5">{{parentLevelName|translate}}</label>
-                    </div>
-                    <div class="col-md-9 showcase_content_area">
-                      <select formControlName="parent" class="custom-select"  [ngClass]="{ 'is-invalid': submitted && f.parent.errors }" >
-                        <option [ngValue]="null">Select</option>
-                        <option [ngValue]="parent" *ngFor="let parent of getParentList()" >
-                            {{parent.name}}
-                        </option>
-                    </select>
+              <div *ngIf="this.model.hierarchyLevel>1 && model.id==0" class="form-group row showcase_row_area">
 
-                    <div *ngIf="submitted && f.parent.errors" class="invalid-feedback">
-                      <div *ngIf="f.parent.errors.required">Plese select {{parentLevelName}}</div>
-                    </div>
-                    </div>
-                  </div>
-              <div class="form-group row showcase_row_area">
-                <div class="col-md-3 showcase_text_area">
-                  <label for="inputType5">{{levelName|translate}} Name </label>
-                </div>
-                <div class="col-md-9 showcase_content_area">
-                  <input type="text" formControlName="standard" maxlength="50" class="form-control" placeholder="{{levelName}}"
-                    [ngClass]="{ 'is-invalid': submitted && f.standard.errors }" />
-                  <div *ngIf="submitted && f.standard.errors" class="invalid-feedback">
-                    <div *ngIf="f.standard.errors?.required">{{levelName}} is required</div>
-                    <div *ngIf="f.standard.errors?.minlength">{{levelName}} must be at least 3 characters long.</div>
-                  </div>
-                </div>
+
+                <mat-form-field>
+                  <mat-select placeholder="{{parentLevelName|translate}}" [formControl]="f.parent">
+
+                    <mat-option *ngFor="let parent of getParentList()" [value]="parent">{{parent.name}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="submitted && f.parent.errors?.required">
+                    Plese select {{parentLevelName}}
+                  </mat-error>
+
+                </mat-form-field>
+
               </div>
               <div class="form-group row showcase_row_area">
-                  <div class="col-md-5 showcase_text_area">
-                <button [disabled]="loading" class="btn btn-primary">
-                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                  Submit
-                </button>
-                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{levelName|translate}} Name" [formControl]="f.standard">
+                  <mat-error *ngIf="submitted && f.standard.errors?.required">
+                    {{levelName}} Year is required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.standard.errors?.minlength">
+                    {{levelName}} Year must be at least 3 characters long.
+                  </mat-error>
+                </mat-form-field>
               </div>
-            </div>
+              <div class="form-group row showcase_row_area">
+                <div class="col-md-5 showcase_text_area">
+                  <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                  </button>
+                  <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                </div>
+              </div>
             </div>
           </div>
 
