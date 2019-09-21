@@ -52,6 +52,9 @@ namespace VedSoft.Data.Repository.Repository.Master
                 customerBranch.Name = input.RequestParameter.Name;
                 customerBranch.Code = input.RequestParameter.Code;
                 customerBranch.ModifiedBy = input.RequestParameter.UserId;
+                customerBranch.Address = input.RequestParameter.Address;
+                customerBranch.ContactNumber = input.RequestParameter.ContactNumber;
+                customerBranch.OtherInfo = input.RequestParameter.OtherInfo;
                 customerBranch.ModifiedDate = DateTime.Now;
             }
 
