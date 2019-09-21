@@ -46,7 +46,7 @@ export class BankSettingsComponent implements OnInit {
     addBank(): void {
         let inputModel: BankModel = {
             id: 0,
-            name: ""
+            bankName: ""
         };
         this.openPopup(inputModel);
 

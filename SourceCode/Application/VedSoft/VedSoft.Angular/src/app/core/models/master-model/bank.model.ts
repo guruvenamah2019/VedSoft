@@ -2,7 +2,7 @@ export class BankModel
 {
     id?: number | null;
     code?: string;
-    name?: string;
+    bankName?: string;
     contactNumber?: string;
     address?: string;
     otherInfo?: string;

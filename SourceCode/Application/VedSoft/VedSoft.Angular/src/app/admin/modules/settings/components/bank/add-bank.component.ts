@@ -31,7 +31,7 @@ export class AddBankComponent implements OnInit {
   ngOnInit() {
 
     this.bankForm = this.formBuilder.group({
-      name: new FormControl(this.model.name, [Validators.required, Validators.minLength(3)]),
+      name: new FormControl(this.model.bankName, [Validators.required, Validators.minLength(3)]),
       // parent: new FormControl(parent, []),
     });
 
@@ -56,7 +56,7 @@ export class AddBankComponent implements OnInit {
     }
 
     let input: BankModel = {
-      name: this.f.name.value,
+      bankName: this.f.name.value,
       userId: this.userService.loggedUser.id,
       id: this.model.id
     };
