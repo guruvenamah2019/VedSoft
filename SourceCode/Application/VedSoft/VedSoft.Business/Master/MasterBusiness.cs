@@ -251,7 +251,7 @@ namespace VedSoft.Business.Master
         }
         public int UpdateAcademicYear(RequestModel<AcademicYearModel> input)
         {
-            if (RepositoryWrapper.AcademicYearRepository.DoesAcademicYearExist(input))
+            if (RepositoryWrapper.AcademicYearRepository.DoesAcademicYearIdExist(input))
             {
                 if (!RepositoryWrapper.AcademicYearRepository.DoesAcademicYearExistUpdate(input))
                 {

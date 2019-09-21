@@ -230,6 +230,7 @@ namespace VedSoft.Data.Repository.Repository.Master
         {
             return this.RepositoryContext.AcademicYears
                                   .Where(x => x.CustomerId == input.CustomerId
+                                  && x.AcademicYear == input.RequestParameter.AcademicYear
                                   && x.Active == CommonConstants.ActiveStatus)
                                   .Count() > 0;
         }
