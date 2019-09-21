@@ -16,6 +16,7 @@ namespace VedSoft.Business.Master
 {
     public class MasterBusiness : BusinessBase, IMasterBusiness
     {
+        #region Customer
         //To add a new customer
         public ResultModel AddCustomer(CustomerModel input)
         {
@@ -87,7 +88,9 @@ namespace VedSoft.Business.Master
             };
 
         }
+        #endregion
 
+        #region CourseHierarchy
         public int AddCourseHierarchy(RequestModel<CourseHiearchyModel> input)
         {
             if(!RepositoryWrapper.MasterRepository.DoesCourseHieararchyExist(input))
@@ -134,7 +137,9 @@ namespace VedSoft.Business.Master
                 return CommonConstants.InvalidRecord;
             }
         }
+        #endregion
 
+        #region CustomerBranch
         public int AddCustomerBranch(RequestModel<CustomerBranchModel> input)
         {
             if (!RepositoryWrapper.CustomerBranchRepository.DoesCustomerBranchExist(input))
@@ -181,7 +186,9 @@ namespace VedSoft.Business.Master
                 return CommonConstants.InvalidRecord;
             }
         }
+        #endregion
 
+        #region User Role
         public int AddUserRole(RequestModel<UserRoleModel> input)
         {
             if (!RepositoryWrapper.UserRoleRepository.DoesUserRoleExist(input))
@@ -228,6 +235,56 @@ namespace VedSoft.Business.Master
                 return CommonConstants.InvalidRecord;
             }
         }
+        #endregion
+
+        #region Academic year
+        public int AddAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            if (!RepositoryWrapper.AcademicYearRepository.DoesAcademicYearExist(input))
+            {
+                return RepositoryWrapper.AcademicYearRepository.AddAcademicYear(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            if (RepositoryWrapper.AcademicYearRepository.DoesAcademicYearExist(input))
+            {
+                if (!RepositoryWrapper.AcademicYearRepository.DoesAcademicYearExistUpdate(input))
+                {
+                    return RepositoryWrapper.AcademicYearRepository.UpdateAcademicYear(input);
+                }
+                else
+                {
+                    return CommonConstants.DuplicateRecord;
+                }
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<AcademicYearModel> GetAcademicYears(SearchRequestModel<AcademicYearModel> input)
+        {
+            return RepositoryWrapper.AcademicYearRepository.GetAcademicYears(input);
+        }
+
+        public int MakeInActiveAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            if (RepositoryWrapper.AcademicYearRepository.DoesAcademicYearExist(input))
+            {
+                return RepositoryWrapper.AcademicYearRepository.MakeInActiveAcademicYear(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+        #endregion
     }
 }
 

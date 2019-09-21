@@ -20,9 +20,10 @@ namespace VedSoft.Data.Repository
         private IUserRepository _userRepository;
         private IUserDetailsRepository _userDetailsRepository;
         private IUserLoginDetailsRepository _userLoginDetailsRepository;
-        private IMasterRepository _masterRepository;
+        private ICustomerCourseHierarchyRepository _masterRepository;
         private ICustomerBranchRepository _customerBranchRepository;
         private IUserRoleRepository _userRoleRepository;
+        private IAcademicYearRepository _academicYearRepository;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -70,11 +71,11 @@ namespace VedSoft.Data.Repository
                 return _userLoginDetailsRepository ?? new UserLoginDetailsRepository(_repoContext);
             }
         }
-        public IMasterRepository MasterRepository
+        public ICustomerCourseHierarchyRepository MasterRepository
         {
             get
             {
-                return _masterRepository ?? new MasterRepository(_repoContext);
+                return _masterRepository ?? new CustomerCourseHierarchyRepository(_repoContext);
             }
         }
 
@@ -91,6 +92,14 @@ namespace VedSoft.Data.Repository
             get
             {
                 return _userRoleRepository ?? new UserRoleRepository(_repoContext);
+            }
+        }
+
+        public IAcademicYearRepository AcademicYearRepository
+        {
+            get
+            {
+                return _academicYearRepository ?? new AcademicYearRepository(_repoContext);
             }
         }
     }

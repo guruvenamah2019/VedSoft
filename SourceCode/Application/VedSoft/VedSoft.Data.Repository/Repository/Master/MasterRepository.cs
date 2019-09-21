@@ -11,9 +11,9 @@ using VedSoft.Utility;
 
 namespace VedSoft.Data.Repository.Repository.Master
 {
-    public class MasterRepository : RepositoryBase<CustomerCourseHierarchyDB>, IMasterRepository
+    public class CustomerCourseHierarchyRepository : RepositoryBase<CustomerCourseHierarchyDB>, ICustomerCourseHierarchyRepository
     {
-        public MasterRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        public CustomerCourseHierarchyRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
             
         }
@@ -133,6 +133,121 @@ namespace VedSoft.Data.Repository.Repository.Master
         {
             return this.RepositoryContext.CustomerCourseHierarchy
                                   .Where(x => x.CustomerId == input.CustomerId 
+                                  && x.Id == input.RequestParameter.Id
+                                   && x.Active == CommonConstants.ActiveStatus
+                                  )
+                                  .Count() > 0;
+        }
+    }
+
+    public class AcademicYearRepository : RepositoryBase<AcademicYearsDB>, IAcademicYearRepository
+    {
+        public AcademicYearRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        public int AddAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            //Make db object
+            AcademicYearsDB academicYearDB = new AcademicYearsDB
+            {
+                CreatedBy = input.RequestParameter.UserId,
+                CreatedDate = DateTime.Now,
+                Active = CommonConstants.ActiveStatus,
+                AcademicYear = input.RequestParameter.AcademicYear,
+                CustomerId = input.CustomerId.GetValueOrDefault()
+            };
+
+            //Save in database
+            this.RepositoryContext.Add(academicYearDB);
+            this.RepositoryContext.SaveChanges();
+
+            input.RequestParameter.Id = academicYearDB.Id;
+
+            return academicYearDB.Id;
+        }
+
+        public int UpdateAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            var academicYear = this.RepositoryContext.AcademicYears
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                            .FirstOrDefault();
+            if (academicYear != null)
+            {
+                academicYear.AcademicYear = input.RequestParameter.AcademicYear;
+                academicYear.ModifiedBy = input.RequestParameter.UserId;
+                academicYear.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(academicYear);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public List<AcademicYearModel> GetAcademicYears(SearchRequestModel<AcademicYearModel> input)
+        {
+            List<AcademicYearModel> academicYearModelList = new List<AcademicYearModel>();
+            var academicYearList = this.RepositoryContext.AcademicYears
+                                      .Where(x => x.CustomerId == input.CustomerId
+                                      && x.Active == CommonConstants.ActiveStatus)
+                                      .Page(input.PageSize, input.PageNumber);
+
+
+            foreach (var academicYear in academicYearList.ToList())
+            {
+                academicYearModelList.Add(new AcademicYearModel
+                {
+                    Id = academicYear.Id,
+                    AcademicYear= academicYear.AcademicYear
+                });
+            }
+
+            return academicYearModelList;
+        }
+
+        public int MakeInActiveAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            var academicYear = this.RepositoryContext.AcademicYears
+                                    .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                                    .FirstOrDefault();
+            if (academicYear != null)
+            {
+                academicYear.Active = CommonConstants.InActiveStatus;
+                academicYear.ModifiedBy = input.RequestParameter.UserId;
+                academicYear.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(academicYear);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public bool DoesAcademicYearExist(RequestModel<AcademicYearModel> input)
+        {
+            return this.RepositoryContext.AcademicYears
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Active == CommonConstants.ActiveStatus)
+                                  .Count() > 0;
+        }
+
+        public bool DoesAcademicYearExistUpdate(RequestModel<AcademicYearModel> input)
+        {
+            return this.RepositoryContext.AcademicYears
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Active == CommonConstants.ActiveStatus
+                                  && x.AcademicYear == input.RequestParameter.AcademicYear
+                                  && x.Id != input.RequestParameter.Id)
+                                  .Count() > 0;
+        }
+
+        public bool DoesAcademicYearIdExist(RequestModel<AcademicYearModel> input)
+        {
+            return this.RepositoryContext.AcademicYears
+                                  .Where(x => x.CustomerId == input.CustomerId
                                   && x.Id == input.RequestParameter.Id
                                    && x.Active == CommonConstants.ActiveStatus
                                   )

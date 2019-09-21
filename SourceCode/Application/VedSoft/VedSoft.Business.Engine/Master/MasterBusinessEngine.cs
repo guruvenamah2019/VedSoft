@@ -13,6 +13,7 @@ namespace VedSoft.Business.Engine.Master
     {
         public IMasterBusiness MasterBusiness { get; set; }
 
+        #region customer
         //To add a new customer
         public ResponseModel<ResultModel> AddCustomer(RequestModel<CustomerModel> input)
         {
@@ -30,7 +31,9 @@ namespace VedSoft.Business.Engine.Master
 
             return responseModel;
         }
+        #endregion
 
+        #region Course Hierarchy
         public ResponseModel<ResultModel> AddCourseHierarchy(RequestModel<CourseHiearchyModel> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
@@ -82,7 +85,9 @@ namespace VedSoft.Business.Engine.Master
 
             return responseModel;
         }
+        #endregion
 
+        #region Customer bracnh
         public ResponseModel<CustomerModel> GetCustomerDetailsBySubDomain(RequestModel<CustomerModel> input)
         {
             ResponseModel<CustomerModel> responseModel = new ResponseModel<CustomerModel>();
@@ -144,6 +149,9 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
 
+        #endregion
+
+        #region User Role
         public ResponseModel<ResultModel> AddUserRole(RequestModel<UserRoleModel> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
@@ -195,5 +203,60 @@ namespace VedSoft.Business.Engine.Master
 
             return responseModel;
         }
+        #endregion
+
+        #region academic year
+        public ResponseModel<ResultModel> AddAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.PrimaryKey = MasterBusiness.AddAcademicYear(input);
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
+
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> UpdateAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.UpdateAcademicYear(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<List<AcademicYearModel>> GetAcademicYears(SearchRequestModel<AcademicYearModel> input)
+        {
+            ResponseModel<List<AcademicYearModel>> responseModel = new ResponseModel<List<AcademicYearModel>>();
+            responseModel.ResponseData = MasterBusiness.GetAcademicYears(input);
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> MakeInActiveAcademicYear(RequestModel<AcademicYearModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.MakeInActiveAcademicYear(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+
+            return responseModel;
+        }
+        #endregion
     }
 }

@@ -39,5 +39,12 @@ namespace VedSoft.Business.Engine.Master
         ResponseModel<List<UserRoleModel>> GetUserRole(SearchRequestModel<UserRoleModel> input);
         ResponseModel<ResultModel> MakeInActiveUserRole(RequestModel<UserRoleModel> input);
         #endregion
+
+        #region Academic Year
+        ResponseModel<ResultModel> AddAcademicYear(RequestModel<AcademicYearModel> input);
+        ResponseModel<ResultModel> UpdateAcademicYear(RequestModel<AcademicYearModel> input);
+        ResponseModel<List<AcademicYearModel>> GetAcademicYears(SearchRequestModel<AcademicYearModel> input);
+        ResponseModel<ResultModel> MakeInActiveAcademicYear(RequestModel<AcademicYearModel> input);
+        #endregion
     }
 }

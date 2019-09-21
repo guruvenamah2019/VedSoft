@@ -8,7 +8,7 @@ using VedSoft.Model.Master;
 
 namespace VedSoft.Data.Contracts.Repository.Master
 {
-    public interface IMasterRepository:IRepositoryBase<CustomerCourseHierarchyDB>
+    public interface ICustomerCourseHierarchyRepository:IRepositoryBase<CustomerCourseHierarchyDB>
     {
         int AddCourseHierarchy(RequestModel<CourseHiearchyModel> input);
         int UpdateCourseHierarchy(RequestModel<CourseHiearchyModel> input);
@@ -21,6 +21,20 @@ namespace VedSoft.Data.Contracts.Repository.Master
         bool DoesCourseHieararchyExistUpdate(RequestModel<CourseHiearchyModel> input);
 
         bool DoesCourseHieararchyIdExist(RequestModel<CourseHiearchyModel> input);
-       
+    }
+
+    public interface IAcademicYearRepository : IRepositoryBase<AcademicYearsDB>
+    {
+        int AddAcademicYear(RequestModel<AcademicYearModel> input);
+        int UpdateAcademicYear(RequestModel<AcademicYearModel> input);
+        List<AcademicYearModel> GetAcademicYears(SearchRequestModel<AcademicYearModel> input);
+
+        int MakeInActiveAcademicYear(RequestModel<AcademicYearModel> input);
+
+        bool DoesAcademicYearExist(RequestModel<AcademicYearModel> input);
+
+        bool DoesAcademicYearExistUpdate(RequestModel<AcademicYearModel> input);
+
+        bool DoesAcademicYearIdExist(RequestModel<AcademicYearModel> input);
     }
 }

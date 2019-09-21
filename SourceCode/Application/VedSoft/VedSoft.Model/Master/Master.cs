@@ -24,4 +24,11 @@ namespace VedSoft.Model.Master
         public int UserId { get; set; }
     }
 
+    public class AcademicYearModel
+    {
+        public int? Id { get; set; }
+        public string AcademicYear { get; set; }
+        public int UserId { get; set; }
+    }
+
 }

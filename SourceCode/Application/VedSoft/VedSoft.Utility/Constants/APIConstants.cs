@@ -49,4 +49,12 @@ namespace VedSoft.Utility.Constants
         public const string ActionGetCustomerRole = "GetRole";
         public const string ActionMakeInActiveCustomerRole = "MakeInActiveRole";
     }
+
+    public class AcademicYearAPIAction
+    {
+        public const string ActionAddAcademicYear = "AddAcademicYear";
+        public const string ActionUpdateAcademicYear = "UpdateAcademicYear";
+        public const string ActionGetAcademicYears = "GetAcademicYears";
+        public const string ActionMakeInActiveAcademicYear = "MakeInActiveAcademicYear";
+    }
 }
