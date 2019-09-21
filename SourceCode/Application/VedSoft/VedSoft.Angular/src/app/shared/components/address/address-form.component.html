@@ -1,0 +1,71 @@
+﻿<form [formGroup]="form">
+  <div class="form-group">
+    <label for="name">name</label>
+    
+    <input type="text" formControlName="name" maxlength="50" class="form-control" placeholder="name"
+    [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+    <div *ngIf="f.name.errors?.required">name is required</div>
+    <div *ngIf="f.name.errors?.minlength">name must be at least 3 characters long.</div>
+  </div>
+
+  </div>
+  <div class="form-group">
+    <label for="address1">address1</label>
+   
+    <input type="text" formControlName="address1" maxlength="50" class="form-control" placeholder="address1"
+    [ngClass]="{ 'is-invalid': submitted && f.address1.errors }" />
+  <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
+    <div *ngIf="f.address1.errors?.required">address1 is required</div>
+    <div *ngIf="f.address1.errors?.minlength">address1 must be at least 3 characters long.</div>
+  </div>
+
+  </div>
+  <div class="form-group">
+    <label for="address1">address2</label>
+   
+    <input type="text" formControlName="address2" maxlength="50" class="form-control" placeholder="address2"
+    [ngClass]="{ 'is-invalid': submitted && f.address2.errors }" />
+  <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+    <div *ngIf="f.address2.errors?.required">address2 is required</div>
+    <div *ngIf="f.address2.errors?.minlength">address2 must be at least 3 characters long.</div>
+  </div>
+
+  </div>
+  <div class="form-group">
+    <label for="city">city</label>
+    <input type="text" formControlName="city" maxlength="50" class="form-control" placeholder="city"
+    [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+  <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+    <div *ngIf="f.city.errors?.required">city is required</div>
+    <div *ngIf="f.city.errors?.minlength">city must be at least 3 characters long.</div>
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="zipcode">zipcode</label>
+    <input type="text" formControlName="zipcode" maxlength="50" class="form-control" placeholder="zipcode"
+    [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }" />
+  <div *ngIf="submitted && f.zipcode.errors" class="invalid-feedback">
+    <div *ngIf="f.zipcode.errors?.required">zipcode is required</div>
+    <div *ngIf="f.zipcode.errors?.minlength">zipcode must be at least 3 characters long.</div>
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="state">state</label>
+    <input type="text" formControlName="state" maxlength="50" class="form-control" placeholder="state"
+    [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+  <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+    <div *ngIf="f.state.errors?.required">state is required</div>
+    <div *ngIf="f.state.errors?.minlength">state must be at least 3 characters long.</div>
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="country">country</label>
+    <input type="text" formControlName="country" maxlength="50" class="form-control" placeholder="country"
+    [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+  <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+    <div *ngIf="f.country.errors?.required">country is required</div>
+    <div *ngIf="f.country.errors?.minlength">country must be at least 3 characters long.</div>
+  </div>
+  </div>
+</form>

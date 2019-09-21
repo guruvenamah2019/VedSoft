@@ -6,8 +6,7 @@ import { ModalModule, BsModalService, BsDropdownModule } from 'ngx-bootstrap';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { createTranslateLoader } from './loader/translate.loader';
-import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component, Error500Component } from "./components/index"
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component, Error500Component, AddressComponent } from "./components/index"
 import { MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
@@ -19,7 +18,8 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     FooterComponent, HeaderComponent, SidebarComponent,
     Error404Component,
-    Error500Component
+    Error500Component,
+    AddressComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -60,7 +60,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatMenuModule,
     Error404Component,
     Error500Component,
-    MatTabsModule
+    MatTabsModule,
+    AddressComponent
   ],
   providers: [
 
