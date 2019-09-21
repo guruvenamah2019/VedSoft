@@ -101,6 +101,7 @@ export class StandardsSettingsComponent implements OnInit {
 
         let confir = confirm("Are you sure to delete");
         if (confir) {
+            inputModel.userId = this.courseService.userSerice.loggedUser.id;
 
             let input: RequestModel<CourseHiearchyModel> = this.baseService.getRequestModel(inputModel);
 

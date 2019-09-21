@@ -7,5 +7,5 @@ export class InstituteModel
     address?: string;
     otherInfo?: string;
     userId?: number;
-    type?:number
+    instituteTypeId?:number;
 }

@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { InstituteModel } from 'src/app/core/models/master-model';
-import { BaseService,  InstituteService } from 'src/app/core/services';
+import { BaseService,  InstituteService, AuthenticationService } from 'src/app/core/services';
 import { RequestModel } from 'src/app/core/models/shared-model';
 import { CommonConstants } from 'src/app/core/enums';
 import { AddInstituteComponent } from './add-institute.component';
@@ -18,7 +18,7 @@ export class InstituteSettingsComponent implements OnInit {
     level: number = 1;
     bsModalRef: BsModalRef;
     instituteList: InstituteModel[] = [];
-    constructor(private modalService: BsModalService, private bankService: InstituteService, private baseService: BaseService) {
+    constructor(private modalService: BsModalService, private bankService: InstituteService, private baseService: BaseService,private userService: AuthenticationService) {
         console.log("InstituteSettingsComponent");
 
     }
@@ -62,7 +62,7 @@ export class InstituteSettingsComponent implements OnInit {
 
         let confir = confirm("Are you sure to delete");
         if (confir) {
-
+            inputModel.userId =this.userService.loggedUser.id;
             let input: RequestModel<InstituteModel> = this.baseService.getRequestModel(inputModel);
 
             this.bankService.makeInActiveInstitute(input).subscribe(x => {

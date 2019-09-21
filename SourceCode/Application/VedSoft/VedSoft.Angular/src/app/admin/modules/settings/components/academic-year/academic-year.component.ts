@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AcademicYearModel } from 'src/app/core/models/master-model';
-import { BaseService, AcademicYearService } from 'src/app/core/services';
+import { BaseService, AcademicYearService, AuthenticationService } from 'src/app/core/services';
 import { RequestModel } from 'src/app/core/models/shared-model';
 import { CommonConstants } from 'src/app/core/enums';
 import { AddAcademicYearComponent } from './add-academic-year.component';
@@ -18,7 +18,7 @@ export class AcademicYearSettingsComponent implements OnInit {
     level: number = 1;
     bsModalRef: BsModalRef;
     academicYearList: AcademicYearModel[] = [];
-    constructor(private modalService: BsModalService, private academicYearService: AcademicYearService, private baseService: BaseService) {
+    constructor(private modalService: BsModalService, private academicYearService: AcademicYearService, private baseService: BaseService,private userService: AuthenticationService) {
         console.log("AcademicYearSettingsComponent");
 
     }
@@ -62,6 +62,7 @@ export class AcademicYearSettingsComponent implements OnInit {
 
         let confir = confirm("Are you sure to delete");
         if (confir) {
+            inputModel.userId = this.userService.loggedUser.id;
 
             let input: RequestModel<AcademicYearModel> = this.baseService.getRequestModel(inputModel);
 

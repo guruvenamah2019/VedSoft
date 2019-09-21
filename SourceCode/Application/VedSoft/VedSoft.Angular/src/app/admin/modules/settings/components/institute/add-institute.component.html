@@ -40,6 +40,23 @@
                   </div>
                 </div>
               </div>
+              <div  class="form-group row showcase_row_area">
+                <div class="col-md-3 showcase_text_area">
+                  <label for="inputType5">{{'Type'|translate}}</label>
+                </div>
+                <div class="col-md-9 showcase_content_area">
+                  <select formControlName="instituteType" class="custom-select"  [ngClass]="{ 'is-invalid': submitted && f.instituteType.errors }" >
+                    <option [ngValue]="null">Select</option>
+                    <option [ngValue]="instituteType" *ngFor="let instituteType of instituteTypeList" >
+                        {{instituteType.name}}
+                    </option>
+                </select>
+
+                <div *ngIf="submitted && f.instituteType.errors" class="invalid-feedback">
+                  <div *ngIf="f.instituteType.errors.required">Plese select Type</div>
+                </div>
+                </div>
+              </div>
               <div class="form-group row showcase_row_area">
                   <div class="col-md-5 showcase_text_area">
                 <button [disabled]="loading" class="btn btn-primary">

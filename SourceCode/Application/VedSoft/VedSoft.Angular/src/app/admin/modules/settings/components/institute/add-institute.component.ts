@@ -4,7 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { InstituteService, AuthenticationService } from 'src/app/core/services';
 import { InstituteModel } from 'src/app/core/models/master-model';
-import { CommonConstants } from 'src/app/core/enums';
+import { CommonConstants, InstituteTypeEnum } from 'src/app/core/enums';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -22,6 +22,7 @@ export class AddInstituteComponent implements OnInit {
   loading = false;
   error = '';
   submitted: boolean = false;
+  instituteTypeList:InstituteModel[]=[];
   onNavigate() {
   }
   constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private instituteService: InstituteService, private userService: AuthenticationService) {
@@ -30,9 +31,20 @@ export class AddInstituteComponent implements OnInit {
   }
   ngOnInit() {
 
+    this.instituteTypeList.push({
+      id:InstituteTypeEnum.School_institute,
+      name:"School/Institute"
+    });
+    this.instituteTypeList.push({
+      id:InstituteTypeEnum.University_Board,
+      name:"University/Board"
+    });
+
+    let instituteType = this.instituteTypeList.find(x => x.id == this.model.instituteTypeId);
+
     this.instituteForm = this.formBuilder.group({
       name: new FormControl(this.model.name, [Validators.required, Validators.minLength(3)]),
-      // parent: new FormControl(parent, []),
+      instituteType: new FormControl(instituteType, [Validators.required]),
     });
 
   }
@@ -55,10 +67,14 @@ export class AddInstituteComponent implements OnInit {
       return;
     }
 
+    let instituteType: InstituteModel =  this.f.instituteType.value;
+
+
     let input: InstituteModel = {
       name: this.f.name.value,
       userId: this.userService.loggedUser.id,
-      id: this.model.id
+      id: this.model.id,
+      instituteTypeId:instituteType.id
     };
 
     if (this.model.id > 0) {

@@ -62,6 +62,7 @@ export class UserRoleSettingComponent  {
 
         let confir = confirm("Are you sure to delete");
         if (confir) {
+            inputModel.userId = this.roleService.userSerice.loggedUser.id;
 
             let input: RequestModel<UserRoleModel> = this.baseService.getRequestModel(inputModel);
 

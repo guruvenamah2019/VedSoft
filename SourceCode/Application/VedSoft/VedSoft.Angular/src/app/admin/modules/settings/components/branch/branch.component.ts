@@ -62,6 +62,7 @@ export class BranchSettingComponent  {
 
         let confir = confirm("Are you sure to delete");
         if (confir) {
+            inputModel.userId =this.branchService.userSerice.loggedUser.id;
 
             let input: RequestModel<CustomerBranchModel> = this.baseService.getRequestModel(inputModel);
 

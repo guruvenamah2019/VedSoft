@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BankModel } from 'src/app/core/models/master-model';
-import { BaseService, BankService } from 'src/app/core/services';
+import { BaseService, BankService, AuthenticationService } from 'src/app/core/services';
 import { RequestModel } from 'src/app/core/models/shared-model';
 import { CommonConstants } from 'src/app/core/enums';
 import { AddBankComponent } from './add-bank.component';
@@ -18,7 +18,7 @@ export class BankSettingsComponent implements OnInit {
     level: number = 1;
     bsModalRef: BsModalRef;
     bankList: BankModel[] = [];
-    constructor(private modalService: BsModalService, private bankService: BankService, private baseService: BaseService) {
+    constructor(private modalService: BsModalService, private bankService: BankService, private baseService: BaseService,private userService: AuthenticationService) {
         console.log("BankSettingsComponent");
 
     }
@@ -62,6 +62,7 @@ export class BankSettingsComponent implements OnInit {
 
         let confir = confirm("Are you sure to delete");
         if (confir) {
+            inputModel.userId =this.userService.loggedUser.id;
 
             let input: RequestModel<BankModel> = this.baseService.getRequestModel(inputModel);
 
