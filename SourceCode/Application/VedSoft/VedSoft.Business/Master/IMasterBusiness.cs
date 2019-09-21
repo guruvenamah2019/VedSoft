@@ -57,5 +57,12 @@ namespace VedSoft.Business.Master
         List<EducationInstituteModel> GetEducationInstituteList(SearchRequestModel<EducationInstituteModel> input);
         int MakeInActiveEducationInstitute(RequestModel<EducationInstituteModel> input);
         #endregion
+
+        #region Customer Course
+        int AddCustomerCourse(RequestModel<CustomerCourseModel> input);
+        int UpdateCustomerCourse(RequestModel<CustomerCourseModel> input);
+        List<CustomerCourseModel> GetCustomerCourseList(SearchRequestModel<CustomerCourseModel> input);
+        int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input);
+        #endregion
     }
 }

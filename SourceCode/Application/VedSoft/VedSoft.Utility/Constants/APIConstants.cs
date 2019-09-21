@@ -32,6 +32,10 @@ namespace VedSoft.Utility.Constants
         public const string ActionUpdateCourseHierarchy = "UpdateCourseHierarchy";
         public const string ActionGetCourseHierarchy = "GetCourseHierarchy";
         public const string ActionMakeInActiveCourseHierarchy = "MakeInActiveCourseHierarchy";
+        public const string ActionAddCustomerCourse = "AddCustomerCourse";
+        public const string ActionUpdateCustomerCourse = "UpdateCustomerCourse";
+        public const string ActionGetCustomerCourseList = "GetCustomerCourseList";
+        public const string ActionMakeInActiveCustomerCourse = "MakeInActiveCustomerCourse";
     }
 
     public class CustomerBranchAPIAction

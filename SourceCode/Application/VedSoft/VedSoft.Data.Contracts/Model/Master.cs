@@ -157,4 +157,38 @@ namespace VedSoft.Data.Contracts.Model
         [Column("MODIFIED_DATE")]
         public DateTime? ModifiedDate { get; set; }
     }
+
+    [Table("CUSTOMER_COURSES")]
+    public class CustomerCourseDB
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("NAME")]
+        public string Name { get; set; }
+        [Column("CUSTOMER_ID")]
+        public int CustomerId { get; set; }
+        [Column("VEDIC_COURSE_ID")]
+        public int VedicCourseId { get; set; }
+        [Column("COURSE_TYPE_ID")]
+        public int CourseTypeId { get; set; }
+        [Column("COURSE_DESCRIPTION")]
+        public string CourseDescription { get; set; }
+        [Column("DURATION")]
+        public int Duration { get; set; }
+        [Column("DURATION_UOM")]
+        public string DurationUOM { get; set; }
+        [Column("COURSE_COST")]
+        public decimal CourseCost { get; set; }
+        [Column("ACTIVE")]
+        public int? Active { get; set; }
+        [Column("CREATED_DATE")]
+        public DateTime CreatedDate { get; set; }
+        [Column("CREATED_BY")]
+        public int CreatedBy { get; set; }
+        [Column("MODIFIED_BY")]
+        public int? ModifiedBy { get; set; }
+        [Column("MODIFIED_DATE")]
+        public DateTime? ModifiedDate { get; set; }
+    }
 }

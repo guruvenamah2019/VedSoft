@@ -58,6 +58,8 @@ namespace VedSoft.Data.Contracts.Model
         public string PasswordValidationCode { get; set; }
         [Column("LANGUAGE_ID")]
         public int? LanguageId { get; set; }
+        [Column("PAGE_SIZE")]
+        public int? PageSize { get; set; }
         [Column("IS_TEMPORARYPASSWORD")]
         public int? IsTemproryPassword { get; set; }
         [Column("LAST_LOGIN_DATE")]

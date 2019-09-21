@@ -11,8 +11,10 @@ namespace VedSoft.Model.User
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        //public string EmailId { get; set; }
+        public int UserTypeId { get; set; }
         public string NotificationEmailId { get; set; }
+        public string ContactNumber { get; set; }//json
+        public string Address { get; set; }//json
         public string Password { get; set; }//encrypted
         public DateTime? LastLoginDate { get; set; }
         public DateTime? PasswordExpiryDate { get; set; }
@@ -20,6 +22,7 @@ namespace VedSoft.Model.User
         public int? TemproryPassword { get; set; }
         public int? Active { get; set; }
         public int UserDetailsId { get; set; }
+        public string PasswordValidationCode { get; set; }//encrypted
     }
 
     public class UserRoleModel

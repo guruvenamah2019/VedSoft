@@ -133,6 +133,118 @@ namespace VedSoft.API.Controllers
             return result;
         }
 
+        /// <summary>
+        /// To add the customer course
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(CourseAPIAction.ActionAddCustomerCourse)]
+        //[Authorize]
+        public async Task<ResponseModel<ResultModel>> AddCustomerCourse([FromBody] RequestModel<CustomerCourseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _masterBusinessEngine.AddCustomerCourse(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To update the customer course
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(CourseAPIAction.ActionUpdateCustomerCourse)]
+        //[Authorize]
+        public async Task<ResponseModel<ResultModel>> UpdateCustomerCourse([FromBody] RequestModel<CustomerCourseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _masterBusinessEngine.UpdateCustomerCourse(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To get the course course list
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(CourseAPIAction.ActionGetCustomerCourseList)]
+        //[Authorize]
+        public async Task<ResponseModel<List<CustomerCourseModel>>> GetCustomerCourseList([FromBody] SearchRequestModel<CustomerCourseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<List<CustomerCourseModel>> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _masterBusinessEngine.GetCustomerCourseList(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To make the customer course inactive
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(CourseAPIAction.ActionMakeInActiveCustomerCourse)]
+        //[Authorize]
+        public async Task<ResponseModel<ResultModel>> MakeInActiveMakeInActiveCustomerCourse([FromBody] RequestModel<CustomerCourseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _masterBusinessEngine.MakeInActiveCustomerCourse(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
 
     }
 }

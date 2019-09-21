@@ -46,4 +46,17 @@ namespace VedSoft.Model.Master
         public int UserId { get; set; }
     }
 
+    public class CustomerCourseModel
+    {
+        public int? Id { get; set; }
+        public string Name { get; set; }
+        public int VedicCourseId { get; set; }
+        public int CourseTypeId { get; set; }
+        public string CourseDescription { get; set; }
+        public int Duration { get; set; }
+        public string DurationUOM { get; set; }
+        public decimal CourseCost { get; set; }
+        public int UserId { get; set; }
+    }
+
 }

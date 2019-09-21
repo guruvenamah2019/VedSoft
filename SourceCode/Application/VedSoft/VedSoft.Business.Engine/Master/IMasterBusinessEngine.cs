@@ -60,5 +60,12 @@ namespace VedSoft.Business.Engine.Master
         ResponseModel<List<EducationInstituteModel>> GetEducationInstituteList(SearchRequestModel<EducationInstituteModel> input);
         ResponseModel<ResultModel> MakeInActiveEducationInstitute(RequestModel<EducationInstituteModel> input);
         #endregion
+
+        #region Customer Course
+        ResponseModel<ResultModel> AddCustomerCourse(RequestModel<CustomerCourseModel> input);
+        ResponseModel<ResultModel> UpdateCustomerCourse(RequestModel<CustomerCourseModel> input);
+        ResponseModel<List<CustomerCourseModel>> GetCustomerCourseList(SearchRequestModel<CustomerCourseModel> input);
+        ResponseModel<ResultModel> MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input);
+        #endregion
     }
 }

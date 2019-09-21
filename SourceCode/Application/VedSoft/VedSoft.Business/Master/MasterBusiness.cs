@@ -383,6 +383,55 @@ namespace VedSoft.Business.Master
             }
         }
         #endregion
+
+        #region CustomerCourse
+        public int AddCustomerCourse(RequestModel<CustomerCourseModel> input)
+        {
+            if (!RepositoryWrapper.CustomerCourseRepository.DoesCustomerCourseExist(input))
+            {
+                return RepositoryWrapper.CustomerCourseRepository.AddCustomerCourse(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateCustomerCourse(RequestModel<CustomerCourseModel> input)
+        {
+            if (RepositoryWrapper.CustomerCourseRepository.DoesCustomerCourseIdExist(input))
+            {
+                if (!RepositoryWrapper.CustomerCourseRepository.DoesCustomerCourseExistUpdate(input))
+                {
+                    return RepositoryWrapper.CustomerCourseRepository.UpdateCustomerCourse(input);
+                }
+                else
+                {
+                    return CommonConstants.DuplicateRecord;
+                }
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<CustomerCourseModel> GetCustomerCourseList(SearchRequestModel<CustomerCourseModel> input)
+        {
+            return RepositoryWrapper.CustomerCourseRepository.GetCustomerCourseList(input);
+        }
+
+        public int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input)
+        {
+            if (RepositoryWrapper.CustomerCourseRepository.DoesCustomerCourseIdExist(input))
+            {
+                return RepositoryWrapper.CustomerCourseRepository.MakeInActiveCustomerCourse(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+        #endregion
     }
 }
 

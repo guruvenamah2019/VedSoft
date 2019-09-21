@@ -490,4 +490,139 @@ namespace VedSoft.Data.Repository.Repository.Master
                                   .Count() > 0;
         }
     }
+
+    public class CustomerCourseRepository : RepositoryBase<CustomerCourseDB>, ICustomerCourseRepository
+    {
+        public CustomerCourseRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        public int AddCustomerCourse(RequestModel<CustomerCourseModel> input)
+        {
+            //Make db object
+            CustomerCourseDB educationInstitute = new CustomerCourseDB
+            {
+                CreatedBy = input.RequestParameter.UserId,
+                CreatedDate = DateTime.Now,
+                Active = CommonConstants.ActiveStatus,
+                CourseCost = input.RequestParameter.CourseCost,
+                CourseDescription = input.RequestParameter.CourseDescription,
+                CourseTypeId = input.RequestParameter.CourseTypeId,
+                Duration = input.RequestParameter.Duration,
+                DurationUOM = input.RequestParameter.DurationUOM,
+                VedicCourseId = input.RequestParameter.VedicCourseId,
+                CustomerId = input.CustomerId.GetValueOrDefault(),
+                Name = input.RequestParameter.Name,
+            };
+
+            //Save in database
+            this.RepositoryContext.Add(educationInstitute);
+            this.RepositoryContext.SaveChanges();
+
+            input.RequestParameter.Id = educationInstitute.Id;
+
+            return educationInstitute.Id;
+        }
+
+        public int UpdateCustomerCourse(RequestModel<CustomerCourseModel> input)
+        {
+            var customerCourse = this.RepositoryContext.CustomerCourse
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                            .FirstOrDefault();
+            if (customerCourse != null)
+            {
+                customerCourse.Name = input.RequestParameter.Name;
+                customerCourse.VedicCourseId = input.RequestParameter.VedicCourseId;
+                customerCourse.CourseTypeId = input.RequestParameter.CourseTypeId;
+                customerCourse.CourseDescription = input.RequestParameter.CourseDescription;
+                customerCourse.Duration = input.RequestParameter.Duration;
+                customerCourse.DurationUOM = input.RequestParameter.DurationUOM;
+                customerCourse.CourseCost = input.RequestParameter.CourseCost;
+                customerCourse.ModifiedBy = input.RequestParameter.UserId;
+                customerCourse.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(customerCourse);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public List<CustomerCourseModel> GetCustomerCourseList(SearchRequestModel<CustomerCourseModel> input)
+        {
+            List<CustomerCourseModel> customerCourseList = new List<CustomerCourseModel>();
+            var customerCourseListDB = this.RepositoryContext.CustomerCourse
+                                      .Where(x => x.CustomerId == input.CustomerId
+                                      && x.Active == CommonConstants.ActiveStatus)
+                                      .Page(input.PageSize, input.PageNumber);
+
+
+            foreach (var customerCourse in customerCourseListDB.ToList())
+            {
+                customerCourseList.Add(new CustomerCourseModel
+                {
+                    Id = customerCourse.Id,
+                    CourseCost = customerCourse.CourseCost,
+                    DurationUOM = customerCourse.DurationUOM,
+                    Duration = customerCourse.Duration,
+                    CourseDescription = customerCourse.CourseDescription,
+                    CourseTypeId = customerCourse.CourseTypeId,
+                    //CustomerId = customerCourse.CustomerId,
+                    VedicCourseId = customerCourse.VedicCourseId,
+                    Name = customerCourse.Name
+                });
+            }
+
+            return customerCourseList;
+        }
+
+        public int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input)
+        {
+            var customerCourse = this.RepositoryContext.CustomerCourse
+                                    .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                                    .FirstOrDefault();
+            if (customerCourse != null)
+            {
+                customerCourse.Active = CommonConstants.InActiveStatus;
+                customerCourse.ModifiedBy = input.RequestParameter.UserId;
+                customerCourse.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(customerCourse);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public bool DoesCustomerCourseExist(RequestModel<CustomerCourseModel> input)
+        {
+            return this.RepositoryContext.CustomerCourse
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Name == input.RequestParameter.Name
+                                  && x.Active == CommonConstants.ActiveStatus)
+                                  .Count() > 0;
+        }
+
+        public bool DoesCustomerCourseExistUpdate(RequestModel<CustomerCourseModel> input)
+        {
+            return this.RepositoryContext.CustomerCourse
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Active == CommonConstants.ActiveStatus
+                                  && x.Name == input.RequestParameter.Name
+                                  && x.Id != input.RequestParameter.Id)
+                                  .Count() > 0;
+        }
+
+        public bool DoesCustomerCourseIdExist(RequestModel<CustomerCourseModel> input)
+        {
+            return this.RepositoryContext.CustomerCourse
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Id == input.RequestParameter.Id
+                                   && x.Active == CommonConstants.ActiveStatus
+                                  )
+                                  .Count() > 0;
+        }
+    }
 }
