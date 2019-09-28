@@ -96,6 +96,8 @@ namespace VedSoft.API.Core
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IMasterBusinessEngine, MasterBusinessEngine>();
             services.AddScoped<IMasterBusiness, MasterBusiness>();
+            services.AddScoped<IUserBusiness, UserBusiness>();
+            services.AddScoped<IUserBusinessEngine, UserBusinessEngine>();
             services.AddScoped<ILoginBusinessEngine, LoginBusinessEngine>();
             services.AddScoped<ILoginBusiness, LoginBusiness>();
             services.AddTransient<ITokenService, TokenService>();

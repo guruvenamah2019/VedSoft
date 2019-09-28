@@ -23,6 +23,9 @@ namespace VedSoft.Model.User
         public int? Active { get; set; }
         public int UserDetailsId { get; set; }
         public string PasswordValidationCode { get; set; }//encrypted
+        public int ActionUserId { get; set; }//It will have the user Id ...who is going to perform the operation on it...not the actual user id
+        public int RequestedPageSize { get; set; }
+        public int RequestedLanguageId { get; set; }
     }
 
     public class UserRoleModel

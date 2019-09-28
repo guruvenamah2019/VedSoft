@@ -38,6 +38,16 @@ namespace VedSoft.Utility.Constants
         public const string ActionMakeInActiveCustomerCourse = "MakeInActiveCustomerCourse";
     }
 
+    public class UserAPIAction
+    {
+        public const string RoutePrefixUser = "api/User";
+
+        public const string ActionAddUser = "AddUser";
+        public const string ActionUpdateUser = "UpdateUser";
+        public const string ActionGetUserList = "GetUserList";
+        public const string ActionMakeInActiveUser = "MakeInActiveUser";
+    }
+
     public class CustomerBranchAPIAction
     {
         public const string ActionAddCustomerBranch = "AddBranch";

@@ -15,6 +15,12 @@ namespace VedSoft.Data.Contracts.User
         UserModel GetUserIdByLoginId(int UserId);
         bool UpdatePassword(SetPasswordRequestModel input);
 
-        
+        int AddUser(RequestModel<UserModel> input);
+        int UpdateUser(RequestModel<UserModel> input);
+        List<UserModel> GetUserList(SearchRequestModel<UserModel> input);
+        int MakeInActiveUser(RequestModel<UserModel> input);
+        bool DoesUserExist(RequestModel<UserModel> input);
+        bool DoesUserExistUpdate(RequestModel<UserModel> input);
+        bool DoesUserIdExist(RequestModel<UserModel> input);
     }
 }
