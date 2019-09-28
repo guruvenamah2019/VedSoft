@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { CourseHiearchyModel } from 'src/app/core/models/master-model/course-hiearchy.model';
+import { SubjectHiearchyModel } from 'src/app/core/models/master-model/subject-hiearchy.model';
 import { CommonConstants } from 'src/app/core/enums';
 import { UserRoleModel } from 'src/app/core/models/master-model';
 import { UserRoleService } from 'src/app/core/services';

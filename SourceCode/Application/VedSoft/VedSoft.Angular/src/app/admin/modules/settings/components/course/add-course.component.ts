@@ -1,22 +1,21 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { CourseHiearchyService, BaseService, AuthenticationService } from 'src/app/core/services';
-import { CourseHiearchyModel } from 'src/app/core/models/master-model/course-hiearchy.model';
+import { SubjectHiearchyService } from 'src/app/core/services';
+import { SubjectHiearchyModel } from 'src/app/core/models/master-model';
 import { CommonConstants } from 'src/app/core/enums';
 import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  templateUrl: 'add-standard.component.html',
+  templateUrl: 'add-course.component.html',
 })
 
-export class AddStandardComponent implements OnInit {
+export class AddCourseComponent implements OnInit {
   @Input("model")
-  model?: CourseHiearchyModel;
+  model?: SubjectHiearchyModel;
   @Output("onSave")
-  onSave: EventEmitter<CourseHiearchyModel> = new EventEmitter<CourseHiearchyModel>();
+  onSave: EventEmitter<SubjectHiearchyModel> = new EventEmitter<SubjectHiearchyModel>();
 
   standardForm: FormGroup;
   loading = false;
@@ -24,13 +23,13 @@ export class AddStandardComponent implements OnInit {
   submitted: boolean = false;
   onNavigate() {
   }
-  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private courseService: CourseHiearchyService) {
+  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private courseService: SubjectHiearchyService) {
     console.log("AdminDashboardIndexComponent");
 
   }
   ngOnInit() {
 
-    let parent = this.courseService.CourseHiearchy.filter(x => x.id == this.model.parentId);
+    let parent = this.courseService.SubjectHiearchy.filter(x => x.id == this.model.parentId);
     parent = parent.length == 0 ? null : parent;
 
 
@@ -60,7 +59,7 @@ export class AddStandardComponent implements OnInit {
 
   getParentList() {
 
-    return this.courseService.CourseHiearchy.filter(x => x.hierarchyLevel == (this.model.hierarchyLevel - 1));
+    return this.courseService.SubjectHiearchy.filter(x => x.hierarchyLevel == (this.model.hierarchyLevel - 1));
 
   }
 
@@ -78,9 +77,9 @@ export class AddStandardComponent implements OnInit {
     if (this.standardForm.invalid) {
       return;
     }
-    let parent: CourseHiearchyModel = this.model.id > 0 ? this.courseService.CourseHiearchy.find(x => x.id == this.model.parentId) : this.f.parent.value;
+    let parent: SubjectHiearchyModel = this.model.id > 0 ? this.courseService.SubjectHiearchy.find(x => x.id == this.model.parentId) : this.f.parent.value;
 
-    let courseInput: CourseHiearchyModel = {
+    let courseInput: SubjectHiearchyModel = {
       parentId: parent? parent.id:0,
       name: this.f.standard.value,
       userId: this.courseService.userSerice.loggedUser.id,
@@ -97,8 +96,8 @@ export class AddStandardComponent implements OnInit {
 
   }
 
-  addStandard(courseInput: CourseHiearchyModel) {
-    this.courseService.addCourseHierarchy(courseInput).subscribe(x => {
+  addStandard(courseInput: SubjectHiearchyModel) {
+    this.courseService.addSubjectHierarchy(courseInput).subscribe(x => {
       if (x.responseData != null) {
         if (x.responseData.statusId == CommonConstants.success) {
           this.courseService.baseService.successMessage("Standard Added sucessfully");
@@ -119,8 +118,8 @@ export class AddStandardComponent implements OnInit {
 
   }
 
-  editStandard(courseInput: CourseHiearchyModel) {
-    this.courseService.updateCourseHierarchy(courseInput).subscribe(x => {
+  editStandard(courseInput: SubjectHiearchyModel) {
+    this.courseService.updateSubjectHierarchy(courseInput).subscribe(x => {
       if (x.responseData != null) {
         if (x.responseData.statusId == CommonConstants.success) {
           this.courseService.baseService.successMessage("Standard update sucessfully");
