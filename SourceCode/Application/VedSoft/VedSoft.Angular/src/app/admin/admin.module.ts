@@ -5,7 +5,7 @@ import { AuthGuard, AdminGuard } from "../core/guards/index";
 import {AdminSettingsModule} from "./modules/settings/settings.module";
 import { ADMIN_ROUTES } from "./admin-route";
 import { SharedModule } from "../shared/shared.module"
-import { CourseHiearchyService } from '../core/services';
+import { SubjectHiearchyService } from '../core/services';
 
 
 

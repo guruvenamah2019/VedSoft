@@ -12,7 +12,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { TranslateService } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { CourseHiearchyService } from './core/services/course.service';
+import { SubjectHiearchyService } from './core/services/subject.service';
 import { CustomerGuard } from './core/guards/customer.guard';
 
 @NgModule({
@@ -49,7 +49,7 @@ import { CustomerGuard } from './core/guards/customer.guard';
     AuthenticationService,
     //fakeBackendProvider,
     BrowserInfoService,
-    CourseHiearchyService,
+    SubjectHiearchyService,
     BranchService,
     BankService,
     InstituteService,

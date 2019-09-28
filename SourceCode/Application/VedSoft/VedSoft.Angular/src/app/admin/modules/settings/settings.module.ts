@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthGuard, AdminGuard } from "../../../core/guards/index";
 import { ADMIN_SETTINGS_ROUTES } from "./settings-route"
-import { AdminSettingsIndexComponent,OrganizationSettingsComponent,SubjectSettingsComponent, 
-    CourseSettingsComponent, StandardsSettingsComponent, AddStandardComponent, BranchSettingComponent, AddBranchComponent, UserRoleSettingComponent, AddUserRoleComponent, BankSettingsComponent, AddBankComponent, InstituteSettingsComponent, AddInstituteComponent, 
+import { AdminSettingsIndexComponent,OrganizationSettingsComponent, 
+    CourseSettingsComponent, SubjectSettingsComponent, AddStandardComponent, BranchSettingComponent, AddBranchComponent, UserRoleSettingComponent, AddUserRoleComponent, BankSettingsComponent, AddBankComponent, InstituteSettingsComponent, AddInstituteComponent, 
     AcademicYearSettingsComponent, AddAcademicYearComponent } from "./components/index"
 import { SharedModule } from "../../../shared/shared.module"
 
@@ -15,9 +15,8 @@ import { SharedModule } from "../../../shared/shared.module"
     declarations: [
         AdminSettingsIndexComponent,
         OrganizationSettingsComponent,
-        SubjectSettingsComponent,
         CourseSettingsComponent,
-        StandardsSettingsComponent,
+        SubjectSettingsComponent,
         AddStandardComponent,
         BranchSettingComponent,
         AddBranchComponent,

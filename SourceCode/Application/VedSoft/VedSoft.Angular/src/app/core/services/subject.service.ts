@@ -4,46 +4,46 @@ import { Observable, of } from 'rxjs';
 import { RequestModel, ResponseModel, ResultModel, SearchRequestModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
 import { COURSE_SERVICE_URL } from "../constant/service-url";
-import { CourseHiearchyModel } from '../models/master-model/course-hiearchy.model';
+import { SubjectHiearchyModel } from '../models/master-model/subject-hiearchy.model';
 import { AuthenticationService } from './authentication.service';
 import { map, tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
-export class CourseHiearchyService {
+export class SubjectHiearchyService {
 
-    private courseHiearchy: CourseHiearchyModel[] = [];
+    private subjectHiearchy: SubjectHiearchyModel[] = [];
 
-    public get CourseHiearchy(){
-        return this.courseHiearchy;
+    public get SubjectHiearchy(){
+        return this.subjectHiearchy;
     }
 
     constructor(private http: HttpClient, public baseService: BaseService, public userSerice: AuthenticationService) {
 
     }
 
-    public addCourseHierarchy(course: CourseHiearchyModel): Observable<ResponseModel<ResultModel>> {
+    public addSubjectHierarchy(course: SubjectHiearchyModel): Observable<ResponseModel<ResultModel>> {
 
-        let input: RequestModel<CourseHiearchyModel> = this.baseService.getRequestModel(course);
+        let input: RequestModel<SubjectHiearchyModel> = this.baseService.getRequestModel(course);
 
         let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_ADD_COURSE_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
-            this.courseHiearchy = [];
+            this.subjectHiearchy = [];
         }));
 
     }
-    public updateCourseHierarchy(course: CourseHiearchyModel): Observable<ResponseModel<ResultModel>> {
+    public updateSubjectHierarchy(course: SubjectHiearchyModel): Observable<ResponseModel<ResultModel>> {
 
-        let input: RequestModel<CourseHiearchyModel> = this.baseService.getRequestModel(course);
+        let input: RequestModel<SubjectHiearchyModel> = this.baseService.getRequestModel(course);
 
         let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_UPDATE_COURSE_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
-            this.courseHiearchy = [];
+            this.subjectHiearchy = [];
         }));
 
     }
-    public getCourseHierarchy(input: SearchRequestModel<CourseHiearchyModel>): Observable<CourseHiearchyModel[]> {
+    public getSubjectHierarchy(input: SearchRequestModel<SubjectHiearchyModel>): Observable<SubjectHiearchyModel[]> {
 /*
         this.courseHiearchy.push({
             hierarchyLevel:1,
@@ -69,39 +69,39 @@ export class CourseHiearchyService {
             name:"Algebra",
            parentId:3,
         });*/
-        this.courseHiearchy.forEach(x=>{
-            x.parent =  this.courseHiearchy.find(p=>p.id ==x.parentId)
+        this.subjectHiearchy.forEach(x=>{
+            x.parent =  this.subjectHiearchy.find(p=>p.id ==x.parentId)
         });
 
         let level = input.requestParameter.hierarchyLevel;
-        if (this.courseHiearchy != null && this.courseHiearchy.length > 0) {
-            return of(this.courseHiearchy.filter(x => x.hierarchyLevel == level))
+        if (this.subjectHiearchy != null && this.subjectHiearchy.length > 0) {
+            return of(this.subjectHiearchy.filter(x => x.hierarchyLevel == level))
         }
         else {
             input.requestParameter.hierarchyLevel = 0;
             let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_GET_COURSE_HIERARCHY}`;
-            return this.http.post<ResponseModel<CourseHiearchyModel[]>>(url, input).pipe(
-                map((data: ResponseModel<CourseHiearchyModel[]>) => {
+            return this.http.post<ResponseModel<SubjectHiearchyModel[]>>(url, input).pipe(
+                map((data: ResponseModel<SubjectHiearchyModel[]>) => {
                     if (data != null && data.responseData != null) {
-                        this.courseHiearchy = data.responseData;
+                        this.subjectHiearchy = data.responseData;
 
-                        this.courseHiearchy.forEach(x=>{
+                        this.subjectHiearchy.forEach(x=>{
                             x.parent = data.responseData.find(p=>p.id ==x.parentId)
                         });
 
 
                     }
-                    return this.courseHiearchy.filter(x => x.hierarchyLevel == level);
+                    return this.subjectHiearchy.filter(x => x.hierarchyLevel == level);
                 })
             );
 
         }
     }
-    public makeInActiveCourseHierarchy(input: RequestModel<CourseHiearchyModel>): Observable<ResponseModel<ResultModel>> {
+    public makeInActiveSubjectHierarchy(input: RequestModel<SubjectHiearchyModel>): Observable<ResponseModel<ResultModel>> {
 
         let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_MAKE_INACTIVE_COURSE_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
-            this.courseHiearchy = [];
+            this.subjectHiearchy = [];
         }));
 
     }

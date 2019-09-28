@@ -1,4 +1,4 @@
-export * from "./course-hiearchy.model"
+export * from "./subject-hiearchy.model"
 export * from "./customer-branch.model"
 export * from "./customer-model"
 export * from "./user-role.model"
