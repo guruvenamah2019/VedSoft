@@ -107,4 +107,22 @@ namespace VedSoft.Data.Contracts.Model
         [Column("LOGIN_REFRESH_TOKEN")]
         public string LoginRefreshToken { get; set; }
     }
+
+    [Table("STUDENT")]
+    public class StudentDB:CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("USER_ID")]
+        public int UserId { get; set; }
+        [Column("FATHER_USER_ID")]
+        public int FatherUserId { get; set; }
+        [Column("MOTHER_USER_ID")]
+        public int MotherUserId { get; set; }
+        [Column("GUARDIAN_USER_ID")]
+        public int? GuardinanUserId { get; set; }
+        [Column("IS_ENROLLED")]
+        public int IsEnrolled { get; set; }
+    }
 }

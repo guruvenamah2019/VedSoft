@@ -28,10 +28,10 @@ namespace VedSoft.Utility.Constants
     {
         public const string RoutePrefixCourse = "api/Course";
 
-        public const string ActionAddCourseHierarchy = "AddCourseHierarchy";
-        public const string ActionUpdateCourseHierarchy = "UpdateCourseHierarchy";
-        public const string ActionGetCourseHierarchy = "GetCourseHierarchy";
-        public const string ActionMakeInActiveCourseHierarchy = "MakeInActiveCourseHierarchy";
+        public const string ActionAddSubjectHierarchy = "AddSubjectHierarchy";
+        public const string ActionUpdateSubjectHierarchy = "UpdateSubjectHierarchy";
+        public const string ActionGetSubjectHierarchy = "GetSubjectHierarchy";
+        public const string ActionMakeInActiveSubjectHierarchy = "MakeInActiveSubjectHierarchy";
         public const string ActionAddCustomerCourse = "AddCustomerCourse";
         public const string ActionUpdateCustomerCourse = "UpdateCustomerCourse";
         public const string ActionGetCustomerCourseList = "GetCustomerCourseList";
@@ -62,6 +62,14 @@ namespace VedSoft.Utility.Constants
         public const string ActionUpdateCustomerRole = "UpdateRole";
         public const string ActionGetCustomerRole = "GetRole";
         public const string ActionMakeInActiveCustomerRole = "MakeInActiveRole";
+    }
+
+    public class StudentAPIAction
+    {
+        public const string ActionAddStudent = "AddStudent";
+        public const string ActionUpdateStudent = "UpdateStudent";
+        public const string ActionGetStudentList = "GetStudentList";
+        public const string ActionMakeInActiveStudent = "MakeInActiveStudent";
     }
 
     public class AcademicYearAPIAction

@@ -27,7 +27,7 @@ namespace VedSoft.API.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route(CourseAPIAction.ActionAddCourseHierarchy)]
+        [Route(CourseAPIAction.ActionAddSubjectHierarchy)]
         //[Authorize]
         public async Task<ResponseModel<ResultModel>> AddCourseHierarchy([FromBody] RequestModel<CourseHiearchyModel> input)
         {
@@ -55,7 +55,7 @@ namespace VedSoft.API.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route(CourseAPIAction.ActionUpdateCourseHierarchy)]
+        [Route(CourseAPIAction.ActionUpdateSubjectHierarchy)]
         //[Authorize]
         public async Task<ResponseModel<ResultModel>> UpdateCourseHierarchy([FromBody] RequestModel<CourseHiearchyModel> input)
         {
@@ -83,7 +83,7 @@ namespace VedSoft.API.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route(CourseAPIAction.ActionGetCourseHierarchy)]
+        [Route(CourseAPIAction.ActionGetSubjectHierarchy)]
         //[Authorize]
         public async Task<ResponseModel<List<CourseHiearchyModel>>> GetCourseHierarchy([FromBody] SearchRequestModel<CourseHiearchyModel> input)
         {
@@ -111,7 +111,7 @@ namespace VedSoft.API.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route(CourseAPIAction.ActionMakeInActiveCourseHierarchy)]
+        [Route(CourseAPIAction.ActionMakeInActiveSubjectHierarchy)]
         //[Authorize]
         public async Task<ResponseModel<ResultModel>> MakeInActiveCourseHierarchy([FromBody] RequestModel<CourseHiearchyModel> input)
         {

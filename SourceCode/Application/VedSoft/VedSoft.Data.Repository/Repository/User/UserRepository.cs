@@ -228,4 +228,126 @@ namespace VedSoft.Data.Repository.Repository.User
                                   .Count() > 0;
         }
     }
+
+    public class StudentRepository : RepositoryBase<StudentDB>, IStudentRepository
+    {
+        public StudentRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        IUserRepository UserRepository { get; set; }
+        public int AddStudent(RequestModel<StudentModel> input)
+        {
+            //Make db object
+            StudentDB studentDB = new StudentDB
+            {
+                CreatedBy = input.RequestParameter.ActionUserId,
+                CreatedDate = DateTime.Now,
+                Active = CommonConstants.ActiveStatus,
+                FatherUserId = input.RequestParameter.FatherUserId,
+                MotherUserId = input.RequestParameter.MotherUserId,
+                UserId = input.RequestParameter.UserId,
+                GuardinanUserId = input.RequestParameter.UserId,
+                IsEnrolled = input.RequestParameter.IsEnrolled,
+            };
+
+            //Save in database
+            this.RepositoryContext.Add(studentDB);
+            this.RepositoryContext.SaveChanges();
+
+            input.RequestParameter.Id = studentDB.UserId;
+
+            return studentDB.UserId;
+        }
+
+        public int UpdateStudent(RequestModel<StudentModel> input)
+        {
+            var student = this.RepositoryContext.Student
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                            .FirstOrDefault();
+            if (student != null)
+            {
+                student.UserId = input.RequestParameter.UserId;
+                student.GuardinanUserId = input.RequestParameter.GuardianUserId;
+                student.FatherUserId = input.RequestParameter.FatherUserId;
+                student.IsEnrolled = input.RequestParameter.IsEnrolled;
+                student.MotherUserId = input.RequestParameter.MotherUserId;
+                student.ModifiedBy = input.RequestParameter.ActionUserId;
+                student.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(student);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public List<StudentModel> GetStudentList(SearchRequestModel<StudentModel> input)
+        {
+            List<StudentModel> userList = new List<StudentModel>();
+            userList = (from st in this.RepositoryContext.Student//.Where(x => x.Id == input.RequestParameter.Id)
+                            join u in this.RepositoryContext.User.Where(x => x.CustomerId == input.CustomerId
+                            && x.Active == CommonConstants.ActiveStatus) on st.UserId equals u.UserId
+                            //join udd in this.RepositoryContext.UserDetails on u.UserId equals udd.UserId
+                            select new StudentModel
+                            {
+                                Id = st.Id,
+                                FatherUserId = st.FatherUserId,
+                                MotherUserId = st.MotherUserId,
+                                GuardianUserId = st.GuardinanUserId.GetValueOrDefault(),
+                                IsEnrolled = st.IsEnrolled,
+                                UserId = st.UserId
+                            }).Page(input.PageSize, input.PageNumber).ToList();
+
+
+            return userList;
+        }
+
+        public int MakeInActiveStudent(RequestModel<StudentModel> input)
+        {
+            var student = this.RepositoryContext.Student
+                                    .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                                    .FirstOrDefault();
+            if (student != null)
+            {
+                student.Active = CommonConstants.InActiveStatus;
+                student.ModifiedBy = input.RequestParameter.ActionUserId;
+                student.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(student);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public bool DoesStudentExist(RequestModel<StudentModel> input)
+        {
+            return this.RepositoryContext.Student
+                                  .Where(x => x.UserId == input.RequestParameter.UserId
+                                  && x.Active == CommonConstants.ActiveStatus)
+                                  .Count() > 0;
+        }
+
+        //public bool DoesStudentExistUpdate(RequestModel<UserModel> input)
+        //{
+        //    return this.RepositoryContext.Student
+        //                          .Where(x => x.CustomerId == input.CustomerId
+        //                          && x.Active == CommonConstants.ActiveStatus
+        //                          && x.LoginId == input.RequestParameter.UserName
+        //                          && x.UserId != input.RequestParameter.Id)
+        //                          .Count() > 0;
+        //}
+
+        public bool DoesStudentIdExist(RequestModel<StudentModel> input)
+        {
+            return this.RepositoryContext.Student
+                                  .Where(x=>x.Id == input.RequestParameter.Id
+                                   && x.Active == CommonConstants.ActiveStatus
+                                  )
+                                  .Count() > 0;
+        }
+    }
 }

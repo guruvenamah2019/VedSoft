@@ -16,7 +16,7 @@ namespace VedSoft.Business.Master
 {
     public class UserBusiness : BusinessBase, IUserBusiness
     {
-        #region CustomerCourse
+        #region User
         public int AddUser(RequestModel<UserModel> input)
         {
             if (!RepositoryWrapper.UserRepository.DoesUserExist(input))
@@ -63,6 +63,48 @@ namespace VedSoft.Business.Master
             if (RepositoryWrapper.UserRepository.DoesUserIdExist(input))
             {
                 return RepositoryWrapper.UserRepository.MakeInActiveUser(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+        #endregion
+
+        #region Student
+        public int AddStudent(RequestModel<StudentModel> input)
+        {
+            if (!RepositoryWrapper.StudentRepository.DoesStudentExist(input))
+            {
+                return RepositoryWrapper.StudentRepository.AddStudent(input); ;
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateStudent(RequestModel<StudentModel> input)
+        {
+            if (RepositoryWrapper.StudentRepository.DoesStudentIdExist(input))
+            {
+                return RepositoryWrapper.StudentRepository.UpdateStudent(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<StudentModel> GetStudentList(SearchRequestModel<StudentModel> input)
+        {
+            return RepositoryWrapper.StudentRepository.GetStudentList(input);
+        }
+
+        public int MakeInActiveStudent(RequestModel<StudentModel> input)
+        {
+            if (RepositoryWrapper.StudentRepository.DoesStudentIdExist(input))
+            {
+                return RepositoryWrapper.StudentRepository.MakeInActiveStudent(input);
             }
             else
             {

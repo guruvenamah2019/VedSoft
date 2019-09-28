@@ -36,13 +36,15 @@ namespace VedSoft.Model.User
         public int UserId { get; set; }
     }
 
-    public class Student
+    public class StudentModel
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public int FatherUserId { get; set; }
         public int MotherUserId { get; set; }
         public int GuardianUserId { get; set; }
         public int IsEnrolled { get; set; }
+        public int ActionUserId { get; set; }//It will have the user Id ...who is going to perform the operation on it...not the actual user id
     }
 
     public class StudentAdmissionDetails
@@ -62,13 +64,4 @@ namespace VedSoft.Model.User
         public int DateOfAdmission { get; set; }
         public int AdmissionTypeId { get; set; }
     }
-
-    public class UserDetailsModel
-    {
-        public int UserId { get; set; }
-        public int CustomerId { get; set; }
-        public int FatherUserId { get; set; }
-        public int MotherUserId { get; set; }
-    }
-        
 }

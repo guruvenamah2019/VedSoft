@@ -34,7 +34,7 @@ namespace VedSoft.Data.Contracts.Model
         public int CreatedBy { get; set; }
     }
 
-    [Table("CUSTOMER_COURSE_HIERACHY")]
+    [Table("CUSTOMER_SUBJECT_HIRARCHY")]
     public class CustomerCourseHierarchyDB
     {
         [Key]
