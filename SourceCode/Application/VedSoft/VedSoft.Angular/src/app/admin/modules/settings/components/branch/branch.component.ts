@@ -85,7 +85,7 @@ export class BranchSettingComponent  {
         const initialState = {
             model: inputModel
         };
-        this.bsModalRef = this.modalService.show(AddBranchComponent, { ignoreBackdropClick: true, initialState });
+        this.bsModalRef = this.modalService.show(AddBranchComponent, { ignoreBackdropClick: true, initialState,class:'modal-lg' });
         this.bsModalRef.content.onSave.subscribe((res: CustomerBranchModel) => {
             this.getBranchList();
         });

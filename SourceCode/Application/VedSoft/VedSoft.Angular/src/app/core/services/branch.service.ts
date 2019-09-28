@@ -15,7 +15,7 @@ export class BranchService {
 
     private branchList: CustomerBranchModel[] = [];
 
-    public get BranchList(){
+    public get BranchList() {
         return this.branchList;
     }
 
@@ -44,50 +44,50 @@ export class BranchService {
 
     }
     public getBranch(input: SearchRequestModel<CustomerBranchModel>): Observable<CustomerBranchModel[]> {
-/*
-        this.branchList.push({
-            id:1,
-            name:"Branch 1",
-            code:"BPL-1",
-            contactNumber:"87655444",
-            otherInfo:"123"
-        });
-        this.branchList.push({
-            id:2,
-            name:"Branch 2",
-            code:"BPL-2",
-            contactNumber:"87655444",
-            otherInfo:"123"
-        });
-        this.branchList.push({
-            id:3,
-            name:"Branch 3",
-            code:"BPL-3",
-            contactNumber:"87655444",
-            otherInfo:"123"
-        });
-        this.branchList.push({
-            id:3,
-            name:"Branch 4",
-            code:"BPL-4",
-            contactNumber:"87655444",
-            otherInfo:"123"
-        });
-        this.branchList.push({
-            id:3,
-            name:"Branch 5",
-            code:"BPL-5",
-            contactNumber:"87655444",
-            otherInfo:"123"
-        });
-        this.branchList.push({
-            id:3,
-            name:"Branch 6",
-            code:"BPL-6",
-            contactNumber:"87655444",
-            otherInfo:"123"
-        });
-        */
+        /*
+                this.branchList.push({
+                    id:1,
+                    name:"Branch 1",
+                    code:"BPL-1",
+                    contactNumber:"87655444",
+                    otherInfo:"123"
+                });
+                this.branchList.push({
+                    id:2,
+                    name:"Branch 2",
+                    code:"BPL-2",
+                    contactNumber:"87655444",
+                    otherInfo:"123"
+                });
+                this.branchList.push({
+                    id:3,
+                    name:"Branch 3",
+                    code:"BPL-3",
+                    contactNumber:"87655444",
+                    otherInfo:"123"
+                });
+                this.branchList.push({
+                    id:3,
+                    name:"Branch 4",
+                    code:"BPL-4",
+                    contactNumber:"87655444",
+                    otherInfo:"123"
+                });
+                this.branchList.push({
+                    id:3,
+                    name:"Branch 5",
+                    code:"BPL-5",
+                    contactNumber:"87655444",
+                    otherInfo:"123"
+                });
+                this.branchList.push({
+                    id:3,
+                    name:"Branch 6",
+                    code:"BPL-6",
+                    contactNumber:"87655444",
+                    otherInfo:"123"
+                });
+                */
 
         if (this.branchList != null && this.branchList.length > 0) {
             return of(this.branchList)
@@ -98,6 +98,20 @@ export class BranchService {
                 map((data: ResponseModel<CustomerBranchModel[]>) => {
                     if (data != null && data.responseData != null) {
                         this.branchList = data.responseData;
+                        this.branchList.forEach(item => {
+                            item.addressInfo = null;
+                            try {
+                                item.addressInfo = JSON.parse(item.address);
+                            }
+                            catch (ex) { }
+                            try {
+                                let contact: string[] = JSON.parse(item.contactNumber);
+                                if (contact != null && contact.length > 0) {
+                                    item.primaryContactNumber = contact[0];
+                                }
+                            }
+                            catch (ex) { }
+                        })
                     }
                     return this.branchList;
                 })
@@ -113,7 +127,7 @@ export class BranchService {
         }));
 
     }
-   
+
 
 
 }

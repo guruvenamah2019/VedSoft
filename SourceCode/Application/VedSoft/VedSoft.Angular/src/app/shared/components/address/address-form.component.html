@@ -1,47 +1,34 @@
 ﻿<form [formGroup]="form">
-
-  <div class="form-group row showcase_row_area">
-    <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-      <input matInput placeholder="Name" [formControl]="f.name">
-      <mat-error *ngIf="submitted && f.name.errors?.required">
-        name is required
-      </mat-error>
-      <mat-error *ngIf="submitted && f.name.errors?.minlength">
-        name must be at least 3 characters long.
-      </mat-error>
-    </mat-form-field>
-  </div>
-  
-
-  <div class="form-group row showcase_row_area">
-      <mat-form-field appearance="outline">
-          <mat-label>Address Line 1</mat-label>
-      <input matInput placeholder="Address Line 1" [formControl]="f.address1">
+  <div class="form-row">
+  <div class="form-group col-md-12 showcase_row_area">
+      <mat-form-field class="full-width">
+      <input matInput placeholder="Address" [formControl]="f.address1" maxlength="100" >
       <mat-error *ngIf="submitted && f.address1.errors?.required">
-        Address Line 1 is required
+        Address is required
       </mat-error>
       <mat-error *ngIf="submitted && f.address1.errors?.minlength">
-        Address Line 1 must be at least 3 characters long.
+        Address must be at least 3 characters long.
       </mat-error>
     </mat-form-field>
   </div>
-
-  <div class="form-group row showcase_row_area">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Address Line 2" [formControl]="f.address2">
+</div>
+<div class="form-row">
+  <div class="form-group col-md-12 showcase_row_area">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Address 2" [formControl]="f.address2" maxlength="100">
       <mat-error *ngIf="submitted && f.address2.errors?.required">
-        Address Line 2 is required
+        Address 2 is required
       </mat-error>
       <mat-error *ngIf="submitted && f.address2.errors?.minlength">
-        Address Line 2 must be at least 3 characters long.
+        Address 2 must be at least 3 characters long.
       </mat-error>
     </mat-form-field>
   </div>
-
-  <div class="form-group row showcase_row_area">
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6 showcase_row_area">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="City" [formControl]="f.city">
+      <input matInput placeholder="City" [formControl]="f.city" maxlength="50">
       <mat-error *ngIf="submitted && f.city.errors?.required">
         City is required
       </mat-error>
@@ -51,21 +38,22 @@
     </mat-form-field>
   </div>
 
-  <div class="form-group row showcase_row_area">
+  <div class="form-group col-md-6 showcase_row_area">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Zipcode" [formControl]="f.zipcode">
+      <input matInput placeholder="Zipcode" [formControl]="f.zipcode" maxlength="6">
       <mat-error *ngIf="submitted && f.zipcode.errors?.required">
         Zipcode is required
       </mat-error>
       <mat-error *ngIf="submitted && f.zipcode.errors?.minlength">
-        Zipcode must be at least 3 characters long.
+        Zipcode must be at 6 characters long.
       </mat-error>
     </mat-form-field>
   </div>
-
-  <div class="form-group row showcase_row_area">
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6 showcase_row_area">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="State" [formControl]="f.state">
+      <input matInput placeholder="State" [formControl]="f.state" maxlength="50">
       <mat-error *ngIf="submitted && f.state.errors?.required">
         State is required
       </mat-error>
@@ -75,9 +63,9 @@
     </mat-form-field>
   </div>
 
-  <div class="form-group row showcase_row_area">
+  <div class="form-group col-md-6 showcase_row_area">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Country" [formControl]="f.country">
+      <input matInput placeholder="Country" [formControl]="f.country" maxlength="50">
       <mat-error *ngIf="submitted && f.country.errors?.required">
         Country is required
       </mat-error>
@@ -87,5 +75,5 @@
     </mat-form-field>
   </div>
 
-
+</div>
 </form>

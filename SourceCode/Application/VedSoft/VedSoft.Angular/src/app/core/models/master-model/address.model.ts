@@ -1,6 +1,6 @@
 export class AddressModel
 {
-    name ?: string | null;
+    //name ?: string | null;
     address1?: string;
     address2?: string;
     zipcode ?: string;
@@ -8,7 +8,7 @@ export class AddressModel
     state?: string;
     country?: string;
     constructor(){
-        this.name="";
+        //this.name="";
         this.address1="";
         this.address2="";
         this.zipcode="";

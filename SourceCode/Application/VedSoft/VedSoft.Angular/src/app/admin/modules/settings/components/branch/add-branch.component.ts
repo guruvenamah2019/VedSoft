@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CustomerBranchModel, AddressModel } from 'src/app/core/models/master-model';
 import { CommonConstants } from 'src/app/core/enums';
 import { BranchService } from 'src/app/core/services';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AddBranchComponent implements OnInit {
   loading = false;
   error = '';
   submitted: boolean = false;
-  address:AddressModel= new AddressModel();
+  //address:AddressModel= new AddressModel();
   onNavigate() {
   }
   constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private branchService: BranchService) {
@@ -29,11 +30,12 @@ export class AddBranchComponent implements OnInit {
 
   }
   ngOnInit() {
-
-
+    
+    
     this.branchForm = this.formBuilder.group({
       name: new FormControl(this.model.name, [Validators.required, Validators.minLength(3)]),
       code: new FormControl(this.model.code, [Validators.required, Validators.minLength(3)]),
+      contactNumber: new FormControl(this.model.primaryContactNumber, [Validators.required, Validators.minLength(10)]),
       //parent: new FormControl(parent, []),
     });
 /*
@@ -73,12 +75,16 @@ export class AddBranchComponent implements OnInit {
 
     let address:AddressModel = this.f.branchAddress.value;
 
+    let contact = [];
+    contact.push( this.f.contactNumber.value);
+
     let courseInput: CustomerBranchModel = {
       name: this.f.name.value,
       code: this.f.code.value,
       userId: this.branchService.userSerice.loggedUser.id,
       id: this.model.id,
-      address: JSON.stringify(address)
+      address: JSON.stringify(address),
+      contactNumber: JSON.stringify(contact)
     };
 
     if (this.model.id > 0) {

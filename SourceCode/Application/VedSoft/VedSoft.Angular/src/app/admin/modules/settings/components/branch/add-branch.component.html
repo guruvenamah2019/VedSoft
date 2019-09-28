@@ -11,12 +11,11 @@
 
         <form [formGroup]="branchForm" (ngSubmit)="onSubmit()">
 
-          <div class="row mb-3">
-            <div class="col-md-12 mx-auto">
+          <div class="form-row">
 
-              <div class="form-group row showcase_row_area">
+              <div class="form-group col-md-6 showcase_row_area">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Branch Code" [formControl]="f.code">
+                  <input matInput placeholder="Branch Code" [formControl]="f.code" maxlength="50" >
                   <mat-error *ngIf="submitted && f.code.errors?.required">
                     Branch code is required
                   </mat-error>
@@ -26,9 +25,9 @@
                 </mat-form-field>
               </div>
 
-              <div class="form-group row showcase_row_area">
+              <div class="form-group col-md-6 showcase_row_area">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Branch Name" [formControl]="f.name">
+                  <input matInput placeholder="Branch Name" [formControl]="f.name" maxlength="100">
                   <mat-error *ngIf="submitted && f.name.errors?.required">
                     Branch Name is required
                   </mat-error>
@@ -37,11 +36,31 @@
                   </mat-error>
                 </mat-form-field>
               </div>
+          </div>
+          <div class="form-row">
 
-              <ved-address [submitted]="submitted" [model]="address"
+            <div class="form-group col-md-6 showcase_row_area">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Contact Number" [formControl]="f.contactNumber" maxlength="10" >
+                <mat-error *ngIf="submitted && f.contactNumber.errors?.required">
+                  Contact Number is required
+                </mat-error>
+                <mat-error *ngIf="submitted && f.contactNumber.errors?.minlength">
+                  Contact Number must be 10 characters long.
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            
+        </div>
+          <div class="form-row">
+              <div class="form-group col-md-12 showcase_row_area">
+              <ved-address [submitted]="submitted" [model]="model.addressInfo"
                 (formReady)="addFormControl('branchAddress', $event)"></ved-address>
-                
-              <div class="form-group row showcase_row_area">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group showcase_row_area">
                 <div class="col-md-5 showcase_text_area">
                   <button [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
@@ -51,7 +70,7 @@
                 </div>
               </div>
             </div>
-          </div>
+
 
 
         </form>
