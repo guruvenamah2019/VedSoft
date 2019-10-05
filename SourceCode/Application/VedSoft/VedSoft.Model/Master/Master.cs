@@ -59,4 +59,12 @@ namespace VedSoft.Model.Master
         public int UserId { get; set; }
     }
 
+    public class CustomerCourseSubjectModel
+    {
+        public int? Id { get; set; }
+        public int CustomerCourseId { get; set; }
+        public int CustomerSubjectHiearchyId { get; set; }
+        public int UserId { get; set; }
+    }
+
 }

@@ -625,4 +625,124 @@ namespace VedSoft.Data.Repository.Repository.Master
                                   .Count() > 0;
         }
     }
+
+    public class CustomerCourseSubjectRepository : RepositoryBase<CustomerCourseSubjectMappingDB>, ICustomerCourseSubjectRepository
+    {
+        public CustomerCourseSubjectRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        public int AddCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            //Make db object
+            CustomerCourseSubjectMappingDB customerCourseSubject = new CustomerCourseSubjectMappingDB
+            {
+                CreatedBy = input.RequestParameter.UserId,
+                CreatedDate = DateTime.Now,
+                Active = CommonConstants.ActiveStatus,
+                CustomerId = input.CustomerId.GetValueOrDefault(),
+                CustomerCourseId = input.RequestParameter.CustomerCourseId,
+                CustomerSubjectHierarchyId = input.RequestParameter.CustomerSubjectHiearchyId
+            };
+
+            //Save in database
+            this.RepositoryContext.Add(customerCourseSubject);
+            this.RepositoryContext.SaveChanges();
+
+            input.RequestParameter.Id = customerCourseSubject.Id;
+
+            return customerCourseSubject.Id;
+        }
+
+        public int UpdateCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            var customerCourseSubject = this.RepositoryContext.CustomerCourseSubject
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                            .FirstOrDefault();
+            if (customerCourseSubject != null)
+            {
+                customerCourseSubject.CustomerSubjectHierarchyId = input.RequestParameter.CustomerSubjectHiearchyId;
+                customerCourseSubject.ModifiedBy = input.RequestParameter.UserId;
+                customerCourseSubject.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(customerCourseSubject);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public List<CustomerCourseSubjectModel> GetCustomerCourseSubjectList(SearchRequestModel<CustomerCourseSubjectModel> input)
+        {
+            List<CustomerCourseSubjectModel> customerCourseSubjectList = new List<CustomerCourseSubjectModel>();
+            var customerCourseSubjectListDB = this.RepositoryContext.CustomerCourseSubject
+                                      .Where(x => x.CustomerId == input.CustomerId
+                                      && x.Active == CommonConstants.ActiveStatus)
+                                      .Page(input.PageSize, input.PageNumber);
+
+
+            foreach (var customerCourse in customerCourseSubjectListDB.ToList())
+            {
+                customerCourseSubjectList.Add(new CustomerCourseSubjectModel
+                {
+                    Id = customerCourse.Id,
+                    CustomerCourseId = customerCourse.CustomerCourseId,
+                    CustomerSubjectHiearchyId = customerCourse.CustomerSubjectHierarchyId,
+                });
+            }
+
+            return customerCourseSubjectList;
+        }
+
+        public int MakeInActiveCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            var customerCourse = this.RepositoryContext.CustomerCourseSubject
+                                    .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                                    .FirstOrDefault();
+            if (customerCourse != null)
+            {
+                customerCourse.Active = CommonConstants.InActiveStatus;
+                customerCourse.ModifiedBy = input.RequestParameter.UserId;
+                customerCourse.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(customerCourse);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public bool DoesCustomerCourseSubjectExist(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            return this.RepositoryContext.CustomerCourseSubject
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.CustomerCourseId==input.RequestParameter.CustomerCourseId
+                                  && x.CustomerSubjectHierarchyId== input.RequestParameter.CustomerSubjectHiearchyId
+                                  && x.Active == CommonConstants.ActiveStatus)
+                                  .Count() > 0;
+        }
+
+        public bool DoesCustomerCourseSubjectExistUpdate(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            return this.RepositoryContext.CustomerCourseSubject
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Active == CommonConstants.ActiveStatus
+                                  && x.CustomerCourseId == input.RequestParameter.CustomerCourseId
+                                  && x.CustomerSubjectHierarchyId == input.RequestParameter.CustomerSubjectHiearchyId
+                                  && x.Id != input.RequestParameter.Id)
+                                  .Count() > 0;
+        }
+
+        public bool DoesCustomerCourseSubjectIdExist(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            return this.RepositoryContext.CustomerCourseSubject
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Id == input.RequestParameter.Id
+                                   && x.Active == CommonConstants.ActiveStatus
+                                  )
+                                  .Count() > 0;
+        }
+    }
 }

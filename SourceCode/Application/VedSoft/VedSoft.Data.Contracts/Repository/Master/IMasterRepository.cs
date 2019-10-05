@@ -82,4 +82,19 @@ namespace VedSoft.Data.Contracts.Repository.Master
 
         bool DoesCustomerCourseIdExist(RequestModel<CustomerCourseModel> input);
     }
+
+    public interface ICustomerCourseSubjectRepository : IRepositoryBase<CustomerCourseSubjectMappingDB>
+    {
+        int AddCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input);
+        int UpdateCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input);
+        List<CustomerCourseSubjectModel> GetCustomerCourseSubjectList(SearchRequestModel<CustomerCourseSubjectModel> input);
+
+        int MakeInActiveCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input);
+
+        bool DoesCustomerCourseSubjectExist(RequestModel<CustomerCourseSubjectModel> input);
+
+        bool DoesCustomerCourseSubjectExistUpdate(RequestModel<CustomerCourseSubjectModel> input);
+
+        bool DoesCustomerCourseSubjectIdExist(RequestModel<CustomerCourseSubjectModel> input);
+    }
 }

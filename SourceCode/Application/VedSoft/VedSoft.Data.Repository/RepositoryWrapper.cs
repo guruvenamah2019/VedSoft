@@ -28,6 +28,7 @@ namespace VedSoft.Data.Repository
         private IEducationInstituteRepository _educationInstituteRepository;
         private ICustomerCourseRepository _customerCourseRepository;
         private IStudentRepository _studentRepository;
+        private ICustomerCourseSubjectRepository _customerCourseSubjectRepository;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -136,6 +137,14 @@ namespace VedSoft.Data.Repository
             get
             {
                 return _studentRepository ?? new StudentRepository(_repoContext);
+            }
+        }
+
+        public ICustomerCourseSubjectRepository CustomerCourseSubjectRepository
+        {
+            get
+            {
+                return _customerCourseSubjectRepository ?? new CustomerCourseSubjectRepository(_repoContext);
             }
         }
     }

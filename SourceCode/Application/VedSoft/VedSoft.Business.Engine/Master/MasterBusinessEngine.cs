@@ -420,5 +420,59 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
         #endregion
+
+        #region Customer Course Subject
+        public ResponseModel<ResultModel> AddCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.PrimaryKey = MasterBusiness.AddCustomerCourseSubject(input);
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
+
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> UpdateCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.UpdateCustomerCourseSubject(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<List<CustomerCourseSubjectModel>> GetCustomerCourseSubjectList(SearchRequestModel<CustomerCourseSubjectModel> input)
+        {
+            ResponseModel<List<CustomerCourseSubjectModel>> responseModel = new ResponseModel<List<CustomerCourseSubjectModel>>();
+            responseModel.ResponseData = MasterBusiness.GetCustomerCourseSubjectList(input);
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> MakeInActiveCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = MasterBusiness.MakeInActiveCustomerCourseSubject(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+
+            return responseModel;
+        }
+        #endregion
     }
 }

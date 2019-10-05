@@ -191,4 +191,18 @@ namespace VedSoft.Data.Contracts.Model
         [Column("MODIFIED_DATE")]
         public DateTime? ModifiedDate { get; set; }
     }
+
+    [Table("CUSTOMER_COURSE_SUBJECT_MAPPING")]
+    public class CustomerCourseSubjectMappingDB:CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("CUSTOMER_ID")]
+        public int CustomerId { get; set; }
+        [Column("CUSTOMER_COURSE_ID")]
+        public int CustomerCourseId { get; set; }
+        [Column("CUSTOMER_SUBJECT_HIERACHY_ID")]
+        public int CustomerSubjectHierarchyId { get; set; }
+    }
 }

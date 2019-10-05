@@ -64,5 +64,12 @@ namespace VedSoft.Business.Master
         List<CustomerCourseModel> GetCustomerCourseList(SearchRequestModel<CustomerCourseModel> input);
         int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input);
         #endregion
+
+        #region Customer Course Subject
+        int AddCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input);
+        int UpdateCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input);
+        List<CustomerCourseSubjectModel> GetCustomerCourseSubjectList(SearchRequestModel<CustomerCourseSubjectModel> input);
+        int MakeInActiveCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input);
+        #endregion
     }
 }

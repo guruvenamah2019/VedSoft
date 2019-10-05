@@ -21,5 +21,6 @@ namespace VedSoft.Data.Contracts.Wrapper
         IEducationInstituteRepository EducationInstituteRepository { get; }
         ICustomerCourseRepository CustomerCourseRepository { get; }
         IStudentRepository StudentRepository { get; }
+        ICustomerCourseSubjectRepository CustomerCourseSubjectRepository { get; }
     }
 }

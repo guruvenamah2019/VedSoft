@@ -432,6 +432,55 @@ namespace VedSoft.Business.Master
             }
         }
         #endregion
+
+        #region CustomerCourse Subject
+        public int AddCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            if (!RepositoryWrapper.CustomerCourseSubjectRepository.DoesCustomerCourseSubjectExist(input))
+            {
+                return RepositoryWrapper.CustomerCourseSubjectRepository.AddCustomerCourseSubject(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            if (RepositoryWrapper.CustomerCourseSubjectRepository.DoesCustomerCourseSubjectIdExist(input))
+            {
+                if (!RepositoryWrapper.CustomerCourseSubjectRepository.DoesCustomerCourseSubjectExistUpdate(input))
+                {
+                    return RepositoryWrapper.CustomerCourseSubjectRepository.UpdateCustomerCourseSubject(input);
+                }
+                else
+                {
+                    return CommonConstants.DuplicateRecord;
+                }
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<CustomerCourseSubjectModel> GetCustomerCourseSubjectList(SearchRequestModel<CustomerCourseSubjectModel> input)
+        {
+            return RepositoryWrapper.CustomerCourseSubjectRepository.GetCustomerCourseSubjectList(input);
+        }
+
+        public int MakeInActiveCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input)
+        {
+            if (RepositoryWrapper.CustomerCourseSubjectRepository.DoesCustomerCourseSubjectIdExist(input))
+            {
+                return RepositoryWrapper.CustomerCourseSubjectRepository.MakeInActiveCustomerCourseSubject(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+        #endregion
     }
 }
 
