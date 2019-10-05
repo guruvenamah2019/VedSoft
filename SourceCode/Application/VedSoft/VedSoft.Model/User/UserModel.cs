@@ -47,13 +47,15 @@ namespace VedSoft.Model.User
         public int ActionUserId { get; set; }//It will have the user Id ...who is going to perform the operation on it...not the actual user id
     }
 
-    public class StudentAdmissionDetails
+    public class StudentAdmissionModel
     {
+        public int Id { get; set; }
         public int StudentId { get; set; }
         public int BranchId { get; set; }
         public int AcademicYearId { get; set; }
-        public int DateOfAdmission { get; set; }
+        public DateTime? DateOfAdmission { get; set; }
         public int AdmissionTypeId { get; set; }
+        public int ActionUserId { get; set; }//It will have the user Id ...who is going to perform the operation on it...not the actual user id
     }
 
     public class StudentC

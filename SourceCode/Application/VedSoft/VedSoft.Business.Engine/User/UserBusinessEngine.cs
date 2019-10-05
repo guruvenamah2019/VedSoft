@@ -120,5 +120,59 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
         #endregion
+
+        #region Student Admission
+        public ResponseModel<ResultModel> AddStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.PrimaryKey = UserBusiness.AddStudentAdmission(input);
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
+
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = UserBusiness.UpdateStudentAdmission(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<List<StudentAdmissionModel>> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input)
+        {
+            ResponseModel<List<StudentAdmissionModel>> responseModel = new ResponseModel<List<StudentAdmissionModel>>();
+            responseModel.ResponseData = UserBusiness.GetStudentAdmissionList(input);
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = UserBusiness.MakeInActiveStudentAdmission(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+
+            return responseModel;
+        }
+        #endregion
     }
 }

@@ -26,5 +26,12 @@ namespace VedSoft.Business.Engine.Master
         ResponseModel<List<StudentModel>> GetStudentList(SearchRequestModel<StudentModel> input);
         ResponseModel<ResultModel> MakeInActiveStudent(RequestModel<StudentModel> input);
         #endregion
+
+        #region Student Admission
+        ResponseModel<ResultModel> AddStudentAdmission(RequestModel<StudentAdmissionModel> input);
+        ResponseModel<ResultModel> UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input);
+        ResponseModel<List<StudentAdmissionModel>> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input);
+        ResponseModel<ResultModel> MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input);
+        #endregion
     }
 }

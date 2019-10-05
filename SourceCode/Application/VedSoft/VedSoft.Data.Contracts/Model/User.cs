@@ -125,4 +125,22 @@ namespace VedSoft.Data.Contracts.Model
         [Column("IS_ENROLLED")]
         public int IsEnrolled { get; set; }
     }
+
+    [Table("STUDENT_ADMISSION_DETAILS")]
+    public class StudentAdmissionDetailsDB : CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("STUDENT_ID")]
+        public int StudentId { get; set; }
+        [Column("BRANCH_ID")]
+        public int BranchId { get; set; }
+        [Column("ACADEMIC_YEARID")]
+        public int ACADEMIC_YEARID { get; set; }
+        [Column("DATE_OF_ADMISSION")]
+        public DateTime? DateOfAdmission { get; set; }
+        [Column("ADMISSION_TYPEID")]
+        public int AdmissionTypeId { get; set; }
+    }
 }

@@ -255,7 +255,7 @@ namespace VedSoft.Data.Repository.Repository.User
             this.RepositoryContext.Add(studentDB);
             this.RepositoryContext.SaveChanges();
 
-            input.RequestParameter.Id = studentDB.UserId;
+            input.RequestParameter.Id = studentDB.Id;
 
             return studentDB.UserId;
         }
@@ -345,6 +345,129 @@ namespace VedSoft.Data.Repository.Repository.User
         {
             return this.RepositoryContext.Student
                                   .Where(x=>x.Id == input.RequestParameter.Id
+                                   && x.Active == CommonConstants.ActiveStatus
+                                  )
+                                  .Count() > 0;
+        }
+    }
+
+    public class StudentAdmissionRepository : RepositoryBase<StudentAdmissionDetailsDB>, IStudentAdmisionDetailsRepository
+    {
+        public StudentAdmissionRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        IUserRepository UserRepository { get; set; }
+        public int AddStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        {
+            //Make db object
+            StudentAdmissionDetailsDB studentAdmissionDB = new StudentAdmissionDetailsDB
+            {
+                CreatedBy = input.RequestParameter.ActionUserId,
+                CreatedDate = DateTime.Now,
+                Active = CommonConstants.ActiveStatus,
+                ACADEMIC_YEARID = input.RequestParameter.AcademicYearId,
+                AdmissionTypeId = input.RequestParameter.AdmissionTypeId,
+                BranchId = input.RequestParameter.BranchId,
+                DateOfAdmission = input.RequestParameter.DateOfAdmission,
+                StudentId = input.RequestParameter.StudentId
+            };
+
+            //Save in database
+            this.RepositoryContext.Add(studentAdmissionDB);
+            this.RepositoryContext.SaveChanges();
+
+            input.RequestParameter.Id = studentAdmissionDB.Id;
+
+            return studentAdmissionDB.Id;
+        }
+
+        public int UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        {
+            var studentAdmission = this.RepositoryContext.StudentAdmission
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                            .FirstOrDefault();
+            if (studentAdmission != null)
+            {
+                studentAdmission.ModifiedBy = input.RequestParameter.ActionUserId;
+                studentAdmission.ModifiedDate = DateTime.Now;
+                studentAdmission.ACADEMIC_YEARID = input.RequestParameter.AcademicYearId;
+                studentAdmission.AdmissionTypeId = input.RequestParameter.AdmissionTypeId;
+                studentAdmission.BranchId = input.RequestParameter.BranchId;
+                studentAdmission.DateOfAdmission = input.RequestParameter.DateOfAdmission;
+                studentAdmission.StudentId = input.RequestParameter.StudentId;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(studentAdmission);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public List<StudentAdmissionModel> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input)
+        {
+            List<StudentAdmissionModel> userList = new List<StudentAdmissionModel>();
+            userList = (from st in this.RepositoryContext.Student
+                        join sa in this.RepositoryContext.StudentAdmission
+                        .Where(x => x.Active == CommonConstants.ActiveStatus)
+                        on st.Id equals sa.StudentId
+                        select new StudentAdmissionModel
+                        {
+                            Id = st.Id,
+                            AcademicYearId = sa.ACADEMIC_YEARID,
+                            StudentId = sa.StudentId,
+                            AdmissionTypeId = sa.AdmissionTypeId,
+                            BranchId = sa.BranchId,
+                            DateOfAdmission = sa.DateOfAdmission
+                        }).Page(input.PageSize, input.PageNumber).ToList();
+
+
+            return userList;
+        }
+
+        public int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        {
+            var studentAdmission = this.RepositoryContext.StudentAdmission
+                                    .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                                    .FirstOrDefault();
+            if (studentAdmission != null)
+            {
+                studentAdmission.Active = CommonConstants.InActiveStatus;
+                studentAdmission.ModifiedBy = input.RequestParameter.ActionUserId;
+                studentAdmission.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(studentAdmission);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public bool DoesStudentAdmissionExist(RequestModel<StudentAdmissionModel> input)
+        {
+            return this.RepositoryContext.StudentAdmission
+                                  .Where(x => x.StudentId==input.RequestParameter.StudentId
+                                  && x.BranchId==input.RequestParameter.BranchId
+                                  && x.Active == CommonConstants.ActiveStatus)
+                                  .Count() > 0;
+        }
+
+        //public bool DoesStudentExistUpdate(RequestModel<UserModel> input)
+        //{
+        //    return this.RepositoryContext.Student
+        //                          .Where(x => x.CustomerId == input.CustomerId
+        //                          && x.Active == CommonConstants.ActiveStatus
+        //                          && x.LoginId == input.RequestParameter.UserName
+        //                          && x.UserId != input.RequestParameter.Id)
+        //                          .Count() > 0;
+        //}
+
+        public bool DoesStudentAdmissionIdExist(RequestModel<StudentAdmissionModel> input)
+        {
+            return this.RepositoryContext.StudentAdmission
+                                  .Where(x => x.Id == input.RequestParameter.Id
                                    && x.Active == CommonConstants.ActiveStatus
                                   )
                                   .Count() > 0;

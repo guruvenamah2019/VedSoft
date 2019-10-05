@@ -26,5 +26,6 @@ namespace VedSoft.Data.Repository
         public DbSet<CustomerCourseDB> CustomerCourse { get; set; }
         public DbSet<StudentDB> Student { get; set; }
         public DbSet<CustomerCourseSubjectMappingDB> CustomerCourseSubject { get; set; }
+        public DbSet<StudentAdmissionDetailsDB> StudentAdmission { get; set; }
     }
 }

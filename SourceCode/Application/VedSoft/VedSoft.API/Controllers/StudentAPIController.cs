@@ -127,6 +127,114 @@ namespace VedSoft.API.Controllers
             return result;
         }
 
+        /// <summary>
+        /// To add the Student Admission
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionAddStudentAdmission)]
+        public async Task<ResponseModel<ResultModel>> AddStudentAdmission([FromBody] RequestModel<StudentAdmissionModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.AddStudentAdmission(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To update the  Student Admission
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionUpdateStudentAdmission)]
+        public async Task<ResponseModel<ResultModel>> UpdateStudentAdmission([FromBody] RequestModel<StudentAdmissionModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.UpdateStudentAdmission(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To get the  Student Admission
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionGetStudentAdmissionList)]
+        public async Task<ResponseModel<List<StudentAdmissionModel>>> GetStudentAdmissionList([FromBody] SearchRequestModel<StudentAdmissionModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<List<StudentAdmissionModel>> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.GetStudentAdmissionList(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To make the  Student Admission inactive
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionMakeInActiveStudentAdmission)]
+        public async Task<ResponseModel<ResultModel>> MakeInActiveStudentAdmission([FromBody] RequestModel<StudentAdmissionModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.MakeInActiveStudentAdmission(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
 
     }
 }
