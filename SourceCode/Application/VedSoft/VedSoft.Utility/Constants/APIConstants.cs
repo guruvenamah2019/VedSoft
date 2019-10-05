@@ -78,6 +78,10 @@ namespace VedSoft.Utility.Constants
         public const string ActionUpdateStudentAdmission = "UpdateStudentAdmission";
         public const string ActionGetStudentAdmissionList = "GetStudentAdmissionList";
         public const string ActionMakeInActiveStudentAdmission = "MakeInActiveStudentAdmission";
+        public const string ActionAddStudentCourse = "AddStudentCourse";
+        public const string ActionUpdateStudentCourse = "UpdateStudentCourse";
+        public const string ActionGetStudentCourseList = "GetStudentCourseList";
+        public const string ActionMakeInActiveStudentCourse = "MakeInActiveStudentCourse";
     }
 
     public class AcademicYearAPIAction

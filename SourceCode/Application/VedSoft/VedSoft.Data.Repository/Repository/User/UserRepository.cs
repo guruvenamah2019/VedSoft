@@ -473,4 +473,120 @@ namespace VedSoft.Data.Repository.Repository.User
                                   .Count() > 0;
         }
     }
+
+    public class StudentCourseRepository : RepositoryBase<StudentCoursesDB>, IStudentCourseRepository
+    {
+        public StudentCourseRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        //IUserRepository UserRepository { get; set; }
+        public int AddStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            //Make db object
+            StudentCoursesDB studentCourseDB = new StudentCoursesDB
+            {
+                CreatedBy = input.RequestParameter.ActionUserId,
+                CreatedDate = DateTime.Now,
+                Active = CommonConstants.ActiveStatus,
+                StudentId = input.RequestParameter.StudentId,
+                BranchCourseId = input.RequestParameter.BranchCourseId,
+                CourseFeeAmount = input.RequestParameter.CourseFee,
+                DiscountAllowed = input.RequestParameter.DiscountAllowed,
+                DiscountedFeeAmount = input.RequestParameter.DiscountedFeeAmount,
+            };
+
+            //Save in database
+            this.RepositoryContext.Add(studentCourseDB);
+            this.RepositoryContext.SaveChanges();
+
+            input.RequestParameter.Id = studentCourseDB.Id;
+
+            return studentCourseDB.Id;
+        }
+
+        public int UpdateStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            var studentCourse = this.RepositoryContext.StudentCourse
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                            .FirstOrDefault();
+            if (studentCourse != null)
+            {
+                studentCourse.ModifiedBy = input.RequestParameter.ActionUserId;
+                studentCourse.ModifiedDate = DateTime.Now;
+                studentCourse.StudentId = input.RequestParameter.StudentId;
+                studentCourse.DiscountAllowed = input.RequestParameter.DiscountAllowed;
+                studentCourse.DiscountedFeeAmount = input.RequestParameter.DiscountedFeeAmount;
+                studentCourse.StudentId = input.RequestParameter.StudentId;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(studentCourse);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public List<StudentCourseModel> GetStudentCourseList(SearchRequestModel<StudentCourseModel> input)
+        {
+            List<StudentCourseModel> userList = new List<StudentCourseModel>();
+            userList = (from st in this.RepositoryContext.Student
+                        join sa in this.RepositoryContext.StudentAdmission
+                            .Where(x => x.Active == CommonConstants.ActiveStatus)
+                            on st.Id equals sa.StudentId
+                        join sc in this.RepositoryContext.StudentCourse.Where(x => x.Active == CommonConstants.ActiveStatus)
+                        on sa.StudentId equals sc.StudentId
+                        select new StudentCourseModel
+                        {
+                            Id = st.Id,
+                            StudentId = sa.StudentId,
+                            BranchCourseId = sc.BranchCourseId,
+                            CourseFee = sc.CourseFeeAmount,
+                            DiscountAllowed = sc.DiscountAllowed,
+                            DiscountedFeeAmount = sc.DiscountedFeeAmount
+                        }).Page(input.PageSize, input.PageNumber).ToList();
+
+
+            return userList;
+        }
+
+        public int MakeInActiveStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            var studentCourse = this.RepositoryContext.StudentCourse
+                                    .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
+                                    .FirstOrDefault();
+            if (studentCourse != null)
+            {
+                studentCourse.Active = CommonConstants.InActiveStatus;
+                studentCourse.ModifiedBy = input.RequestParameter.ActionUserId;
+                studentCourse.ModifiedDate = DateTime.Now;
+            }
+
+            //Save in database
+            this.RepositoryContext.Update(studentCourse);
+            this.RepositoryContext.SaveChanges();
+
+            return CommonConstants.Success;
+        }
+
+        public bool DoesStudentCourseExist(RequestModel<StudentCourseModel> input)
+        {
+            return this.RepositoryContext.StudentCourse
+                                  .Where(x => 
+                                  x.StudentId == input.RequestParameter.StudentId
+                                  && x.BranchCourseId==input.RequestParameter.BranchCourseId
+                                  && x.BranchCourseId == input.RequestParameter.BranchCourseId
+                                  && x.Active == CommonConstants.ActiveStatus)
+                                  .Count() > 0;
+        }
+
+        public bool DoesStudentCourseIdExist(RequestModel<StudentCourseModel> input)
+        {
+            return this.RepositoryContext.StudentCourse
+                                  .Where(x => x.Id == input.RequestParameter.Id
+                                   && x.Active == CommonConstants.ActiveStatus
+                                  )
+                                  .Count() > 0;
+        }
+    }
 }

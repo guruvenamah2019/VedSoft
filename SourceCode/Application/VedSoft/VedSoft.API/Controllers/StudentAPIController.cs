@@ -235,6 +235,114 @@ namespace VedSoft.API.Controllers
             return result;
         }
 
+        /// <summary>
+        /// To add the Student Course
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionAddStudentCourse)]
+        public async Task<ResponseModel<ResultModel>> AddStudentCourse([FromBody] RequestModel<StudentCourseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.AddStudentCourse(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To update the  Student Course
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionUpdateStudentCourse)]
+        public async Task<ResponseModel<ResultModel>> UpdateStudentCourse([FromBody] RequestModel<StudentCourseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.UpdateStudentCourse(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To get the  Student Course
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionGetStudentCourseList)]
+        public async Task<ResponseModel<List<StudentCourseModel>>> GetStudentCourseList([FromBody] SearchRequestModel<StudentCourseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<List<StudentCourseModel>> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.GetStudentCourseList(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To make the  Student Course inactive
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionMakeInActiveStudentCourse)]
+        public async Task<ResponseModel<ResultModel>> MakeInActiveStudentCourse([FromBody] RequestModel<StudentCourseModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<ResultModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.MakeInActiveStudentCourse(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
 
     }
 }

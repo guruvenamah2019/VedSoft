@@ -58,12 +58,14 @@ namespace VedSoft.Model.User
         public int ActionUserId { get; set; }//It will have the user Id ...who is going to perform the operation on it...not the actual user id
     }
 
-    public class StudentC
+    public class StudentCourseModel
     {
+        public int Id { get; set; }
         public int StudentId { get; set; }
-        public int BranchId { get; set; }
-        public int AcademicYearId { get; set; }
-        public int DateOfAdmission { get; set; }
-        public int AdmissionTypeId { get; set; }
+        public int BranchCourseId { get; set; }
+        public decimal CourseFee { get; set; }
+        public int DiscountAllowed { get; set; }
+        public decimal DiscountedFeeAmount { get; set; }
+        public int ActionUserId { get; set; }//It will have the user Id ...who is going to perform the operation on it...not the actual user id
     }
 }

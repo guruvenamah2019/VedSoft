@@ -174,5 +174,59 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
         #endregion
+
+        #region Student Admission
+        public ResponseModel<ResultModel> AddStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.PrimaryKey = UserBusiness.AddStudentCourse(input);
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
+
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> UpdateStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = UserBusiness.UpdateStudentCourse(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<List<StudentCourseModel>> GetStudentCourseList(SearchRequestModel<StudentCourseModel> input)
+        {
+            ResponseModel<List<StudentCourseModel>> responseModel = new ResponseModel<List<StudentCourseModel>>();
+            responseModel.ResponseData = UserBusiness.GetStudentCourseList(input);
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
+        public ResponseModel<ResultModel> MakeInActiveStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+            responseModel.ResponseData.ResponseValue = UserBusiness.MakeInActiveStudentCourse(input);
+            if ((int)responseModel.ResponseData.ResponseValue > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            else
+                responseModel.ResponseData.StatusId = (int)responseModel.ResponseData.ResponseValue;
+
+            return responseModel;
+        }
+        #endregion
     }
 }

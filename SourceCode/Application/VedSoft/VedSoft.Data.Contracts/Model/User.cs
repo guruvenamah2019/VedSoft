@@ -143,4 +143,22 @@ namespace VedSoft.Data.Contracts.Model
         [Column("ADMISSION_TYPEID")]
         public int AdmissionTypeId { get; set; }
     }
+
+    [Table("STUDENT_COURSES")]
+    public class StudentCoursesDB : CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("STUDENT_ID")]
+        public int StudentId { get; set; }
+        [Column("BRANCH_COURSES_ID")]
+        public int BranchCourseId { get; set; }
+        [Column("COURSE_FEE_AMOUNT")]
+        public decimal CourseFeeAmount { get; set; }
+        [Column("DISCOUNT_ALLOWED")]
+        public int DiscountAllowed { get; set; }
+        [Column("DISCOUNTED_FEE_AMOUNT")]
+        public decimal DiscountedFeeAmount { get; set; }
+    }
 }

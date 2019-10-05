@@ -45,4 +45,15 @@ namespace VedSoft.Data.Contracts.User
         //bool DoesStudentExistUpdate(RequestModel<StudentModel> input);
         bool DoesStudentAdmissionIdExist(RequestModel<StudentAdmissionModel> input);
     }
+
+    public interface IStudentCourseRepository : IRepositoryBase<StudentCoursesDB>
+    {
+        int AddStudentCourse(RequestModel<StudentCourseModel> input);
+        int UpdateStudentCourse(RequestModel<StudentCourseModel> input);
+        List<StudentCourseModel> GetStudentCourseList(SearchRequestModel<StudentCourseModel> input);
+        int MakeInActiveStudentCourse(RequestModel<StudentCourseModel> input);
+        bool DoesStudentCourseExist(RequestModel<StudentCourseModel> input);
+        //bool DoesStudentExistUpdate(RequestModel<StudentModel> input);
+        bool DoesStudentCourseIdExist(RequestModel<StudentCourseModel> input);
+    }
 }

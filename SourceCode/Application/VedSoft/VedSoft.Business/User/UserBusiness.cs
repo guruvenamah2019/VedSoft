@@ -154,6 +154,48 @@ namespace VedSoft.Business.Master
             }
         }
         #endregion
+
+        #region Student Admission
+        public int AddStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            if (!RepositoryWrapper.StudentCourseRepository.DoesStudentCourseExist(input))
+            {
+                return RepositoryWrapper.StudentCourseRepository.AddStudentCourse(input); ;
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
+        }
+        public int UpdateStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            if (RepositoryWrapper.StudentCourseRepository.DoesStudentCourseIdExist(input))
+            {
+                return RepositoryWrapper.StudentCourseRepository.UpdateStudentCourse(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+
+        public List<StudentCourseModel> GetStudentCourseList(SearchRequestModel<StudentCourseModel> input)
+        {
+            return RepositoryWrapper.StudentCourseRepository.GetStudentCourseList(input);
+        }
+
+        public int MakeInActiveStudentCourse(RequestModel<StudentCourseModel> input)
+        {
+            if (RepositoryWrapper.StudentCourseRepository.DoesStudentCourseIdExist(input))
+            {
+                return RepositoryWrapper.StudentCourseRepository.MakeInActiveStudentCourse(input);
+            }
+            else
+            {
+                return CommonConstants.InvalidRecord;
+            }
+        }
+        #endregion
     }
 }
 

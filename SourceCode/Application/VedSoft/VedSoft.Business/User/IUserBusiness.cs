@@ -30,5 +30,12 @@ namespace VedSoft.Business.Master
         List<StudentAdmissionModel> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input);
         int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input);
         #endregion
+
+        #region Student Course
+        int AddStudentCourse(RequestModel<StudentCourseModel> input);
+        int UpdateStudentCourse(RequestModel<StudentCourseModel> input);
+        List<StudentCourseModel> GetStudentCourseList(SearchRequestModel<StudentCourseModel> input);
+        int MakeInActiveStudentCourse(RequestModel<StudentCourseModel> input);
+        #endregion
     }
 }

@@ -33,5 +33,12 @@ namespace VedSoft.Business.Engine.Master
         ResponseModel<List<StudentAdmissionModel>> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input);
         ResponseModel<ResultModel> MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input);
         #endregion
+
+        #region Student Course
+        ResponseModel<ResultModel> AddStudentCourse(RequestModel<StudentCourseModel> input);
+        ResponseModel<ResultModel> UpdateStudentCourse(RequestModel<StudentCourseModel> input);
+        ResponseModel<List<StudentCourseModel>> GetStudentCourseList(SearchRequestModel<StudentCourseModel> input);
+        ResponseModel<ResultModel> MakeInActiveStudentCourse(RequestModel<StudentCourseModel> input);
+        #endregion
     }
 }
