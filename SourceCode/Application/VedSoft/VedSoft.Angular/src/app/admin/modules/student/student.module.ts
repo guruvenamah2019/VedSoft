@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard, AdminGuard } from "../../../core/guards/index";
 import { STUDENT_ROUTES } from "./student-route"
 import { SharedModule } from "../../../shared/shared.module"
-import { StudentIndexComponent, StudentComponent, StudentListComponent, StudentAcademicComponent, StudentAdmissionComponent, StudentAttendanceComponent, StudentBatchComponent, StudentDocumentsComponent, StudentEnquiryComponent, StudentLeavesComponent, StudentLoginComponent, StudentPerformanceComponent, StudentProfileComponent, StudentPunchesComponent,StudentAssignmentsComponent } from './components';
+import { StudentIndexComponent, StudentComponent, StudentListComponent, StudentAcademicComponent, StudentAdmissionComponent, StudentAttendanceComponent, StudentBatchComponent, StudentDocumentsComponent, StudentEnquiryComponent, StudentLeavesComponent, StudentLoginComponent, StudentPerformanceComponent, StudentProfileComponent, StudentPunchesComponent,StudentAssignmentsComponent, NewStudentComponent } from './components';
 
 @NgModule({
     declarations: [
@@ -21,7 +21,8 @@ import { StudentIndexComponent, StudentComponent, StudentListComponent, StudentA
         StudentPerformanceComponent,
         StudentProfileComponent,
         StudentPunchesComponent,
-        StudentAssignmentsComponent
+        StudentAssignmentsComponent,
+        NewStudentComponent
     ],
     imports: [
         SharedModule,
