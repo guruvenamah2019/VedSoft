@@ -13,9 +13,9 @@ import { UserRoleService } from 'src/app/core/services';
 })
 
 export class AddUserRoleComponent implements OnInit {
-  @Input("model")
+  @Input('model')
   model?: UserRoleModel;
-  @Output("onSave")
+  @Output('onSave')
   onSave: EventEmitter<UserRoleModel> = new EventEmitter<UserRoleModel>();
 
   userRoleForm: FormGroup;
@@ -25,7 +25,7 @@ export class AddUserRoleComponent implements OnInit {
   onNavigate() {
   }
   constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private roleService: UserRoleService) {
-    console.log("AddUserRoleComponent");
+    console.log('AddUserRoleComponent');
 
   }
   ngOnInit() {
@@ -33,29 +33,27 @@ export class AddUserRoleComponent implements OnInit {
 
     this.userRoleForm = this.formBuilder.group({
       name: new FormControl(this.model.name, [Validators.required, Validators.minLength(3)]),
-      //parent: new FormControl(parent, []),
     });
-/*
-    if (this.model.id == 0 && this.model.hierarchyLevel > 1) {
-      this.standardForm.controls.parent.setValidators([Validators.required]);
-    }
-
-*/
+    /*
+        if (this.model.id === 0 && this.model.hierarchyLevel > 1) {
+          this.standardForm.controls.parent.setValidators([Validators.required]);
+        }
+        */
 
   }
 
-  get headerName():string{
-    let header:string="";
-    if(this.model.id>0)
-    header="Edit Role";
+  get headerName(): string {
+    let header: string = '';
+    if (this.model.id > 0)
+      header = 'Edit Role';
     else
-    header="Add Role";
+      header = 'Add Role';
 
     return header;
   }
 
 
- 
+
 
   get f() { return this.userRoleForm.controls; }
 
@@ -66,7 +64,7 @@ export class AddUserRoleComponent implements OnInit {
       return;
     }
 
-    let courseInput: UserRoleModel = {
+    const courseInput: UserRoleModel = {
       name: this.f.name.value,
       userId: this.roleService.userSerice.loggedUser.id,
       id: this.model.id
@@ -74,8 +72,7 @@ export class AddUserRoleComponent implements OnInit {
 
     if (this.model.id > 0) {
       this.editStandard(courseInput);
-    }
-    else {
+    }    else {
       this.addStandard(courseInput);
     }
 
@@ -84,17 +81,15 @@ export class AddUserRoleComponent implements OnInit {
   addStandard(courseInput: UserRoleModel) {
     this.roleService.addUserRole(courseInput).subscribe(x => {
       if (x.responseData != null) {
-        if (x.responseData.statusId == CommonConstants.success) {
-          this.roleService.baseService.successMessage("role Added sucessfully");
+        if (x.responseData.statusId === CommonConstants.success) {
+          this.roleService.baseService.successMessage('role Added sucessfully');
           courseInput.id = x.responseData.primaryKey;
           this.bsModalRef.hide();
           this.onSave.emit(courseInput);
-        }
-        else if (x.responseData.statusId == CommonConstants.duplicateRecord) {
-          this.roleService.baseService.errorMessage("role already exist");
-        }
-        else {
-          this.roleService.baseService.errorMessage("role unable to add, please try later");
+        }        else if (x.responseData.statusId === CommonConstants.duplicateRecord) {
+          this.roleService.baseService.errorMessage('role already exist');
+        }        else {
+          this.roleService.baseService.errorMessage('role unable to add, please try later');
         }
 
       }
@@ -106,17 +101,15 @@ export class AddUserRoleComponent implements OnInit {
   editStandard(courseInput: UserRoleModel) {
     this.roleService.updateUserRole(courseInput).subscribe(x => {
       if (x.responseData != null) {
-        if (x.responseData.statusId == CommonConstants.success) {
-          this.roleService.baseService.successMessage("role update sucessfully");
+        if (x.responseData.statusId === CommonConstants.success) {
+          this.roleService.baseService.successMessage('role update sucessfully');
           courseInput.id = x.responseData.primaryKey;
           this.bsModalRef.hide();
           this.onSave.emit(courseInput);
-        }
-        else if (x.responseData.statusId == CommonConstants.duplicateRecord) {
-          this.roleService.baseService.errorMessage("role already exist with this name");
-        }
-        else {
-          this.roleService.baseService.errorMessage("role unable to update, please try later");
+        } else if (x.responseData.statusId === CommonConstants.duplicateRecord) {
+          this.roleService.baseService.errorMessage('role already exist with this name');
+        } else {
+          this.roleService.baseService.errorMessage('role unable to update, please try later');
         }
 
       }

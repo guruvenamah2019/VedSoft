@@ -7,9 +7,9 @@ export const ADMIN_SETTINGS_ROUTES: Routes = [
             {
               path: 'org', component: OrganizationSettingsComponent
             },
-            {
+            /*{
               path: 'branch', component: BranchSettingComponent
-            },
+            },*/
             {
                 path: 'course', component: CourseSettingsComponent
               },
@@ -37,7 +37,7 @@ export const ADMIN_SETTINGS_ROUTES: Routes = [
               {
                 path: 'academicyear', component: AcademicYearSettingsComponent
               },
-              { path: 'students', loadChildren: () => import('../student/student.module').then(m => m.StudentModule) },
+            //  { path: 'students', loadChildren: () => import('../student/student.module').then(m => m.StudentModule) },
             
           ]
     },

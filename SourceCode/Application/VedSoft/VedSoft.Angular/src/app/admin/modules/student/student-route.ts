@@ -4,7 +4,7 @@ export const STUDENT_ROUTES: Routes = [
     { 
         path: '', component: StudentListComponent},
            
-            { path: 'student/:id', component: StudentComponent,children: [
+            { path: ':id', component: StudentComponent,children: [
                 {
                     path: '', component: StudentProfileComponent
                   },

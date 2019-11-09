@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { RequestModel, ResponseModel, ResultModel, SearchRequestModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
-import { BANK_SERVICE_URL } from "../constant/service-url";
+import { STUDENT_SERVICE_URL } from "../constant/service-url";
 import { map, tap } from 'rxjs/operators';
 import { StudentModel } from '../models/student-model/student-master.model';
 
@@ -19,7 +19,7 @@ export class StudentService {
     }
 
     constructor(private http: HttpClient, public baseService: BaseService) {
-/*
+
         this._studentList.push({
             id:1,
             firstName:"Ram",
@@ -38,14 +38,14 @@ export class StudentService {
             firstName:"Karan",
         });
       
-*/
+
     }
 
     public addStudent(course: StudentModel): Observable<ResponseModel<ResultModel>> {
 
         let input: RequestModel<StudentModel> = this.baseService.getRequestModel(course);
 
-        let url = `${this.baseService.appInfo.apiUrl}/${BANK_SERVICE_URL.ACTION_ADD_BANK}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_ADD_STUDENT}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this._studentList = [];
         }));
@@ -55,7 +55,7 @@ export class StudentService {
 
         let input: RequestModel<StudentModel> = this.baseService.getRequestModel(course);
 
-        let url = `${this.baseService.appInfo.apiUrl}/${BANK_SERVICE_URL.ACTION_UPDATE_BANK}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_UPDATE_STUDENT}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this._studentList = [];
         }));
@@ -69,7 +69,7 @@ export class StudentService {
             return of(this._studentList)
         }
         else {
-            let url = `${this.baseService.appInfo.apiUrl}/${BANK_SERVICE_URL.ACTION_GET_BANK}`;
+            let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_GET_STUDENT}`;
             return this.http.post<ResponseModel<StudentModel[]>>(url, input).pipe(
                 map((data: ResponseModel<StudentModel[]>) => {
                     if (data != null && data.responseData != null) {
@@ -85,7 +85,7 @@ export class StudentService {
     }
     public makeInActiveStudent(input: RequestModel<StudentModel>): Observable<ResponseModel<ResultModel>> {
 
-        let url = `${this.baseService.appInfo.apiUrl}/${BANK_SERVICE_URL.ACTION_MAKE_INACTIVE_BANK}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_MAKE_INACTIVE_STUDENT}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this._studentList = [];
         }));

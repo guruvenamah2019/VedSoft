@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { RequestModel, ResponseModel, ResultModel, SearchRequestModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
-import { COURSE_SERVICE_URL } from "../constant/service-url";
+import { SUBJECT_SERVICE_URL } from "../constant/service-url";
 import { SubjectHiearchyModel } from '../models/master-model/subject-hiearchy.model';
 import { AuthenticationService } from './authentication.service';
 import { map, tap } from 'rxjs/operators';
@@ -27,7 +27,7 @@ export class SubjectHiearchyService {
 
         let input: RequestModel<SubjectHiearchyModel> = this.baseService.getRequestModel(course);
 
-        let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_ADD_COURSE_HIERARCHY}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${SUBJECT_SERVICE_URL.ACTION_ADD_SUBJECT_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.subjectHiearchy = [];
         }));
@@ -37,7 +37,7 @@ export class SubjectHiearchyService {
 
         let input: RequestModel<SubjectHiearchyModel> = this.baseService.getRequestModel(course);
 
-        let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_UPDATE_COURSE_HIERARCHY}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${SUBJECT_SERVICE_URL.ACTION_UPDATE_SUBJECT_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.subjectHiearchy = [];
         }));
@@ -79,7 +79,7 @@ export class SubjectHiearchyService {
         }
         else {
             input.requestParameter.hierarchyLevel = 0;
-            let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_GET_COURSE_HIERARCHY}`;
+            let url = `${this.baseService.appInfo.apiUrl}/${SUBJECT_SERVICE_URL.ACTION_GET_SUBJECT_HIERARCHY}`;
             return this.http.post<ResponseModel<SubjectHiearchyModel[]>>(url, input).pipe(
                 map((data: ResponseModel<SubjectHiearchyModel[]>) => {
                     if (data != null && data.responseData != null) {
@@ -99,7 +99,7 @@ export class SubjectHiearchyService {
     }
     public makeInActiveSubjectHierarchy(input: RequestModel<SubjectHiearchyModel>): Observable<ResponseModel<ResultModel>> {
 
-        let url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_MAKE_INACTIVE_COURSE_HIERARCHY}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${SUBJECT_SERVICE_URL.ACTION_MAKE_INACTIVE_SUBJECT_HIERARCHY}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.subjectHiearchy = [];
         }));

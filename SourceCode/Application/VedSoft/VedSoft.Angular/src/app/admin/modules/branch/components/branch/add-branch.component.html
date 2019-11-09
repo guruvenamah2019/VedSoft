@@ -1,0 +1,84 @@
+﻿<div class="modal-header new_p0p_qq">
+  <button type="button" class="close clsebtn_newdesign" (click)="bsModalRef.hide()"
+    data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body feedback-modal-body">
+
+  <div class="grid">
+    <p class="grid-header">{{headerName}}</p>
+    <div class="grid-body">
+      <div class="item-wrapper">
+
+        <form [formGroup]="branchForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-row">
+
+              <div class="form-group col-md-6 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Branch Code" [formControl]="f.code" maxlength="50" >
+                  <mat-error *ngIf="submitted && f.code.errors?.required">
+                    Branch code is required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.code.errors?.minlength">
+                    Branch code must be at least 3 characters long.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-6 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Branch Name" [formControl]="f.name" maxlength="100">
+                  <mat-error *ngIf="submitted && f.name.errors?.required">
+                    Branch Name is required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.name.errors?.minlength">
+                    Branch Name must be at least 3 characters long.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+          </div>
+          <div class="form-row">
+
+            <div class="form-group col-md-6 showcase_row_area">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Contact Number" [formControl]="f.contactNumber" maxlength="10" >
+                <mat-error *ngIf="submitted && f.contactNumber.errors?.required">
+                  Contact Number is required
+                </mat-error>
+                <mat-error *ngIf="submitted && f.contactNumber.errors?.minlength">
+                  Contact Number must be 10 characters long.
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            
+        </div>
+          <div class="form-row">
+              <div class="form-group col-md-12 showcase_row_area">
+              <ved-address [submitted]="submitted" [model]="model.addressInfo"
+                (formReady)="addFormControl('branchAddress', $event)"></ved-address>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group showcase_row_area">
+                <div class="col-md-5 showcase_text_area">
+                  <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                  </button>
+                  <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                </div>
+              </div>
+            </div>
+
+
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer height56px">
+
+</div>

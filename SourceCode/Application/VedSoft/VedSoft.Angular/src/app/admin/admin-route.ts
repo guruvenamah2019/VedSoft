@@ -10,12 +10,14 @@ export const ADMIN_ROUTES: Routes = [
             {
                 path: "dashboard", component: AdminDashboardComponent
             },
+            
 
             { path: 'settings', loadChildren: () => import('./modules/settings/settings.module').then(m => m.AdminSettingsModule) },
             {
                 path: '', redirectTo: 'dashboard', pathMatch: 'full'
             },
-            { path: 'branchs/:branchId', loadChildren: () => import('./modules/branch/branch.module').then(m => m.BranchModule) },
+
+            { path: 'branchs', loadChildren: () => import('./modules/branch/branch.module').then(m => m.BranchModule) },
             
         ],
 

@@ -1,18 +1,13 @@
 ﻿import { Routes } from '@angular/router';
-import { BranchIndexComponent} from './components';
+import { BranchIndexComponent, BranchListComponent} from './components';
 export const BRANCH_ROUTES: Routes = [
+  { path: '', component:BranchListComponent },
     { 
-        path: '', component: BranchIndexComponent, children: [
+        path: ':id', component: BranchIndexComponent, children: [
           {
             path: '', redirectTo:"students"
           },
 
-
-          /*  {
-              path: 'students', component: StudentListComponent
-            },
-            { path: 'student/:id', component: StudentComponent}
-            */
 
            { path: 'students', loadChildren: () => import('../student/student.module').then(m => m.StudentModule) },
 

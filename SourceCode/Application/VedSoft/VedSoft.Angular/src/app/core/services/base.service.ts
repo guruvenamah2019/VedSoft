@@ -58,14 +58,14 @@ export class BaseService {
   }
 
   public getCustomer(subDomain: string): Observable<boolean> {
-    /*
-    this.CustomerInfo ={
+    
+    /*this.CustomerInfo ={
       customerId:1,
       name:"Ram",
       contactNumber:"111111",
       code:"1111"
-    };
-*/
+    };*/
+
     if (this.CustomerInfo && this.CustomerInfo.customerId) {
       return of(true);
     }

@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserService, BaseService, AuthenticationService, BrowserInfoService, BranchService, BankService, InstituteService, StudentService } from './core/services/index';
+import { UserService, BaseService, AuthenticationService, BrowserInfoService, BranchService,
+  BankService, InstituteService, StudentService, CourseService } from './core/services/index';
 import { AuthGuard, AdminGuard } from './core/guards/index';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptor/index';
@@ -20,48 +21,43 @@ import { CustomerGuard } from './core/guards/customer.guard';
     AppComponent
   ],
   imports: [
-    //BrowserModule,
     SharedModule,
-    //HttpClientModule,
     AppRoutingModule,
     DeviceDetectorModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut:5000,
-      preventDuplicates:true,
-      positionClass:"toast-top-center",
+      timeOut: 5000,
+      preventDuplicates: true,
+      positionClass: 'toast-top-center',
 
     }),
-
-    //HttpClientModule
   ],
   providers: [
     BaseService,
     UserService,
 
-    //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
 
     AuthGuard,
     AdminGuard,
     CustomerGuard,
     AuthenticationService,
-    //fakeBackendProvider,
+     //fakeBackendProvider,
     BrowserInfoService,
     SubjectHiearchyService,
     BranchService,
     BankService,
     InstituteService,
-    StudentService
-    
-
+    StudentService,
+    CourseService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(public translate: TranslateService) {
-    ///const browserLang = translate.getBrowserLang();
-    //translate.use(browserLang.match(/en|hi/) ? browserLang : 'en');
+    /// const browserLang = translate.getBrowserLang();
+    // translate.use(browserLang.match(/en|hi/) ? browserLang : 'en');
   }
 }
