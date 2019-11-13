@@ -72,15 +72,28 @@ namespace VedSoft.Business.Engine.Master
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
             responseModel.ResponseData = new ResultModel();
-            responseModel.ResponseData.PrimaryKey = UserBusiness.AddStudent(input);
-            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
-            if (responseModel.ResponseData.PrimaryKey > 0)
-                responseModel.ResponseData.StatusId = CommonConstants.Success;
-            else
+            RequestModel<UserModel> inputUser = new RequestModel<UserModel>()
+            {
+                CustomerId = input.CustomerId,
+                RequestParameter = input.RequestParameter.User
+            };
+
+            var userId = UserBusiness.AddUser(inputUser);
+            if (userId > 0)
+            {
+                input.RequestParameter.User.Id = userId;
+                responseModel.ResponseData.PrimaryKey = UserBusiness.AddStudent(input);
+                responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+                if (responseModel.ResponseData.PrimaryKey > 0)
+                    responseModel.ResponseData.StatusId = CommonConstants.Success;
+                else
+                    responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
+
+                responseModel.Status = CommonConstants.Success;
+            }
+            else {
                 responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
-
-            responseModel.Status = CommonConstants.Success;
-
+            }
             return responseModel;
         }
 

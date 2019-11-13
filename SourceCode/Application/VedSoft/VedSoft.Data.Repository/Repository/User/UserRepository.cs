@@ -244,10 +244,10 @@ namespace VedSoft.Data.Repository.Repository.User
                 CreatedBy = input.RequestParameter.ActionUserId,
                 CreatedDate = DateTime.Now,
                 Active = CommonConstants.ActiveStatus,
-                FatherUserId = input.RequestParameter.FatherUserId,
-                MotherUserId = input.RequestParameter.MotherUserId,
-                UserId = input.RequestParameter.UserId,
-                GuardinanUserId = input.RequestParameter.UserId,
+                //FatherUserId = input.RequestParameter.FatherUserId,
+                //MotherUserId = input.RequestParameter.MotherUserId,
+                UserId = input.RequestParameter.User.Id,
+                //GuardinanUserId = input.RequestParameter.UserId,
                 IsEnrolled = input.RequestParameter.IsEnrolled,
             };
 
@@ -267,11 +267,14 @@ namespace VedSoft.Data.Repository.Repository.User
                             .FirstOrDefault();
             if (student != null)
             {
-                student.UserId = input.RequestParameter.UserId;
-                student.GuardinanUserId = input.RequestParameter.GuardianUserId;
-                student.FatherUserId = input.RequestParameter.FatherUserId;
+                //student.UserId = input.RequestParameter.UserId;
+                if (input.RequestParameter.GuardianUser != null && input.RequestParameter.GuardianUser.Id > 0)
+                    student.GuardinanUserId = input.RequestParameter.GuardianUser.Id;
+                if (input.RequestParameter.FatherUser != null && input.RequestParameter.FatherUser.Id > 0)
+                    student.FatherUserId = input.RequestParameter.FatherUser.Id;
                 student.IsEnrolled = input.RequestParameter.IsEnrolled;
-                student.MotherUserId = input.RequestParameter.MotherUserId;
+                if (input.RequestParameter.MotherUser != null && input.RequestParameter.MotherUser.Id > 0)
+                    student.MotherUserId = input.RequestParameter.MotherUser.Id;
                 student.ModifiedBy = input.RequestParameter.ActionUserId;
                 student.ModifiedDate = DateTime.Now;
             }
@@ -293,12 +296,21 @@ namespace VedSoft.Data.Repository.Repository.User
                             select new StudentModel
                             {
                                 Id = st.Id,
-                                FatherUserId = st.FatherUserId,
-                                MotherUserId = st.MotherUserId,
-                                GuardianUserId = st.GuardinanUserId.GetValueOrDefault(),
+                                FatherUser = new UserModel(),
+                                MotherUser = new UserModel(),
+                                GuardianUser = new UserModel(),
                                 IsEnrolled = st.IsEnrolled,
-                                UserId = st.UserId
-                            }).Page(input.PageSize, input.PageNumber).ToList();
+                                User = new UserModel() {
+                                    Id = u.UserId,
+                                    NotificationEmailId = u.NotificationEmailId,
+                                    FirstName = u.FirstName,
+                                    LastName = u.LastName,
+                                    MiddleName = u.MiddleName,
+                                    UserName = u.LoginId,
+                                    Password = u.Password,
+                                    Active = u.Active,
+                                }
+                                }).Page(input.PageSize, input.PageNumber).ToList();
 
 
             return userList;
@@ -326,7 +338,7 @@ namespace VedSoft.Data.Repository.Repository.User
         public bool DoesStudentExist(RequestModel<StudentModel> input)
         {
             return this.RepositoryContext.Student
-                                  .Where(x => x.UserId == input.RequestParameter.UserId
+                                  .Where(x => x.UserId == input.RequestParameter.User.Id
                                   && x.Active == CommonConstants.ActiveStatus)
                                   .Count() > 0;
         }
