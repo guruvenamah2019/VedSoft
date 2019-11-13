@@ -6,9 +6,7 @@
 
   <div class="item-wrapper">
 
-      {{activeLinkIndex}}
-
-      <mat-horizontal-stepper linear #stepper>
+      <mat-horizontal-stepper linear="true" #stepper>
         <mat-step [stepControl]="frmStepOne">
             <ng-template matStepLabel>Student Details</ng-template>
             <ved-std-profile></ved-std-profile>
@@ -21,7 +19,7 @@
             <ng-template matStepLabel>Admission Details</ng-template>
             <ved-std-profile></ved-std-profile>
         </mat-step>
-        <mat-step [stepControl]="frmStepThree">
+       <!-- <mat-step [stepControl]="frmStepThree">
             <ng-template matStepLabel>Payment Details</ng-template>
             <ved-std-profile></ved-std-profile>
         </mat-step>
@@ -29,6 +27,7 @@
             <ng-template matStepLabel>Batch Details</ng-template>
             <ved-std-profile></ved-std-profile>
         </mat-step>
+        -->
     </mat-horizontal-stepper>
 
   </div>

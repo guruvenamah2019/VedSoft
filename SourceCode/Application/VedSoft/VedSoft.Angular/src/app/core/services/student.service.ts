@@ -21,21 +21,32 @@ export class StudentService {
     constructor(private http: HttpClient, public baseService: BaseService) {
 
         this._studentList.push({
+            Id:1,
+            User:{
             id:1,
             firstName:"Ram",
-
+            }
         });
         this._studentList.push({
+            Id:2,
+            User:{
             id:2,
             firstName:"Vijay",
+            }
         });
         this._studentList.push({
+            Id:3,
+            User:{
             id:3,
             firstName:"Dev",
+            }
         });
         this._studentList.push({
+            Id:4,
+            User:{
             id:4,
             firstName:"Karan",
+            }
         });
       
 
