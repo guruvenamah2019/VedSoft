@@ -10,7 +10,7 @@ import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component, 
 import { MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
-  MatRippleModule, MatMenuModule, MatTabsModule, MatSelectModule, MatIconModule} from "@angular/material"
+  MatRippleModule, MatMenuModule, MatTabsModule, MatSelectModule, MatIconModule, MatStepperModule,MatCardModule} from "@angular/material"
 import { ToastrModule } from 'ngx-toastr';
 
 
@@ -45,7 +45,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatMenuModule,
     MatTabsModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule,
+    MatCardModule
     
   ],
   exports: [
@@ -65,7 +67,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatTabsModule,
     AddressComponent,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule,
+    MatCardModule
   ],
   providers: [
 

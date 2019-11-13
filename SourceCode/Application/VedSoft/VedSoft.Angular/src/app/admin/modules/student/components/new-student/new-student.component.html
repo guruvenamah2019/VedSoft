@@ -4,60 +4,32 @@
 
   </p>
 
-  
-
-  
   <div class="item-wrapper">
 
       {{activeLinkIndex}}
 
-        <mat-tab-group [selectedIndex]="activeLinkIndex" (selectedTabChange)="navigate($event)">
-            <mat-tab *ngFor="let tab of navLinks" [label]="tab.label"  ></mat-tab>
-        </mat-tab-group>
+      <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="frmStepOne">
+            <ng-template matStepLabel>Student Details</ng-template>
+            <ved-std-profile></ved-std-profile>
+        </mat-step>
+        <mat-step [stepControl]="frmStepTwo">
+            <ng-template matStepLabel>Guardian Details</ng-template>
+            <ved-std-profile></ved-std-profile>
+        </mat-step>
+        <mat-step [stepControl]="frmStepThree">
+            <ng-template matStepLabel>Admission Details</ng-template>
+            <ved-std-profile></ved-std-profile>
+        </mat-step>
+        <mat-step [stepControl]="frmStepThree">
+            <ng-template matStepLabel>Payment Details</ng-template>
+            <ved-std-profile></ved-std-profile>
+        </mat-step>
+        <mat-step [stepControl]="frmStepThree">
+            <ng-template matStepLabel>Batch Details</ng-template>
+            <ved-std-profile></ved-std-profile>
+        </mat-step>
+    </mat-horizontal-stepper>
 
-
-      
-          <router-outlet></router-outlet>
-    
-<!--
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab label="Profile">
-<ved-std-profile></ved-std-profile>
-      </mat-tab>
-      <mat-tab label="Enquiry"  >
-        <ved-std-enquiry></ved-std-enquiry>
-      </mat-tab>
-      <mat-tab label="Admission" class="">
-          <ved-std-admission></ved-std-admission>
-      </mat-tab>
-      <mat-tab label="Performance" class="">
-          <ved-std-performance></ved-std-performance>
-      </mat-tab>
-      <mat-tab label="Attendance" class="">
-          <ved-std-attendance></ved-std-attendance>
-      </mat-tab>
-      <mat-tab label="Punches" class="">
-          <ved-std-punches></ved-std-punches>
-      </mat-tab>
-      <mat-tab label="Batch" class="">
-          <ved-std-batch></ved-std-batch>
-      </mat-tab>
-      <mat-tab label="Academic" class="">
-          <ved-std-academic></ved-std-academic>
-      </mat-tab>
-      <mat-tab label="Leaves" class="">
-          <ved-std-leaves></ved-std-leaves>
-      </mat-tab>
-      <mat-tab label="Login" class="">
-          <ved-std-login></ved-std-login>
-      </mat-tab>
-      <mat-tab label="Documents" class="">
-          <ved-std-documents></ved-std-documents>
-      </mat-tab>
-      <mat-tab label="Assignments" class="">
-          <ved-std-assignments></ved-std-assignments>
-      </mat-tab>
-    </mat-tab-group>
-    -->
   </div>
 </div>

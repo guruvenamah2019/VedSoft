@@ -6,6 +6,7 @@ export class UserMasterModel {
   lastName?: string;
   notificationEmailId?: string;
 userDetailsId ?:string;
+addressInfo?:any;
 
   constructor() {
     this.id = 1;

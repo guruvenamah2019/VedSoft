@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { BankService, AuthenticationService } from 'src/app/core/services';
+import { BankService, AuthenticationService, BranchService } from 'src/app/core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { map } from 'rxjs/operators';
@@ -20,10 +20,32 @@ export class StudentComponent implements OnInit {
   loading = false;
   error = '';
   submitted: boolean = false;
+  branchId:number=0;
   onNavigate() {
   }
-  constructor(private userService: AuthenticationService, private router: Router,private activatedRoute: ActivatedRoute) {
+  constructor(private userService: AuthenticationService, private router: Router,private route: ActivatedRoute, private branchService:BranchService) {
     console.log("StudentComponent");
+
+    this.route.parent.params.subscribe(params => {
+      console.log(params)
+      if (params["branchId"] != null) {
+          this.branchId = params["branchId"];
+          this.branchService.getBranchInfo(this.branchId).subscribe(x => {
+              if (x != null) {
+                this.route.params.subscribe(childParams => {
+                  console.log(childParams)
+                });
+              }
+
+
+          })
+      }
+
+
+  }); // Object {artistId: 12345}
+
+   
+
 
     this.navLinks = [
       {
@@ -100,7 +122,7 @@ export class StudentComponent implements OnInit {
   }
   navigate(event: MatTabChangeEvent) {
     const tabData = this.navLinks[event.index];    
-   this.router.navigate([tabData.link], { relativeTo: this.activatedRoute });
+   this.router.navigate([tabData.link], { relativeTo: this.route });
 }
   
 

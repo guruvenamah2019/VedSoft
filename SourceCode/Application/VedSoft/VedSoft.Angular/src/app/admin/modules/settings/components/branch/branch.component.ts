@@ -37,7 +37,7 @@ export class BranchSettingComponent  {
         searchInput.pageNumber = 1;
         searchInput.pageSize = 100;
 
-        this.branchService.getBranch(searchInput).subscribe(data=>{
+        this.branchService.getBranchList(searchInput).subscribe(data=>{
             this.branchList = data;
         });
 

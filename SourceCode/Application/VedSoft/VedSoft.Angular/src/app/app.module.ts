@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService, BaseService, AuthenticationService, BrowserInfoService, BranchService,
   BankService, InstituteService, StudentService, CourseService } from './core/services/index';
-import { AuthGuard, AdminGuard } from './core/guards/index';
+import { AuthGuard, AdminGuard, BranchGuard,CustomerGuard } from './core/guards/index';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptor/index';
 import { fakeBackendProvider } from '../app/core/interceptor/fake-backend';
@@ -14,7 +14,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SubjectHiearchyService } from './core/services/subject.service';
-import { CustomerGuard } from './core/guards/customer.guard';
 
 @NgModule({
   declarations: [
@@ -43,6 +42,7 @@ import { CustomerGuard } from './core/guards/customer.guard';
     AuthGuard,
     AdminGuard,
     CustomerGuard,
+    BranchGuard,
     AuthenticationService,
      //fakeBackendProvider,
     BrowserInfoService,

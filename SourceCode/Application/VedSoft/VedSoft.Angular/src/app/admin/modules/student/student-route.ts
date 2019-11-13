@@ -1,5 +1,6 @@
 ﻿import { Routes } from '@angular/router';
 import { StudentIndexComponent, StudentListComponent,NewStudentComponent, StudentComponent, StudentProfileComponent, StudentEnquiryComponent, StudentAdmissionComponent, StudentAssignmentsComponent, StudentDocumentsComponent, StudentLoginComponent, StudentLeavesComponent, StudentAcademicComponent, StudentBatchComponent, StudentPunchesComponent, StudentAttendanceComponent } from './components';
+import { BranchGuard } from 'src/app/core/guards';
 export const STUDENT_ROUTES: Routes = [
     { 
         path: '',redirectTo:'students'
@@ -9,28 +10,9 @@ export const STUDENT_ROUTES: Routes = [
       },
         
 
-        { path: 'students/new', component: NewStudentComponent,children: [
-          {
-            path: '', redirectTo:'profile'
-          },
-          {
-              path: 'profile', component: StudentProfileComponent
-            },
-            {
-              path: 'enquiry', component: StudentEnquiryComponent
-            },
-            {
-              path: 'admission', component: StudentAdmissionComponent
-            },
-            {
-              path: 'performance', component: StudentProfileComponent
-            },
-            {
-              path: 'batch', component: StudentBatchComponent
-            },
-        ]},
+        { path: 'students/new', component: NewStudentComponent},
            
-            { path: 'students/:id', component: StudentComponent,children: [
+            { path: 'students/:studentId', component: StudentComponent,children: [
                
       
                 {

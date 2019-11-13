@@ -24,7 +24,7 @@ export class BranchIndexComponent implements OnInit {
         
     }
     ngOnInit() {
-        this.route.parent.params.subscribe(params => console.log(params)); // Object {artistId: 12345}
+        this.route.params.subscribe(params => console.log(params)); // Object {artistId: 12345}
 
     }
     
