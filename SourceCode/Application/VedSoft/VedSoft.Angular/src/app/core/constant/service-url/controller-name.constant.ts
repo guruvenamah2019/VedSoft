@@ -4,5 +4,6 @@
     HOME_CONTROLLER: "api/Home",
     LOGIN_CONTROLLER: "api/Login",
     MASTER_CONTROLLER: "api/Customer",
+    USER_CONTROLLER:'api/user'
     
 };

@@ -74,13 +74,7 @@ export class StudentService {
     }
     public getStudent(input: SearchRequestModel<StudentModel>): Observable<StudentModel[]> {
 
-        
-
-        if (this._studentList != null && this._studentList.length > 0) {
-            return of(this._studentList)
-        }
-        else {
-            let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_GET_STUDENT}`;
+        let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_GET_STUDENT}`;
             return this.http.post<ResponseModel<StudentModel[]>>(url, input).pipe(
                 map((data: ResponseModel<StudentModel[]>) => {
                     if (data != null && data.responseData != null) {
@@ -92,7 +86,6 @@ export class StudentService {
                 })
             );
 
-        }
     }
     public makeInActiveStudent(input: RequestModel<StudentModel>): Observable<ResponseModel<ResultModel>> {
 
