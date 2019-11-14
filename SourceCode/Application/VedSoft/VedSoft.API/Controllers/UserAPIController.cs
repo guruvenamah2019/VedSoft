@@ -13,11 +13,14 @@ using VedSoft.Utility.Constants;
 using VedSoft.Logger;
 using Microsoft.AspNetCore.Authorization;
 using VedSoft.Model.User;
+using Microsoft.AspNetCore.Cors;
 
 namespace VedSoft.API.Controllers
 {
     [Route(UserAPIAction.RoutePrefixUser)]
     [ApiController]
+    [EnableCors("CorsPolicy")]
+
     public partial class UserAPIController : ApiBaseController
     {
 
