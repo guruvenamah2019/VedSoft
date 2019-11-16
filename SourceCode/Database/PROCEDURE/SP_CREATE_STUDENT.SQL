@@ -7,7 +7,6 @@ DROP PROCEDURE IF EXISTS `SP_CREATE_STUDENT`$$
 CREATE DEFINER=`trishakti`@`%` PROCEDURE `SP_CREATE_STUDENT`(IN P_STUDENT_OBJECT JSON,
 OUT P_OUT_FLAG VARCHAR(50)    
     )
-    #P_OUT_FLAG -1= USERID ALREADY EXISTS, =-2 STUDENT ALREADY EXISTS 
 BEGIN
     DECLARE    J_V_CUSTOMERID VARCHAR(40);    
     DECLARE    J_V_STUDENT_LOGIN VARCHAR(150);
@@ -69,7 +68,7 @@ BEGIN
 		SELECT  CUSTOMERID,
 		        STUDENT_LOGIN ,
 		        STUDENT_ROLLNO,
-		        STUDENT_LOGIN_PASSWORD
+		        STUDENT_LOGIN_PASSWORD,
 			STUDENT_FIRST_NAME ,
 			STUDENT_MIDDLE_NAME ,
 			STUDENT_LAST_NAME ,
@@ -156,52 +155,7 @@ BEGIN
 			J_V_CREATED_BY,
 			J_V_CREATED_DATE
 			FROM
-		 JSON_TABLE('{
-		"Customerid": "1",
-		"Studentloginid": "Dev16nov19",
-		               "Rollno": "9977735797",
-		               "Studentloginpassword": "1",
-		               "Studentfirstname": "Dev",
-				"Studentmiddlename": "1",
-				"Studentlastname": "Tanwar",
-				"Studentnotificationid": "32",
-				"Studentaddress": "{}",
-				"Studentcontactno": "98765432",
-				"Studentacademicinstitute": "",
-				"StudentQualification": "",
-				"Studentdateofbirth": "",
-				"Gender": "M",
-				"Studentimagepath": "",
-				"Isenrolled": "0",
-				"Guardianloginid": "DWARKA123",
-				"Guardianpassword": "abc",
-				"Guardianfirstname": "DWARKA",
-				"Guardianmiddlename": "",
-				"Guardianlastname": "TANWAR",
-				"Guardiannotificationid": "32",
-				"Guardianaddress": "{}",
-				"Guardiancontactno": "98765432",
-				"Fatherfirstname": "DWARKA",
-				"Fathermiddlename": "",
-				"Fatherlastname": "TANWAR",
-				"Fathernotificationid": "dev.sanga@gmail.com",
-				"Fathercontactno": "98765432",
-				"FatherQualification": "BCA",
-				"FatherOccupation": "RETD",
-				"FatherAnualIncome": "98765432",
-				"Fatheraddress": "{}",
-				"Motherfirstname": "SHOBHA",
-				"Mothermiddlename": "",
-				"Motherlastname": "TANWAR",
-				"Mothernotificationid": "32",
-				"Mothercontactno": "98765432",
-				"MotherQualification": "",
-				"MotherOccupation": "98765432",
-				"MotherAnualIncome": "98765432",
-				"Createddate": "",
-				"Createdby": "98765432"
-				
-			  }', 
+		 JSON_TABLE(P_STUDENT_OBJECT, 
 			  '$' COLUMNS (
             CUSTOMERID INT(11) PATH '$.Customerid' ,
 	    STUDENT_LOGIN VARCHAR(150)  PATH '$.Studentloginid',
@@ -254,7 +208,10 @@ START TRANSACTION;
 SET V_ACTIVE=1;
 SET V_USERTYPEID_FOR_STUDENT=3;
 SET V_USERTYPEID_FOR_GUARDIAN=4;
-   
+SET V_USER_ID_FOR_STUDENT=0; 
+SET V_USER_ID_FOR_GUARDIAN  =0;
+SET V_STUDENT_ID=0;
+SET V_STUDENT_DETAIL_ID=0;
     #First Student is exits or not if not exists then create user first
 	
         SELECT IFNULL(ID,0)  INTO V_USER_ID_FOR_STUDENT
@@ -285,13 +242,13 @@ SET V_USERTYPEID_FOR_GUARDIAN=4;
 	
 	
 	SELECT IFNULL(ID,0)  INTO V_USER_ID_FOR_GUARDIAN
-        FROM USER_MASTER WHERE customer_id=V_CUSTOMERID AND LOGIN_ID=v_GUARDIAN_LOGINID;	
+        FROM USER_MASTER WHERE customer_id=J_V_CUSTOMERID AND LOGIN_ID=J_V_GUARDIAN_LOGIN;	
 		IF V_USER_ID_FOR_GUARDIAN =0 THEN
 				CALL SP_INSERT_USER_MASTER(J_V_GUARDIAN_LOGIN 	,
                                           J_V_GUARDIAN_LOGIN_PASSWORD	,
                                           J_V_GUARDIAN_FIRST_NAME,
                                           J_V_GUARDIAN_MIDDLE_NAME 	,
-                                          J_GUARDIAN_LAST_NAME 	,
+                                          J_V_GUARDIAN_LAST_NAME 	,
 					  V_USERTYPEID_FOR_GUARDIAN	,
                                           V_ACTIVE	,
                                           J_V_CUSTOMERID	,
@@ -358,7 +315,7 @@ SET V_USERTYPEID_FOR_GUARDIAN=4;
 		@V_STUDENT_DETAIL_ID);
 
     END IF;
-          
+          COMMIT;
 	END$$
 
 DELIMITER ;
