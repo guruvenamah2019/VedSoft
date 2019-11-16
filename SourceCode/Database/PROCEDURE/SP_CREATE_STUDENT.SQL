@@ -1,0 +1,364 @@
+DELIMITER $$
+
+USE `ved_soft_db`$$
+
+DROP PROCEDURE IF EXISTS `SP_CREATE_STUDENT`$$
+
+CREATE DEFINER=`trishakti`@`%` PROCEDURE `SP_CREATE_STUDENT`(IN P_STUDENT_OBJECT JSON,
+OUT P_OUT_FLAG VARCHAR(50)    
+    )
+    #P_OUT_FLAG -1= USERID ALREADY EXISTS, =-2 STUDENT ALREADY EXISTS 
+BEGIN
+    DECLARE    J_V_CUSTOMERID VARCHAR(40);    
+    DECLARE    J_V_STUDENT_LOGIN VARCHAR(150);
+    DECLARE    J_V_STUDENT_LOGIN_PASSWORD VARCHAR(250);
+    DECLARE    J_V_STUDENT_ROLLNO INT(11);
+    DECLARE    J_V_STUDENT_FIRST_NAME VARCHAR(150);
+    DECLARE    J_V_STUDENT_MIDDLE_NAME VARCHAR(150);
+    DECLARE    J_V_STUDENT_LAST_NAME VARCHAR(150);
+    DECLARE    J_V_STUDENT_NOTIFICATION_ID VARCHAR(150) ;
+    DECLARE    J_V_STUDENT_ADDRESS JSON ;
+    DECLARE    J_V_STUDENT_CONTACTNO INT(11) ;
+    DECLARE    J_V_IS_ENROLLED INT(11);
+    DECLARE    J_V_GUARDIAN_LOGIN VARCHAR(150) ;
+    DECLARE    J_V_GUARDIAN_LOGIN_PASSWORD VARCHAR(250);
+    DECLARE    J_V_GUARDIAN_FIRST_NAME VARCHAR(150);
+    DECLARE    J_V_GUARDIAN_MIDDLE_NAME VARCHAR(150);
+    DECLARE    J_V_GUARDIAN_LAST_NAME VARCHAR(150) ;
+    DECLARE    J_V_GUARDIAN_NOTIFICATION_ID     VARCHAR(150) ;
+    DECLARE    J_V_GUARDIAN_ADDRESS JSON ;
+    DECLARE    J_V_GUARDIAN_CONTACTNO JSON;
+    DECLARE    J_V_FATHER_FIRST_NAME VARCHAR(150) ;
+    DECLARE    J_V_FATHER_MIDDLE_NAME VARCHAR(150) ;
+    DECLARE    J_V_FATHER_LAST_NAME VARCHAR(150) ;
+    DECLARE    J_V_FATHER_OCCUPATION VARCHAR(150) ;
+    DECLARE    J_V_FATHER_QUALIFICATION VARCHAR(150) ;
+    DECLARE    J_V_FATHER_ANUAL_INCOME DECIMAL ;
+    DECLARE    J_V_FATHER_NOTIFICATION_ID     VARCHAR(150) ;
+    DECLARE    J_V_FATHER_ADDRESS JSON;
+    DECLARE    J_V_FATHER_CONTACTNO INT ;
+    DECLARE    J_V_MOTHER_FIRST_NAME VARCHAR(150) ;
+    DECLARE    J_V_MOTHER_MIDDLE_NAME VARCHAR(150) ;
+    DECLARE    J_V_MOTHER_LAST_NAME VARCHAR(150);
+    DECLARE    J_V_MOTHER_OCCUPATION VARCHAR(150) ;
+    DECLARE    J_V_MOTHER_QUALIFICATION VARCHAR(150) ;
+    DECLARE    J_V_STUDENT_GENDER VARCHAR(2) ;
+    DECLARE    J_V_STUDENT_IMAGE_PATH VARCHAR(150) ;
+    DECLARE    J_V_MOTHER_ANUAL_INCOME DECIMAL ;
+    DECLARE    J_V_MOTHER_NOTIFICATION_ID  VARCHAR(150)  ;
+    DECLARE    J_V_MOTHER_ADDRESS JSON  ;
+    DECLARE    J_V_MOTHER_CONTACTNO INT;
+    DECLARE    J_V_CREATED_BY INT(11);
+    DECLARE    J_V_CREATED_DATE DATETIME ;
+    DECLARE   J_V_STUDENT_ACADEMIC_INSTITUTE VARCHAR(150);
+    DECLARE   J_V_STUDENT_DATE_OF_BIRTH DATETIME;
+    DECLARE   J_V_STUDENT_QUALIFICATION VARCHAR(150);
+    #Internal Varialbles 
+    DECLARE    V_MODIFIED_BY INT(11) ;
+    DECLARE    V_MODIFIED_DATE DATETIME ;
+    DECLARE    V_ACTIVE INT(11);
+    DECLARE    V_USERTYPEID_FOR_STUDENT INT(11);
+    DECLARE    V_USERTYPEID_FOR_GUARDIAN INT(11);
+    #OUTPUT ID Variables
+    DECLARE    V_USER_ID_FOR_STUDENT INT(11);
+    DECLARE    V_USER_ID_FOR_GUARDIAN INT(11);
+    DECLARE    V_OUT_USER_ID INT(11);
+    DECLARE    V_STUDENT_ID INT(11);
+    DECLARE    V_STUDENT_DETAIL_ID INT(11);
+
+		SELECT  CUSTOMERID,
+		        STUDENT_LOGIN ,
+		        STUDENT_ROLLNO,
+		        STUDENT_LOGIN_PASSWORD
+			STUDENT_FIRST_NAME ,
+			STUDENT_MIDDLE_NAME ,
+			STUDENT_LAST_NAME ,
+			STUDENT_NOTIFICATION_ID ,
+			STUDENT_ADDRESS ,
+			STUDENT_CONTACTNO ,
+			STUDENT_ACADEMIC_INSTITUTE,
+			STUDENT_QUALIFICATION,
+			STUDENT_DATE_OF_BIRTH,
+			STUDENT_GENDER,
+			STUDENT_IMAGE_PATH,
+			IS_ENROLLED ,
+			GUARDIAN_LOGIN ,
+			GUARDIAN_LOGIN_PASSWORD,
+			GUARDIAN_FIRST_NAME ,
+			GUARDIAN_MIDDLE_NAME ,
+			GUARDIAN_LAST_NAME ,
+			GUARDIAN_NOTIFICATION_ID ,
+			GUARDIAN_ADDRESS ,
+			GUARDIAN_CONTACTNO ,
+			FATHER_FIRST_NAME ,
+			FATHER_MIDDLE_NAME ,
+			FATHER_LAST_NAME ,
+			FATHER_OCCUPATION ,
+			FATHER_QUALIFICATION,
+			FATHER_ANUAL_INCOME,
+			FATHER_NOTIFICATION_ID ,
+			FATHER_ADDRESS ,
+			FATHER_CONTACTNO ,
+			MOTHER_FIRST_NAME ,
+			MOTHER_MIDDLE_NAME ,
+			MOTHER_LAST_NAME ,
+			MOTHER_OCCUPATION ,
+			MOTHER_QUALIFICATION,
+			MOTHER_ANUAL_INCOME ,
+			MOTHER_NOTIFICATION_ID  ,
+			MOTHER_ADDRESS ,
+			MOTHER_CONTACTNO ,
+			CREATED_BY,
+			CREATED_DATE
+			INTO 
+			J_V_CUSTOMERID,
+			J_V_STUDENT_LOGIN ,
+			J_V_STUDENT_ROLLNO,
+			J_V_STUDENT_LOGIN_PASSWORD,
+			J_V_STUDENT_FIRST_NAME ,
+			J_V_STUDENT_MIDDLE_NAME ,
+			J_V_STUDENT_LAST_NAME ,
+			J_V_STUDENT_NOTIFICATION_ID ,
+			J_V_STUDENT_ADDRESS ,
+			J_V_STUDENT_CONTACTNO ,
+			J_V_STUDENT_ACADEMIC_INSTITUTE,
+			J_V_STUDENT_QUALIFICATION,
+			J_V_STUDENT_DATE_OF_BIRTH,
+			J_V_STUDENT_GENDER,
+			J_V_STUDENT_IMAGE_PATH,
+			J_V_IS_ENROLLED ,
+			J_V_GUARDIAN_LOGIN ,
+			J_V_GUARDIAN_LOGIN_PASSWORD,
+			J_V_GUARDIAN_FIRST_NAME ,
+			J_V_GUARDIAN_MIDDLE_NAME ,
+			J_V_GUARDIAN_LAST_NAME ,
+			J_V_GUARDIAN_NOTIFICATION_ID ,
+			J_V_GUARDIAN_ADDRESS ,
+			J_V_GUARDIAN_CONTACTNO ,
+			J_V_FATHER_FIRST_NAME ,
+			J_V_FATHER_MIDDLE_NAME ,
+			J_V_FATHER_LAST_NAME ,
+			J_V_FATHER_OCCUPATION ,
+			J_V_FATHER_QUALIFICATION,
+			J_V_FATHER_ANUAL_INCOME,
+			J_V_FATHER_NOTIFICATION_ID ,
+			J_V_FATHER_ADDRESS ,
+			J_V_FATHER_CONTACTNO ,
+			J_V_MOTHER_FIRST_NAME ,
+			J_V_MOTHER_MIDDLE_NAME ,
+			J_V_MOTHER_LAST_NAME ,
+			J_V_MOTHER_OCCUPATION ,
+			J_V_MOTHER_QUALIFICATION,
+			J_V_MOTHER_ANUAL_INCOME ,
+			J_V_MOTHER_NOTIFICATION_ID  ,
+			J_V_MOTHER_ADDRESS ,
+			J_V_MOTHER_CONTACTNO  ,
+			J_V_CREATED_BY,
+			J_V_CREATED_DATE
+			FROM
+		 JSON_TABLE('{
+		"Customerid": "1",
+		"Studentloginid": "Dev16nov19",
+		               "Rollno": "9977735797",
+		               "Studentloginpassword": "1",
+		               "Studentfirstname": "Dev",
+				"Studentmiddlename": "1",
+				"Studentlastname": "Tanwar",
+				"Studentnotificationid": "32",
+				"Studentaddress": "{}",
+				"Studentcontactno": "98765432",
+				"Studentacademicinstitute": "",
+				"StudentQualification": "",
+				"Studentdateofbirth": "",
+				"Gender": "M",
+				"Studentimagepath": "",
+				"Isenrolled": "0",
+				"Guardianloginid": "DWARKA123",
+				"Guardianpassword": "abc",
+				"Guardianfirstname": "DWARKA",
+				"Guardianmiddlename": "",
+				"Guardianlastname": "TANWAR",
+				"Guardiannotificationid": "32",
+				"Guardianaddress": "{}",
+				"Guardiancontactno": "98765432",
+				"Fatherfirstname": "DWARKA",
+				"Fathermiddlename": "",
+				"Fatherlastname": "TANWAR",
+				"Fathernotificationid": "dev.sanga@gmail.com",
+				"Fathercontactno": "98765432",
+				"FatherQualification": "BCA",
+				"FatherOccupation": "RETD",
+				"FatherAnualIncome": "98765432",
+				"Fatheraddress": "{}",
+				"Motherfirstname": "SHOBHA",
+				"Mothermiddlename": "",
+				"Motherlastname": "TANWAR",
+				"Mothernotificationid": "32",
+				"Mothercontactno": "98765432",
+				"MotherQualification": "",
+				"MotherOccupation": "98765432",
+				"MotherAnualIncome": "98765432",
+				"Createddate": "",
+				"Createdby": "98765432"
+				
+			  }', 
+			  '$' COLUMNS (
+            CUSTOMERID INT(11) PATH '$.Customerid' ,
+	    STUDENT_LOGIN VARCHAR(150)  PATH '$.Studentloginid',
+	    STUDENT_ROLLNO INT(11) PATH '$.Rollno' ,
+	    STUDENT_LOGIN_PASSWORD VARCHAR(250)  PATH '$.Studentloginpassword',
+            STUDENT_FIRST_NAME VARCHAR(150) PATH '$.Studentfirstname',
+            STUDENT_MIDDLE_NAME VARCHAR(150) PATH '$.Studentmiddlename',
+            STUDENT_LAST_NAME VARCHAR(150) PATH '$.Studentlastname', 
+            STUDENT_NOTIFICATION_ID VARCHAR(150) PATH '$.Studentnotificationid', 
+            STUDENT_ADDRESS JSON PATH '$.Studentaddress' ,
+            STUDENT_CONTACTNO INT(11) PATH '$.Studentcontactno' ,
+            STUDENT_ACADEMIC_INSTITUTE VARCHAR(150) PATH '$.Studentacademicinstitute', 
+            STUDENT_QUALIFICATION VARCHAR(150) PATH '$.StudentQualification', 
+            STUDENT_DATE_OF_BIRTH DATETIME PATH '$.Studentdateofbirth', 
+            STUDENT_GENDER VARCHAR(2) PATH '$.Gender', 
+            STUDENT_IMAGE_PATH VARCHAR(2) PATH '$.Studentimagepath', 
+            IS_ENROLLED INT(11) PATH '$.Isenrolled' ,
+            GUARDIAN_LOGIN VARCHAR(150)  PATH '$.Guardianloginid',
+            GUARDIAN_LOGIN_PASSWORD VARCHAR(250)  PATH '$.Guardianloginpassword',
+            GUARDIAN_FIRST_NAME VARCHAR(150) PATH '$.Guardianfirstname',
+            GUARDIAN_MIDDLE_NAME VARCHAR(150) PATH '$.Guardianmiddlename',
+            GUARDIAN_LAST_NAME VARCHAR(150) PATH '$.Guardianlastname',
+            GUARDIAN_NOTIFICATION_ID     VARCHAR(150) PATH '$.Guardiannotificationid',
+            GUARDIAN_ADDRESS JSON PATH '$.Guardianaddress' ,
+            GUARDIAN_CONTACTNO JSON PATH '$.Guardiancontactno' ,
+            FATHER_FIRST_NAME VARCHAR(150) PATH '$.Fatherfirstname',
+            FATHER_MIDDLE_NAME VARCHAR(150) PATH '$.Fathermiddlename',
+            FATHER_LAST_NAME VARCHAR(150) PATH '$.Fatherlastname',
+            FATHER_OCCUPATION VARCHAR(150) PATH '$.FatherOccupation',
+            FATHER_QUALIFICATION VARCHAR(150) PATH '$.FatherQualification',
+            FATHER_ANUAL_INCOME DECIMAL PATH '$.FatherAnualIncome',
+            FATHER_NOTIFICATION_ID     VARCHAR(150) PATH '$.Fathernotificationid',
+            FATHER_ADDRESS JSON PATH '$.Fatheraddress' ,
+            FATHER_CONTACTNO INT PATH '$.Fathercontactno' ,
+            MOTHER_FIRST_NAME VARCHAR(150) PATH '$.Motherfirstname',
+            MOTHER_MIDDLE_NAME VARCHAR(150) PATH '$.Mothermiddlename',
+            MOTHER_LAST_NAME VARCHAR(150) PATH '$.Motherlastname',
+            MOTHER_OCCUPATION VARCHAR(150) PATH '$.MotherOccupation',
+            MOTHER_QUALIFICATION VARCHAR(150) PATH '$.MotherQualification',
+            MOTHER_ANUAL_INCOME DECIMAL PATH '$.MotherAnualIncome',
+            MOTHER_NOTIFICATION_ID     VARCHAR(150) PATH '$.Mothernotificationid',
+            MOTHER_ADDRESS JSON PATH '$.Motheraddress' ,
+            MOTHER_CONTACTNO INT PATH '$.Mothercontactno' ,
+            CREATED_BY INT PATH '$.Createdby' ,
+            CREATED_DATE DATETIME PATH '$.Createddate' 
+							
+						   )
+				 ) STUDENT_DETAILS;
+START TRANSACTION;
+SET V_ACTIVE=1;
+SET V_USERTYPEID_FOR_STUDENT=3;
+SET V_USERTYPEID_FOR_GUARDIAN=4;
+   
+    #First Student is exits or not if not exists then create user first
+	
+        SELECT IFNULL(ID,0)  INTO V_USER_ID_FOR_STUDENT
+        FROM USER_MASTER WHERE customer_id=J_V_CUSTOMERID AND LOGIN_ID=J_V_STUDENT_LOGIN;	
+	
+	IF V_USER_ID_FOR_STUDENT =0 THEN
+		CALL SP_INSERT_USER_MASTER(        J_V_STUDENT_LOGIN 	,
+                                           J_V_STUDENT_LOGIN_PASSWORD	,
+                                           J_V_STUDENT_FIRST_NAME,
+                                           J_V_STUDENT_MIDDLE_NAME 	,
+                                           J_V_STUDENT_LAST_NAME 	,
+			                    		   V_USERTYPEID_FOR_STUDENT	,
+                                           V_ACTIVE	,
+                                           J_V_CUSTOMERID	,
+                                           J_V_STUDENT_CONTACTNO 	,
+                                           J_V_STUDENT_ADDRESS 	,
+                                           J_V_STUDENT_NOTIFICATION_ID 	,
+                                           J_V_CREATED_DATE	,
+                                           J_V_CREATED_BY	,
+                                           V_MODIFIED_DATE	,
+                                           V_MODIFIED_BY	,
+                                           @V_USER_ID_FOR_STUDENT
+									);
+	END IF;
+	
+	
+	#First Guardian is exists or not if not exists then create user first
+	
+	
+	SELECT IFNULL(ID,0)  INTO V_USER_ID_FOR_GUARDIAN
+        FROM USER_MASTER WHERE customer_id=V_CUSTOMERID AND LOGIN_ID=v_GUARDIAN_LOGINID;	
+		IF V_USER_ID_FOR_GUARDIAN =0 THEN
+				CALL SP_INSERT_USER_MASTER(J_V_GUARDIAN_LOGIN 	,
+                                          J_V_GUARDIAN_LOGIN_PASSWORD	,
+                                          J_V_GUARDIAN_FIRST_NAME,
+                                          J_V_GUARDIAN_MIDDLE_NAME 	,
+                                          J_GUARDIAN_LAST_NAME 	,
+					  V_USERTYPEID_FOR_GUARDIAN	,
+                                          V_ACTIVE	,
+                                          J_V_CUSTOMERID	,
+                                          J_V_GUARDIAN_CONTACTNO 	,
+                                          J_V_GUARDIAN_ADDRESS 	,
+                                          J_V_GUARDIAN_NOTIFICATION_ID 	,
+                                          J_V_CREATED_DATE	,
+                                          J_V_CREATED_BY	,
+                                          V_MODIFIED_DATE	,
+                                          V_MODIFIED_BY	,
+                                          @V_USER_ID_FOR_GUARDIAN);
+		END IF;
+		
+		
+		#Check whether Student exists or not 
+		SELECT IFNULL(ID,0)  INTO V_STUDENT_ID
+        FROM STUDENT WHERE USER_ID=V_USER_ID_FOR_STUDENT ;	
+		
+		IF V_STUDENT_ID=0 THEN 
+	
+		CALL SP_INSERT_STUDENT
+					(
+			  
+			V_USER_ID_FOR_STUDENT,
+			J_V_STUDENT_ROLLNO,
+			V_USER_ID_FOR_GUARDIAN,
+			J_V_IS_ENROLLED,
+			V_ACTIVE,
+			J_V_CREATED_BY,
+			J_V_CREATED_DATE ,
+			V_MODIFIED_BY,
+			V_MODIFIED_DATE,
+			@V_STUDENT_ID
+			);
+	    END IF;	
+ 
+		#Check whether Student exists or not 
+		SELECT IFNULL(ID,0)  INTO V_STUDENT_DETAIL_ID
+        FROM STUDENT_DETAILS WHERE STUDENT_ID=V_STUDENT_ID ;
+ 
+     IF   	V_STUDENT_DETAIL_ID=0 THEN	
+		CALL SP_INSERT_STUDENT_DETAILS(
+		V_STUDENT_ID,
+		J_V_STUDENT_ACADEMIC_INSTITUTE,
+		J_V_STUDENT_IMAGE_PATH,
+		J_V_FATHER_FIRST_NAME,
+		J_V_FATHER_LAST_NAME,
+		J_V_FATHER_CONTACTNO,
+		J_V_FATHER_ANUAL_INCOME,
+		J_V_FATHER_QUALIFICATION,
+		J_V_FATHER_OCCUPATION,
+		J_V_MOTHER_FIRST_NAME,
+		J_V_MOTHER_LAST_NAME,
+		J_V_MOTHER_QUALIFICATION,
+		J_V_MOTHER_OCCUPATION,
+		J_V_MOTHER_CONTACTNO,
+		J_V_MOTHER_ANUAL_INCOME,
+		J_V_STUDENT_DATE_OF_BIRTH ,
+		J_V_STUDENT_QUALIFICATION,
+		J_V_CREATED_BY,
+		J_V_CREATED_DATE,
+		V_MODIFIED_BY,
+		V_MODIFIED_DATE ,
+		@V_STUDENT_DETAIL_ID);
+
+    END IF;
+          
+	END$$
+
+DELIMITER ;
