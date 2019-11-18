@@ -4,6 +4,7 @@
     CustomerId?: number;
     RequestTxnID?: string;
     LanguageId?: number;
+    LoginUserId?:number;
 }
 
 export class SearchRequestModel<T> extends RequestModel<T>  

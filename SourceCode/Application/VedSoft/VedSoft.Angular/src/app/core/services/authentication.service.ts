@@ -97,12 +97,14 @@ export class AuthenticationService {
   private doLoginUser(user: AuthenticationModel) {
     if (user.loginResponseDetails != null && user.loginResponseDetails.loginStatus == LoginStatusEnum.Success) {
       this.loggedUser = user.userDetails;
+      this.baseService.loginUserId = this.loggedUser.id;
       this.storeTokens(user.loginResponseDetails);
     }
   }
 
   private doLogoutUser() {
     this.loggedUser = null;
+    this.baseService.loginUserId = null;
     this.removeTokens();
   }
 
@@ -173,7 +175,10 @@ export class AuthenticationService {
       map((result: ResponseModel<UserMasterModel>) => {
 
         if (result != null && result.responseData != null)
+        {
           this.loggedUser = result.responseData;
+          this.baseService.loginUserId = this.loggedUser.id;
+        }
         return this.loggedUser != null && this.loggedUser.id > 0
       }));
 

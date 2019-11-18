@@ -14,8 +14,10 @@ export class BaseService {
   public requestCount: number = 0;
   public appInfo: ApplicationModel;
   public CustomerInfo: CustomerModel;
+  public loginUserId:number;
   constructor(private http: HttpClient, private messageService: ToastrService) {
     console.log("AppBaseService");
+    this.loginUserId=null;
     this.setAppUrl();
 
     //this.getCustomer(subDomainName).subscribe()
@@ -32,6 +34,7 @@ export class BaseService {
     obj.CustomerId = this.CustomerInfo.customerId,
       obj.LanguageId = this.appInfo.LanguageId,
       obj.requestParameter = requestModel;
+      obj.LoginUserId = this.loginUserId;
     return obj;
 
   }
@@ -41,6 +44,7 @@ export class BaseService {
     obj.CustomerId = this.CustomerInfo.customerId,
       obj.LanguageId = this.appInfo.LanguageId,
       obj.requestParameter = requestModel;
+      obj.LoginUserId = this.loginUserId;
     return obj;
 
   }
