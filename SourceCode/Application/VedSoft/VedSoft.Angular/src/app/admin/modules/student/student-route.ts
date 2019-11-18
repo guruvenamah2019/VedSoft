@@ -3,16 +3,17 @@ import { StudentIndexComponent, StudentListComponent,NewStudentComponent, Studen
 import { BranchGuard } from 'src/app/core/guards';
 export const STUDENT_ROUTES: Routes = [
     { 
-        path: '',redirectTo:'students'
+        path: '', redirectTo:"students"
       },
       { 
-        path: 'students',  component: StudentListComponent
+        path: 'students',   component: StudentListComponent
       },
+      { path: 'students/:id', redirectTo: 'student/:id' },
         
 
-        { path: 'students/new', component: NewStudentComponent},
+        { path: 'student/new', component: NewStudentComponent},
            
-            { path: 'students/:studentId', component: StudentComponent,children: [
+            { path: 'student/:studentId', component: StudentComponent,children: [
                
       
                 {

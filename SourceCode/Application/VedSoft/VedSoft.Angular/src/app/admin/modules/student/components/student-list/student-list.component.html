@@ -42,7 +42,7 @@
             <td>
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+student.id}}">
-                <label class="custom-control-label" for="{{'customCheck1'+student.id}}">{{student.firstName}}</label>
+                <label class="custom-control-label" for="{{'customCheck1'+student.id}}">{{student.user.firstName}}</label>
               </div>
             </td>
             <td class="actions">
@@ -55,7 +55,7 @@
                 </button>
                 <ul id="{{'ddl1'+student.id}}" *dropdownMenu class="dropdown-menu" role="menu" [attr.aria-labelledby]="'btn1'+student.id"
                   x-placement="bottom-end">
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline" [routerLink]="['../', student.id]"   >Edit</i></li>
+                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline" [routerLink]="['./', student.id]"   >Edit</i></li>
                   <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever" (click)="deleteStudent(student)"  >Delete</i></li>
 
                 </ul>
