@@ -97,7 +97,7 @@ namespace VedSoft.Data.Repository.Repository.User
             //Make db object
             UserMasterDB userMaster = new UserMasterDB
             {
-                CreatedBy = input.RequestParameter.ActionUserId,
+                CreatedBy = input.LoginUserId,
                 CreatedDate = DateTime.Now,
                 Active = CommonConstants.ActiveStatus,
                 Address = input.RequestParameter.Address,
@@ -108,7 +108,11 @@ namespace VedSoft.Data.Repository.Repository.User
                 MiddleName = input.RequestParameter.MiddleName,
                 NotificationEmailId = input.RequestParameter.NotificationEmailId,
                 Password = input.RequestParameter.Password,
-                UserTypeId = input.RequestParameter.UserTypeId
+                UserTypeId = input.RequestParameter.UserTypeId,
+                CustomerId = input.CustomerId,
+                
+                
+
             };
 
             //Save in database

@@ -72,9 +72,12 @@ namespace VedSoft.Business.Engine.Master
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
             responseModel.ResponseData = new ResultModel();
+            input.RequestParameter.User.UserTypeId = 1;
+            input.RequestParameter.User.RequestedLanguageId = input.LanguageId??1;
             RequestModel<UserModel> inputUser = new RequestModel<UserModel>()
             {
                 CustomerId = input.CustomerId,
+                LanguageId= input.LanguageId,
                 RequestParameter = input.RequestParameter.User
             };
 

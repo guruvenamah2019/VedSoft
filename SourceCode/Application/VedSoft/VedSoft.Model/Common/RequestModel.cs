@@ -12,7 +12,8 @@ namespace VedSoft.Model.Common
         public int? CustomerId { get; set; }
         public string ObjectKey { get; set; }
         public string RequestTxnID { get; set; }
-        public int? LanguageId { get; set; }        
+        public int? LanguageId { get; set; }
+        public int? LoginUserId { get; set; }
     }
 
     public class SearchRequestModel<T> : RequestModel<T> where T : class
