@@ -1,0 +1,18 @@
+﻿<a mat-button [routerLink]="'/admin/branchs'"> Branches </a>
+<a mat-button [routerLink]="'/admin/dashboard'"> Dashboard </a>
+
+<button mat-button [matMenuTriggerFor]="ReportsMenu"  >
+    <span>Reports</span>
+    <i class="mdi mdi-14px mdi-arrow-down-drop-circle-outline link-icon"></i>
+  </button>
+  <a mat-button [routerLink]="'/admin/dashboard'">  Follow-ups </a>
+
+  <a mat-button [routerLink]="'/admin/dashboard'">  Activities </a>
+
+<mat-menu #ReportsMenu="matMenu" yPosition="below">
+  <button mat-menu-item [routerLink]="'/admin/dashboard'">Admissions</button>
+  <button mat-menu-item [routerLink]="'/admin/dashboard'">Fees</button>
+  <button mat-menu-item [routerLink]="'/admin/dashboard'">Enquiries</button>
+  <button mat-menu-item [routerLink]="'/admin/dashboard'">Expense</button>
+
+</mat-menu>

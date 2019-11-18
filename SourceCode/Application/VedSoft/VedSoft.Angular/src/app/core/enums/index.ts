@@ -2,3 +2,4 @@
 export * from "./login-status.enum"
 export * from "./password-strength.enum"
 export * from "./institute-type.enum"
+export * from "./module.enum"

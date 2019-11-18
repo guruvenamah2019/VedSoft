@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 import { CustomerModel } from '../models/master-model/customer-model';
 import { LOGIN_SERVICE_URL, COURSE_SERVICE_URL } from '../constant/service-url';
 import { map, catchError } from 'rxjs/operators';
+import { ModuleEnum } from '../enums';
 
 @Injectable({ providedIn: 'root' })
 export class BaseService {
@@ -15,14 +16,25 @@ export class BaseService {
   public appInfo: ApplicationModel;
   public CustomerInfo: CustomerModel;
   public loginUserId:number;
+  public activeModule:ModuleEnum;
   constructor(private http: HttpClient, private messageService: ToastrService) {
     console.log("AppBaseService");
     this.loginUserId=null;
     this.setAppUrl();
+    this.ActiveModule = ModuleEnum.Public;
 
     //this.getCustomer(subDomainName).subscribe()
 
   }
+  
+  get ActiveModule(): ModuleEnum {
+    return this.activeModule;
+}
+set ActiveModule(value: ModuleEnum) {
+    this.activeModule = value;
+}
+
+
   private setAppUrl() {
     this.appInfo = new ApplicationModel();
     this.appInfo.apiUrl = environment.apiUrl;

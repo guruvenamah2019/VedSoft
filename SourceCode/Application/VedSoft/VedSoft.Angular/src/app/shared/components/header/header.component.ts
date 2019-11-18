@@ -11,14 +11,14 @@ import jQuery from "jquery"
 
 export class HeaderComponent implements OnInit {
     searchForm:FormGroup;
-    constructor(  private formBuilder: FormBuilder) {
+    constructor( private router: Router) {
         console.log("HeaderComponent");
+        router.events.subscribe(x=>{console.log("RAM"+ x)})
+
         
     }
     ngOnInit() {
-        this.searchForm = this.formBuilder.group({
-          searchKey: ['', Validators.required]
-        });
+      
     
       }
       get f() { return this.searchForm.controls; }
