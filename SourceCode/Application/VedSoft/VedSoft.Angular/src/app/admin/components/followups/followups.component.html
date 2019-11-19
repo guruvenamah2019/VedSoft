@@ -1,0 +1,72 @@
+﻿<div class="row">
+    <div class="col-md-9 col-lg-9 col-xl-9">
+        <div class="card">
+            <div class="card-block pb-0">
+                <div class="card-title">
+                    <h3>Follow-ups&nbsp;</h3>
+                    <div >
+                        
+                            <div class="lead"></div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="followups admin_notes ui comments" id="followups">
+                <div class="jumbotron mx-1">
+                    <div class="text-xs-center"><b>No followups this week.</b></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div id="pagination"></div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3">
+        <div class="hidden-sm-down" id="filter-sidebar">
+            <h3>Filter</h3>
+            <hr>
+            <h5>Mode</h5>
+            <ul class="followup-filter-mode list-inline" id="topic_list">
+                <li class="list-inline-item" data-mode="due"><span class="tag tag-default tag-success">Due</span></li>
+                <li class="list-inline-item" data-mode="completed"><span class="tag tag-default ">Completed</span></li>
+            </ul>
+            <h5>Due Date</h5>
+            <ul class="followup-filter-span list-inline" id="topic_list">
+                <li data-span="overdue"><span class="tag tag-default ">Overdue</span></li>
+                <li data-span="today"><span class="tag tag-default ">Today</span></li>
+                <li data-span="tomorrow"><span class="tag tag-default ">Tomorrow</span></li>
+                <li class="hidden-xs-up" data-span="yesterday"><span class="tag tag-default ">Yesterday</span></li>
+                <li data-span="this_week"><span class="tag tag-default tag-success">This Week</span></li>
+                <li data-span="next_week"><span class="tag tag-default ">Next Week</span></li>
+                <li data-span="later"><span class="tag tag-default ">Later</span></li>
+                <li class="hidden-xs-up" data-span="last_week"><span class="tag tag-default ">Last Week</span></li>
+                <li class="hidden-xs-up" data-span="earlier"><span class="tag tag-default ">Earlier</span></li>
+            </ul>
+            <h5>User</h5>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 mb-1"><select name="user_id" id="user_id" data-controller="chosen"
+                        class="input-medium form-control followup-filter-user" style="display: none;">
+                        <option value="">All</option>
+                        <option value="6039">COMMERCE TODAY</option>
+                        <option value="5008">MANISH KUMAR JHA</option>
+                    </select>
+                    <div class="chosen-container chosen-container-single" style="width: 160px;" title=""
+                        id="user_id_chosen"><a class="chosen-single" tabindex="-1"><span>All</span>
+                            <div><b></b></div>
+                        </a>
+                        <div class="chosen-drop">
+                            <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                            <ul class="chosen-results"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5>Branches</h5>
+            <ul class="followup-filter-branch list-unstyled" id="select_branch_list">
+                <li data-branch="3993"><span class="tag tag-default">Commerce Today</span></li>
+            </ul>
+            
+            <h5>Export</h5><a class="blue title xls" target="_blank" href="/followups.xlsx"><i
+                    class="fa fa-download"></i>&nbsp;xls</a>
+        </div>
+    </div>
+</div>

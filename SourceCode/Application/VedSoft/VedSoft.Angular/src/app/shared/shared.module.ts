@@ -6,7 +6,7 @@ import { ModalModule, BsModalService, BsDropdownModule } from 'ngx-bootstrap';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { createTranslateLoader } from './loader/translate.loader';
-import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component,Error401Component, Error500Component, AddressComponent, CustomerHeaderComponent } from "./components/index"
+import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component,Error401Component, Error500Component, AddressComponent, CustomerHeaderComponent, BranchNavigationComponent } from "./components/index"
 import { MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
@@ -21,7 +21,8 @@ import { ToastrModule } from 'ngx-toastr';
     Error500Component,
     AddressComponent,
     Error401Component,
-    CustomerHeaderComponent
+    CustomerHeaderComponent,
+    BranchNavigationComponent
   ],
   imports: [
     ReactiveFormsModule,

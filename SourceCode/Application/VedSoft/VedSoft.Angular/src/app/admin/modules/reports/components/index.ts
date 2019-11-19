@@ -1,0 +1,5 @@
+export * from "./reports-index.component"
+export * from "./admission/admission.component"
+export * from "./enquiry/enquiry.component"
+export * from "./expenses/expenses.component"
+export * from "./fees/fees.component"

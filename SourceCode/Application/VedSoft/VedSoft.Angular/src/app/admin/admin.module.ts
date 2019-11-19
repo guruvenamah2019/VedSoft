@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AdminIndexComponent,AdminDashboardComponent } from './components/index';
+import { AdminIndexComponent,AdminDashboardComponent, AdminFollowupsComponent, AdminActivitiesComponent } from './components/index';
 import { RouterModule } from '@angular/router';
 import { AuthGuard, AdminGuard } from "../core/guards/index";
 import {AdminSettingsModule} from "./modules/settings/settings.module";
@@ -12,7 +12,9 @@ import { SubjectHiearchyService } from '../core/services';
 @NgModule({
     declarations: [
         AdminIndexComponent,
-        AdminDashboardComponent
+        AdminFollowupsComponent,
+        AdminDashboardComponent,
+        AdminActivitiesComponent
     ],
     imports: [
         SharedModule,
