@@ -26,13 +26,13 @@ namespace VedSoft.Utility.Constants
 
     public enum LoginStatusConstants
     {
-        Success=1,
-        InvalidCredentials=2,
-        PasswordExpired=3,
-        LoginAttemptExceeded=4,
-        TemproryPassword=5,
+        Success = 1,
+        InvalidCredentials = 2,
+        PasswordExpired = 3,
+        LoginAttemptExceeded = 4,
+        TemproryPassword = 5,
         InActive = 6,
-        InvalidRefreshToken=7,
+        InvalidRefreshToken = 7,
         AccontLocked = 8
     }
 
@@ -42,10 +42,14 @@ namespace VedSoft.Utility.Constants
         public const int ActiveStatus = 1;
         public const int InActiveStatus = 0;
         public const int Success = 1;
-        public const string UserLoginDetailsIdClaim  = "UserLoginDetailsIdClaim";
+        public const string UserLoginDetailsIdClaim = "UserLoginDetailsIdClaim";
         public const int AccountLockedTimeInMiutes = 30;
         public const int DuplicateRecord = -1;
         public const int InvalidRecord = -2;
     }
-        
+
+    public class ConfigKeys
+    {
+        public static string MySqlConnectionString { get; set; }
+    }
 }

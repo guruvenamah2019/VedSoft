@@ -86,6 +86,9 @@ namespace VedSoft.API.Core
                                                             .Replace("DATABASE", conDatabase);
 
             Program._log.InfoFormat("DB Connection String:{0}", mySqlConnectionString);
+            ConfigKey.MySqlConnectionString = mySqlConnectionString;
+            
+            Utility.Constants.ConfigKeys.MySqlConnectionString = mySqlConnectionString;
             services.AddDbContext<RepositoryContext>(mySql => mySql.UseMySql(mySqlConnectionString));
         }
 

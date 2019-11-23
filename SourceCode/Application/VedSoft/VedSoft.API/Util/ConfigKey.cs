@@ -19,6 +19,7 @@ namespace VedSoft.API.Util
         public static int JWTAccessTokenDurationInSeconds { get; set; }
         public static string JWTTokenIssuer { get; set; }
         public static string JWTTokenAudience { get; set; }
+        public static string MySqlConnectionString { get; set; }
 
         //public static string JWTSecurityKey = _configuration.GetSection("JWTSecurityKey").Value;
         //public static int JWTAccessTokenDurationInSeconds = Convert.ToInt32(_configuration.GetSection("JWTAccessTokenDurationInSeconds").Value);

@@ -7,7 +7,7 @@ using VedSoft.Model.Master;
 
 namespace VedSoft.Data.Repository
 {
-    public class RepositoryContext : DbContext
+    public partial class RepositoryContext : DbContext
     {
         public RepositoryContext(DbContextOptions options): base(options)
         {

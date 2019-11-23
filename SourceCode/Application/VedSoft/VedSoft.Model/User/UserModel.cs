@@ -8,6 +8,7 @@ namespace VedSoft.Model.User
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+        public int RollNumber { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -26,6 +27,11 @@ namespace VedSoft.Model.User
         public int ActionUserId { get; set; }//It will have the user Id ...who is going to perform the operation on it...not the actual user id
         public int RequestedPageSize { get; set; }
         public int RequestedLanguageId { get; set; }
+        public string AcademicInstitute { get; set; }
+        public string Qualification { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public int Sex { get; set; }
+        public string ImageName { get; set; }
     }
 
     public class UserRoleModel
@@ -43,6 +49,7 @@ namespace VedSoft.Model.User
         public UserModel FatherUser { get; set; }
         public UserModel MotherUser { get; set; }
         public UserModel GuardianUser { get; set; }
+        public int BranchId { get; set; }
         public int IsEnrolled { get; set; }
         public int ActionUserId { get; set; }//It will have the user Id ...who is going to perform the operation on it...not the actual user id
     }
