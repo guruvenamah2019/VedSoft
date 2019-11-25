@@ -9,17 +9,20 @@ import { CustomerModel } from '../models/master-model/customer-model';
 import { LOGIN_SERVICE_URL, COURSE_SERVICE_URL } from '../constant/service-url';
 import { map, catchError } from 'rxjs/operators';
 import { ModuleEnum } from '../enums';
+import { UserMasterModel } from '../models/user-model';
+import { CustomerBranchModel } from '../models/master-model';
 
 @Injectable({ providedIn: 'root' })
 export class BaseService {
   public requestCount: number = 0;
   public appInfo: ApplicationModel;
   public CustomerInfo: CustomerModel;
-  public loginUserId:number;
   public activeModule:ModuleEnum;
+  public loggedUser: UserMasterModel;
+  public branchInfo:CustomerBranchModel;
   constructor(private http: HttpClient, private messageService: ToastrService) {
     console.log("AppBaseService");
-    this.loginUserId=null;
+    this.loggedUser = new UserMasterModel();
     this.setAppUrl();
     this.ActiveModule = ModuleEnum.Public;
 
@@ -46,7 +49,7 @@ set ActiveModule(value: ModuleEnum) {
     obj.CustomerId = this.CustomerInfo.customerId,
       obj.LanguageId = this.appInfo.LanguageId,
       obj.requestParameter = requestModel;
-      obj.LoginUserId = this.loginUserId;
+      obj.LoginUserId = this.loggedUser?this.loggedUser.id:null;
     return obj;
 
   }
@@ -56,7 +59,7 @@ set ActiveModule(value: ModuleEnum) {
     obj.CustomerId = this.CustomerInfo.customerId,
       obj.LanguageId = this.appInfo.LanguageId,
       obj.requestParameter = requestModel;
-      obj.LoginUserId = this.loginUserId;
+      obj.LoginUserId = this.loggedUser?this.loggedUser.id:null;
     return obj;
 
   }

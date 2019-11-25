@@ -11,8 +11,17 @@
         <button (click)="mobieViewClieck()" class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
           <i class="mdi mdi-menu"></i>
         </button>
-        <ved-cust-header></ved-cust-header>
-        <ved-brc-nav></ved-brc-nav>
+        
+        
+        <div *ngIf="IsBranch; else customerHeader">
+          
+          <ved-brc-nav ></ved-brc-nav>
+      </div>
+      
+      <ng-template #customerHeader>
+        <ved-cust-header ></ved-cust-header>
+      </ng-template>
+        {{IsBranch}}
       </div>
     </div>
   </nav>

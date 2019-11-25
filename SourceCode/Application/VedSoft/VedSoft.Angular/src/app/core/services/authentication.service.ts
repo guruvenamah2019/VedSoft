@@ -10,6 +10,7 @@ import { post } from 'selenium-webdriver/http';
 import { LoginStatusEnum } from '../enums/login-status.enum';
 import { SetPasswordRequestModel } from '../models/login';
 import { CustomerModel } from '../models/master-model/customer-model';
+import { CustomerBranchModel } from '../models/master-model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,18 @@ export class AuthenticationService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  public loggedUser: UserMasterModel;
-  public customerInfo: CustomerModel;
 
   constructor(private http: HttpClient, private baseService: BaseService) {
 
   }
+  public get loggedUser(): UserMasterModel {
+    return this.baseService.loggedUser;
+  }
+  public set loggedUser(user: UserMasterModel) {
+    this.baseService.loggedUser = user;
+  }
 
- 
+
 
   public login(user: LoginRequestModel): Observable<ResponseModel<AuthenticationModel>> {
 
@@ -75,17 +80,17 @@ export class AuthenticationService {
       refreshToken: this.getRefreshToken(),
       token: this.getJwtToken()
     })
-    
+
     return this.http.post<ResponseModel<LoginResponseModel>>(url, input).pipe(tap((tokens: ResponseModel<LoginResponseModel>) => {
       if (tokens != null && tokens.responseData != null && tokens.responseData.loginStatus == LoginStatusEnum.Success) {
         this.storeJwtToken(tokens.responseData.token);
       }
       else {
         this.removeTokens();
-        this.logout().subscribe(x => { 
+        this.logout().subscribe(x => {
           location.reload(true);
         });
-        
+
       }
     }));
   }
@@ -97,14 +102,14 @@ export class AuthenticationService {
   private doLoginUser(user: AuthenticationModel) {
     if (user.loginResponseDetails != null && user.loginResponseDetails.loginStatus == LoginStatusEnum.Success) {
       this.loggedUser = user.userDetails;
-      this.baseService.loginUserId = this.loggedUser.id;
+      this.baseService.loggedUser = user.userDetails;
       this.storeTokens(user.loginResponseDetails);
     }
   }
 
   private doLogoutUser() {
     this.loggedUser = null;
-    this.baseService.loginUserId = null;
+    this.baseService.loggedUser = null;
     this.removeTokens();
   }
 
@@ -164,23 +169,21 @@ export class AuthenticationService {
 
     };
     */
-    if(this.loggedUser!=null && this.loggedUser.id>0)
-    {
+    if (this.loggedUser != null && this.loggedUser.id > 0) {
       return of(true)
     }
-    else
-    {
+    else {
 
-    return this.getUserDetailsByToken().pipe(
-      map((result: ResponseModel<UserMasterModel>) => {
+      return this.getUserDetailsByToken().pipe(
+        map((result: ResponseModel<UserMasterModel>) => {
 
-        if (result != null && result.responseData != null)
-        {
-          this.loggedUser = result.responseData;
-          this.baseService.loginUserId = this.loggedUser.id;
-        }
-        return this.loggedUser != null && this.loggedUser.id > 0
-      }));
+          if (result != null && result.responseData != null) {
+            this.loggedUser = result.responseData;
+            this.baseService.loggedUser = result.responseData;
+          }
+          return this.baseService.loggedUser != null && this.baseService.loggedUser.id > 0
+        }));
 
-  }}
+    }
+  }
 }

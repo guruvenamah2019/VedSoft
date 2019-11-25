@@ -10,18 +10,25 @@ import jQuery from "jquery"
 })
 
 export class HeaderComponent implements OnInit {
-    searchForm:FormGroup;
     constructor( private router: Router) {
         console.log("HeaderComponent");
-        router.events.subscribe(x=>{console.log("RAM"+ x)})
+        //router..subscribe(x=>{console.log("RAM"+ router.url)})
 
         
     }
+
+    public activeUrl(){
+      return this.router.url;
+    }
+    get IsBranch(){
+      return this.router.url.toLowerCase().indexOf("/admin/branchs/")>-1;
+    }
+
     ngOnInit() {
       
     
       }
-      get f() { return this.searchForm.controls; }
+     
 
       mobieViewClieck() {
         jQuery(".page-body").toggleClass("sidebar-collpased");

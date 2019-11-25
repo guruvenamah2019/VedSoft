@@ -17,6 +17,7 @@ import { StudentProfileComponent } from '..';
 export class NewStudentComponent implements OnInit {
   navLinks: any[];
   activeLinkIndex = -1;
+  branchId=0;
   @ViewChild(StudentProfileComponent,{static:false}) stepOneComponent: StudentProfileComponent;
   @ViewChild(StudentProfileComponent,{static:false}) stepTwoComponent: StudentProfileComponent;
   @ViewChild(StudentProfileComponent,{static:false}) stepThreeComponent: StudentProfileComponent;
@@ -38,6 +39,14 @@ export class NewStudentComponent implements OnInit {
   }
   constructor(private userService: AuthenticationService, private router: Router,private activatedRoute: ActivatedRoute) {
     console.log("StudentComponent");
+
+    this.activatedRoute.parent.params.subscribe(params => {
+      console.log(params)
+      if (params["branchId"] != null) {
+          this.branchId = params["branchId"];
+          
+      }
+    });
 
    
   }

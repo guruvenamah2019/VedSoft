@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
+import { BranchService } from '../../../../core/services';
 
 
 @Component({
@@ -19,12 +20,20 @@ export class BranchIndexComponent implements OnInit {
     onNavigate() {
     }
     constructor( private route: ActivatedRoute,
-        private router: Router,) {
+        private router: Router,private branchService:BranchService) {
         console.log("BranchIndexComponent");
         
     }
     ngOnInit() {
-        this.route.params.subscribe(params => console.log(params)); // Object {artistId: 12345}
+        this.route.params.subscribe(params => {
+            this.branchService.baseService.branchInfo=null;
+            console.log(params)
+            if(params!=null && params.branchId!=null){
+                this.branchService.getBranchInfo(params.branchId).subscribe(brc=>{
+                    this.branchService.baseService.branchInfo = brc;
+                })
+            }
+        }); // Object {artistId: 12345}
 
     }
     

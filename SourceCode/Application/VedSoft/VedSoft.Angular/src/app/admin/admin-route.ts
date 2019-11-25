@@ -24,6 +24,7 @@ export const ADMIN_ROUTES: Routes = [
             },
 
             { path: 'branchs', loadChildren: () => import('./modules/branch/branch.module').then(m => m.BranchModule) },
+            
             { path: 'reports', loadChildren: () => import('./modules/reports/reports.module').then(m => m.ReportsModule) },
             
         ],

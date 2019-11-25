@@ -1,18 +1,35 @@
 export class UserMasterModel {
   id?: number;
   userName?: string;
+  rollNumber?: number;
   firstName?: string;
-  middleName?:string;
+  middleName?: string;
   lastName?: string;
+  userTypeId?: number;
   notificationEmailId?: string;
-userDetailsId ?:string;
-address?:any;
-contactNumber?:string;
-UserTypeId?:number;
+  contactNumber?: string;
+  address?: string;
+  password?: string;
+  lastLoginDate?: string | null;
+  passwordExpiryDate?: string | null;
+  lockAttempts?: number | null;
+  temproryPassword?: number | null;
+  active?: number | null;
+  userDetailsId?: number;
+  passwordValidationCode?: string;
+  actionUserId?: number;
+  requestedPageSize?: number;
+  requestedLanguageId?: number;
+  academicInstitute?: number;
+  qualification?: string;
+  dateOfBirth?: string;
+  sex?: number;
+  imageName?: string;
+
 
   constructor() {
-    this.id = 1;
-    this.userName = "Admin";
+    this.id = 0;
+    this.userName = "";
 
   }
 }

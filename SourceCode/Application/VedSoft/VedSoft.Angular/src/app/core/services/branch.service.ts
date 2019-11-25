@@ -128,7 +128,7 @@ export class BranchService {
 
     }
 
-    public getBranchInfo(id:number): Observable<CustomerBranchModel> {
+    public getBranchInfo(id: number): Observable<CustomerBranchModel> {
 
         let branch: CustomerBranchModel = new CustomerBranchModel();
         let searchInput = this.baseService.getSearchRequestModel(branch);
@@ -136,21 +136,22 @@ export class BranchService {
         searchInput.pageSize = 100;
 
         return this.getBranchList(searchInput).pipe(
-            map((list: CustomerBranchModel[])=>{
-            if(list.length>0 ){
-                return  list.find(x=>x.id==id);
+            map((list: CustomerBranchModel[]) => {
+                if (list.length > 0) {
+                    return list.find(x => x.id == id);
+                }
+                else {
+                    return null;
+                }
             }
-            else{
-            return null;
-            }}
             )
         );
 
-       /* let url = `${this.baseService.appInfo.apiUrl}/${BRANCH_SERVICE_URL.ACTION_MAKE_INACTIVE_CUSTOMER_BRANCH}`;
-        return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
-            this.branchList = [];
-        }));
-*/
+        /* let url = `${this.baseService.appInfo.apiUrl}/${BRANCH_SERVICE_URL.ACTION_MAKE_INACTIVE_CUSTOMER_BRANCH}`;
+         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
+             this.branchList = [];
+         }));
+ */
     }
 
 

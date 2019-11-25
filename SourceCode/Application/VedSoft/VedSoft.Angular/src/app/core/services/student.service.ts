@@ -14,41 +14,41 @@ export class StudentService {
 
     private _studentList: StudentModel[] = [];
 
-    public get StudentList(){
+    public get StudentList() {
         return this._studentList;
     }
 
     constructor(private http: HttpClient, public baseService: BaseService) {
 
         this._studentList.push({
-            Id:1,
-            User:{
-            id:1,
-            firstName:"Ram",
+            id: 1,
+            user: {
+                id: 1,
+                firstName: "Ram",
             }
         });
         this._studentList.push({
-            Id:2,
-            User:{
-            id:2,
-            firstName:"Vijay",
+            id: 2,
+            user: {
+                id: 2,
+                firstName: "Vijay",
             }
         });
         this._studentList.push({
-            Id:3,
-            User:{
-            id:3,
-            firstName:"Dev",
+            id: 3,
+            user: {
+                id: 3,
+                firstName: "Dev",
             }
         });
         this._studentList.push({
-            Id:4,
-            User:{
-            id:4,
-            firstName:"Karan",
+            id: 4,
+            user: {
+                id: 4,
+                firstName: "Karan",
             }
         });
-      
+
 
     }
 
@@ -75,16 +75,16 @@ export class StudentService {
     public getStudent(input: SearchRequestModel<StudentModel>): Observable<StudentModel[]> {
 
         let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_GET_STUDENT}`;
-            return this.http.post<ResponseModel<StudentModel[]>>(url, input).pipe(
-                map((data: ResponseModel<StudentModel[]>) => {
-                    if (data != null && data.responseData != null) {
-                        this._studentList = data.responseData;
+        return this.http.post<ResponseModel<StudentModel[]>>(url, input).pipe(
+            map((data: ResponseModel<StudentModel[]>) => {
+                if (data != null && data.responseData != null) {
+                    this._studentList = data.responseData;
 
 
-                    }
-                    return this._studentList;
-                })
-            );
+                }
+                return this._studentList;
+            })
+        );
 
     }
     public makeInActiveStudent(input: RequestModel<StudentModel>): Observable<ResponseModel<ResultModel>> {
@@ -95,7 +95,7 @@ export class StudentService {
         }));
 
     }
-    
+
 
 
 }
