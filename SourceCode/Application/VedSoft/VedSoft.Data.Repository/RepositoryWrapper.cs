@@ -38,14 +38,14 @@ namespace VedSoft.Data.Repository
 
         }
 
-        public RepositoryWrapper(RepositoryContext repositoryContext, string connString)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<RepositoryContext>();
-            optionsBuilder.UseMySql(connString);
+        //public RepositoryWrapper(RepositoryContext repositoryContext, string connString)
+        //{
+        //    var optionsBuilder = new DbContextOptionsBuilder<RepositoryContext>();
+        //    optionsBuilder.UseMySql(connString);
 
-            RepositoryContext obupdatedContext = new RepositoryContext(optionsBuilder.Options);
-            _repoContext = obupdatedContext;
-        }
+        //    RepositoryContext obupdatedContext = new RepositoryContext(optionsBuilder.Options);
+        //    _repoContext = obupdatedContext;
+        //}
 
         public ICustomerRepository CustomerRepository
         {
