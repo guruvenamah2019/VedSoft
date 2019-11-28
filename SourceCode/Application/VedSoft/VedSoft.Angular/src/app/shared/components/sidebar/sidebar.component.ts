@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services';
+import jQuery from "jquery"
 
 
 @Component({
@@ -15,7 +16,7 @@ export class SidebarComponent implements OnInit {
 
     }
     ngOnInit() {
-        
+
     }
 
     signOut() {
@@ -28,11 +29,20 @@ export class SidebarComponent implements OnInit {
 
     }
 
-    get userName():string{
+    get userName(): string {
 
-        return this.auth.loggedUser.firstName +" "+this.auth.loggedUser.middleName+" " +this.auth.loggedUser.lastName; 
+        return this.auth.loggedUser.firstName + " " + this.auth.loggedUser.middleName + " " + this.auth.loggedUser.lastName;
 
 
+    }
+
+    mobieViewClieck() {
+        //jQuery(".page-body").toggleClass("sidebar-collpased");
+        jQuery("body").toggleClass("sidebar-toggled");
+        jQuery(".sidebar").toggleClass("toggled");
+        if (jQuery(".sidebar").hasClass("toggled")) {
+            jQuery('.sidebar .collapse').collapse('hide');
+        };
     }
 
 }

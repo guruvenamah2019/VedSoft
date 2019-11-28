@@ -2,6 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import jQuery from "jquery"
+import { AuthenticationService } from 'src/app/core/services';
 
 
 @Component({
@@ -10,7 +11,7 @@ import jQuery from "jquery"
 })
 
 export class HeaderComponent implements OnInit {
-    constructor( private router: Router) {
+    constructor( private router: Router, private auth: AuthenticationService) {
         console.log("HeaderComponent");
         //router..subscribe(x=>{console.log("RAM"+ router.url)})
 
@@ -31,7 +32,21 @@ export class HeaderComponent implements OnInit {
      
 
       mobieViewClieck() {
-        jQuery(".page-body").toggleClass("sidebar-collpased");
+        //jQuery(".page-body").toggleClass("sidebar-collpased");
+        jQuery("body").toggleClass("sidebar-toggled");
+        jQuery(".sidebar").toggleClass("toggled");
+        if (jQuery(".sidebar").hasClass("toggled")) {
+            jQuery('.sidebar .collapse').collapse('hide');
+        };
       }
+      signOut() {
+        this.auth.logout().subscribe(x => {
+            if (x) {
+                this.router.navigate(["/public/login"]);
+            }
+
+        })
+
+    }
       
 }

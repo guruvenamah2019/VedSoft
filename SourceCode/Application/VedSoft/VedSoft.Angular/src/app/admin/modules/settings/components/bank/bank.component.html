@@ -1,71 +1,81 @@
 ﻿<div class="grid">
-  <p class="grid-header demo-wrapper">
-    <span>Bank Settings</span>
-    <span class="float-right  btn btn-dark has-icon btn-rounded">
-      <i class="mdi mdi-import"></i>Import</span>
-    <span (click)="addBank()" class="float-right btn btn-success has-icon btn-rounded">
-      <i class="mdi mdi-bank"></i>Add</span>
-    <span class="float-none"></span>
-  </p>
+  <div class="card mb-4 py-3 border-left-info">
+    <div class="card-body">
+      Bank Settings
 
-
-  <div class="item-wrapper">
-    <div class="table-responsive">
-      <table class="table table-hover" *ngIf="bankList">
-        <thead>
-          <tr>
-            <th>Select All|None
-
-              <label class="badge badge-info">{{bankList.length}} bank(s)</label>
-            </th>
-            <th>
-              <div class="btn-group" dropdown>
-                <button id="btnAll" dropdownToggle type="button"
-                  class="btn btn-trasnparent action-btn btn-xs component-flat pr-0 dropdown-toggle"
-                  aria-controls="ddlAll">
-                  <i class="mdi mdi-dots-vertical"></i>
-
-                </button>
-                <ul id="ddlAll" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="btnAll"
-                  x-placement="bottom-end">
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline"  >Edit</i></li>
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever">Delete</i></li>
-
-                </ul>
-              </div>
-
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let bank of bankList">
-            <td>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+bank.id}}">
-                <label class="custom-control-label" for="{{'customCheck1'+bank.id}}">{{bank.bankName}}</label>
-              </div>
-            </td>
-            <td class="actions">
-              <div class="btn-group" dropdown>
-                <button id="{{'btn1'+bank.id}}" dropdownToggle type="button"
-                  class="btn btn-trasnparent action-btn btn-xs component-flat pr-0 dropdown-toggle"
-                  [attr.aria-controls]="'ddl1'+bank.id">
-                  <i class="mdi mdi-dots-vertical"></i>
-
-                </button>
-                <ul id="{{'ddl1'+bank.id}}" *dropdownMenu class="dropdown-menu" role="menu" [attr.aria-labelledby]="'btn1'+bank.id"
-                  x-placement="bottom-end">
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline" (click)="editBank(bank)" >Edit</i></li>
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever" (click)="deleteBank(bank)"  >Delete</i></li>
-
-                </ul>
-              </div>
-            </td>
-          </tr>
-          
-
-        </tbody>
-      </table>
+      <span class="float-right  btn btn-dark has-icon btn-rounded">
+        <i class="fas fa-import"></i>Import</span>
+      <span (click)="addBank()" class="float-right btn btn-success has-icon btn-rounded">
+        <i class="fas fa-plus"></i>Add</span>
     </div>
   </div>
+  <div class="row">
+
+  <div class="col-lg-12">
+
+    <!-- Dropdown Card Example -->
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">
+          <th>Select All|None
+
+            <label class="badge badge-info">{{bankList.length}} bank(s)</label>
+          </th>
+        </h6>
+        <div class="dropdown no-arrow">
+          <!--<a class="dropdown-toggle " role="button" id="ddlAllLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="ddlAllLink">
+              <a class="dropdown-item">Edit</a>
+              <a class="dropdown-item">Delete</a>
+            </div>-->
+        </div>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover" *ngIf="bankList">
+            <tbody>
+              <tr *ngFor="let bank of bankList">
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+bank.id}}">
+                    <label class="custom-control-label" for="{{'customCheck1'+bank.id}}">{{bank.bankName}}</label>
+                  </div>
+                </td>
+                <td class="actions">
+
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" role="button" id="{{'btn1'+bank.id}}" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                      [attr.aria-labelledby]="'btn1'+bank.id">
+                      <a class="dropdown-item" (click)="editBank(bank)"><i
+                          class="fas fa-edit fa-sm fa-fw mr-2">Edit</i></a>
+                      <a class="dropdown-item" (click)="deleteBanK(bank)"><i
+                          class="fas fa-trash fa-sm fa-fw mr-2">Delete</i></a>
+                    </div>
+                  </div>
+
+                </td>
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  </div>
+
 </div>

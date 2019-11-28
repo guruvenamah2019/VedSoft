@@ -1,133 +1,150 @@
-﻿
-    <div class="sidebar">
-    <div class="user-profile">
-      <div class="display-avatar animated-avatar">
-          <a [routerLink]="['/profile/me']"> 
-            <img    class="profile-img img-lg rounded-circle" src="../assets/images/profile/male/image_1.png" alt="profile image">
-          </a>
-      </div>
-      <div class="info-wrapper">
-        <p class="user-name">{{userName}}</p>
-        <h6 class="display-income"></h6>
+﻿<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/profile/me']">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-laugh-wink"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">{{userName}} </div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link" [routerLink]="['/admin/dashboard']" [routerLinkActive]="'is-active'">
+      <i class="mdi mdi-gauge link-icon"></i>
+      <span>Dashboard</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Interface
+  </div>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+      aria-controls="collapseTwo">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Settings</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Custom Components:</h6>
+        <a class="collapse-item" [routerLink]="['/admin/settings/academicyear']"
+          [routerLinkActive]="'is-active'">academicyear</a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/org']" [routerLinkActive]="'is-active'">org</a>
+        <a class="collapse-item" [routerLink]="['/admin/branchs']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-home-variant link-icon"></i> <span>Branchs</span>
+
+        </a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/roles']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-plus-box link-icon"></i> <span>Roles</span>
+
+        </a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/standards']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-label link-icon"></i> <span>Standards</span>
+
+        </a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/streams']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-steam link-icon"></i> <span>Streams</span>
+
+        </a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/subject']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-text-subject link-icon"></i><span>Subject</span>
+
+        </a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/topics']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-label link-icon"></i><span>Topics</span>
+
+        </a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/course']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-library link-icon"></i><span>Course</span>
+
+        </a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/bank']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-bank link-icon"></i> <span>Banks</span>
+
+        </a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/institute']" [routerLinkActive]="'is-active'">
+          <i class="mdi mdi-school link-icon"></i> <span>Institutes</span>
+
+        </a>
       </div>
     </div>
-    <ul class="navigation-menu">
-      <li class="nav-category-divider">Main</li>
-      <li>
-          <a class="nav-link" [routerLink]="['/admin/dashboard']" [routerLinkActive]="'is-active'">
-              <span>Dashboard</span> 
-              <i class="mdi mdi-gauge link-icon"></i>
-          </a>
-        
-      </li>
-      <li>
-        <a  href="#settings-pages" data-toggle="collapse" aria-expanded="false">
-          <span class="link-title">Settings</span>
-          <i class="mdi mdi-settings link-icon"></i>
-        </a>
-        <ul class="collapse navigation-submenu" id="settings-pages">
-          <li>
-              <a class="nav-link" [routerLink]="['/admin/settings/academicyear']" [routerLinkActive]="'is-active'">
-                <i class="mdi mdi-calendar link-icon"></i> <span>Academic Year</span> 
+  </li>
 
-                
-            </a>
-          
-          </li>
-          <li>
-            <a class="nav-link" [routerLink]="['/admin/settings/org']" [routerLinkActive]="'is-active'">
-              <i class="mdi mdi-domain link-icon"></i> <span>Organization</span> 
+  <!-- Nav Item - Utilities Collapse Menu 
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Utilities</span>
+      </a>
+      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Custom Utilities:</h6>
+          <a class="collapse-item" href="utilities-color.html">Colors</a>
+          <a class="collapse-item" href="utilities-border.html">Borders</a>
+          <a class="collapse-item" href="utilities-animation.html">Animations</a>
+          <a class="collapse-item" href="utilities-other.html">Other</a>
+        </div>
+      </div>
+    </li>
+  -->
 
-              
-          </a>
-        
-        </li>
-          <li>
-            <a class="nav-link" [routerLink]="['/admin/branchs']" [routerLinkActive]="'is-active'">
-              <i class="mdi mdi-home-variant link-icon"></i> <span>Branchs</span> 
-              
-          </a>
-        </li>
-        <li>
-          <a class="nav-link" [routerLink]="['/admin/settings/roles']" [routerLinkActive]="'is-active'">
-            <i class="mdi mdi-plus-box link-icon"></i> <span>Roles</span> 
-            
-        </a>
-      </li>
-          <li>
-              <a class="nav-link" [routerLink]="['/admin/settings/standards']" [routerLinkActive]="'is-active'">
-               <i class="mdi mdi-label link-icon"></i> <span>Standards</span> 
-                
-            </a>
-          </li>
-          <li>
-              <a class="nav-link" [routerLink]="['/admin/settings/streams']" [routerLinkActive]="'is-active'">
-                <i class="mdi mdi-steam link-icon"></i> <span>Streams</span> 
-                
-            </a>
-          </li>
-          <li>
-              <a class="nav-link" [routerLink]="['/admin/settings/subject']" [routerLinkActive]="'is-active'">
-                <i class="mdi mdi-text-subject link-icon"></i><span>Subject</span> 
-                
-            </a>
-          </li>
-          <li>
-              <a class="nav-link" [routerLink]="['/admin/settings/topics']" [routerLinkActive]="'is-active'">
-                <i class="mdi mdi-label link-icon"></i><span>Topics</span> 
-                
-            </a>
-          </li>
-          <li>
-            <a class="nav-link" [routerLink]="['/admin/settings/course']" [routerLinkActive]="'is-active'">
-              <i class="mdi mdi-library link-icon"></i><span>Course</span> 
-              
-          </a>
-        </li>
-          <li>
-            <a class="nav-link" [routerLink]="['/admin/settings/bank']" [routerLinkActive]="'is-active'">
-              <i class="mdi mdi-bank link-icon"></i> <span>Banks</span> 
-              
-          </a>
-        </li>
-        <li>
-          <a class="nav-link" [routerLink]="['/admin/settings/institute']" [routerLinkActive]="'is-active'">
-            <i class="mdi mdi-school link-icon"></i> <span>Institutes</span> 
-            
-        </a>
-      </li>
-          
-         
-        </ul>
-      </li>
-      
-      
-      <li class="nav-category-divider">User</li>
-      <li>
-        <a href="#ui-profile" data-toggle="collapse" aria-expanded="false">
-          <span class="link-title">Profile</span>
-          <i class="mdi mdi-account-box link-icon"></i>
-        </a>
-        <ul class="collapse navigation-submenu" id="ui-profile">
-          <li>
-            <a class="nav-link" [routerLink]="['/profile/me']" [routerLinkActive]="'is-active'">
-              <i class="mdi mdi-account link-icon"></i> <span>Profile</span> 
-              
-          </a>
-        </li>
-        <li>
-            <a class="nav-link" [routerLink]="['/profile/password']" [routerLinkActive]="'is-active'">
-              <i class="mdi mdi-key link-icon"></i> <span>Password</span> 
-          </a>
-        </li>
-        </ul>
-      </li>
-      <li>
-        <a (click)="signOut()" >
-          <span class="link-title">Logout</span>
-          <i class="mdi mdi-logout link-icon"></i>
-        </a>
-      </li>
-    </ul>
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    User
   </div>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+      aria-controls="collapsePages">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Profile</span>
+    </a>
+    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Profile Screens:</h6>
+        <a class="collapse-item" [routerLink]="['/profile/me']" [routerLinkActive]="'is-active'">Profile</a>
+        <a class="collapse-item" [routerLink]="['/profile/password']" [routerLinkActive]="'is-active'">Password</a>
+        <div class="collapse-divider"></div>
+        <!--<h6 class="collapse-header">Other Pages:</h6>
+          <a class="collapse-item" href="404.html">404 Page</a>
+          <a class="collapse-item" href="blank.html">Blank Page</a>-->
+
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Charts -->
   
+
+  <!-- Nav Item - Tables -->
+  <!--<li class="nav-item">
+      <a class="nav-link" href="tables.html">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Tables</span></a>
+    </li>
+  -->
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" (click)="mobieViewClieck()" id="sidebarToggle"></button>
+  </div>
+
+</ul>
+<!-- End of Sidebar -->

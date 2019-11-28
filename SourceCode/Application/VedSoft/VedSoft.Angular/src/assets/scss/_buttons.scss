@@ -1,0 +1,230 @@
+.btn-circle {
+  border-radius: 100%;
+  height: 2.5rem;
+  width: 2.5rem;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  &.btn-sm {
+    height: 1.8rem;
+    width: 1.8rem;
+    font-size: 0.75rem;
+  }
+  &.btn-lg {
+    height: 3.5rem;
+    width: 3.5rem;
+    font-size: 1.35rem;
+  }
+}
+
+.btn-icon-split {
+  padding: 0;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: center;
+  .icon {
+    background: fade-out($black, .85);
+    display: inline-block;
+    padding: $btn-padding-y $btn-padding-x;
+  }
+  .text {
+    display: inline-block;
+    padding: $btn-padding-y $btn-padding-x;
+  }
+  &.btn-sm {
+    .icon {
+      padding: $btn-padding-y-sm $btn-padding-x-sm;
+    }
+    .text {
+      padding: $btn-padding-y-sm $btn-padding-x-sm;
+    }
+  }
+  &.btn-lg {
+    .icon {
+      padding: $btn-padding-y-lg $btn-padding-x-lg;
+    }
+    .text {
+      padding: $btn-padding-y-lg $btn-padding-x-lg;
+    }
+  }
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease;
+  transition-property: "background", "color";
+  @include font-size(14);
+  font-weight: 600;
+
+  
+
+  i {
+    @include font-size(20);
+  }
+
+  &.btn-lg {
+    height: 55px;
+    max-height: 55px;
+    padding: 15px 30px;
+    @include font-size(18);
+  }
+
+  &.btn-sm {
+    height: 35px;
+    max-height: 35px;
+    padding: 4px 15px;
+    @include font-size(14);
+
+  }
+
+  &.btn-xs {
+    height: 25px;
+    max-height: 25px;
+    padding: 0px 10px;
+    line-height: 1;
+    @include font-size(12);
+
+    &.has-icon {
+
+      span,
+      i {
+        @include font-size(13);
+        margin-right: 5px;
+      }
+    }
+  }
+
+  &:not(.btn-refresh, .dropdown-dotted-list) {
+    height: 40px;
+    max-height: 40px;
+    padding: 5px 20px;
+  }
+
+  &.active {
+    box-shadow: none;
+  }
+
+  &.social-icon-btn {
+    height: 40px;
+    width: 40px;
+  }
+
+  &.social-btn {
+    i {
+      margin-right: 10px;
+    }
+  }
+
+  &.social-btn-outlined {
+    i {
+      margin-right: 10px;
+    }
+  }
+
+  &.has-icon {
+
+    span,
+    i {
+      @include font-size(20);
+      margin-right: 10px;
+      line-height: 1;
+    }
+  }
+
+  &.btn-outline-secondary {
+    color: darken(theme-color(secondary), 40%);
+    border-color: darken(theme-color(secondary), 10%);
+  }
+
+  &.btn-warning,
+  &.btn-info,
+  &.btn-success {
+    color: $white;
+  }
+
+  &.btn-secondary {
+    color: color(gray);
+  }
+
+  
+  &.dropdown-toggle-split {
+    padding: 0 8px;
+  }
+
+  &.action-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    height: 40px;
+    width: 40px;
+
+    i {
+      font-size: 1.25rem;
+      width: 26px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 23px;
+      vertical-align: middle;
+
+      &:before {
+        width: inherit;
+        height: inherit;
+        line-height: inherit;
+        font-size: inherit;
+      }
+
+      @include font-size(20);
+    }
+
+    &.btn-xs {
+      height: 30px;
+      width: 30px;
+    }
+
+    &.btn-sm {
+      height: 35px;
+      width: 35px;
+    }
+
+    &.btn-lg {
+      height: 50px;
+      width: 50px;
+
+      i {
+        @include font-size(30);
+        line-height: 24px;
+      }
+    }
+
+    &.btn-refresh {
+      &.clicked {
+        i {
+          color: theme-color(primary);
+          animation: rotate360 0.8s linear infinite;
+        }
+      }
+    }
+
+    &.btn-like {
+      &.clicked {
+
+        i {
+          color: theme-color(danger);
+          animation: bounceIn 0.8s linear 1;
+        }
+
+       
+      }
+    }
+  }
+
+  &.btn-rounded {
+    border-radius: 50px;
+  }
+}
