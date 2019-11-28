@@ -18,17 +18,17 @@ namespace VedSoft.Business.Master
         #endregion
 
         #region Student
-        int AddStudent(RequestModel<StudentModel> input);
-        int UpdateStudent(RequestModel<StudentModel> input);
-        List<StudentModel> GetStudentList(SearchRequestModel<StudentModel> input);
-        int MakeInActiveStudent(RequestModel<StudentModel> input);
+        int AddStudent(RequestModel<StudentAdmissionModel> input);
+        int UpdateStudent(RequestModel<StudentModel_Old> input);
+        List<StudentModel_Old> GetStudentList(SearchRequestModel<StudentModel_Old> input);
+        int MakeInActiveStudent(RequestModel<StudentModel_Old> input);
         #endregion
 
         #region Student Admission
-        int AddStudentAdmission(RequestModel<StudentAdmissionModel> input);
-        int UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input);
-        List<StudentAdmissionModel> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input);
-        int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input);
+        int AddStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
+        int UpdateStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
+        List<StudentAdmissionModel_Old> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel_Old> input);
+        int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
         #endregion
 
         #region Student Course

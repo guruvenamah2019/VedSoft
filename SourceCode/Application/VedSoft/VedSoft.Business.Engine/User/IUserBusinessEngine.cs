@@ -21,17 +21,17 @@ namespace VedSoft.Business.Engine.Master
         #endregion
 
         #region Student
-        ResponseModel<ResultModel> AddStudent(RequestModel<StudentModel> input);
-        ResponseModel<ResultModel> UpdateStudent(RequestModel<StudentModel> input);
-        ResponseModel<List<StudentModel>> GetStudentList(SearchRequestModel<StudentModel> input);
-        ResponseModel<ResultModel> MakeInActiveStudent(RequestModel<StudentModel> input);
+        ResponseModel<ResultModel> AddStudent(RequestModel<StudentAdmissionModel> input);
+        ResponseModel<ResultModel> UpdateStudent(RequestModel<StudentModel_Old> input);
+        ResponseModel<List<StudentModel_Old>> GetStudentList(SearchRequestModel<StudentModel_Old> input);
+        ResponseModel<ResultModel> MakeInActiveStudent(RequestModel<StudentModel_Old> input);
         #endregion
 
         #region Student Admission
-        ResponseModel<ResultModel> AddStudentAdmission(RequestModel<StudentAdmissionModel> input);
-        ResponseModel<ResultModel> UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input);
-        ResponseModel<List<StudentAdmissionModel>> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input);
-        ResponseModel<ResultModel> MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input);
+        ResponseModel<ResultModel> AddStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
+        ResponseModel<ResultModel> UpdateStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
+        ResponseModel<List<StudentAdmissionModel_Old>> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel_Old> input);
+        ResponseModel<ResultModel> MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
         #endregion
 
         #region Student Course

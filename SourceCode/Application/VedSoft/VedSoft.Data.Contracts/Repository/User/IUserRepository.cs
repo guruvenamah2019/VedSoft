@@ -26,24 +26,24 @@ namespace VedSoft.Data.Contracts.User
 
     public interface IStudentRepository : IRepositoryBase<StudentDB>
     {
-        int AddStudent(RequestModel<StudentModel> input);
-        int UpdateStudent(RequestModel<StudentModel> input);
-        List<StudentModel> GetStudentList(SearchRequestModel<StudentModel> input);
-        int MakeInActiveStudent(RequestModel<StudentModel> input);
-        bool DoesStudentExist(RequestModel<StudentModel> input);
+        int AddStudent(RequestModel<StudentAdmissionModel> input);
+        int UpdateStudent(RequestModel<StudentModel_Old> input);
+        List<StudentModel_Old> GetStudentList(SearchRequestModel<StudentModel_Old> input);
+        int MakeInActiveStudent(RequestModel<StudentModel_Old> input);
+        bool DoesStudentExist(RequestModel<StudentModel_Old> input);
         //bool DoesStudentExistUpdate(RequestModel<StudentModel> input);
-        bool DoesStudentIdExist(RequestModel<StudentModel> input);
+        bool DoesStudentIdExist(RequestModel<StudentModel_Old> input);
     }
 
     public interface IStudentAdmisionDetailsRepository : IRepositoryBase<StudentAdmissionDetailsDB>
     {
-        int AddStudentAdmission(RequestModel<StudentAdmissionModel> input);
-        int UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input);
-        List<StudentAdmissionModel> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input);
-        int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input);
-        bool DoesStudentAdmissionExist(RequestModel<StudentAdmissionModel> input);
+        int AddStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
+        int UpdateStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
+        List<StudentAdmissionModel_Old> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel_Old> input);
+        int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel_Old> input);
+        bool DoesStudentAdmissionExist(RequestModel<StudentAdmissionModel_Old> input);
         //bool DoesStudentExistUpdate(RequestModel<StudentModel> input);
-        bool DoesStudentAdmissionIdExist(RequestModel<StudentAdmissionModel> input);
+        bool DoesStudentAdmissionIdExist(RequestModel<StudentAdmissionModel_Old> input);
     }
 
     public interface IStudentCourseRepository : IRepositoryBase<StudentCoursesDB>

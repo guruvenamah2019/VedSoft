@@ -68,39 +68,21 @@ namespace VedSoft.Business.Engine.Master
         #endregion
 
         #region Student
-        public ResponseModel<ResultModel> AddStudent(RequestModel<StudentModel> input)
+        public ResponseModel<ResultModel> AddStudent(RequestModel<StudentAdmissionModel> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
             responseModel.ResponseData = new ResultModel();
-            input.RequestParameter.User.UserTypeId = 1;
-            input.RequestParameter.User.RequestedLanguageId = input.LanguageId??1;
-            RequestModel<UserModel> inputUser = new RequestModel<UserModel>()
-            {
-                CustomerId = input.CustomerId,
-                LanguageId= input.LanguageId,
-                RequestParameter = input.RequestParameter.User
-            };
 
-            var userId = UserBusiness.AddUser(inputUser);
-            if (userId > 0)
-            {
-                input.RequestParameter.User.Id = userId;
-                responseModel.ResponseData.PrimaryKey = UserBusiness.AddStudent(input);
-                responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
-                if (responseModel.ResponseData.PrimaryKey > 0)
-                    responseModel.ResponseData.StatusId = CommonConstants.Success;
-                else
-                    responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
-
-                responseModel.Status = CommonConstants.Success;
-            }
-            else {
-                responseModel.ResponseData.StatusId = CommonConstants.DuplicateRecord;
-            }
+            var userId = UserBusiness.AddStudent(input);
+            responseModel.ResponseData.PrimaryKey = userId;
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+            
             return responseModel;
         }
 
-        public ResponseModel<ResultModel> UpdateStudent(RequestModel<StudentModel> input)
+        public ResponseModel<ResultModel> UpdateStudent(RequestModel<StudentModel_Old> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
             responseModel.ResponseData = new ResultModel();
@@ -114,16 +96,16 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
 
-        public ResponseModel<List<StudentModel>> GetStudentList(SearchRequestModel<StudentModel> input)
+        public ResponseModel<List<StudentModel_Old>> GetStudentList(SearchRequestModel<StudentModel_Old> input)
         {
-            ResponseModel<List<StudentModel>> responseModel = new ResponseModel<List<StudentModel>>();
+            ResponseModel<List<StudentModel_Old>> responseModel = new ResponseModel<List<StudentModel_Old>>();
             responseModel.ResponseData = UserBusiness.GetStudentList(input);
             responseModel.Status = CommonConstants.Success;
 
             return responseModel;
         }
 
-        public ResponseModel<ResultModel> MakeInActiveStudent(RequestModel<StudentModel> input)
+        public ResponseModel<ResultModel> MakeInActiveStudent(RequestModel<StudentModel_Old> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
             responseModel.ResponseData = new ResultModel();
@@ -138,7 +120,7 @@ namespace VedSoft.Business.Engine.Master
         #endregion
 
         #region Student Admission
-        public ResponseModel<ResultModel> AddStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public ResponseModel<ResultModel> AddStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
             responseModel.ResponseData = new ResultModel();
@@ -154,7 +136,7 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
 
-        public ResponseModel<ResultModel> UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public ResponseModel<ResultModel> UpdateStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
             responseModel.ResponseData = new ResultModel();
@@ -168,16 +150,16 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
 
-        public ResponseModel<List<StudentAdmissionModel>> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input)
+        public ResponseModel<List<StudentAdmissionModel_Old>> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel_Old> input)
         {
-            ResponseModel<List<StudentAdmissionModel>> responseModel = new ResponseModel<List<StudentAdmissionModel>>();
+            ResponseModel<List<StudentAdmissionModel_Old>> responseModel = new ResponseModel<List<StudentAdmissionModel_Old>>();
             responseModel.ResponseData = UserBusiness.GetStudentAdmissionList(input);
             responseModel.Status = CommonConstants.Success;
 
             return responseModel;
         }
 
-        public ResponseModel<ResultModel> MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public ResponseModel<ResultModel> MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
             responseModel.ResponseData = new ResultModel();

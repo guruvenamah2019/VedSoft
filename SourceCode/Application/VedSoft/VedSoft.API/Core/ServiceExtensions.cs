@@ -68,7 +68,7 @@ namespace VedSoft.API.Core
         public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration config)
         {
             var appConfigValue = config.GetSection("AppSettings");
-            string mySqlConnectionString = "server=SERVER;userid=USERID;password=PASSWORD;database=DATABASE;";
+            string mySqlConnectionString = "server=SERVER;userid=USERID;password=PASSWORD;database=DATABASE;oldguids=true;";
 
             //var conServer = Environment.GetEnvironmentVariable("VedSoftDBConnString_server");
             //var conUserID = Environment.GetEnvironmentVariable("VedSoftDBConnString_userid");

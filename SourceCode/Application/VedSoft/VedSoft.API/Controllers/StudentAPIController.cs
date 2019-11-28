@@ -26,7 +26,7 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionAddStudent)]
-        public async Task<ResponseModel<ResultModel>> AddStudent([FromBody] RequestModel<StudentModel> input)
+        public async Task<ResponseModel<ResultModel>> AddStudent([FromBody] RequestModel<StudentAdmissionModel> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;
@@ -53,7 +53,7 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionUpdateStudent)]
-        public async Task<ResponseModel<ResultModel>> UpdateStudent([FromBody] RequestModel<StudentModel> input)
+        public async Task<ResponseModel<ResultModel>> UpdateStudent([FromBody] RequestModel<StudentModel_Old> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;
@@ -80,11 +80,11 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionGetStudentList)]
-        public async Task<ResponseModel<List<StudentModel>>> GetStudentList([FromBody] SearchRequestModel<StudentModel> input)
+        public async Task<ResponseModel<List<StudentModel_Old>>> GetStudentList([FromBody] SearchRequestModel<StudentModel_Old> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;
-            ResponseModel<List<StudentModel>> result = null;
+            ResponseModel<List<StudentModel_Old>> result = null;
 
             await Task.Factory.StartNew(() =>
             {
@@ -107,7 +107,7 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionMakeInActiveStudent)]
-        public async Task<ResponseModel<ResultModel>> MakeInActiveStudent([FromBody] RequestModel<StudentModel> input)
+        public async Task<ResponseModel<ResultModel>> MakeInActiveStudent([FromBody] RequestModel<StudentModel_Old> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;
@@ -134,7 +134,7 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionAddStudentAdmission)]
-        public async Task<ResponseModel<ResultModel>> AddStudentAdmission([FromBody] RequestModel<StudentAdmissionModel> input)
+        public async Task<ResponseModel<ResultModel>> AddStudentAdmission([FromBody] RequestModel<StudentAdmissionModel_Old> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;
@@ -161,7 +161,7 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionUpdateStudentAdmission)]
-        public async Task<ResponseModel<ResultModel>> UpdateStudentAdmission([FromBody] RequestModel<StudentAdmissionModel> input)
+        public async Task<ResponseModel<ResultModel>> UpdateStudentAdmission([FromBody] RequestModel<StudentAdmissionModel_Old> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;
@@ -188,11 +188,11 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionGetStudentAdmissionList)]
-        public async Task<ResponseModel<List<StudentAdmissionModel>>> GetStudentAdmissionList([FromBody] SearchRequestModel<StudentAdmissionModel> input)
+        public async Task<ResponseModel<List<StudentAdmissionModel_Old>>> GetStudentAdmissionList([FromBody] SearchRequestModel<StudentAdmissionModel_Old> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;
-            ResponseModel<List<StudentAdmissionModel>> result = null;
+            ResponseModel<List<StudentAdmissionModel_Old>> result = null;
 
             await Task.Factory.StartNew(() =>
             {
@@ -215,7 +215,7 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionMakeInActiveStudentAdmission)]
-        public async Task<ResponseModel<ResultModel>> MakeInActiveStudentAdmission([FromBody] RequestModel<StudentAdmissionModel> input)
+        public async Task<ResponseModel<ResultModel>> MakeInActiveStudentAdmission([FromBody] RequestModel<StudentAdmissionModel_Old> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;

@@ -10,9 +10,67 @@ using VedSoft.Model.User;
 using VedSoft.Model.Common;
 using VedSoft.Utility.Constants;
 using VedSoft.Utility;
+using ppp=MySql.Data.MySqlClient;
+using System.Data;
+using MySql.Data.MySqlClient;
+using Dapper;
+//using MySql.Data.EntityFrameworkCore;
 
 namespace VedSoft.Data.Repository.Repository.User
 {
+    public class OracleDynamicParameters : SqlMapper.IDynamicParameters
+    {
+        private readonly DynamicParameters dynamicParameters = new DynamicParameters();
+        private readonly List<MySqlParameter> mySqlParameters = new List<MySqlParameter>();
+
+        public void Add(string name, MySqlDbType oracleDbType, ParameterDirection direction, object value = null, int? size = null)
+        {
+            MySqlParameter oracleParameter;
+            if (size.HasValue)
+            {
+                oracleParameter = new MySqlParameter();
+                oracleParameter.ParameterName = name;
+                oracleParameter.Direction = direction;
+                oracleParameter.Value = value;
+                oracleParameter.MySqlDbType = oracleDbType;
+                oracleParameter.Size = size.Value;
+            }
+            else
+            {
+                //oracleParameter = new MySqlParameter(name, oracleDbType, value, direction);
+                oracleParameter = new MySqlParameter();
+                oracleParameter.ParameterName = name;
+                oracleParameter.Direction = direction;
+                //oracleParameter.Value = value;
+                //oracleParameter.Size = size.Value;
+            }
+
+            mySqlParameters.Add(oracleParameter);
+        }
+
+        public void Add(string name, MySqlDbType oracleDbType, ParameterDirection direction)
+        {
+            MySqlParameter oracleParameter = new MySqlParameter();
+            oracleParameter.ParameterName = name;
+            oracleParameter.Direction = direction;
+            //oracleParameter.Value = value;
+            oracleParameter.MySqlDbType = oracleDbType;
+            //oracleParameter.Size = size.Value;
+            mySqlParameters.Add(oracleParameter);
+        }
+
+        public void AddParameters(IDbCommand command, SqlMapper.Identity identity)
+        {
+            ((SqlMapper.IDynamicParameters)dynamicParameters).AddParameters(command, identity);
+
+            var oracleCommand = command as MySqlCommand;
+
+            if (oracleCommand != null)
+            {
+                oracleCommand.Parameters.AddRange(mySqlParameters.ToArray());
+            }
+        }
+    }
     public class UserRepository : RepositoryBase<UserMasterDB>, IUserRepository
     {
         public UserRepository(RepositoryContext repositoryContext) : base(repositoryContext)
@@ -240,31 +298,20 @@ namespace VedSoft.Data.Repository.Repository.User
 
         }
         IUserRepository UserRepository { get; set; }
-        public int AddStudent(RequestModel<StudentModel> input)
+        public int AddStudent(RequestModel<StudentAdmissionModel> input)
         {
-            //Make db object
-            StudentDB studentDB = new StudentDB
-            {
-                CreatedBy = input.RequestParameter.ActionUserId,
-                CreatedDate = DateTime.Now,
-                Active = CommonConstants.ActiveStatus,
-                //FatherUserId = input.RequestParameter.FatherUserId,
-                //MotherUserId = input.RequestParameter.MotherUserId,
-                UserId = input.RequestParameter.User.Id,
-                //GuardinanUserId = input.RequestParameter.UserId,
-                IsEnrolled = input.RequestParameter.IsEnrolled,
-            };
+            string studentJSON = Utility.SerializeObjects.SerializeJsonObject.GetJsonValue(input.RequestParameter);
+            var Parameters = new DynamicParameters();
+            Parameters.Add("P_STUDENT_OBJECT", studentJSON, DbType.String, ParameterDirection.Input);
+            Parameters.Add("P_OUT_FLAG", "", DbType.String, ParameterDirection.Output);
+            Parameters.Add("P_OUT_STUDENTID", 0, DbType.Int32, ParameterDirection.Output);
 
-            //Save in database
-            this.RepositoryContext.Add(studentDB);
-            this.RepositoryContext.SaveChanges();
+            List<int> returnValue=this.RepositoryContext.ExecuteSP<int>(Parameters, "SP_CREATE_STUDENT").ToList();
 
-            input.RequestParameter.Id = studentDB.Id;
-
-            return studentDB.UserId;
+            return (Parameters.Get<Int32>("P_OUT_STUDENTID"));
         }
 
-        public int UpdateStudent(RequestModel<StudentModel> input)
+        public int UpdateStudent(RequestModel<StudentModel_Old> input)
         {
             var student = this.RepositoryContext.Student
                             .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
@@ -290,14 +337,14 @@ namespace VedSoft.Data.Repository.Repository.User
             return CommonConstants.Success;
         }
 
-        public List<StudentModel> GetStudentList(SearchRequestModel<StudentModel> input)
+        public List<StudentModel_Old> GetStudentList(SearchRequestModel<StudentModel_Old> input)
         {
-            List<StudentModel> userList = new List<StudentModel>();
+            List<StudentModel_Old> userList = new List<StudentModel_Old>();
             userList = (from st in this.RepositoryContext.Student//.Where(x => x.Id == input.RequestParameter.Id)
                             join u in this.RepositoryContext.User.Where(x => x.CustomerId == input.CustomerId
                             && x.Active == CommonConstants.ActiveStatus) on st.UserId equals u.UserId
                             //join udd in this.RepositoryContext.UserDetails on u.UserId equals udd.UserId
-                            select new StudentModel
+                            select new StudentModel_Old
                             {
                                 Id = st.Id,
                                 FatherUser = new UserModel(),
@@ -320,7 +367,7 @@ namespace VedSoft.Data.Repository.Repository.User
             return userList;
         }
 
-        public int MakeInActiveStudent(RequestModel<StudentModel> input)
+        public int MakeInActiveStudent(RequestModel<StudentModel_Old> input)
         {
             var student = this.RepositoryContext.Student
                                     .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
@@ -339,7 +386,7 @@ namespace VedSoft.Data.Repository.Repository.User
             return CommonConstants.Success;
         }
 
-        public bool DoesStudentExist(RequestModel<StudentModel> input)
+        public bool DoesStudentExist(RequestModel<StudentModel_Old> input)
         {
             return this.RepositoryContext.Student
                                   .Where(x => x.UserId == input.RequestParameter.User.Id
@@ -357,7 +404,7 @@ namespace VedSoft.Data.Repository.Repository.User
         //                          .Count() > 0;
         //}
 
-        public bool DoesStudentIdExist(RequestModel<StudentModel> input)
+        public bool DoesStudentIdExist(RequestModel<StudentModel_Old> input)
         {
             return this.RepositoryContext.Student
                                   .Where(x=>x.Id == input.RequestParameter.Id
@@ -374,7 +421,7 @@ namespace VedSoft.Data.Repository.Repository.User
 
         }
         IUserRepository UserRepository { get; set; }
-        public int AddStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public int AddStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             //Make db object
             StudentAdmissionDetailsDB studentAdmissionDB = new StudentAdmissionDetailsDB
@@ -398,7 +445,7 @@ namespace VedSoft.Data.Repository.Repository.User
             return studentAdmissionDB.Id;
         }
 
-        public int UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public int UpdateStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             var studentAdmission = this.RepositoryContext.StudentAdmission
                             .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
@@ -421,14 +468,14 @@ namespace VedSoft.Data.Repository.Repository.User
             return CommonConstants.Success;
         }
 
-        public List<StudentAdmissionModel> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input)
+        public List<StudentAdmissionModel_Old> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel_Old> input)
         {
-            List<StudentAdmissionModel> userList = new List<StudentAdmissionModel>();
+            List<StudentAdmissionModel_Old> userList = new List<StudentAdmissionModel_Old>();
             userList = (from st in this.RepositoryContext.Student
                         join sa in this.RepositoryContext.StudentAdmission
                         .Where(x => x.Active == CommonConstants.ActiveStatus)
                         on st.Id equals sa.StudentId
-                        select new StudentAdmissionModel
+                        select new StudentAdmissionModel_Old
                         {
                             Id = st.Id,
                             AcademicYearId = sa.ACADEMIC_YEARID,
@@ -442,7 +489,7 @@ namespace VedSoft.Data.Repository.Repository.User
             return userList;
         }
 
-        public int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             var studentAdmission = this.RepositoryContext.StudentAdmission
                                     .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
@@ -461,7 +508,7 @@ namespace VedSoft.Data.Repository.Repository.User
             return CommonConstants.Success;
         }
 
-        public bool DoesStudentAdmissionExist(RequestModel<StudentAdmissionModel> input)
+        public bool DoesStudentAdmissionExist(RequestModel<StudentAdmissionModel_Old> input)
         {
             return this.RepositoryContext.StudentAdmission
                                   .Where(x => x.StudentId==input.RequestParameter.StudentId
@@ -480,7 +527,7 @@ namespace VedSoft.Data.Repository.Repository.User
         //                          .Count() > 0;
         //}
 
-        public bool DoesStudentAdmissionIdExist(RequestModel<StudentAdmissionModel> input)
+        public bool DoesStudentAdmissionIdExist(RequestModel<StudentAdmissionModel_Old> input)
         {
             return this.RepositoryContext.StudentAdmission
                                   .Where(x => x.Id == input.RequestParameter.Id

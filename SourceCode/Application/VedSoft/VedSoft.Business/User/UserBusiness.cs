@@ -72,18 +72,11 @@ namespace VedSoft.Business.Master
         #endregion
 
         #region Student
-        public int AddStudent(RequestModel<StudentModel> input)
+        public int AddStudent(RequestModel<StudentAdmissionModel> input)
         {
-            if (!RepositoryWrapper.StudentRepository.DoesStudentExist(input))
-            {
-                return RepositoryWrapper.StudentRepository.AddStudent(input); ;
-            }
-            else
-            {
-                return CommonConstants.DuplicateRecord;
-            }
+            return RepositoryWrapper.StudentRepository.AddStudent(input);
         }
-        public int UpdateStudent(RequestModel<StudentModel> input)
+        public int UpdateStudent(RequestModel<StudentModel_Old> input)
         {
             if (RepositoryWrapper.StudentRepository.DoesStudentIdExist(input))
             {
@@ -95,12 +88,12 @@ namespace VedSoft.Business.Master
             }
         }
 
-        public List<StudentModel> GetStudentList(SearchRequestModel<StudentModel> input)
+        public List<StudentModel_Old> GetStudentList(SearchRequestModel<StudentModel_Old> input)
         {
             return RepositoryWrapper.StudentRepository.GetStudentList(input);
         }
 
-        public int MakeInActiveStudent(RequestModel<StudentModel> input)
+        public int MakeInActiveStudent(RequestModel<StudentModel_Old> input)
         {
             if (RepositoryWrapper.StudentRepository.DoesStudentIdExist(input))
             {
@@ -114,7 +107,7 @@ namespace VedSoft.Business.Master
         #endregion
 
         #region Student Admission
-        public int AddStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public int AddStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             if (!RepositoryWrapper.StudentAdmisionDetailsRepository.DoesStudentAdmissionExist(input))
             {
@@ -125,7 +118,7 @@ namespace VedSoft.Business.Master
                 return CommonConstants.DuplicateRecord;
             }
         }
-        public int UpdateStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public int UpdateStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             if (RepositoryWrapper.StudentAdmisionDetailsRepository.DoesStudentAdmissionIdExist(input))
             {
@@ -137,12 +130,12 @@ namespace VedSoft.Business.Master
             }
         }
 
-        public List<StudentAdmissionModel> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel> input)
+        public List<StudentAdmissionModel_Old> GetStudentAdmissionList(SearchRequestModel<StudentAdmissionModel_Old> input)
         {
             return RepositoryWrapper.StudentAdmisionDetailsRepository.GetStudentAdmissionList(input);
         }
 
-        public int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel> input)
+        public int MakeInActiveStudentAdmission(RequestModel<StudentAdmissionModel_Old> input)
         {
             if (RepositoryWrapper.StudentAdmisionDetailsRepository.DoesStudentAdmissionIdExist(input))
             {
