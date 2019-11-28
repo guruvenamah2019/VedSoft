@@ -11,30 +11,32 @@ import { BranchService } from '../../../../core/services';
 export class BranchIndexComponent implements OnInit {
     pageTitle: string = "login";
     id: string;
-    //constructor(private _router: Router, private _activatedRoute: ActivatedRoute) {
-    //    this.id = _activatedRoute.snapshot.params["id"];
-    //}
-    //ngOnInit() {
-    //}
+
 
     onNavigate() {
     }
-    constructor( private route: ActivatedRoute,
-        private router: Router,private branchService:BranchService) {
+    constructor(private route: ActivatedRoute,
+        private router: Router, private branchService: BranchService) {
         console.log("BranchIndexComponent");
-        
+
     }
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.branchService.baseService.branchInfo=null;
-            console.log(params)
-            if(params!=null && params.branchId!=null){
-                this.branchService.getBranchInfo(params.branchId).subscribe(brc=>{
-                    this.branchService.baseService.branchInfo = brc;
+            this.branchService.baseService.branchInfo = null;
+            console.log("BranchIndexComponent" + JSON.stringify(params))
+            if (params != null && params.branchId != null) {
+                this.branchService.getBranchInfo(params.branchId).subscribe(brc => {
+                    if (brc)
+                        this.branchService.baseService.branchInfo = brc;
+                    else
+                        this.router.navigate(['/admin/branchs']);
                 })
+            }
+            else {
+                this.router.navigate(['/admin/branchs']);
             }
         }); // Object {artistId: 12345}
 
     }
-    
+
 }

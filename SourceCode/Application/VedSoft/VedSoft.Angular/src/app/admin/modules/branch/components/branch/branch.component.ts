@@ -51,7 +51,13 @@ export class BranchListComponent  {
         this.branchOpen(inputModel);
 
     }
+    branchDetails(inputModel: CustomerBranchModel): void {
 
+        this.branchService.baseService.branchInfo = inputModel;
+        //[routerLink]="['./', branch.id]" 
+        this.router.navigate(['/admin/branchs', inputModel.id]);
+
+    }
     
     editBranch(inputModel: CustomerBranchModel): void {
 

@@ -6,7 +6,7 @@ export const STUDENT_ROUTES: Routes = [
         path: '', redirectTo:"students"
       },
       { 
-        path: 'students',    component: StudentListComponent
+        path: 'students',   component: StudentListComponent
       },
       { path: 'students/:id', redirectTo: 'student/:id' },
         

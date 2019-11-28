@@ -11,7 +11,14 @@ export class BranchGuard implements CanActivate {
   constructor(private router: Router, private baseService: BaseService, ) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    return this.baseService.branchInfo != null && this.baseService.branchInfo.id > 0;
+    if (this.baseService.branchInfo != null && this.baseService.branchInfo.id > 0)
+      return true;
+    else {
+      this.router.navigate(['/admin/branchs']);
+      return false;
+    }
+
+    // return this.baseService.branchInfo != null && this.baseService.branchInfo.id > 0;
   }
 
 
