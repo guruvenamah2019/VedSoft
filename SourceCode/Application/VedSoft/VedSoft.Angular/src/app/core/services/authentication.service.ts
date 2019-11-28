@@ -20,7 +20,7 @@ export class AuthenticationService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
 
-  constructor(private http: HttpClient, private baseService: BaseService) {
+  constructor(private http: HttpClient, public baseService: BaseService) {
 
   }
   public get loggedUser(): UserMasterModel {

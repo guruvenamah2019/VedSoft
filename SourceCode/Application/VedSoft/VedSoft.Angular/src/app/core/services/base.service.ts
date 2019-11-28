@@ -11,6 +11,7 @@ import { map, catchError } from 'rxjs/operators';
 import { ModuleEnum } from '../enums';
 import { UserMasterModel } from '../models/user-model';
 import { CustomerBranchModel } from '../models/master-model';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class BaseService {
@@ -20,7 +21,7 @@ export class BaseService {
   public activeModule:ModuleEnum;
   public loggedUser: UserMasterModel;
   public branchInfo:CustomerBranchModel;
-  constructor(private http: HttpClient, private messageService: ToastrService) {
+  constructor(private http: HttpClient, private messageService: ToastrService,private router: Router) {
     console.log("AppBaseService");
     this.loggedUser = new UserMasterModel();
     this.setAppUrl();
@@ -118,6 +119,10 @@ set ActiveModule(value: ModuleEnum) {
             return of(false);
           }));
     }
+  }
+
+  get IsBranch(){
+    return this.router.url.toLowerCase().indexOf("/admin/branchs/")>-1;
   }
 
 }
