@@ -44,3 +44,10 @@ export class StudentCourseModel {
   discountedFeeAmount?: number;
   actionUserId?: number;
 }
+
+export class StudentViewModel extends UserBaseModel {
+  studentId?: number;
+  userId?: number;
+  branchId?: number;
+  branchName?: string;
+}

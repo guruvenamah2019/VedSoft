@@ -16,49 +16,76 @@ export class StudentProfileComponent implements OnInit {
 
   loading = false;
   error = '';
-  submitted: boolean = false;
+  submitted: boolean = true;
   studentForm: FormGroup;
+  dateFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    const today = new Date();
+    // Prevent Saturday and Sunday from being selected.
+    return d <= today;
+  }
   model: StudentAdmissionModel = new StudentAdmissionModel();
   onNavigate() {
   }
-  constructor(private userService: AuthenticationService, private formBuilder: FormBuilder, private studentService:StudentService ) {
+  constructor(private userService: AuthenticationService, private formBuilder: FormBuilder, private studentService: StudentService) {
     console.log("StudentProfileComponent");
 
   }
   ngOnInit() {
     this.model = {
-      studentDetails:{
-        studentId:0,
-        firstName:'',
-        middleName:'',
-        lastName:'',
-        primaryContact:'',
-        father:{
-          firstName:'',
-          lastName:''
+      studentDetails: {
+        studentId: 0,
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        primaryContact: '',
+        father: {
+          firstName: '',
+          lastName: ''
         },
-        mother:{
-          firstName:'',
-          lastName:''
+        mother: {
+          firstName: '',
+          lastName: ''
         },
-        
+        details: {
+          address: {
+            address1: ''
+          }
+        }
+
+
       },
-      guardianDetails:{
-        firstName:'',
-        lastName:''
+      guardianDetails: {
+        firstName: '',
+        lastName: ''
       }
-      
+
     };
     this.studentForm = this.formBuilder.group({
-      firstName: new FormControl(this.model.studentDetails.firstName, [Validators.required, Validators.minLength(3)]),
-      middleName: new FormControl(this.model.studentDetails.middleName ),
-      lastName: new FormControl(this.model.studentDetails.lastName, [Validators.required, Validators.minLength(3)]),
-      contactNumber: new FormControl("", [Validators.required, Validators.minLength(3)]),
-      notificationEmailId: new FormControl(this.model.studentDetails.notificationId, [Validators.required, Validators.minLength(10)]),
-      fatherFirstName: new FormControl(this.model.studentDetails.father.firstName, [Validators.required, Validators.minLength(3)]),
-      fatherLastName: new FormControl(this.model.studentDetails.father.lastName, [Validators.required, Validators.minLength(3)]),
-      motherFirstName: new FormControl(this.model.studentDetails.mother.firstName, [Validators.required, Validators.minLength(3)]),
-      motherLastName: new FormControl(this.model.studentDetails.mother.lastName, [Validators.required, Validators.minLength(3)]),
+      firstName: new FormControl(this.model.studentDetails.firstName, [Validators.required, Validators.minLength(2)]),
+      middleName: new FormControl(this.model.studentDetails.middleName),
+      lastName: new FormControl(this.model.studentDetails.lastName, [Validators.required, Validators.minLength(2)]),
+      contactNumber: new FormControl("", [Validators.required, Validators.minLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      notificationEmailId: new FormControl(this.model.studentDetails.notificationId, [ Validators.email]),
+      fatherFirstName: new FormControl(this.model.studentDetails.father.firstName, [Validators.required, Validators.minLength(2)]),
+      fatherLastName: new FormControl(this.model.studentDetails.father.lastName, []),
+      fatherMiddleName: new FormControl(this.model.studentDetails.father.middleName),
+      fatherContactNumber: new FormControl("", [Validators.required,, Validators.minLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      fatherNotificationEmailId: new FormControl(this.model.studentDetails.notificationId, [ Validators.email]),
+      motherFirstName: new FormControl(this.model.studentDetails.mother.firstName, [Validators.required, Validators.minLength(2)]),
+      motherLastName: new FormControl(this.model.studentDetails.mother.lastName, []),
+      motherMiddleName: new FormControl(this.model.studentDetails.mother.middleName),
+      motherContactNumber: new FormControl("", [ Validators.required,Validators.minLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      motherNotificationEmailId: new FormControl(this.model.studentDetails.mother.notificationId, [ Validators.email]),
+      dateOfBirth: new FormControl(this.model.studentDetails.dateOfBirth, []),
+
+
+      guardianFirstName: new FormControl(this.model.guardianDetails.firstName, [Validators.required, Validators.minLength(2)]),
+      guardianMiddleName: new FormControl(this.model.guardianDetails.middleName),
+      guardianLastName: new FormControl(this.model.guardianDetails.lastName, []),
+      guardianContactNumber: new FormControl("", [Validators.required, Validators.minLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      guardianNotificationEmailId: new FormControl(this.model.guardianDetails.notificationId, [ Validators.email]),
+
       //parent: new FormControl(parent, []),
     });
 
@@ -71,7 +98,7 @@ export class StudentProfileComponent implements OnInit {
   get f() { return this.studentForm.controls; }
 
   private getRandomId() {
-    return (Math.floor((Math.random()*6)+1)).toString();
+    return (Math.floor((Math.random() * 6) + 1)).toString();
   }
 
   onSubmit() {
@@ -80,40 +107,65 @@ export class StudentProfileComponent implements OnInit {
     if (this.studentForm.invalid) {
       return;
     }
-    
+
 
     let address: AddressModel = this.f.studentAddress.value;
-    var input: StudentAdmissionModel={
-      studentDetails:{
-        studentId:0,
+    var input: StudentAdmissionModel = {
+      customerId: this.userService.baseService.CustomerInfo.customerId,
+      branchId: this.userService.baseService.branchInfo.id,
+      academicInstituteId:1,
+      isEnrolled:1,
+      studentDetails: {
+        studentId: 0,
         //userName:this.getRandomId(),
         firstName: this.f.firstName.value,
         lastName: this.f.lastName.value,
         middleName: this.f.middleName.value,
         notificationId: this.f.notificationEmailId.value,
-        primaryContact:this.f.contactNumber.value,
-        mother:{
+        primaryContact: this.f.contactNumber.value,
+        dateOfBirth: this.f.dateOfBirth.value,
+        mother: {
           firstName: this.f.motherFirstName.value,
           lastName: this.f.motherLastName.value,
+          middleName: this.f.motherMiddleName.value,
+          primaryContact: this.f.motherContactNumber.value,
+          notificationId:this.f.motherNotificationEmailId.value,
         },
-        father:{
+        father: {
           firstName: this.f.fatherFirstName.value,
           lastName: this.f.fatherLastName.value,
+          middleName: this.f.fatherMiddleName.value,
+          primaryContact: this.f.fatherContactNumber.value,
+          notificationId:this.f.fatherNotificationEmailId.value,
         },
-        //a: JSON.stringify(address),
+        details: {
+          address: address,
+
+        }
+        
       },
-     
+      guardianDetails:{
+        firstName: this.f.guardianFirstName.value,
+        lastName: this.f.guardianLastName.value,
+        middleName: this.f.guardianMiddleName.value,
+        primaryContact: this.f.guardianContactNumber.value,
+        notificationId:this.f.guardianNotificationEmailId.value,
+
+      }
+
       //actionUserId: this.userService.loggedUser.id
     };
-    if(input.studentDetails.studentId>0)
-    {
+
+   
+
+    if (input.studentDetails.studentId > 0) {
       this.editStudent(input);
     }
-    else{
+    else {
       this.addStudent(input);
 
     }
-    
+
 
 
   }
@@ -158,6 +210,7 @@ export class StudentProfileComponent implements OnInit {
 
   }
 
+  
 
 
 }

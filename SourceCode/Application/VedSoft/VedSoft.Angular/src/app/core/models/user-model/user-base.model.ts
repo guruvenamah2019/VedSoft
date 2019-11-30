@@ -13,9 +13,9 @@ export class UserBaseModel {
 }
 
 export class UserAdditionalDetailsModel {
-    qualification: string;
-    annualIncome: number;
-    occupation: string;
-    address: AddressModel;
-    contactNumber: ContactNumberModel;
+    qualification?: string;
+    annualIncome?: number;
+    occupation?: string;
+    address?: AddressModel;
+    contactNumber?: ContactNumberModel;
 }

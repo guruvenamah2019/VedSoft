@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
+import {  AuthenticationService } from 'src/app/core/services';
 
 
 @Component({
@@ -19,12 +20,12 @@ export class StudentIndexComponent implements OnInit {
     onNavigate() {
     }
     constructor( private route: ActivatedRoute,
-        private router: Router,) {
+        private router: Router,private user: AuthenticationService) {
         console.log("BranchIndexComponent");
         
     }
     ngOnInit() {
-        this.route.parent.params.subscribe(params => console.log(params)); // Object {artistId: 12345}
+        
 
     }
     

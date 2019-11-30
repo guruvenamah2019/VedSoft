@@ -4,141 +4,311 @@
 
       <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
 
-        <div class="form-row">
-
-            <div class="form-group col-md-4 showcase_row_area">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="First Name" [formControl]="f.firstName" maxlength="50" >
-                <mat-error *ngIf="submitted && f.firstName.errors?.required">
-                  FirstName is required
-                </mat-error>
-                <mat-error *ngIf="submitted && f.firstName.errors?.minlength">
-                  FirstName must be at least 3 characters long.
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="form-group col-md-4 showcase_row_area">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Middle Name" [formControl]="f.middleName" maxlength="100">
-               <!-- <mat-error *ngIf="submitted && f.lastName.errors?.required">
-                  Last Name is required
-                </mat-error>
-                <mat-error *ngIf="submitted && f.lastName.errors?.minlength">
-                  Last Name must be at least 3 characters long.
-                </mat-error>-->
-              </mat-form-field>
-            </div>
-
-            <div class="form-group col-md-4 showcase_row_area">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Last Name" [formControl]="f.lastName" maxlength="100">
-                <mat-error *ngIf="submitted && f.lastName.errors?.required">
-                  Last Name is required
-                </mat-error>
-                <mat-error *ngIf="submitted && f.lastName.errors?.minlength">
-                  Last Name must be at least 3 characters long.
-                </mat-error>
-              </mat-form-field>
-            </div>
-        </div>
-        <div class="form-row">
-
-          <div class="form-group col-md-6 showcase_row_area">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Email Id" [formControl]="f.notificationEmailId" maxlength="10" >
-              <mat-error *ngIf="submitted && f.notificationEmailId.errors?.required">
-                Email is required
-              </mat-error>
-              <mat-error *ngIf="submitted && f.notificationEmailId.errors?.minlength">
-                Email must be 10 characters long.
-              </mat-error>
-            </mat-form-field>
+        <div class="card">
+          <div class="card-header">
+            Student Basic details
           </div>
-          <div class="form-group col-md-6 showcase_row_area">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Contact Number" [formControl]="f.contactNumber" maxlength="10" >
-              <mat-error *ngIf="submitted && f.contactNumber.errors?.required">
-                Contact Number is required
-              </mat-error>
-              <mat-error *ngIf="submitted && f.contactNumber.errors?.minlength">
-                Contact Number  must be 10 characters long.
-              </mat-error>
-            </mat-form-field>
-          </div>
+          <div class="card-body">
+            <div class="form-row">
 
-          
-      </div>
-      <div class="form-row">
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width ">
+                  <input matInput placeholder="First Name" [formControl]="f.firstName" maxlength="50">
+                  <mat-error *ngIf="submitted && f.firstName.errors?.required">
+                    required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.firstName.errors?.minlength">
+                    at least two characters required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Middle Name" [formControl]="f.middleName" maxlength="100">
+                  <!-- <mat-error *ngIf="submitted && f.lastName.errors?.required">
+                            Last Name is required
+                          </mat-error>
+                          <mat-error *ngIf="submitted && f.lastName.errors?.minlength">
+                            Last Name must be at least 3 characters long.
+                          </mat-error>-->
+                </mat-form-field>
+              </div>
 
-        <div class="form-group col-md-6 showcase_row_area">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Father First Name" [formControl]="f.fatherFirstName" maxlength="50" >
-            <mat-error *ngIf="submitted && f.fatherFirstName.errors?.required">
-              Father First Name is required
-            </mat-error>
-            <mat-error *ngIf="submitted && f.fatherFirstName.errors?.minlength">
-              Father First Name must be at least 3 characters long.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Last Name" [formControl]="f.lastName" maxlength="100">
+                  <mat-error *ngIf="submitted && f.lastName.errors?.required">
+                    required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.lastName.errors?.minlength">
+                    at least two characters required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-row">
 
-        <div class="form-group col-md-6 showcase_row_area">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Father Last Name" [formControl]="f.fatherLastName" maxlength="100">
-            <mat-error *ngIf="submitted && f.fatherLastName.errors?.required">
-              Father Last Name is required
-            </mat-error>
-            <mat-error *ngIf="submitted && f.fatherLastName.errors?.minlength">
-              Father Last Name must be at least 3 characters long.
-            </mat-error>
-          </mat-form-field>
-        </div>
-    </div>
-    <div class="form-row">
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Email Id" [formControl]="f.notificationEmailId" maxlength="10">
 
-      <div class="form-group col-md-6 showcase_row_area">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mother First Name" [formControl]="f.motherFirstName" maxlength="50" >
-          <mat-error *ngIf="submitted && f.motherFirstName.errors?.required">
-            Mother  FirstName is required
-          </mat-error>
-          <mat-error *ngIf="submitted && f.motherFirstName.errors?.minlength">
-            Mother FirstName must be at least 3 characters long.
-          </mat-error>
-        </mat-form-field>
-      </div>
+                  <mat-error *ngIf="submitted && f.notificationEmailId.errors?.email">
+                    Enter valid email.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="dpDOB" [formControl]="f.dateOfBirth"
+                    [matDatepickerFilter]="dateFilter" placeholder="Date of Birth" disabled>
+                  <mat-datepicker-toggle matSuffix [for]="dpDOB"></mat-datepicker-toggle>
+                  <mat-datepicker #dpDOB disabled="false"></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Contact Number" [formControl]="f.contactNumber" maxlength="10">
+                  <mat-error *ngIf="submitted && f.contactNumber.errors?.required">
+                    required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.contactNumber.errors?.minlength">
+                    must be 10 characters
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.contactNumber.errors?.pattern">
+                    numeric only
+                  </mat-error>
+                </mat-form-field>
+              </div>
 
-      <div class="form-group col-md-6 showcase_row_area">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mother Last Name" [formControl]="f.motherLastName" maxlength="100">
-          <mat-error *ngIf="submitted && f.motherLastName.errors?.required">
-            Mother Last Name is required
-          </mat-error>
-          <mat-error *ngIf="submitted && f.motherLastName.errors?.minlength">
-            Mother Last Name must be at least 3 characters long.
-          </mat-error>
-        </mat-form-field>
-      </div>
-  </div>
-        <div class="form-row">
-            <div class="form-group col-md-12 showcase_row_area">
-            <ved-address [submitted]="submitted" [model]="model.user.addressInfo"
-              (formReady)="addFormControl('studentAddress', $event)"></ved-address>
+
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group showcase_row_area">
-              <div class="col-md-5 showcase_text_area">
-                <button [disabled]="loading" class="btn btn-primary">
-                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                  Submit
-                </button>
-                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            Parents details
+          </div>
+          <div class="card-body">
+
+            <div class="form-row">
+
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Father First Name" [formControl]="f.fatherFirstName" maxlength="50">
+                  <mat-error *ngIf="submitted && f.fatherFirstName.errors?.required">
+                    required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.fatherFirstName.errors?.minlength">
+                    at least two characters required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Father Middle Name" [formControl]="f.fatherMiddleName" maxlength="100">
+
+                </mat-form-field>
+              </div>
+
+
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Father Last Name" [formControl]="f.fatherLastName" maxlength="100">
+
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-row">
+
+              <div class="form-group col-md-6 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Email Id" [formControl]="f.fatherNotificationEmailId" maxlength="10">
+
+                  <mat-error *ngIf="submitted && f.fatherNotificationEmailId.errors?.email">
+                    Enter valid email.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-6 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Contact Number" [formControl]="f.fatherContactNumber" maxlength="10">
+
+                  <mat-error *ngIf="submitted && f.fatherContactNumber.errors?.minlength">
+                    must be 10 characters
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.fatherContactNumber.errors?.pattern">
+                    numeric only
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+            </div>
+            <div class="form-row">
+
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Mother First Name" [formControl]="f.motherFirstName" maxlength="100">
+                  <mat-error *ngIf="submitted && f.motherFirstName.errors?.required">
+                    required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.motherFirstName.errors?.minlength">
+                    at least two characters required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Mother Middle Name" [formControl]="f.motherMiddleName" maxlength="100">
+
+                </mat-form-field>
+              </div>
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Mother Last Name" [formControl]="f.motherLastName" maxlength="100">
+
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-row">
+
+              <div class="form-group col-md-6 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Email Id" [formControl]="f.motherNotificationEmailId" maxlength="100">
+
+                  <mat-error *ngIf="submitted && f.motherNotificationEmailId.errors?.email">
+                    Enter valid email.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-6 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Contact Number" [formControl]="f.motherContactNumber" maxlength="10">
+
+                  <mat-error *ngIf="submitted && f.motherContactNumber.errors?.minlength">
+                    must be 10 characters
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.motherContactNumber.errors?.pattern">
+                    numeric only
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            Guardian
+          </div>
+          <div class="card-body">
+
+            <div class="form-row">
+
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="First Name" [formControl]="f.guardianFirstName" maxlength="50">
+                  <mat-error *ngIf="submitted && f.guardianFirstName.errors?.required">
+                    required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.guardianFirstName.errors?.minlength">
+                    at least two characters required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Middle Name" [formControl]="f.guardianMiddleName" maxlength="100">
+
+                </mat-form-field>
+              </div>
+
+
+              <div class="form-group col-md-4 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Last Name" [formControl]="f.guardianLastName" maxlength="100">
+
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-row">
+
+              <div class="form-group col-md-6 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Email Id" [formControl]="f.guardianNotificationEmailId" maxlength="10">
+
+                  <mat-error *ngIf="submitted && f.guardianNotificationEmailId.errors?.email">
+                    Enter valid email.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-6 showcase_row_area">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Contact Number" [formControl]="f.guardianContactNumber" maxlength="10">
+                  <mat-error *ngIf="submitted && f.guardianContactNumber.errors?.required">
+                    required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.guardianContactNumber.errors?.minlength">
+                    must be 10 characters
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.guardianContactNumber.errors?.pattern">
+                    numeric only
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            Address
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-md-12 showcase_row_area">
+                <ved-address [submitted]="submitted" [model]="model.studentDetails.details.address"
+                  (formReady)="addFormControl('studentAddress', $event)"></ved-address>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+              Other information
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                
+              </div>
+              <div class="form-row">
+                <div class="form-group showcase_row_area">
+                  <div class="col-md-5 showcase_text_area">
+                    <button [disabled]="loading" class="btn btn-primary">
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Submit
+                    </button>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
+  
 
 
       </form>

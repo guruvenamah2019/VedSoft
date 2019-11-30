@@ -5,18 +5,16 @@ import { RequestModel, ResponseModel, ResultModel, SearchRequestModel } from '..
 import { BaseService } from './base.service';
 import { STUDENT_SERVICE_URL } from "../constant/service-url";
 import { map, tap } from 'rxjs/operators';
-import { StudentBaseModel, StudentAdmissionModel } from '../models/student-model/student-master.model';
+import { StudentBaseModel, StudentAdmissionModel, StudentViewModel } from '../models/student-model/student-master.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StudentService {
 
-    private _studentList: StudentAdmissionModel[] = [];
+    //private _studentList: StudentAdmissionModel[] = [];
 
-    public get StudentList() {
-        return this._studentList;
-    }
+  
 
     constructor(private http: HttpClient, public baseService: BaseService) {
 
@@ -31,7 +29,7 @@ export class StudentService {
 
         let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_ADD_STUDENT}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
-            this._studentList = [];
+            //this._studentList = [];
         }));
 
     }
@@ -41,21 +39,21 @@ export class StudentService {
 
         let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_UPDATE_STUDENT}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
-            this._studentList = [];
+            //this._studentList = [];
         }));
 
     }
-    public getStudent(input: SearchRequestModel<StudentAdmissionModel>): Observable<StudentAdmissionModel[]> {
+    public getStudent(input: SearchRequestModel<StudentViewModel>): Observable<StudentViewModel[]> {
 
         let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_GET_STUDENT}`;
-        return this.http.post<ResponseModel<StudentAdmissionModel[]>>(url, input).pipe(
-            map((data: ResponseModel<StudentAdmissionModel[]>) => {
+        return this.http.post<ResponseModel<StudentViewModel[]>>(url, input).pipe(
+            map((data: ResponseModel<StudentViewModel[]>) => {
+                var _studentList:StudentViewModel[] =[];
                 if (data != null && data.responseData != null) {
-                    this._studentList = data.responseData;
-
+                    _studentList = data.responseData;
 
                 }
-                return this._studentList;
+                return _studentList;
             })
         );
 
@@ -64,7 +62,7 @@ export class StudentService {
 
         let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_MAKE_INACTIVE_STUDENT}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
-            this._studentList = [];
+            //this._studentList = [];
         }));
 
     }

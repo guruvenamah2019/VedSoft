@@ -10,7 +10,9 @@ import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component,E
 import { MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
-  MatRippleModule, MatMenuModule, MatTabsModule, MatSelectModule, MatIconModule, MatStepperModule,MatCardModule} from "@angular/material"
+  MatRippleModule, MatMenuModule, MatTabsModule, MatSelectModule, MatIconModule, MatStepperModule,
+  MatCardModule, MatDatepickerModule,MatNativeDateModule , MAT_DATE_LOCALE
+} from "@angular/material"
 import { ToastrModule } from 'ngx-toastr';
 
 
@@ -51,6 +53,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatIconModule,
     MatStepperModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
+
     
   ],
   exports: [
@@ -72,10 +77,12 @@ import { ToastrModule } from 'ngx-toastr';
     MatSelectModule,
     MatIconModule,
     MatStepperModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule
   ],
   providers: [
-
+    MatNativeDateModule,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-IN'},
   ],
 
 })

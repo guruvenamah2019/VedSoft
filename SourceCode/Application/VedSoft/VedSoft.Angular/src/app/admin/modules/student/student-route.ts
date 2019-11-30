@@ -11,9 +11,9 @@ export const STUDENT_ROUTES: Routes = [
       { path: 'students/:id', redirectTo: 'student/:id' },
         
 
-        { path: 'student/new', canActivate:[BranchGuard], component: NewStudentComponent},
+        { path: 'student/new',  component: NewStudentComponent},
            
-            { path: 'student/:studentId',canActivate:[BranchGuard], component: StudentComponent,children: [
+            { path: 'student/:studentId', component: StudentComponent,children: [
                
       
                 {
