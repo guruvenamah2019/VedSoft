@@ -4,7 +4,7 @@ import { AuthenticationService } from "../services/index";
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap } from 'rxjs/operators';
 import { ResponseModel } from '../models/shared-model/response.model';
-import { LoginResponseModel } from '../models/user-model';
+import { LoginResponseModel } from '../models/login';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

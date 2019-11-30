@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap, map } from 'rxjs/operators';
 import { TokenModel, RequestModel, ResponseModel, ResultModel } from '../models/shared-model/index';
 import { BaseService } from './base.service';
-import { LoginRequestModel, AuthenticationModel, UserMasterModel, LoginResponseModel } from '../models/user-model';
+import { LoginRequestModel, AuthenticationModel, UserLoginModel, LoginResponseModel } from '../models/login';
 import { LOGIN_SERVICE_URL } from "../constant/service-url";
 import { post } from 'selenium-webdriver/http';
 import { LoginStatusEnum } from '../enums/login-status.enum';
@@ -23,10 +23,10 @@ export class AuthenticationService {
   constructor(private http: HttpClient, public baseService: BaseService) {
 
   }
-  public get loggedUser(): UserMasterModel {
+  public get loggedUser(): UserLoginModel {
     return this.baseService.loggedUser;
   }
-  public set loggedUser(user: UserMasterModel) {
+  public set loggedUser(user: UserLoginModel) {
     this.baseService.loggedUser = user;
   }
 
@@ -144,7 +144,7 @@ export class AuthenticationService {
         }));
   }
 
-  private getUserDetailsByToken(): Observable<ResponseModel<UserMasterModel>> {
+  private getUserDetailsByToken(): Observable<ResponseModel<UserLoginModel>> {
 
     //    let url = `${this.baseService.appInfo.apiUrl}/users/logout`;
     let url = `${this.baseService.appInfo.apiUrl}/${LOGIN_SERVICE_URL.USER_DETAILS_BY_TOKEN}`;
@@ -154,7 +154,7 @@ export class AuthenticationService {
       token: this.getJwtToken()
     });
 
-    return this.http.post<ResponseModel<UserMasterModel>>(url, input).pipe();
+    return this.http.post<ResponseModel<UserLoginModel>>(url, input).pipe();
 
   }
 
@@ -175,7 +175,7 @@ export class AuthenticationService {
     else {
 
       return this.getUserDetailsByToken().pipe(
-        map((result: ResponseModel<UserMasterModel>) => {
+        map((result: ResponseModel<UserLoginModel>) => {
 
           if (result != null && result.responseData != null) {
             this.loggedUser = result.responseData;

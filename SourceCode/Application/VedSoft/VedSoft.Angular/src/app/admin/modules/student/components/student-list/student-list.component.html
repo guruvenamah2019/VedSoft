@@ -1,74 +1,88 @@
 ﻿<div class="grid">
-  <p class="grid-header demo-wrapper">
-    <span>Student List</span>
-    <span class="float-right  btn btn-dark has-icon btn-rounded">
-      <i class="mdi mdi-import"></i>Import</span>
-    <span [routerLink]="['new']"  class="float-right btn btn-success has-icon btn-rounded">
-      <i class="mdi mdi-student"></i>Add</span>
-      <span [routerLink]="['../../']"  class="float-right btn btn-success has-icon btn-rounded">
+
+  <div class="card mb-4 py-3 border-left-info">
+    <div class="card-body">
+      Student List
+
+      <span class="float-right  btn btn-dark has-icon btn-rounded">
+        <i class="fas fa-fw fa-upload"></i>Import</span>
+      <span [routerLink]="['new']" class="float-right btn btn-success has-icon btn-rounded">
+        <i class="fas fa-fw fa-plus"></i>Add</span>
+      <span [routerLink]="['../../']" class="float-right btn btn-success has-icon btn-rounded">
+        <i class="fas fa-fw fa-arrow-left"></i>
         Back</span>
-     
-    <span class="float-none"></span>
-  </p>
+
+      <span class="float-none"></span>
+    </div>
+  </div>
 
 
-  <div class="item-wrapper">
-    <div class="table-responsive">
-      <table class="table table-hover" *ngIf="studentList">
-        <thead>
-          <tr>
+  <div class="row">
+
+    <div class="col-lg-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">
             <th>Select All|None
 
               <label class="badge badge-info">{{studentList.length}} Student(s)</label>
             </th>
-            <th>
-              <div class="btn-group" dropdown>
-                <button id="btnAll" dropdownToggle type="button"
-                  class="btn btn-trasnparent action-btn btn-xs component-flat pr-0 dropdown-toggle"
-                  aria-controls="ddlAll">
-                  <i class="mdi mdi-dots-vertical"></i>
+          </h6>
+          <div class="dropdown no-arrow">
+            <!--<a class="dropdown-toggle " role="button" id="ddlAllLink" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="ddlAllLink">
+                          <a class="dropdown-item">Edit</a>
+                          <a class="dropdown-item">Delete</a>
+                        </div>-->
+          </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover" >
+              
+              <tbody>
+                <tr *ngFor="let student of studentList">
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+student.id}}">
+                      <label class="custom-control-label"
+                        for="{{'customCheck1'+student.id}}">{{student.user.firstName}}</label>
+                    </div>
+                  </td>
+                  <td class="actions">
+                    
 
-                </button>
-                <ul id="ddlAll" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="btnAll"
-                  x-placement="bottom-end">
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline"  >Edit</i></li>
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever">Delete</i></li>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" role="button" id="{{'btn1'+student.id}}" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                          [attr.aria-labelledby]="'btn1'+student.id">
+                          <a class="dropdown-item" [routerLink]="['./', student.id]"><i
+                              class="fas fa-edit fa-sm fa-fw mr-2">Edit</i></a>
+                          <a class="dropdown-item" (click)="deleteStudent(student)"><i
+                              class="fas fa-trash fa-sm fa-fw mr-2">Delete</i></a>
+                        </div>
+                      </div>
+                  </td>
+                </tr>
 
-                </ul>
-              </div>
 
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let student of studentList">
-            <td>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+student.id}}">
-                <label class="custom-control-label" for="{{'customCheck1'+student.id}}">{{student.user.firstName}}</label>
-              </div>
-            </td>
-            <td class="actions">
-              <div class="btn-group" dropdown>
-                <button id="{{'btn1'+student.id}}" dropdownToggle type="button"
-                  class="btn btn-trasnparent action-btn btn-xs component-flat pr-0 dropdown-toggle"
-                  [attr.aria-controls]="'ddl1'+student.id">
-                  <i class="mdi mdi-dots-vertical"></i>
-
-                </button>
-                <ul id="{{'ddl1'+student.id}}" *dropdownMenu class="dropdown-menu" role="menu" [attr.aria-labelledby]="'btn1'+student.id"
-                  x-placement="bottom-end">
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-pencil-box-outline" [routerLink]="['./', student.id]"   >Edit</i></li>
-                  <li role="menuitem" class="dropdown-item"><i class="mdi mdi-delete-forever" (click)="deleteStudent(student)"  >Delete</i></li>
-
-                </ul>
-              </div>
-            </td>
-          </tr>
-          
-
-        </tbody>
-      </table>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+
+
+  <div class="item-wrapper">
+
   </div>
 </div>

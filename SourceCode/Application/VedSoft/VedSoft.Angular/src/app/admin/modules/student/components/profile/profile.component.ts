@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { BankService, AuthenticationService, StudentService } from 'src/app/core/services';
-import { AddressModel } from 'src/app/core/models/master-model';
-import { StudentModel } from 'src/app/core/models/student-model';
-import { CommonConstants } from 'src/app/core/enums';
+import { BankService, AuthenticationService, StudentService } from '../../../../../core/services';
+import { AddressModel } from '../../../../../core/models/master-model';
+import { StudentBaseModel, StudentAdmissionModel } from '../../../../../core/models/student-model';
+import { CommonConstants } from '../../../../../core/enums';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class StudentProfileComponent implements OnInit {
   error = '';
   submitted: boolean = false;
   studentForm: FormGroup;
-  model: StudentModel = new StudentModel();
+  model: StudentAdmissionModel = new StudentAdmissionModel();
   onNavigate() {
   }
   constructor(private userService: AuthenticationService, private formBuilder: FormBuilder, private studentService:StudentService ) {
@@ -27,25 +27,38 @@ export class StudentProfileComponent implements OnInit {
   }
   ngOnInit() {
     this.model = {
-      id:0,
-      user: {
+      studentDetails:{
+        id:0,
         firstName:'',
+        middleName:'',
         lastName:'',
-        address:'',
-        notificationEmailId:'',
+        primaryContact:'',
+        father:{
+          firstName:'',
+          lastName:''
+        },
+        mother:{
+          firstName:'',
+          lastName:''
+        },
         
       },
+      guardianDetails:{
+        firstName:'',
+        lastName:''
+      }
+      
     };
     this.studentForm = this.formBuilder.group({
-      firstName: new FormControl(this.model.user.firstName, [Validators.required, Validators.minLength(3)]),
-      middleName: new FormControl(this.model.user.middleName ),
-      lastName: new FormControl(this.model.user.lastName, [Validators.required, Validators.minLength(3)]),
+      firstName: new FormControl(this.model.studentDetails.firstName, [Validators.required, Validators.minLength(3)]),
+      middleName: new FormControl(this.model.studentDetails.middleName ),
+      lastName: new FormControl(this.model.studentDetails.lastName, [Validators.required, Validators.minLength(3)]),
       contactNumber: new FormControl("", [Validators.required, Validators.minLength(3)]),
-      notificationEmailId: new FormControl(this.model.user.notificationEmailId, [Validators.required, Validators.minLength(10)]),
-      fatherFirstName: new FormControl(this.model.user.firstName, [Validators.required, Validators.minLength(3)]),
-      fatherLastName: new FormControl(this.model.user.lastName, [Validators.required, Validators.minLength(3)]),
-      motherFirstName: new FormControl(this.model.user.firstName, [Validators.required, Validators.minLength(3)]),
-      motherLastName: new FormControl(this.model.user.lastName, [Validators.required, Validators.minLength(3)]),
+      notificationEmailId: new FormControl(this.model.studentDetails.notificationId, [Validators.required, Validators.minLength(10)]),
+      fatherFirstName: new FormControl(this.model.studentDetails.father.firstName, [Validators.required, Validators.minLength(3)]),
+      fatherLastName: new FormControl(this.model.studentDetails.father.lastName, [Validators.required, Validators.minLength(3)]),
+      motherFirstName: new FormControl(this.model.studentDetails.mother.firstName, [Validators.required, Validators.minLength(3)]),
+      motherLastName: new FormControl(this.model.studentDetails.mother.lastName, [Validators.required, Validators.minLength(3)]),
       //parent: new FormControl(parent, []),
     });
 
@@ -70,28 +83,29 @@ export class StudentProfileComponent implements OnInit {
     
 
     let address: AddressModel = this.f.studentAddress.value;
-    var input: StudentModel={
-      id: this.model.id,
-      user:{
-        userName:this.getRandomId(),
+    var input: StudentAdmissionModel={
+      studentDetails:{
+        id:0,
+        //userName:this.getRandomId(),
         firstName: this.f.firstName.value,
         lastName: this.f.lastName.value,
         middleName: this.f.middleName.value,
-        notificationEmailId: this.f.notificationEmailId.value,
-        contactNumber:this.f.contactNumber.value,
-        address: JSON.stringify(address),
+        notificationId: this.f.notificationEmailId.value,
+        primaryContact:this.f.contactNumber.value,
+        mother:{
+          firstName: this.f.motherFirstName.value,
+          lastName: this.f.motherLastName.value,
+        },
+        father:{
+          firstName: this.f.fatherFirstName.value,
+          lastName: this.f.fatherLastName.value,
+        },
+        //a: JSON.stringify(address),
       },
-      motherUser:{
-        firstName: this.f.motherFirstName.value,
-        lastName: this.f.motherLastName.value,
-      },
-      fatherUser:{
-        firstName: this.f.fatherFirstName.value,
-        lastName: this.f.fatherLastName.value,
-      },
-      actionUserId: this.userService.loggedUser.id
+     
+      //actionUserId: this.userService.loggedUser.id
     };
-    if(input.id>0)
+    if(input.studentDetails.id>0)
     {
       this.editStudent(input);
     }
@@ -104,12 +118,12 @@ export class StudentProfileComponent implements OnInit {
 
   }
 
-  addStudent(studentInput: StudentModel) {
+  addStudent(studentInput: StudentAdmissionModel) {
     this.studentService.addStudent(studentInput).subscribe(x => {
       if (x.responseData != null) {
         if (x.responseData.statusId == CommonConstants.success) {
           this.studentService.baseService.successMessage("Student Added sucessfully");
-          studentInput.id = x.responseData.primaryKey;
+          studentInput.studentDetails.id = x.responseData.primaryKey;
         }
         else if (x.responseData.statusId == CommonConstants.duplicateRecord) {
           this.studentService.baseService.errorMessage("Student already exist");
@@ -124,12 +138,12 @@ export class StudentProfileComponent implements OnInit {
 
   }
 
-  editStudent(studentInput: StudentModel) {
+  editStudent(studentInput: StudentAdmissionModel) {
     this.studentService.updateStudent(studentInput).subscribe(x => {
       if (x.responseData != null) {
         if (x.responseData.statusId == CommonConstants.success) {
           this.studentService.baseService.successMessage("Student update sucessfully");
-          studentInput.id = x.responseData.primaryKey;
+          studentInput.studentDetails.id = x.responseData.primaryKey;
         }
         else if (x.responseData.statusId == CommonConstants.duplicateRecord) {
           this.studentService.baseService.errorMessage("Student already exist with this name");

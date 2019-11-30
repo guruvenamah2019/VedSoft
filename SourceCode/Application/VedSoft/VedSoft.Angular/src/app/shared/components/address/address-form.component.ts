@@ -26,7 +26,7 @@ export class AddressComponent implements OnInit {
 			"address2": new FormControl(this.address!=null? this.address.address2:""),
 			"city": new FormControl(this.address!=null? this.address.city:"", Validators.required),
 			"state": new FormControl(this.address!=null? this.address.state:"", [Validators.required]),
-			"zipcode": new FormControl(this.address!=null? this.address.zipcode:"", [Validators.required, Validators.minLength(6)]),
+			"pincode": new FormControl(this.address!=null? this.address.pincode:"", [Validators.required, Validators.minLength(6)]),
 			"country": new FormControl(this.address!=null? this.address.country:"", [Validators.required])
 		});
 	}
@@ -39,7 +39,7 @@ export class AddressComponent implements OnInit {
 			"address2": new FormControl(this.address!=null? this.address.address2:""),
 			"city": new FormControl(this.address!=null? this.address.city:"", Validators.required),
 			"state": new FormControl(this.address!=null? this.address.state:"", [Validators.required]),
-			"zipcode": new FormControl(this.address!=null? this.address.zipcode:"", [Validators.required, Validators.minLength(6)]),
+			"pincode": new FormControl(this.address!=null? this.address.pincode:"", [Validators.required, Validators.minLength(6)]),
 			"country": new FormControl(this.address!=null? this.address.country:"", [Validators.required])
 		});
 

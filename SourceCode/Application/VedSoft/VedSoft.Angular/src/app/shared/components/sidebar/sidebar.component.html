@@ -15,7 +15,7 @@
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
     <a class="nav-link" [routerLink]="['/admin/dashboard']" [routerLinkActive]="'is-active'">
-      <i class="mdi mdi-gauge link-icon"></i>
+      <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
 
@@ -37,43 +37,45 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Custom Components:</h6>
-        <a class="collapse-item" [routerLink]="['/admin/settings/academicyear']"
-          [routerLinkActive]="'is-active'">academicyear</a>
-        <a class="collapse-item" [routerLink]="['/admin/settings/org']" [routerLinkActive]="'is-active'">org</a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/academicyear']" [routerLinkActive]="'is-active'" >
+          <i class="fas fa-fw fa-chalkboard"></i>
+          Academic Year</a>
+        <a class="collapse-item" [routerLink]="['/admin/settings/org']" [routerLinkActive]="'is-active'">
+          <i class="fas fa-fw fa-sitemap"></i>Organization</a>
         <a class="collapse-item" [routerLink]="['/admin/branchs']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-home-variant link-icon"></i> <span>Branchs</span>
+          <i class="fas fa-fw fa-code-branch"></i><span>Branchs</span>
 
         </a>
         <a class="collapse-item" [routerLink]="['/admin/settings/roles']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-plus-box link-icon"></i> <span>Roles</span>
+          <i class="fas fa-fw fa-user-tag"></i><span>Roles</span>
 
         </a>
         <a class="collapse-item" [routerLink]="['/admin/settings/standards']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-label link-icon"></i> <span>Standards</span>
+          <i class="fas fa-fw fa-book"></i> <span>Standards</span>
 
         </a>
         <a class="collapse-item" [routerLink]="['/admin/settings/streams']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-steam link-icon"></i> <span>Streams</span>
+          <i class="fas fa-fw fa-book"></i> <span>Streams</span>
 
         </a>
         <a class="collapse-item" [routerLink]="['/admin/settings/subject']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-text-subject link-icon"></i><span>Subject</span>
+          <i class="fas fa-fw fa-book"></i><span>Subject</span>
 
         </a>
         <a class="collapse-item" [routerLink]="['/admin/settings/topics']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-label link-icon"></i><span>Topics</span>
+          <i class="fas fa-fw fa-book"></i><span>Topics</span>
 
         </a>
         <a class="collapse-item" [routerLink]="['/admin/settings/course']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-library link-icon"></i><span>Course</span>
+          <i class="fas fa-fw fa-book-open"></i><span>Course</span>
 
         </a>
         <a class="collapse-item" [routerLink]="['/admin/settings/bank']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-bank link-icon"></i> <span>Banks</span>
+          <i class="fas fa-fw fa-university"></i> <span>Banks</span>
 
         </a>
         <a class="collapse-item" [routerLink]="['/admin/settings/institute']" [routerLinkActive]="'is-active'">
-          <i class="mdi mdi-school link-icon"></i> <span>Institutes</span>
+          <i class="fas fa-fw fa-school"></i><span>Institutes</span>
 
         </a>
       </div>
@@ -128,7 +130,7 @@
   </li>
 
   <!-- Nav Item - Charts -->
-  
+
 
   <!-- Nav Item - Tables -->
   <!--<li class="nav-item">

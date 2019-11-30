@@ -9,7 +9,7 @@ import { CustomerModel } from '../models/master-model/customer-model';
 import { LOGIN_SERVICE_URL, COURSE_SERVICE_URL } from '../constant/service-url';
 import { map, catchError } from 'rxjs/operators';
 import { ModuleEnum } from '../enums';
-import { UserMasterModel } from '../models/user-model';
+import { UserLoginModel } from '../models/login';
 import { CustomerBranchModel } from '../models/master-model';
 import { Router } from '@angular/router';
 
@@ -19,11 +19,11 @@ export class BaseService {
   public appInfo: ApplicationModel;
   public CustomerInfo: CustomerModel;
   public activeModule:ModuleEnum;
-  public loggedUser: UserMasterModel;
+  public loggedUser: UserLoginModel;
   public branchInfo:CustomerBranchModel;
   constructor(private http: HttpClient, private messageService: ToastrService,private router: Router) {
     console.log("AppBaseService");
-    this.loggedUser = new UserMasterModel();
+    this.loggedUser = new UserLoginModel();
     this.setAppUrl();
     this.ActiveModule = ModuleEnum.Public;
 

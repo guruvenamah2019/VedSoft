@@ -4,7 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { TokenModel } from "../models/shared-model/tokens.model"
 
-import { LoginRequestModel, AuthenticationModel } from "../models/user-model";
+import { LoginRequestModel, AuthenticationModel } from "../models/login";
 import { Token } from '@angular/compiler';
 import { ResponseModel, ResultModel } from '../models/shared-model';
 

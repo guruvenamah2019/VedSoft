@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthenticationService, BrowserInfoService } from "../../../core/services/index";
 import { EncryptionService } from 'src/app/encryption/service/encryption.service';
-import { LoginRequestModel } from 'src/app/core/models/user-model';
+import { LoginRequestModel } from 'src/app/core/models/login';
 import { PasswordStrengthEnum } from "src/app/core/enums/index";
 import { PasswordStrengthCheck, SetPasswordRequestModel } from "src/app/core/models/login/index"
 import { LoginStatusEnum } from 'src/app/core/enums/login-status.enum';

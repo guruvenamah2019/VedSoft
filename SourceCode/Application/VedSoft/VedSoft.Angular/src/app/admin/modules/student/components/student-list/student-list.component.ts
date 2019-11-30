@@ -4,7 +4,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BaseService, StudentService, BranchService } from 'src/app/core/services';
 import { RequestModel } from 'src/app/core/models/shared-model';
 import { CommonConstants } from 'src/app/core/enums';
-import { StudentModel } from 'src/app/core/models/student-model/student-master.model';
+import { StudentBaseModel } from 'src/app/core/models/student-model/student-master.model';
 
 
 
@@ -16,7 +16,7 @@ export class StudentListComponent implements OnInit {
 
     level: number = 1;
     bsModalRef: BsModalRef;
-    studentList: StudentModel[] = [];
+    studentList: StudentBaseModel[] = [];
     branchId: number = 0;
     constructor(private route: ActivatedRoute, private studentService: StudentService, private baseService: BaseService, private branchService: BranchService) {
         this.route.parent.params.subscribe(params => {
@@ -42,7 +42,7 @@ export class StudentListComponent implements OnInit {
 
 
     getStudentList() {
-        let student: StudentModel = new StudentModel();
+        let student: StudentBaseModel = new StudentBaseModel();
         let searchInput = this.baseService.getSearchRequestModel(student);
         searchInput.pageNumber = 1;
         searchInput.pageSize = 100;

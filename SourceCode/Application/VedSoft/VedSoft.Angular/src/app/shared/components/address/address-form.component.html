@@ -40,12 +40,12 @@
 
   <div class="form-group col-md-6 showcase_row_area">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Zipcode" [formControl]="f.zipcode" maxlength="6">
-      <mat-error *ngIf="submitted && f.zipcode.errors?.required">
-        Zipcode is required
+      <input matInput placeholder="Pincode" [formControl]="f.pincode" maxlength="6">
+      <mat-error *ngIf="submitted && f.pincode.errors?.required">
+        pincode is required
       </mat-error>
-      <mat-error *ngIf="submitted && f.zipcode.errors?.minlength">
-        Zipcode must be at 6 characters long.
+      <mat-error *ngIf="submitted && f.pincode.errors?.minlength">
+        pincode must be at 6 characters long.
       </mat-error>
     </mat-form-field>
   </div>

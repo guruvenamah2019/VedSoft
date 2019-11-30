@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService, BrowserInfoService } from "../../../core/services/index";
 import { first } from 'rxjs/operators';
 import { EncryptionService } from 'src/app/encryption/service/encryption.service';
-import { LoginRequestModel } from 'src/app/core/models/user-model';
+import { LoginRequestModel } from 'src/app/core/models/login';
 import { LoginStatusEnum } from 'src/app/core/enums/login-status.enum';
 import { ToastrService } from 'ngx-toastr';
 
