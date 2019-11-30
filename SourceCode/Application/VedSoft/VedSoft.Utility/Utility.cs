@@ -15,5 +15,10 @@ namespace VedSoft.Utility
         {
             return en.Skip((page-1) * pageSize).Take(pageSize);
         }
+
+        public static int MySQLStartLimit(int PageNumber, int pageSize)
+        {
+            return ((PageNumber - 1) * pageSize);
+        }
     }
 }

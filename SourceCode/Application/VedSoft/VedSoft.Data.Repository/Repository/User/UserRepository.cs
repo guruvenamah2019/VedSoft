@@ -337,34 +337,28 @@ namespace VedSoft.Data.Repository.Repository.User
             return CommonConstants.Success;
         }
 
-        public List<StudentAdmissionModel> GetStudentList(SearchRequestModel<StudentAdmissionModel> input)
+        public List<StudentViewModel> GetStudentList(SearchRequestModel<StudentViewModel> input)
         {
-            List<StudentAdmissionModel> userList = new List<StudentAdmissionModel>();
-            userList = (from st in this.RepositoryContext.Student//.Where(x => x.Id == input.RequestParameter.Id)
-                            join u in this.RepositoryContext.User.Where(x => x.CustomerId == input.CustomerId
-                            && x.Active == CommonConstants.ActiveStatus) on st.UserId equals u.UserId
-                            //join udd in this.RepositoryContext.UserDetails on u.UserId equals udd.UserId
-                            select new StudentAdmissionModel
-                            {
-                                CustomerId=input.CustomerId,
-                                //FatherUser = new UserModel(),
-                                //MotherUser = new UserModel(),
-                                //GuardianUser = new UserModel(),
-                                IsEnrolled = st.IsEnrolled,
-                                StudentDetails = new StudentBaseModel() {
-                                    StudentId = st.Id,
-                                    NotificationId = u.NotificationEmailId,
-                                    FirstName = u.FirstName,
-                                    LastName = u.LastName,
-                                    MiddleName = u.MiddleName,
-                                    //UserName = u.LoginId,
-                                    Password = u.Password,
-                                    //Active = u.Active,
-                                }
-                                }).Page(input.PageSize, input.PageNumber).ToList();
+            string query = string.Format(@"SELECT s.id  StudentId,u.id  UserId,u.first_name FirstName,u.middle_name MiddleName,u.last_name LastName,
+                            u.primary_contactno PrimaryContact,u.login_id LoginId,u.notification_id NotificationId,sb.branch_id BranchId,
+                            b.name BranchName
+                            FROM STUDENT s JOIN USER_MASTER u ON s.user_id=u.id
+                            JOIN STUDENT_BRANCHES sb ON sb.student_id=s.id
+                            JOIN CUSTOMER_BRANCHES b ON sb.branch_id=b.id
+                            WHERE (0={0} OR u.customer_id={0}) 
+                                AND (0={1} OR u.id={1}) 
+                                AND (0={2} OR s.id={2}) 
+                                AND (0={3} OR sb.branch_id={3}) 
+                                ORDER BY s.id 
+                             LIMIT {4},{5}", input.CustomerId,
+                             input.RequestParameter.UserId,
+                             input.RequestParameter.StudentId,
+                             input.RequestParameter.BranchId,
+                             PagingUtils.MySQLStartLimit(input.PageNumber,input.PageSize),
+                             input.PageSize);
+            List<StudentViewModel> studentList = this.RepositoryContext.ExecuteSqlQuery<StudentViewModel>(query).ToList();
 
-
-            return userList;
+            return studentList;
         }
 
         public int MakeInActiveStudent(RequestModel<StudentModel_Old> input)

@@ -96,9 +96,9 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
 
-        public ResponseModel<List<StudentAdmissionModel>> GetStudentList(SearchRequestModel<StudentAdmissionModel> input)
+        public ResponseModel<List<StudentViewModel>> GetStudentList(SearchRequestModel<StudentViewModel> input)
         {
-            ResponseModel<List<StudentAdmissionModel>> responseModel = new ResponseModel<List<StudentAdmissionModel>>();
+            ResponseModel<List<StudentViewModel>> responseModel = new ResponseModel<List<StudentViewModel>>();
             responseModel.ResponseData = UserBusiness.GetStudentList(input);
             responseModel.Status = CommonConstants.Success;
 

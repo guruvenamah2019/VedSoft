@@ -149,4 +149,12 @@ namespace VedSoft.Model.User
         public string Mobile2 { get; set; }
         public string Landline { get; set; }
     }
+
+    public class StudentViewModel:UserBaseModel
+    {
+        public int StudentId { get; set; }
+        public int UserId { get; set; }
+        public int BranchId { get; set; }
+        public string BranchName { get; set; }
+    }
 }
