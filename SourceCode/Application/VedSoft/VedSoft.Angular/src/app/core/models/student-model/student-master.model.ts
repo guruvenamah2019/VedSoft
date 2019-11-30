@@ -17,7 +17,7 @@ export class GuardianBaseModel extends UserBaseModel {
 
 
 export class StudentBaseModel extends UserBaseModel {
-  id?:number;
+  studentId?:number;
   father?: ParentModel;
   mother?: ParentModel;
   details?: UserAdditionalDetailsModel;

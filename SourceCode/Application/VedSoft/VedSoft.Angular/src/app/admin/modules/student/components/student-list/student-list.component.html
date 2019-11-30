@@ -48,22 +48,22 @@
                 <tr *ngFor="let student of studentList">
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+student.id}}">
+                      <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+student.studentDetails.studentId}}">
                       <label class="custom-control-label"
-                        for="{{'customCheck1'+student.id}}">{{student.user.firstName}}</label>
+                        for="{{'customCheck1'+student.studentDetails.studentId}}">{{student.studentDetails.firstName}}</label>
                     </div>
                   </td>
                   <td class="actions">
                     
 
                     <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" role="button" id="{{'btn1'+student.id}}" data-toggle="dropdown"
+                        <a class="dropdown-toggle" role="button" id="{{'btn1'+student.studentDetails.studentId}}" data-toggle="dropdown"
                           aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                          [attr.aria-labelledby]="'btn1'+student.id">
-                          <a class="dropdown-item" [routerLink]="['./', student.id]"><i
+                          [attr.aria-labelledby]="'btn1'+student.studentDetails.studentId">
+                          <a class="dropdown-item" [routerLink]="['./', student.studentDetails.studentId]"><i
                               class="fas fa-edit fa-sm fa-fw mr-2">Edit</i></a>
                           <a class="dropdown-item" (click)="deleteStudent(student)"><i
                               class="fas fa-trash fa-sm fa-fw mr-2">Delete</i></a>

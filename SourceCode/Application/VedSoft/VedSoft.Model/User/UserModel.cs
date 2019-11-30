@@ -78,7 +78,7 @@ namespace VedSoft.Model.User
 
     public class StudentAdmissionModel
     {
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
         public int BranchId { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -105,6 +105,7 @@ namespace VedSoft.Model.User
 
     public class StudentBaseModel:UserBaseModel
     {
+        public int StudentId { get; set; }
         public ParentModel Father { get; set; }
         public ParentModel Mother { get; set; }
         public UserAdditionalDetailsModel Details { get; set; }

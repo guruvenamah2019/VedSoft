@@ -28,7 +28,7 @@ export class StudentProfileComponent implements OnInit {
   ngOnInit() {
     this.model = {
       studentDetails:{
-        id:0,
+        studentId:0,
         firstName:'',
         middleName:'',
         lastName:'',
@@ -85,7 +85,7 @@ export class StudentProfileComponent implements OnInit {
     let address: AddressModel = this.f.studentAddress.value;
     var input: StudentAdmissionModel={
       studentDetails:{
-        id:0,
+        studentId:0,
         //userName:this.getRandomId(),
         firstName: this.f.firstName.value,
         lastName: this.f.lastName.value,
@@ -105,7 +105,7 @@ export class StudentProfileComponent implements OnInit {
      
       //actionUserId: this.userService.loggedUser.id
     };
-    if(input.studentDetails.id>0)
+    if(input.studentDetails.studentId>0)
     {
       this.editStudent(input);
     }
@@ -123,7 +123,7 @@ export class StudentProfileComponent implements OnInit {
       if (x.responseData != null) {
         if (x.responseData.statusId == CommonConstants.success) {
           this.studentService.baseService.successMessage("Student Added sucessfully");
-          studentInput.studentDetails.id = x.responseData.primaryKey;
+          studentInput.studentDetails.studentId = x.responseData.primaryKey;
         }
         else if (x.responseData.statusId == CommonConstants.duplicateRecord) {
           this.studentService.baseService.errorMessage("Student already exist");
@@ -143,7 +143,7 @@ export class StudentProfileComponent implements OnInit {
       if (x.responseData != null) {
         if (x.responseData.statusId == CommonConstants.success) {
           this.studentService.baseService.successMessage("Student update sucessfully");
-          studentInput.studentDetails.id = x.responseData.primaryKey;
+          studentInput.studentDetails.studentId = x.responseData.primaryKey;
         }
         else if (x.responseData.statusId == CommonConstants.duplicateRecord) {
           this.studentService.baseService.errorMessage("Student already exist with this name");

@@ -337,29 +337,29 @@ namespace VedSoft.Data.Repository.Repository.User
             return CommonConstants.Success;
         }
 
-        public List<StudentModel_Old> GetStudentList(SearchRequestModel<StudentModel_Old> input)
+        public List<StudentAdmissionModel> GetStudentList(SearchRequestModel<StudentAdmissionModel> input)
         {
-            List<StudentModel_Old> userList = new List<StudentModel_Old>();
+            List<StudentAdmissionModel> userList = new List<StudentAdmissionModel>();
             userList = (from st in this.RepositoryContext.Student//.Where(x => x.Id == input.RequestParameter.Id)
                             join u in this.RepositoryContext.User.Where(x => x.CustomerId == input.CustomerId
                             && x.Active == CommonConstants.ActiveStatus) on st.UserId equals u.UserId
                             //join udd in this.RepositoryContext.UserDetails on u.UserId equals udd.UserId
-                            select new StudentModel_Old
+                            select new StudentAdmissionModel
                             {
-                                Id = st.Id,
-                                FatherUser = new UserModel(),
-                                MotherUser = new UserModel(),
-                                GuardianUser = new UserModel(),
+                                CustomerId=input.CustomerId,
+                                //FatherUser = new UserModel(),
+                                //MotherUser = new UserModel(),
+                                //GuardianUser = new UserModel(),
                                 IsEnrolled = st.IsEnrolled,
-                                User = new UserModel() {
-                                    Id = u.UserId,
-                                    NotificationEmailId = u.NotificationEmailId,
+                                StudentDetails = new StudentBaseModel() {
+                                    StudentId = st.Id,
+                                    NotificationId = u.NotificationEmailId,
                                     FirstName = u.FirstName,
                                     LastName = u.LastName,
                                     MiddleName = u.MiddleName,
-                                    UserName = u.LoginId,
+                                    //UserName = u.LoginId,
                                     Password = u.Password,
-                                    Active = u.Active,
+                                    //Active = u.Active,
                                 }
                                 }).Page(input.PageSize, input.PageNumber).ToList();
 

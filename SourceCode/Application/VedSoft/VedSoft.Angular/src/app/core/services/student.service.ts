@@ -12,7 +12,7 @@ import { StudentBaseModel, StudentAdmissionModel } from '../models/student-model
 })
 export class StudentService {
 
-    private _studentList: StudentBaseModel[] = [];
+    private _studentList: StudentAdmissionModel[] = [];
 
     public get StudentList() {
         return this._studentList;
@@ -45,11 +45,11 @@ export class StudentService {
         }));
 
     }
-    public getStudent(input: SearchRequestModel<StudentBaseModel>): Observable<StudentBaseModel[]> {
+    public getStudent(input: SearchRequestModel<StudentAdmissionModel>): Observable<StudentAdmissionModel[]> {
 
         let url = `${this.baseService.appInfo.apiUrl}/${STUDENT_SERVICE_URL.ACTION_GET_STUDENT}`;
-        return this.http.post<ResponseModel<StudentBaseModel[]>>(url, input).pipe(
-            map((data: ResponseModel<StudentBaseModel[]>) => {
+        return this.http.post<ResponseModel<StudentAdmissionModel[]>>(url, input).pipe(
+            map((data: ResponseModel<StudentAdmissionModel[]>) => {
                 if (data != null && data.responseData != null) {
                     this._studentList = data.responseData;
 

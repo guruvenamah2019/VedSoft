@@ -80,11 +80,11 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionGetStudentList)]
-        public async Task<ResponseModel<List<StudentModel_Old>>> GetStudentList([FromBody] SearchRequestModel<StudentModel_Old> input)
+        public async Task<ResponseModel<List<StudentAdmissionModel>>> GetStudentList([FromBody] SearchRequestModel<StudentAdmissionModel> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;
-            ResponseModel<List<StudentModel_Old>> result = null;
+            ResponseModel<List<StudentAdmissionModel>> result = null;
 
             await Task.Factory.StartNew(() =>
             {

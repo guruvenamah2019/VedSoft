@@ -88,7 +88,7 @@ namespace VedSoft.Business.Master
             }
         }
 
-        public List<StudentModel_Old> GetStudentList(SearchRequestModel<StudentModel_Old> input)
+        public List<StudentAdmissionModel> GetStudentList(SearchRequestModel<StudentAdmissionModel> input)
         {
             return RepositoryWrapper.StudentRepository.GetStudentList(input);
         }
