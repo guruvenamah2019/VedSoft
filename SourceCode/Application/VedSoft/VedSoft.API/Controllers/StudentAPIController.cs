@@ -19,6 +19,14 @@ namespace VedSoft.API.Controllers
 {
     public partial class UserAPIController : ApiBaseController
     {
+        [HttpGet]
+        public object test()
+        {
+            return new RequestModel<StudentAdmissionModel> {
+
+                RequestParameter=new StudentAdmissionModel { }
+            };
+        }
         /// <summary>
         /// To add the Student
         /// </summary>
@@ -91,6 +99,33 @@ namespace VedSoft.API.Controllers
                 return GetResponse(Request, () =>
                 {
                     result = _userBusinessEngine.GetStudentList(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// To get the  Student details
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(StudentAPIAction.ActionGetStudentDetails)]
+        public async Task<ResponseModel<StudentAdmissionModel>> GetStudentDetails([FromBody] SearchRequestModel<StudentViewModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<StudentAdmissionModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _userBusinessEngine.GetStudentDetails(input);
                     return result;
 
                 });

@@ -22,6 +22,8 @@ namespace VedSoft.Data.Contracts.Model
         public string MiddleName { get; set; }
         [Column("LAST_NAME")]
         public string LastName{ get; set; }
+        [Column("PRIMARY_CONTACTNO")]
+        public string PrimaryContactNo { get; set; }
         [Column("USER_TYPE_ID")]
         public int? UserTypeId { get; set; }
         [Column("CONTACT_NO")]
@@ -114,16 +116,64 @@ namespace VedSoft.Data.Contracts.Model
         [Key]
         [Column("ID")]
         public int Id { get; set; }
+        [Column("BIOMETRIC_ID")]
+        public string BiometricId { get; set; }
+        [Column("ROLL_NO")]
+        public int RollNo { get; set; }
         [Column("USER_ID")]
         public int UserId { get; set; }
-        [Column("FATHER_USER_ID")]
-        public int FatherUserId { get; set; }
-        [Column("MOTHER_USER_ID")]
-        public int MotherUserId { get; set; }
+        //[Column("FATHER_USER_ID")]
+        //public int FatherUserId { get; set; }
+        //[Column("MOTHER_USER_ID")]
+        //public int MotherUserId { get; set; }
         [Column("GUARDIAN_USER_ID")]
         public int? GuardinanUserId { get; set; }
         [Column("IS_ENROLLED")]
         public int IsEnrolled { get; set; }
+    }
+
+    [Table("STUDENT_DETAILS")]
+    public class StudentDetailsDB : CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("STUDENT_ID")]
+        public int StudentId { get; set; }
+        [Column("ACADEMIC_INSTITUE_ID")]
+        public int AcademicInstituteId { get; set; }
+        [Column("STUDENT_IMAGE_PATH")]
+        public string StudentImagePath { get; set; }
+        [Column("FATHER_FIRST_NAME")]
+        public string FatherFirstName { get; set; }
+        [Column("FATHER_MIDDLE_NAME")]
+        public string FatherMiddleName { get; set; }
+        [Column("FATHER_LAST_NAME")]
+        public string FatherLastName { get; set; }
+        [Column("FATHER_CONTACTNO")]
+        public string FatherContactNo { get; set; }
+        [Column("FATHER_ANUAL_INCOME")]
+        public decimal FatherAnnualIncome { get; set; }
+        [Column("FATHER_QUALIFICATION")]
+        public string FatherQualification { get; set; }
+        [Column("FATHER_OCCUPATION")]
+        public string FatherOccupation { get; set; }
+        [Column("MOTHER_FIRST_NAME")]
+        public string MotherFirstName { get; set; }
+        [Column("MOTHER_MIDDLE_NAME")]
+        public string MotherMiddleName { get; set; }
+        [Column("MOTHER_LAST_NAME")]
+        public string MotherLastName { get; set; }
+        [Column("MOTHER_CONTACTNO")]
+        public string MotherContactNo { get; set; }
+        [Column("MOTHER_ANUAL_INCOME")]
+        public decimal MotherAnnualIncome { get; set; }
+        [Column("MOTHER_QUALIFICATION")]
+        public string MotherQualification { get; set; }
+        [Column("DATE_OF_BIRTH")]
+        public DateTime DateOfBirth { get; set; }
+        [Column("STUDENT_QUALIFICATION")]
+        public string StudentQualification { get; set; }
     }
 
     [Table("STUDENT_ADMISSION_DETAILS")]
@@ -160,5 +210,17 @@ namespace VedSoft.Data.Contracts.Model
         public int DiscountAllowed { get; set; }
         [Column("DISCOUNTED_FEE_AMOUNT")]
         public decimal DiscountedFeeAmount { get; set; }
+    }
+
+    [Table("STUDENT_BRANCHES")]
+    public class StudentBranchesDB : CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("STUDENT_ID")]
+        public int StudentId { get; set; }
+        [Column("BRANCH_ID")]
+        public int BranchId { get; set; }
     }
 }

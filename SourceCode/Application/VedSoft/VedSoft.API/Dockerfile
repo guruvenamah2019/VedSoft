@@ -18,7 +18,7 @@ COPY . .
 WORKDIR "/src/VedSoft.API"
 RUN dotnet build "VedSoft.API.csproj" -c Release -o /app
 
-FROM build AS  publish
+FROM build AS publish
 RUN dotnet publish "VedSoft.API.csproj" -c Release -o /app
 
 FROM base AS final

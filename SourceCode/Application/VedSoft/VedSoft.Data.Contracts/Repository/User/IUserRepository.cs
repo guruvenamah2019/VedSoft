@@ -33,6 +33,8 @@ namespace VedSoft.Data.Contracts.User
         bool DoesStudentExist(RequestModel<StudentModel_Old> input);
         //bool DoesStudentExistUpdate(RequestModel<StudentModel> input);
         bool DoesStudentIdExist(RequestModel<StudentModel_Old> input);
+
+        StudentAdmissionModel GetStudentDetails(SearchRequestModel<StudentViewModel> input);
     }
 
     public interface IStudentAdmisionDetailsRepository : IRepositoryBase<StudentAdmissionDetailsDB>

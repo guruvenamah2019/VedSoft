@@ -117,6 +117,14 @@ namespace VedSoft.Business.Engine.Master
 
             return responseModel;
         }
+
+        public ResponseModel<StudentAdmissionModel> GetStudentDetails(SearchRequestModel<StudentViewModel> input)
+        {
+            ResponseModel<StudentAdmissionModel> responseModel = new ResponseModel<StudentAdmissionModel>();
+            responseModel.ResponseData = UserBusiness.GetStudentDetails(input);
+
+            return responseModel;
+        }
         #endregion
 
         #region Student Admission

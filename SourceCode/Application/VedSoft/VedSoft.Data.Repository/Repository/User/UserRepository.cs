@@ -321,11 +321,11 @@ namespace VedSoft.Data.Repository.Repository.User
                 //student.UserId = input.RequestParameter.UserId;
                 if (input.RequestParameter.GuardianUser != null && input.RequestParameter.GuardianUser.Id > 0)
                     student.GuardinanUserId = input.RequestParameter.GuardianUser.Id;
-                if (input.RequestParameter.FatherUser != null && input.RequestParameter.FatherUser.Id > 0)
-                    student.FatherUserId = input.RequestParameter.FatherUser.Id;
+                //if (input.RequestParameter.FatherUser != null && input.RequestParameter.FatherUser.Id > 0)
+                //    student.FatherUserId = input.RequestParameter.FatherUser.Id;
                 student.IsEnrolled = input.RequestParameter.IsEnrolled;
-                if (input.RequestParameter.MotherUser != null && input.RequestParameter.MotherUser.Id > 0)
-                    student.MotherUserId = input.RequestParameter.MotherUser.Id;
+                //if (input.RequestParameter.MotherUser != null && input.RequestParameter.MotherUser.Id > 0)
+                //    student.MotherUserId = input.RequestParameter.MotherUser.Id;
                 student.ModifiedBy = input.RequestParameter.ActionUserId;
                 student.ModifiedDate = DateTime.Now;
             }
@@ -359,6 +359,75 @@ namespace VedSoft.Data.Repository.Repository.User
             List<StudentViewModel> studentList = this.RepositoryContext.ExecuteSqlQuery<StudentViewModel>(query).ToList();
 
             return studentList;
+        }
+
+        public StudentAdmissionModel GetStudentDetails(SearchRequestModel<StudentViewModel> input)
+        {
+            StudentAdmissionModel studentAdmissionDetails = (from s in this.RepositoryContext.Student.Where(x => x.Id == input.RequestParameter.StudentId && x.Active == CommonConstants.ActiveStatus)
+                           join sd in this.RepositoryContext.StudentDetails on s.Id equals sd.StudentId
+                           join u in this.RepositoryContext.User.Where(p => p.CustomerId == input.CustomerId) on s.UserId equals u.UserId
+                           join sb in this.RepositoryContext.StudentBranches on s.Id equals sb.StudentId
+                           join cb in this.RepositoryContext.CustomerBranch on sb.BranchId equals cb.Id
+                           select new StudentAdmissionModel
+                           {
+                               StudentDetails = new StudentBaseModel
+                               {
+                                   //BranchId=sb.BranchId,
+                                   //BranchName=cb.Name,
+                                   DateOfBirth = sd.DateOfBirth,
+                                   FirstName = u.FirstName,
+                                   ImageName = sd.StudentImagePath,
+                                   LastName = u.LastName,
+                                   LoginId = u.LoginId,
+                                   MiddleName = u.MiddleName,
+                                   NotificationId = u.NotificationEmailId,
+                                   Password = u.Password,
+                                   PrimaryContact = u.PrimaryContactNo,
+                                   StudentId = s.Id,
+                                   //UserId = u.UserId,
+                                   Details = new UserAdditionalDetailsModel
+                                   {
+                                       Address = new AddressModel
+                                       {
+                                           Address1 = u.Address
+                                       },
+                                       ContactNumber = new ContactNumberModel
+                                       {
+
+                                           Landline = u.ContactNo
+                                       },
+                                       Qualification = sd.StudentQualification,
+
+                                   },
+                                   Father = new ParentModel
+                                   {
+                                       AnnualIncome = sd.FatherAnnualIncome,
+                                       FirstName = sd.FatherFirstName,
+                                       LastName = sd.FatherLastName,
+                                       MiddleName = sd.FatherMiddleName,
+                                       //PrimaryContact = sd.FatherContactNo,
+                                       Qualification = sd.FatherQualification,
+                                   },
+                                   Mother = new ParentModel
+                                   {
+                                       AnnualIncome = sd.MotherAnnualIncome,
+                                       FirstName = sd.MotherFirstName,
+                                       LastName = sd.MotherLastName,
+                                       MiddleName = sd.MotherMiddleName,
+                                       //PrimaryContact = sd.MotherContactNo,
+                                       Qualification = sd.MotherQualification,
+                                   },
+                               },
+                               AcademicInstituteId = sd.AcademicInstituteId,
+                               BranchId = sb.BranchId,
+                               CustomerId = u.CustomerId,
+                               CreatedBy = s.CreatedBy,
+                               CreatedDate = s.CreatedDate,
+                               IsEnrolled = s.IsEnrolled,
+                               RollNo = s.RollNo
+                           }).FirstOrDefault();
+
+            return studentAdmissionDetails;
         }
 
         public int MakeInActiveStudent(RequestModel<StudentModel_Old> input)

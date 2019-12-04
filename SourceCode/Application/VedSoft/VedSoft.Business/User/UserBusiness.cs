@@ -104,6 +104,10 @@ namespace VedSoft.Business.Master
                 return CommonConstants.InvalidRecord;
             }
         }
+        public StudentAdmissionModel GetStudentDetails(SearchRequestModel<StudentViewModel> input)
+        {
+            return RepositoryWrapper.StudentRepository.GetStudentDetails(input);
+        }
         #endregion
 
         #region Student Admission
