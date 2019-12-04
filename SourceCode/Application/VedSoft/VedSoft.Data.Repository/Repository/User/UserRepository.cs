@@ -427,6 +427,36 @@ namespace VedSoft.Data.Repository.Repository.User
                                RollNo = s.RollNo
                            }).FirstOrDefault();
 
+            #region Address & Mobile number serialization
+            if (studentAdmissionDetails!=null 
+                && studentAdmissionDetails.StudentDetails != null 
+                && studentAdmissionDetails.StudentDetails.Details !=null
+                && studentAdmissionDetails.StudentDetails.Details.Address != null
+                && studentAdmissionDetails.StudentDetails.Details.Address.Address1 != null
+                )
+            {
+                var addressObject = studentAdmissionDetails.StudentDetails.Details.Address;
+                Address address = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<Address>(addressObject.Address1);
+                addressObject.Address1 = address.AddressLine1;
+                addressObject.Address2 = address.AddressLine2;
+                addressObject.City = address.City;
+                addressObject.State = address.State;
+            }
+
+            if (studentAdmissionDetails != null
+                && studentAdmissionDetails.StudentDetails != null
+                && studentAdmissionDetails.StudentDetails.Details != null
+                && studentAdmissionDetails.StudentDetails.Details.ContactNumber != null
+                && studentAdmissionDetails.StudentDetails.Details.ContactNumber.Landline != null
+                )
+            {
+                var landlineObject = studentAdmissionDetails.StudentDetails.Details.ContactNumber;
+                ContactNumber contactNumber = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<ContactNumber>(landlineObject.Landline);
+                contactNumber.Landline = contactNumber.Landline;
+                contactNumber.Mobile = contactNumber.Mobile;
+            }
+            #endregion
+
             return studentAdmissionDetails;
         }
 

@@ -9,6 +9,11 @@ namespace VedSoft.Utility.SerializeObjects
 {
     public class SerializeJsonObject
     {
+        public static T DeserializeObject<T>(string jsonContent)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonContent);
+        }
+
         //To get the serialized object
         public static string GetJsonValue(object obj)
         {
