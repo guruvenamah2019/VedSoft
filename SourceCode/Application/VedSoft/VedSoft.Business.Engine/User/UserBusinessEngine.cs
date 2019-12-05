@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using VedSoft.Business.Master;
 using VedSoft.Model;
 using VedSoft.Model.Common;
@@ -101,6 +102,7 @@ namespace VedSoft.Business.Engine.Master
             ResponseModel<List<StudentViewModel>> responseModel = new ResponseModel<List<StudentViewModel>>();
             responseModel.ResponseData = UserBusiness.GetStudentList(input);
             responseModel.Status = CommonConstants.Success;
+            responseModel.RecordCount = responseModel.ResponseData.Select(x => x.Counter).FirstOrDefault();
 
             return responseModel;
         }

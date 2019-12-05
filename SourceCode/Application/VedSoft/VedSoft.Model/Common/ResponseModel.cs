@@ -11,7 +11,6 @@ namespace VedSoft.Model.Common
         public decimal? Status { get; set; }
         public string Message { get; set; }
         public string ResponseApiVersion { get; set; }
+        public int RecordCount { get; set; }
     }
-
-
 }

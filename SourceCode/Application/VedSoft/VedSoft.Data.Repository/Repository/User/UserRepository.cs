@@ -339,9 +339,7 @@ namespace VedSoft.Data.Repository.Repository.User
 
         public List<StudentViewModel> GetStudentList(SearchRequestModel<StudentViewModel> input)
         {
-            string query = string.Format(@"SELECT s.id  StudentId,u.id  UserId,u.first_name FirstName,u.middle_name MiddleName,u.last_name LastName,
-                            u.primary_contactno PrimaryContact,u.login_id LoginId,u.notification_id NotificationId,sb.branch_id BranchId,
-                            b.name BranchName
+            string query = string.Format(@"SELECT @@COLUMNNAME@@
                             FROM STUDENT s JOIN USER_MASTER u ON s.user_id=u.id
                             JOIN STUDENT_BRANCHES sb ON sb.student_id=s.id
                             JOIN CUSTOMER_BRANCHES b ON sb.branch_id=b.id
@@ -354,9 +352,20 @@ namespace VedSoft.Data.Repository.Repository.User
                              input.RequestParameter.UserId,
                              input.RequestParameter.StudentId,
                              input.RequestParameter.BranchId,
-                             PagingUtils.MySQLStartLimit(input.PageNumber,input.PageSize),
+                             PagingUtils.MySQLStartLimit(input.PageNumber, input.PageSize),
                              input.PageSize);
-            List<StudentViewModel> studentList = this.RepositoryContext.ExecuteSqlQuery<StudentViewModel>(query).ToList();
+
+            #region total record count
+            string queryCount = query.Replace("@@COLUMNNAME@@", " count(s.id) studentCount ");
+            var studentCount = this.RepositoryContext.ExecuteSqlQuery<Int32>(queryCount).FirstOrDefault();
+            #endregion
+
+            string studentListquery = query.Replace("@@COLUMNNAME@@", @" s.id  StudentId,u.id  UserId,u.first_name FirstName,u.middle_name MiddleName,u.last_name LastName,
+                            u.primary_contactno PrimaryContact, u.login_id LoginId, u.notification_id NotificationId, sb.branch_id BranchId,
+                            b.name BranchName "); 
+            List<StudentViewModel> studentList = this.RepositoryContext.ExecuteSqlQuery<StudentViewModel>(studentListquery).ToList();
+            //add the counter property...need to relook
+            studentList.ForEach(x => x.Counter = studentCount);
 
             return studentList;
         }

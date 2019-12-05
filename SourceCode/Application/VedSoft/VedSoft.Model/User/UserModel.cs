@@ -156,5 +156,6 @@ namespace VedSoft.Model.User
         public int UserId { get; set; }
         public int BranchId { get; set; }
         public string BranchName { get; set; }
+        public int Counter { get; set; } //just to have the counter
     }
 }
