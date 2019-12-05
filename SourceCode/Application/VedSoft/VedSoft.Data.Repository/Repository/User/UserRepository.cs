@@ -364,68 +364,84 @@ namespace VedSoft.Data.Repository.Repository.User
         public StudentAdmissionModel GetStudentDetails(SearchRequestModel<StudentViewModel> input)
         {
             StudentAdmissionModel studentAdmissionDetails = (from s in this.RepositoryContext.Student.Where(x => x.Id == input.RequestParameter.StudentId && x.Active == CommonConstants.ActiveStatus)
-                           join sd in this.RepositoryContext.StudentDetails on s.Id equals sd.StudentId
-                           join u in this.RepositoryContext.User.Where(p => p.CustomerId == input.CustomerId) on s.UserId equals u.UserId
-                           join sb in this.RepositoryContext.StudentBranches on s.Id equals sb.StudentId
-                           join cb in this.RepositoryContext.CustomerBranch on sb.BranchId equals cb.Id
-                           select new StudentAdmissionModel
-                           {
-                               StudentDetails = new StudentBaseModel
-                               {
-                                   //BranchId=sb.BranchId,
-                                   //BranchName=cb.Name,
-                                   DateOfBirth = sd.DateOfBirth,
-                                   FirstName = u.FirstName,
-                                   ImageName = sd.StudentImagePath,
-                                   LastName = u.LastName,
-                                   LoginId = u.LoginId,
-                                   MiddleName = u.MiddleName,
-                                   NotificationId = u.NotificationEmailId,
-                                   Password = u.Password,
-                                   PrimaryContact = u.PrimaryContactNo,
-                                   StudentId = s.Id,
-                                   //UserId = u.UserId,
-                                   Details = new UserAdditionalDetailsModel
-                                   {
-                                       Address = new AddressModel
-                                       {
-                                           Address1 = u.Address
-                                       },
-                                       ContactNumber = new ContactNumberModel
-                                       {
+                                                             join sd in this.RepositoryContext.StudentDetails on s.Id equals sd.StudentId
+                                                             join u in this.RepositoryContext.User.Where(p => p.CustomerId == input.CustomerId) on s.UserId equals u.UserId
+                                                             join gu in this.RepositoryContext.User.Where(p => p.CustomerId == input.CustomerId) on s.GuardinanUserId equals gu.UserId
+                                                             join sb in this.RepositoryContext.StudentBranches on s.Id equals sb.StudentId
+                                                             join cb in this.RepositoryContext.CustomerBranch on sb.BranchId equals cb.Id
+                                                             select new StudentAdmissionModel
+                                                             {
+                                                                 StudentDetails = new StudentBaseModel
+                                                                 {
+                                                                     //BranchId=sb.BranchId,
+                                                                     //BranchName=cb.Name,
+                                                                     DateOfBirth = sd.DateOfBirth,
+                                                                     FirstName = u.FirstName,
+                                                                     ImageName = sd.StudentImagePath,
+                                                                     LastName = u.LastName,
+                                                                     LoginId = u.LoginId,
+                                                                     MiddleName = u.MiddleName,
+                                                                     NotificationId = u.NotificationEmailId,
+                                                                     Password = u.Password,
+                                                                     PrimaryContact = u.PrimaryContactNo,
+                                                                     StudentId = s.Id,
+                                                                     //UserId = u.UserId,
+                                                                     Details = new UserAdditionalDetailsModel
+                                                                     {
+                                                                         Address = new AddressModel
+                                                                         {
+                                                                             Address1 = u.Address
+                                                                         },
+                                                                         ContactNumber = new ContactNumberModel
+                                                                         {
 
-                                           Landline = u.ContactNo
-                                       },
-                                       Qualification = sd.StudentQualification,
+                                                                             Landline = u.ContactNo
+                                                                         },
+                                                                         Qualification = sd.StudentQualification,
 
-                                   },
-                                   Father = new ParentModel
-                                   {
-                                       AnnualIncome = sd.FatherAnnualIncome,
-                                       FirstName = sd.FatherFirstName,
-                                       LastName = sd.FatherLastName,
-                                       MiddleName = sd.FatherMiddleName,
-                                       //PrimaryContact = sd.FatherContactNo,
-                                       Qualification = sd.FatherQualification,
-                                   },
-                                   Mother = new ParentModel
-                                   {
-                                       AnnualIncome = sd.MotherAnnualIncome,
-                                       FirstName = sd.MotherFirstName,
-                                       LastName = sd.MotherLastName,
-                                       MiddleName = sd.MotherMiddleName,
-                                       //PrimaryContact = sd.MotherContactNo,
-                                       Qualification = sd.MotherQualification,
-                                   },
-                               },
-                               AcademicInstituteId = sd.AcademicInstituteId,
-                               BranchId = sb.BranchId,
-                               CustomerId = u.CustomerId,
-                               CreatedBy = s.CreatedBy,
-                               CreatedDate = s.CreatedDate,
-                               IsEnrolled = s.IsEnrolled,
-                               RollNo = s.RollNo
-                           }).FirstOrDefault();
+                                                                     },
+                                                                     Father = new ParentModel
+                                                                     {
+                                                                         AnnualIncome = sd.FatherAnnualIncome,
+                                                                         FirstName = sd.FatherFirstName,
+                                                                         LastName = sd.FatherLastName,
+                                                                         MiddleName = sd.FatherMiddleName,
+                                                                         //PrimaryContact = sd.FatherContactNo,
+                                                                         Qualification = sd.FatherQualification,
+                                                                     },
+                                                                     Mother = new ParentModel
+                                                                     {
+                                                                         AnnualIncome = sd.MotherAnnualIncome,
+                                                                         FirstName = sd.MotherFirstName,
+                                                                         LastName = sd.MotherLastName,
+                                                                         MiddleName = sd.MotherMiddleName,
+                                                                         //PrimaryContact = sd.MotherContactNo,
+                                                                         Qualification = sd.MotherQualification,
+                                                                     },
+                                                                 },
+                                                                 AcademicInstituteId = sd.AcademicInstituteId,
+                                                                 BranchId = sb.BranchId,
+                                                                 CustomerId = u.CustomerId,
+                                                                 CreatedBy = s.CreatedBy,
+                                                                 CreatedDate = s.CreatedDate,
+                                                                 IsEnrolled = s.IsEnrolled,
+                                                                 RollNo = s.RollNo,
+                                                                 GuardianDetails = new GuardianBaseModel
+                                                                 {
+                                                                     FirstName = gu.FirstName,
+                                                                     Details = new UserAdditionalDetailsModel
+                                                                     {
+                                                                         Address = new AddressModel { Address1 = gu.Address },
+                                                                         ContactNumber = new ContactNumberModel { Landline = gu.ContactNo },
+                                                                     },
+                                                                     PrimaryContact = gu.PrimaryContactNo,
+                                                                     LastName = gu.LastName,
+                                                                     LoginId = gu.LoginId,
+                                                                     MiddleName = gu.MiddleName,
+                                                                     NotificationId = gu.NotificationEmailId,
+                                                                     Password = gu.Password,
+                                                                 }
+                                                             }).FirstOrDefault();
 
             #region Address & Mobile number serialization
             if (studentAdmissionDetails!=null 
@@ -436,11 +452,12 @@ namespace VedSoft.Data.Repository.Repository.User
                 )
             {
                 var addressObject = studentAdmissionDetails.StudentDetails.Details.Address;
-                Address address = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<Address>(addressObject.Address1);
-                addressObject.Address1 = address.AddressLine1;
-                addressObject.Address2 = address.AddressLine2;
+                AddressModel address = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<AddressModel>(addressObject.Address1);
+                addressObject.Address1 = address.Address1;
+                addressObject.Address2 = address.Address2;
                 addressObject.City = address.City;
                 addressObject.State = address.State;
+                addressObject.Pincode = address.Pincode;
             }
 
             if (studentAdmissionDetails != null
@@ -451,9 +468,39 @@ namespace VedSoft.Data.Repository.Repository.User
                 )
             {
                 var landlineObject = studentAdmissionDetails.StudentDetails.Details.ContactNumber;
-                ContactNumber contactNumber = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<ContactNumber>(landlineObject.Landline);
+                ContactNumberModel contactNumber = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<ContactNumberModel>(landlineObject.Landline);
                 contactNumber.Landline = contactNumber.Landline;
                 contactNumber.Mobile = contactNumber.Mobile;
+                contactNumber.Mobile2 = contactNumber.Mobile2;
+            }
+
+            if (studentAdmissionDetails != null
+                && studentAdmissionDetails.GuardianDetails != null
+                && studentAdmissionDetails.GuardianDetails.Details != null
+                && studentAdmissionDetails.GuardianDetails.Details.Address != null
+                )
+            {
+                var addressObject = studentAdmissionDetails.GuardianDetails.Details.Address;
+                AddressModel address = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<AddressModel>(addressObject.Address1);
+                addressObject.Address1 = address.Address1;
+                addressObject.Address2 = address.Address2;
+                addressObject.City = address.City;
+                addressObject.State = address.State;
+                addressObject.Pincode = address.Pincode;
+            }
+
+            if (studentAdmissionDetails != null
+                && studentAdmissionDetails.GuardianDetails != null
+                && studentAdmissionDetails.GuardianDetails.Details != null
+                && studentAdmissionDetails.GuardianDetails.Details.ContactNumber != null
+                && studentAdmissionDetails.GuardianDetails.Details.ContactNumber.Landline != null
+                )
+            {
+                var landlineObject = studentAdmissionDetails.GuardianDetails.Details.ContactNumber;
+                ContactNumberModel contactNumber = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<ContactNumberModel>(landlineObject.Landline);
+                landlineObject.Landline = contactNumber.Landline;
+                landlineObject.Mobile = contactNumber.Mobile;
+                landlineObject.Mobile2 = contactNumber.Mobile2;
             }
             #endregion
 
