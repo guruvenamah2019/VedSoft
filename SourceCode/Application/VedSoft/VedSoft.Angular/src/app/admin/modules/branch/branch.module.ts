@@ -3,13 +3,17 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard, AdminGuard } from "../../../core/guards/index";
 import { BRANCH_ROUTES } from "./branch-route"
 import { SharedModule } from "../../../shared/shared.module"
-import { BranchIndexComponent, BranchListComponent,AddBranchComponent } from './components';
+import { BranchIndexComponent, BranchListComponent,AddBranchComponent,BranchBatchComponent, StudentListComponent, BranchCourseComponent,AddBranchCourseComponent } from './components';
 
 @NgModule({
     declarations: [
         BranchIndexComponent,
         BranchListComponent,
-        AddBranchComponent
+        AddBranchComponent,
+        BranchBatchComponent,
+        StudentListComponent,
+        BranchCourseComponent,
+        AddBranchCourseComponent,
        
     ],
     imports: [
@@ -17,7 +21,8 @@ import { BranchIndexComponent, BranchListComponent,AddBranchComponent } from './
         RouterModule.forChild(BRANCH_ROUTES)
     ],
     entryComponents: [
-        AddBranchComponent
+        AddBranchComponent,
+        AddBranchCourseComponent
     ],
     providers: [
     ],

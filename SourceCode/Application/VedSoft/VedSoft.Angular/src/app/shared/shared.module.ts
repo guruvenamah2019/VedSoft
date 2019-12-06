@@ -6,14 +6,15 @@ import { ModalModule, BsModalService, BsDropdownModule } from 'ngx-bootstrap';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { createTranslateLoader } from './loader/translate.loader';
-import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component,Error401Component, Error500Component, AddressComponent, CustomerHeaderComponent, BranchNavigationComponent } from "./components/index"
+import { FooterComponent, HeaderComponent, SidebarComponent, Error404Component,Error401Component, Error500Component, AddressComponent, CustomerHeaderComponent, BranchNavigationComponent, BranchSidebarComponent } from "./components/index"
 import { MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
   MatRippleModule, MatMenuModule, MatTabsModule, MatSelectModule, MatIconModule, MatStepperModule,
-  MatCardModule, MatDatepickerModule,MatNativeDateModule , MAT_DATE_LOCALE
+  MatCardModule, MatDatepickerModule,MatNativeDateModule , MAT_DATE_LOCALE, MatListModule
 } from "@angular/material"
 import { ToastrModule } from 'ngx-toastr';
+import { NumericDirective } from "./directive/numeric.directive"
 
 
 @NgModule({
@@ -24,7 +25,10 @@ import { ToastrModule } from 'ngx-toastr';
     AddressComponent,
     Error401Component,
     CustomerHeaderComponent,
-    BranchNavigationComponent
+    BranchNavigationComponent,
+    BranchSidebarComponent,
+    NumericDirective,
+    
   ],
   imports: [
     ReactiveFormsModule,
@@ -54,7 +58,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatStepperModule,
     MatCardModule,
     MatDatepickerModule,
-    MatNativeDateModule 
+    MatNativeDateModule ,
+    MatListModule
 
     
   ],
@@ -78,7 +83,10 @@ import { ToastrModule } from 'ngx-toastr';
     MatIconModule,
     MatStepperModule,
     MatCardModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatListModule,
+    BranchSidebarComponent,
+    NumericDirective
   ],
   providers: [
     MatNativeDateModule,

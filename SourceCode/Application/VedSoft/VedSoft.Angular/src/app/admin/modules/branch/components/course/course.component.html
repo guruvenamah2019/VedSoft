@@ -1,0 +1,89 @@
+﻿
+<div class="grid">
+    <div class="card mb-4 py-3 border-left-info">
+      <div class="card-body">
+          Course List
+  
+        <span class="float-right  btn btn-dark has-icon btn-rounded">
+            <i class="fas fa-file-import"></i>Import</span>
+        <span (click)="addCourse()" class="float-right btn btn-success has-icon btn-rounded">
+          <i class="fas fa-plus"></i>Add</span>
+          <span class="float-none"></span>
+
+      </div>
+    </div>
+    <div class="row">
+  
+    <div class="col-lg-12">
+
+       <!-- Dropdown Card Example -->
+       <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">
+              <th>Select All|None
+    
+                <label class="badge badge-info">{{courseList.length}} course(s)</label>
+              </th>
+            </h6>
+            <div class="dropdown no-arrow">
+              <!--<a class="dropdown-toggle " role="button" id="ddlAllLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="ddlAllLink">
+                  <a class="dropdown-item">Edit</a>
+                  <a class="dropdown-item">Delete</a>
+                </div>-->
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover" *ngIf="courseList">
+                <tbody>
+                  <tr *ngFor="let course of courseList">
+                    <td>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="{{'customCheck1'+course.id}}">
+                        <label class="custom-control-label" for="{{'customCheck1'+course.id}}">{{course.name}}</label>
+                      </div>
+                    </td>
+                    <td>
+                        <p>{{course.courseCost | currency:'INR'}}</p>
+                      </td>
+                      <td>
+                          {{course.durationUOM}}
+                        </td>
+                    <td class="actions">
+    
+                      <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" role="button" id="{{'btn1'+course.id}}" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                          [attr.aria-labelledby]="'btn1'+course.id">
+                          <a class="dropdown-item" (click)="editcourse(course)"><i
+                              class="fas fa-edit fa-sm fa-fw mr-2">Edit</i></a>
+                          <a class="dropdown-item" (click)="deletecourse(course)"><i
+                              class="fas fa-trash fa-sm fa-fw mr-2">Delete</i></a>
+                        </div>
+                      </div>
+    
+                    </td>
+                  </tr>
+    
+    
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    </div>
+
+
+
+</div>

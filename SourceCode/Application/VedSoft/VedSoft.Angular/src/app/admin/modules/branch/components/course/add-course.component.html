@@ -1,0 +1,79 @@
+﻿<div class="modal-header new_p0p_qq">
+  <button type="button" class="close clsebtn_newdesign" (click)="bsModalRef.hide()"
+    data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body feedback-modal-body">
+
+  <div class="grid">
+    <p class="grid-header">Add/Edit Course</p>
+    <div class="grid-body">
+      <div class="item-wrapper">
+
+        <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+
+            <div class="card">
+                
+                <div class="card-body">
+                  <div class="form-row">
+      
+                    <div class="form-group col-md-12 showcase_row_area">
+                      <mat-form-field class="example-full-width ">
+                        <input matInput placeholder="Course Name" [formControl]="f.name" maxlength="50">
+                        <mat-error *ngIf="f.name.errors?.required">
+                          required
+                        </mat-error>
+                        <mat-error *ngIf="f.name.errors?.minlength">
+                          at least two characters required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    
+                  </div>
+
+                  <div class="form-row">
+      
+                      <div class="form-group col-md-12 showcase_row_area">
+                        <mat-form-field class="example-full-width ">
+                          <input matInput numeric numericType="decimal" placeholder="Course Fees" [formControl]="f.courseCost" maxlength="10">
+                          <mat-error *ngIf="f.courseCost.errors?.required">
+                            required
+                          </mat-error>
+                          <mat-error *ngIf="f.courseCost.errors?.minlength">
+                            at least two characters required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      
+                    </div>
+
+                    <div class="form-row">
+      
+                        <div class="form-group col-md-12 showcase_row_area">
+                            <mat-selection-list #subjects>
+                                <mat-list-option *ngFor="let sub of subjectList">
+                                  {{sub.name}}
+                                </mat-list-option>
+                              </mat-selection-list>
+                              
+                              <p>
+                                Options selected: {{subjects.selectedOptions.selected.length}}
+                              </p>
+                        </div>
+                        
+                      </div>
+                 
+                </div>
+              </div>
+
+          
+
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer height56px">
+
+</div>

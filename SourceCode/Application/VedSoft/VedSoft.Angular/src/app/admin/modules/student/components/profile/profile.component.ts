@@ -65,26 +65,26 @@ export class StudentProfileComponent implements OnInit {
       firstName: new FormControl(this.model.studentDetails.firstName, [Validators.required, Validators.minLength(2)]),
       middleName: new FormControl(this.model.studentDetails.middleName),
       lastName: new FormControl(this.model.studentDetails.lastName, [Validators.required, Validators.minLength(2)]),
-      contactNumber: new FormControl("", [Validators.required, Validators.minLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      notificationEmailId: new FormControl(this.model.studentDetails.notificationId, [ Validators.email]),
+      contactNumber: new FormControl("", [Validators.required, Validators.minLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      notificationEmailId: new FormControl(this.model.studentDetails.notificationId, [Validators.email]),
       fatherFirstName: new FormControl(this.model.studentDetails.father.firstName, [Validators.required, Validators.minLength(2)]),
       fatherLastName: new FormControl(this.model.studentDetails.father.lastName, []),
       fatherMiddleName: new FormControl(this.model.studentDetails.father.middleName),
-      fatherContactNumber: new FormControl("", [Validators.required,, Validators.minLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      fatherNotificationEmailId: new FormControl(this.model.studentDetails.notificationId, [ Validators.email]),
+      fatherContactNumber: new FormControl("", [Validators.required, , Validators.minLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      fatherNotificationEmailId: new FormControl(this.model.studentDetails.notificationId, [Validators.email]),
       motherFirstName: new FormControl(this.model.studentDetails.mother.firstName, [Validators.required, Validators.minLength(2)]),
       motherLastName: new FormControl(this.model.studentDetails.mother.lastName, []),
       motherMiddleName: new FormControl(this.model.studentDetails.mother.middleName),
-      motherContactNumber: new FormControl("", [ Validators.required,Validators.minLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      motherNotificationEmailId: new FormControl(this.model.studentDetails.mother.notificationId, [ Validators.email]),
+      motherContactNumber: new FormControl("", [Validators.required, Validators.minLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      motherNotificationEmailId: new FormControl(this.model.studentDetails.mother.notificationId, [Validators.email]),
       dateOfBirth: new FormControl(this.model.studentDetails.dateOfBirth, []),
 
 
       guardianFirstName: new FormControl(this.model.guardianDetails.firstName, [Validators.required, Validators.minLength(2)]),
       guardianMiddleName: new FormControl(this.model.guardianDetails.middleName),
       guardianLastName: new FormControl(this.model.guardianDetails.lastName, []),
-      guardianContactNumber: new FormControl("", [Validators.required, Validators.minLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      guardianNotificationEmailId: new FormControl(this.model.guardianDetails.notificationId, [ Validators.email]),
+      guardianContactNumber: new FormControl("", [Validators.required, Validators.minLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      guardianNotificationEmailId: new FormControl(this.model.guardianDetails.notificationId, [Validators.email]),
 
       //parent: new FormControl(parent, []),
     });
@@ -113,50 +113,54 @@ export class StudentProfileComponent implements OnInit {
     var input: StudentAdmissionModel = {
       customerId: this.userService.baseService.CustomerInfo.customerId,
       branchId: this.userService.baseService.branchInfo.id,
-      academicInstituteId:1,
-      isEnrolled:1,
+      academicInstituteId: 1,
+      isEnrolled: 1,
       studentDetails: {
         studentId: 0,
+        loginId: '',
+        password: '',
         //userName:this.getRandomId(),
-        firstName: this.f.firstName.value,
-        lastName: this.f.lastName.value,
-        middleName: this.f.middleName.value,
-        notificationId: this.f.notificationEmailId.value,
-        primaryContact: this.f.contactNumber.value,
+        firstName:this.convertNullToBlack( this.f.firstName.value),
+        lastName:this.convertNullToBlack( this.f.lastName.value),
+        middleName:this.convertNullToBlack( this.f.middleName.value),
+        notificationId: this.convertNullToBlack(this.f.notificationEmailId.value),
+        primaryContact: this.convertNullToBlack(this.f.contactNumber.value),
         dateOfBirth: this.f.dateOfBirth.value,
         mother: {
-          firstName: this.f.motherFirstName.value,
-          lastName: this.f.motherLastName.value,
-          middleName: this.f.motherMiddleName.value,
-          primaryContact: this.f.motherContactNumber.value,
-          notificationId:this.f.motherNotificationEmailId.value,
+          firstName:this.convertNullToBlack( this.f.motherFirstName.value),
+          lastName:this.convertNullToBlack( this.f.motherLastName.value),
+          middleName: this.convertNullToBlack(this.f.motherMiddleName.value),
+          primaryContact:this.convertNullToBlack( this.f.motherContactNumber.value),
+          notificationId:this.convertNullToBlack( this.f.motherNotificationEmailId.value),
         },
         father: {
-          firstName: this.f.fatherFirstName.value,
-          lastName: this.f.fatherLastName.value,
-          middleName: this.f.fatherMiddleName.value,
-          primaryContact: this.f.fatherContactNumber.value,
-          notificationId:this.f.fatherNotificationEmailId.value,
+          firstName: this.convertNullToBlack(this.f.fatherFirstName.value),
+          lastName: this.convertNullToBlack(this.f.fatherLastName.value),
+          middleName: this.convertNullToBlack(this.f.fatherMiddleName.value),
+          primaryContact: this.convertNullToBlack(this.f.fatherContactNumber.value),
+          notificationId:this.convertNullToBlack( this.f.fatherNotificationEmailId.value),
         },
         details: {
           address: address,
 
         }
-        
+
       },
-      guardianDetails:{
-        firstName: this.f.guardianFirstName.value,
-        lastName: this.f.guardianLastName.value,
-        middleName: this.f.guardianMiddleName.value,
-        primaryContact: this.f.guardianContactNumber.value,
-        notificationId:this.f.guardianNotificationEmailId.value,
+      guardianDetails: {
+        firstName: this.convertNullToBlack(this.f.guardianFirstName.value),
+        lastName: this.convertNullToBlack(this.f.guardianLastName.value),
+        middleName: this.convertNullToBlack(this.f.guardianMiddleName.value),
+        primaryContact: this.convertNullToBlack(this.f.guardianContactNumber.value),
+        notificationId: this.convertNullToBlack(this.f.guardianNotificationEmailId.value),
+        loginId: '',
+        password: ''
 
       }
 
       //actionUserId: this.userService.loggedUser.id
     };
 
-   
+
 
     if (input.studentDetails.studentId > 0) {
       this.editStudent(input);
@@ -168,6 +172,10 @@ export class StudentProfileComponent implements OnInit {
 
 
 
+  }
+
+  convertNullToBlack(value: any): string {
+    return value == null ? '' : value;
   }
 
   addStudent(studentInput: StudentAdmissionModel) {
@@ -210,7 +218,7 @@ export class StudentProfileComponent implements OnInit {
 
   }
 
-  
+
 
 
 }

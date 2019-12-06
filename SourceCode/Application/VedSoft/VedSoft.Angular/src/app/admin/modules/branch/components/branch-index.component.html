@@ -1,3 +1,19 @@
 ﻿<div *ngIf="branchService.baseService.branchInfo">
-<router-outlet></router-outlet>
+        <div id="wrapper">
+                <ved-brc-sidebar></ved-brc-sidebar>
+                <div id="content-wrapper" class="d-flex flex-column">
+        
+                        <!-- Main Content -->
+                        <div id="content">
+                                <ved-header></ved-header>
+                                <div class="container-fluid">
+                                        <router-outlet></router-outlet>
+        
+                                </div>
+                        </div>
+        
+                        <ved-footer></ved-footer>
+                </div>
+        
+        </div>
 </div>

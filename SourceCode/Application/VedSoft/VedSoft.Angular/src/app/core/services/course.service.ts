@@ -26,7 +26,7 @@ export class CourseService {
 
         const input: RequestModel<CourseModel> = this.baseService.getRequestModel(course);
 
-        const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_ADD_COURSE_HIERARCHY}`;
+        const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_ADD_COURSE}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.courseList = [];
         }));
@@ -36,7 +36,7 @@ export class CourseService {
 
         const input: RequestModel<CourseModel> = this.baseService.getRequestModel(course);
 
-        const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_UPDATE_COURSE_HIERARCHY}`;
+        const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_UPDATE_COURSE}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.courseList = [];
         }));
@@ -46,7 +46,7 @@ export class CourseService {
         if (this.courseList != null && this.courseList.length > 0) {
             return of(this.courseList);
         } else {
-            const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_GET_COURSE_HIERARCHY}`;
+            const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_GET_COURSE_LIST}`;
             return this.http.post<ResponseModel<CourseModel[]>>(url, input).pipe(
                 map((data: ResponseModel<CourseModel[]>) => {
                     if (data != null && data.responseData != null) {
@@ -60,7 +60,7 @@ export class CourseService {
     }
     public makeInActiveCourse(input: RequestModel<CourseModel>): Observable<ResponseModel<ResultModel>> {
 
-        const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_MAKE_INACTIVE_COURSE_HIERARCHY}`;
+        const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_MAKE_INACTIVE_COURSE}`;
         return this.http.post<ResponseModel<ResultModel>>(url, input).pipe(tap(x => {
             this.courseList = [];
         }));

@@ -2,19 +2,15 @@
 import { StudentIndexComponent, StudentListComponent,NewStudentComponent, StudentComponent, StudentProfileComponent, StudentEnquiryComponent, StudentAdmissionComponent, StudentAssignmentsComponent, StudentDocumentsComponent, StudentLoginComponent, StudentLeavesComponent, StudentAcademicComponent, StudentBatchComponent, StudentPunchesComponent, StudentAttendanceComponent } from './components';
 import { BranchGuard } from '../../../core/guards';
 export const STUDENT_ROUTES: Routes = [
-    { 
-        path: '', redirectTo:"students"
-      },
-      { 
-        path: 'students',   component: StudentListComponent
-      },
-      { path: 'students/:id', redirectTo: 'student/:id' },
+    
         
 
-        { path: 'student/new',  component: NewStudentComponent},
+        { path: 'newuser',  component: NewStudentComponent},
            
-            { path: 'student/:studentId', component: StudentComponent,children: [
-               
+            { path: '', component: StudentComponent,children: [
+              {
+                path: '',redirectTo:"profile"
+              },
       
                 {
                   path: 'profile', component: StudentProfileComponent
