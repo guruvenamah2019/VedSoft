@@ -57,6 +57,7 @@ namespace VedSoft.Model.Master
         public string DurationUOM { get; set; }
         public decimal CourseCost { get; set; }
         public int UserId { get; set; }
+        public List<int> CustomerSubjectHiearchyIdList { get; set; }
     }
 
     public class CustomerCourseSubjectModel

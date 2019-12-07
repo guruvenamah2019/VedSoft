@@ -499,8 +499,9 @@ namespace VedSoft.Data.Repository.Repository.Master
         }
         public int AddCustomerCourse(RequestModel<CustomerCourseModel> input)
         {
+            //this.RepositoryContext.Database.BeginTransaction();
             //Make db object
-            CustomerCourseDB educationInstitute = new CustomerCourseDB
+            CustomerCourseDB customerCourse = new CustomerCourseDB
             {
                 CreatedBy = input.RequestParameter.UserId,
                 CreatedDate = DateTime.Now,
@@ -515,13 +516,33 @@ namespace VedSoft.Data.Repository.Repository.Master
                 Name = input.RequestParameter.Name,
             };
 
+            input.RequestParameter.Id = customerCourse.Id;
+
             //Save in database
-            this.RepositoryContext.Add(educationInstitute);
+            this.RepositoryContext.Add(customerCourse);
+            this.RepositoryContext.SaveChanges();
+            foreach (int coursehierarchy in input.RequestParameter.CustomerSubjectHiearchyIdList)
+            {
+                CustomerCourseSubjectMappingDB customerCourseSubject = new CustomerCourseSubjectMappingDB
+                {
+                    CreatedBy = input.RequestParameter.UserId,
+                    CreatedDate = DateTime.Now,
+                    Active = CommonConstants.ActiveStatus,
+                    CustomerId = input.CustomerId.GetValueOrDefault(),
+                    CustomerCourseId = customerCourse.Id,
+                    CustomerSubjectHierarchyId = coursehierarchy
+                };
+                this.RepositoryContext.Add(customerCourseSubject);
+            }
+            //Save in database
+
             this.RepositoryContext.SaveChanges();
 
-            input.RequestParameter.Id = educationInstitute.Id;
+            //this.RepositoryContext.Database.CommitTransaction();
 
-            return educationInstitute.Id;
+            
+
+            return customerCourse.Id;
         }
 
         public int UpdateCustomerCourse(RequestModel<CustomerCourseModel> input)
