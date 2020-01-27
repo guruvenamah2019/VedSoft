@@ -462,11 +462,14 @@ namespace VedSoft.Data.Repository.Repository.User
             {
                 var addressObject = studentAdmissionDetails.StudentDetails.Details.Address;
                 AddressModel address = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<AddressModel>(addressObject.Address1);
-                addressObject.Address1 = address.Address1;
-                addressObject.Address2 = address.Address2;
-                addressObject.City = address.City;
-                addressObject.State = address.State;
-                addressObject.Pincode = address.Pincode;
+                if (address != null)
+                {
+                    addressObject.Address1 = address.Address1;
+                    addressObject.Address2 = address.Address2;
+                    addressObject.City = address.City;
+                    addressObject.State = address.State;
+                    addressObject.Pincode = address.Pincode;
+                }
             }
 
             if (studentAdmissionDetails != null
@@ -478,9 +481,12 @@ namespace VedSoft.Data.Repository.Repository.User
             {
                 var landlineObject = studentAdmissionDetails.StudentDetails.Details.ContactNumber;
                 ContactNumberModel contactNumber = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<ContactNumberModel>(landlineObject.Landline);
-                contactNumber.Landline = contactNumber.Landline;
-                contactNumber.Mobile = contactNumber.Mobile;
-                contactNumber.Mobile2 = contactNumber.Mobile2;
+                if (contactNumber !=null)
+                {
+                    contactNumber.Landline = contactNumber.Landline;
+                    contactNumber.Mobile = contactNumber.Mobile;
+                    contactNumber.Mobile2 = contactNumber.Mobile2;
+                }
             }
 
             if (studentAdmissionDetails != null
@@ -491,11 +497,15 @@ namespace VedSoft.Data.Repository.Repository.User
             {
                 var addressObject = studentAdmissionDetails.GuardianDetails.Details.Address;
                 AddressModel address = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<AddressModel>(addressObject.Address1);
-                addressObject.Address1 = address.Address1;
-                addressObject.Address2 = address.Address2;
-                addressObject.City = address.City;
-                addressObject.State = address.State;
-                addressObject.Pincode = address.Pincode;
+                if (address != null)
+                {
+
+                    addressObject.Address1 = address.Address1;
+                    addressObject.Address2 = address.Address2;
+                    addressObject.City = address.City;
+                    addressObject.State = address.State;
+                    addressObject.Pincode = address.Pincode;
+                }
             }
 
             if (studentAdmissionDetails != null
@@ -507,9 +517,12 @@ namespace VedSoft.Data.Repository.Repository.User
             {
                 var landlineObject = studentAdmissionDetails.GuardianDetails.Details.ContactNumber;
                 ContactNumberModel contactNumber = Utility.SerializeObjects.SerializeJsonObject.DeserializeObject<ContactNumberModel>(landlineObject.Landline);
-                landlineObject.Landline = contactNumber.Landline;
-                landlineObject.Mobile = contactNumber.Mobile;
-                landlineObject.Mobile2 = contactNumber.Mobile2;
+                if (contactNumber != null)
+                {
+                    landlineObject.Landline = contactNumber.Landline;
+                    landlineObject.Mobile = contactNumber.Mobile;
+                    landlineObject.Mobile2 = contactNumber.Mobile2;
+                }
             }
             #endregion
 
