@@ -406,6 +406,14 @@ namespace VedSoft.Business.Engine.Master
 
             return responseModel;
         }
+        public ResponseModel<CustomerCourseModel> GetCustomerCourseInfo(RequestModel<ResultInputIdModel> input) {
+            ResponseModel<CustomerCourseModel> responseModel = new ResponseModel<CustomerCourseModel>();
+            responseModel.ResponseData = MasterBusiness.GetCustomerCourseInfo(input);
+            responseModel.Status = CommonConstants.Success;
+
+            return responseModel;
+        }
+
 
         public ResponseModel<ResultModel> MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input)
         {

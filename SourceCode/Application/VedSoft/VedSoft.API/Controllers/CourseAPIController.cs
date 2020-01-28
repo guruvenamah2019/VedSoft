@@ -218,6 +218,34 @@ namespace VedSoft.API.Controllers
         }
 
         /// <summary>
+        /// To get the course course information
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(CourseAPIAction.ActionGetCustomerCourseInfo)]
+        //[Authorize]
+        public async Task<ResponseModel<CustomerCourseModel>> GetCustomerCourse([FromBody] RequestModel<ResultInputIdModel> input)
+        {
+            CurrentRequestParameter = input;
+            CurrentUniqueID = input.RequestTxnID;
+            ResponseModel<CustomerCourseModel> result = null;
+
+            await Task.Factory.StartNew(() =>
+            {
+                return GetResponse(Request, () =>
+                {
+                    result = _masterBusinessEngine.GetCustomerCourseInfo(input);
+                    return result;
+
+                });
+
+            });
+
+            return result;
+        }
+
+        /// <summary>
         /// To make the customer course inactive
         /// </summary>
         /// <param name="input"></param>

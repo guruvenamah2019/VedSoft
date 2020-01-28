@@ -169,9 +169,9 @@ namespace VedSoft.Data.Contracts.Model
         [Column("CUSTOMER_ID")]
         public int CustomerId { get; set; }
         [Column("VEDIC_COURSE_ID")]
-        public int VedicCourseId { get; set; }
+        public int? VedicCourseId { get; set; }
         [Column("COURSE_TYPE_ID")]
-        public int CourseTypeId { get; set; }
+        public int? CourseTypeId { get; set; }
         [Column("COURSE_DESCRIPTION")]
         public string CourseDescription { get; set; }
         [Column("DURATION")]

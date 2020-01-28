@@ -35,6 +35,7 @@ namespace VedSoft.Utility.Constants
         public const string ActionAddCustomerCourse = "AddCustomerCourse";
         public const string ActionUpdateCustomerCourse = "UpdateCustomerCourse";
         public const string ActionGetCustomerCourseList = "GetCustomerCourseList";
+        public const string ActionGetCustomerCourseInfo = "GetCustomerCourseInfo";
         public const string ActionMakeInActiveCustomerCourse = "MakeInActiveCustomerCourse";
         public const string ActionAddCustomerCourseSubject = "AddCustomerCourseSubject";
         public const string ActionUpdateCustomerCourseSubject = "UpdateCustomerCourseSubject";

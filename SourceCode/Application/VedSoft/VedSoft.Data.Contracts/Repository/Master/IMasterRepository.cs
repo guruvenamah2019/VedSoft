@@ -73,6 +73,7 @@ namespace VedSoft.Data.Contracts.Repository.Master
         int AddCustomerCourse(RequestModel<CustomerCourseModel> input);
         int UpdateCustomerCourse(RequestModel<CustomerCourseModel> input);
         List<CustomerCourseModel> GetCustomerCourseList(SearchRequestModel<CustomerCourseModel> input);
+        CustomerCourseModel GetCustomerCourseInfo(RequestModel<ResultInputIdModel> input);
 
         int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input);
 

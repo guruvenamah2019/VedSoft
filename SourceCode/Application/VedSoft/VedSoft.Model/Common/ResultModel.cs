@@ -18,4 +18,9 @@ namespace VedSoft.Model.Common
             IsException = false;
         }
     }
-}
+
+    public class ResultInputIdModel
+    {
+        public int Id { get; set; }
+    }
+    }

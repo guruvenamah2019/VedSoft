@@ -65,6 +65,7 @@ namespace VedSoft.Business.Engine.Master
         ResponseModel<ResultModel> AddCustomerCourse(RequestModel<CustomerCourseModel> input);
         ResponseModel<ResultModel> UpdateCustomerCourse(RequestModel<CustomerCourseModel> input);
         ResponseModel<List<CustomerCourseModel>> GetCustomerCourseList(SearchRequestModel<CustomerCourseModel> input);
+        ResponseModel<CustomerCourseModel> GetCustomerCourseInfo(RequestModel<ResultInputIdModel> input);
         ResponseModel<ResultModel> MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input);
         #endregion
 

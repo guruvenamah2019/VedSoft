@@ -508,10 +508,10 @@ namespace VedSoft.Data.Repository.Repository.Master
                 Active = CommonConstants.ActiveStatus,
                 CourseCost = input.RequestParameter.CourseCost,
                 CourseDescription = input.RequestParameter.CourseDescription,
-                CourseTypeId = input.RequestParameter.CourseTypeId,
+                CourseTypeId = null,// input.RequestParameter.CourseTypeId,
                 Duration = input.RequestParameter.Duration,
                 DurationUOM = input.RequestParameter.DurationUOM,
-                VedicCourseId = input.RequestParameter.VedicCourseId,
+                VedicCourseId = null,// input.RequestParameter.VedicCourseId,
                 CustomerId = input.CustomerId.GetValueOrDefault(),
                 Name = input.RequestParameter.Name,
             };
@@ -588,15 +588,42 @@ namespace VedSoft.Data.Repository.Repository.Master
                     DurationUOM = customerCourse.DurationUOM,
                     Duration = customerCourse.Duration,
                     CourseDescription = customerCourse.CourseDescription,
-                    CourseTypeId = customerCourse.CourseTypeId,
+                    //CourseTypeId = customerCourse.CourseTypeId,
                     //CustomerId = customerCourse.CustomerId,
-                    VedicCourseId = customerCourse.VedicCourseId,
+                    //VedicCourseId = customerCourse.VedicCourseId,
                     Name = customerCourse.Name
                 });
             }
 
             return customerCourseList;
         }
+
+        public CustomerCourseModel GetCustomerCourseInfo(RequestModel<ResultInputIdModel> input)
+        {
+            CustomerCourseModel customerCourseList = new CustomerCourseModel();
+            var customerCourse = this.RepositoryContext.CustomerCourse
+                                      .FirstOrDefault(x => x.CustomerId == input.CustomerId
+                                      && x.Id == input.RequestParameter.Id);
+
+            if (customerCourse != null)
+            {
+                customerCourseList.Id = customerCourse.Id;
+                customerCourseList.CourseCost = customerCourse.CourseCost;
+                customerCourseList.DurationUOM = customerCourse.DurationUOM;
+                customerCourseList.Duration = customerCourse.Duration;
+                customerCourseList.CourseDescription = customerCourse.CourseDescription;
+                customerCourseList.Name = customerCourse.Name;
+                customerCourseList.UserId = customerCourse.CreatedBy;
+                customerCourseList.CustomerSubjectHiearchyIdList = this.RepositoryContext.CustomerCourseSubject
+                                      .Where(x => x.CustomerId == input.CustomerId
+                                      && x.Active == CommonConstants.ActiveStatus && x.CustomerCourseId == customerCourseList.Id).Select(x => x.CustomerSubjectHierarchyId).ToList();
+            }
+
+            
+
+            return customerCourseList;
+        }
+        
 
         public int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input)
         {

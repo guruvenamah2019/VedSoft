@@ -420,6 +420,11 @@ namespace VedSoft.Business.Master
             return RepositoryWrapper.CustomerCourseRepository.GetCustomerCourseList(input);
         }
 
+        public CustomerCourseModel GetCustomerCourseInfo(RequestModel<ResultInputIdModel> input) {
+            return RepositoryWrapper.CustomerCourseRepository.GetCustomerCourseInfo(input);
+        }
+
+
         public int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input)
         {
             if (RepositoryWrapper.CustomerCourseRepository.DoesCustomerCourseIdExist(input))
