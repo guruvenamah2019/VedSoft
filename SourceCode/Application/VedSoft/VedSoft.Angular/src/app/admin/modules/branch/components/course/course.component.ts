@@ -14,11 +14,11 @@ import { AddBranchCourseComponent } from './add-course.component';
 })
 
 
-export class BranchCourseComponent  {
+export class BranchCourseComponent {
     courseList: CourseModel[] = [];
     bsModalRef: BsModalRef;
     constructor(private modalService: BsModalService, private baseService: BaseService, private router: Router,
-        private activatedRoute: ActivatedRoute, private courseService: CourseService, private subject:SubjectHiearchyService) {
+        private activatedRoute: ActivatedRoute, private courseService: CourseService, private subject: SubjectHiearchyService) {
         console.log("BranchCourseComponent");
 
     }
@@ -30,42 +30,47 @@ export class BranchCourseComponent  {
         this.getCourseList();
     }
 
-    getCourseList(){
+    getCourseList() {
 
         let course: CourseModel = new CourseModel();
         let searchInput = this.baseService.getSearchRequestModel(course);
         searchInput.pageNumber = 1;
         searchInput.pageSize = 100;
 
-        this.courseService.getCourse(searchInput).subscribe(data=>{
+        this.courseService.getCourse(searchInput).subscribe(data => {
             this.courseList = data;
         });
 
-        
+
     }
     addCourse(): void {
-
-
-
         let inputModel: CourseModel = {
             id: 0,
-            name: ""
+            name: "",
+            customerSubjectHiearchyIdList:[]
         };
         this.courseOpen(inputModel);
 
     }
 
-    
-    editCourse(inputModel: CourseModel): void {
 
-        this.courseOpen(inputModel);
+    public editCourse(inputModel: CourseModel): void {
+
+        this.courseService.getCourseInfo(inputModel.id).subscribe(x => {
+
+            if (x != null) {
+
+                this.courseOpen(x);
+            }
+        });
 
     }
+
     deleteCourse(inputModel: CourseModel): void {
 
         let confir = confirm("Are you sure to delete");
         if (confir) {
-            inputModel.userId =this.courseService.userSerice.loggedUser.id;
+            inputModel.userId = this.courseService.userSerice.loggedUser.id;
 
             let input: RequestModel<CourseModel> = this.baseService.getRequestModel(inputModel);
 
@@ -88,29 +93,31 @@ export class BranchCourseComponent  {
 
         let subject: SubjectHiearchyModel = new SubjectHiearchyModel();
         subject.hierarchyLevel = 1;
-            let searchInput = this.subject.baseService.getSearchRequestModel(subject);
-            searchInput.pageNumber = 1;
-            searchInput.pageSize = 100;
-    
-        this.subject.getSubjectHierarchy(searchInput).subscribe(x=>{
-       
-      if(x.length>0){
+        let searchInput = this.subject.baseService.getSearchRequestModel(subject);
+        searchInput.pageNumber = 1;
+        searchInput.pageSize = 100;
 
-        const initialState = {
-            model: inputModel
-        };
-        this.bsModalRef = this.modalService.show(AddBranchCourseComponent, { ignoreBackdropClick: true, initialState,class:'modal-lg' });
-        this.bsModalRef.content.onSave.subscribe((res: CourseModel) => {
-            this.getCourseList();
+        this.subject.getSubjectHierarchy(searchInput).subscribe(x => {
+
+            if (x.length > 0) {
+                var subjectsList = this.subject.SubjectHiearchy.filter(x=> inputModel.customerSubjectHiearchyIdList.indexOf(x.id)>=0);
+
+                const initialState = {
+                    model: inputModel,
+                    selectedSubjectList:subjectsList
+                };
+                this.bsModalRef = this.modalService.show(AddBranchCourseComponent, { ignoreBackdropClick: true, initialState, class: 'modal-lg' });
+                this.bsModalRef.content.onSave.subscribe((res: CourseModel) => {
+                    this.getCourseList();
+                });
+            }
+            else {
+
+                this.courseService.baseService.errorMessage("Please create subject first");
+
+            }
+
         });
-    }
-    else{
-
-        this.courseService.baseService.errorMessage("Please create subject first");
-
-    }
-
-    });
     }
 
 

@@ -10,6 +10,7 @@ export class CourseModel {
     durationUOM?: number;
     courseCost?: number;
     subjects?: SubjectHiearchyModel[];
+    customerSubjectHiearchyIdList?:number[];
     constructor() {
     }
 }

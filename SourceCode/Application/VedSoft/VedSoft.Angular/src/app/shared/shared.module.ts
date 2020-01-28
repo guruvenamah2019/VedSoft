@@ -1,5 +1,5 @@
 import { NgModule, } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ModalModule, BsModalService, BsDropdownModule } from 'ngx-bootstrap';
@@ -31,6 +31,7 @@ import { NumericDirective } from "./directive/numeric.directive"
     
   ],
   imports: [
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     
@@ -59,11 +60,12 @@ import { NumericDirective } from "./directive/numeric.directive"
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule ,
-    MatListModule
+    MatListModule,
 
     
   ],
   exports: [
+    FormsModule,
     ReactiveFormsModule,
     CommonModule,
     ModalModule,
@@ -86,7 +88,7 @@ import { NumericDirective } from "./directive/numeric.directive"
     MatDatepickerModule,
     MatListModule,
     BranchSidebarComponent,
-    NumericDirective
+    NumericDirective,
   ],
   providers: [
     MatNativeDateModule,

@@ -4,8 +4,11 @@ export class SubjectHiearchyModel {
     parentId?:number;
     userId?:number;
     hierarchyLevel?:number;
-    parent?:SubjectHiearchyModel
+    parent?:SubjectHiearchyModel;
+    child?:SubjectHiearchyModel[];
     constructor() {
+        this.child=[];
 
     };
 }
+

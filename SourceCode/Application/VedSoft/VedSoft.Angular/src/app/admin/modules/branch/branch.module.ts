@@ -18,7 +18,7 @@ import { BranchIndexComponent, BranchListComponent,AddBranchComponent,BranchBatc
     ],
     imports: [
         SharedModule,
-        RouterModule.forChild(BRANCH_ROUTES)
+        RouterModule.forChild(BRANCH_ROUTES),
     ],
     entryComponents: [
         AddBranchComponent,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { RequestModel, ResponseModel, ResultModel, SearchRequestModel } from '../models/shared-model/index';
+import { RequestModel, ResponseModel, ResultModel, SearchRequestModel, RequestInputID } from '../models/shared-model/index';
 import { BaseService } from './base.service';
 import { COURSE_SERVICE_URL } from '../constant/service-url';
 import { CourseModel } from '../models/master-model';
@@ -58,6 +58,27 @@ export class CourseService {
 
         }
     }
+    public getCourseInfo(courseId:number): Observable<CourseModel> {
+
+        var course: RequestInputID={
+            
+                Id:courseId
+            
+
+        };
+
+        const input: RequestModel<RequestInputID> = this.baseService.getRequestModel(course);
+      
+            const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_GET_COURSE_INFO}`;
+            return this.http.post<ResponseModel<CourseModel>>(url, input).pipe(
+                map((data: ResponseModel<CourseModel>) => {
+                    return data.responseData;;
+                })
+            );
+
+        
+            }
+
     public makeInActiveCourse(input: RequestModel<CourseModel>): Observable<ResponseModel<ResultModel>> {
 
         const url = `${this.baseService.appInfo.apiUrl}/${COURSE_SERVICE_URL.ACTION_MAKE_INACTIVE_COURSE}`;

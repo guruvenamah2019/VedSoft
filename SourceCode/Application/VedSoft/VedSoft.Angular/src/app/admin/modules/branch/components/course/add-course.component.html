@@ -45,22 +45,74 @@
                       </div>
                       
                     </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6 showcase_row_area">
+                        <mat-form-field class="example-full-width ">
+                          <input matInput numeric numericType="decimal" placeholder="Course Fees" [formControl]="f.duration" maxlength="10">
+                          <mat-error *ngIf="f.duration.errors?.required">
+                            required
+                          </mat-error>
+                          <mat-error *ngIf="f.duration.errors?.minlength">
+                            at least two characters required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group col-md-6 showcase_row_area">
+                      <mat-form-field>
+                        <mat-select placeholder="Duration" [formControl]="f.durationUOM">
+      
+                          <mat-option *ngFor="let duration of durationList" [value]="duration.ID">{{duration.Text}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="submitted && f.durationUOM.errors?.required">
+                          Plese select course duration
+                        </mat-error>
+      
+                      </mat-form-field>
+                    </div>
+                    </div>
 
                     <div class="form-row">
       
-                        <div class="form-group col-md-12 showcase_row_area">
-                            <mat-selection-list #subjects>
-                                <mat-list-option *ngFor="let sub of subjectList">
-                                  {{sub.name}}
-                                </mat-list-option>
-                              </mat-selection-list>
-                              
-                              <p>
-                                Options selected: {{subjects.selectedOptions.selected.length}}
-                              </p>
+                      <div class="form-group col-md-6 showcase_row_area">
+                        <div>Select Subject</div>
+                        <div class="list-group">
+                          <ul class="list-group list-group-flush">
+                            <li *ngFor="let subj of SubjectList"  class="list-group-item">{{subj.name}}
+                              <ul class="list-group list-group-flush">
+                                <li *ngFor="let child of getChild(subj.id)" (click)="add(child)" class="list-group-item">{{child.name}}</li>
+                                  
+                              </ul>
+                            </li>
+                          </ul>
+                          
                         </div>
-                        
                       </div>
+                      <div class="form-group col-md-6 showcase_row_area">
+                        <div>Selected Subject</div>
+                        <div class="list-group">
+                          <ul class="list-group list-group-flush">
+                            <li *ngFor="let subj of SelectedSubjectList" class="list-group-item">{{subj.name}}
+                              <ul class="list-group list-group-flush">
+                                <li *ngFor="let child of subj.child" (click)="remove(child)" class="list-group-item">{{child.name}}</li>
+                                  
+                              </ul>
+                            </li>
+                          </ul>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+
+                    <div class="form-row">
+                      <div class="col-md-5 showcase_text_area">
+                        <button [disabled]="loading" class="btn btn-primary">
+                          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                          Submit
+                        </button>
+                        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                      </div>
+                    </div>
                  
                 </div>
               </div>
