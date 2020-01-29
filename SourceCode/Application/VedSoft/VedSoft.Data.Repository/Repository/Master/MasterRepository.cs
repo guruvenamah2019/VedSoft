@@ -553,20 +553,47 @@ namespace VedSoft.Data.Repository.Repository.Master
             if (customerCourse != null)
             {
                 customerCourse.Name = input.RequestParameter.Name;
-                customerCourse.VedicCourseId = input.RequestParameter.VedicCourseId;
-                customerCourse.CourseTypeId = input.RequestParameter.CourseTypeId;
+                //customerCourse.VedicCourseId = input.RequestParameter.VedicCourseId;
+                //customerCourse.CourseTypeId = input.RequestParameter.CourseTypeId;
                 customerCourse.CourseDescription = input.RequestParameter.CourseDescription;
                 customerCourse.Duration = input.RequestParameter.Duration;
                 customerCourse.DurationUOM = input.RequestParameter.DurationUOM;
                 customerCourse.CourseCost = input.RequestParameter.CourseCost;
                 customerCourse.ModifiedBy = input.RequestParameter.UserId;
                 customerCourse.ModifiedDate = DateTime.Now;
+
+
+                //Save in database
+                this.RepositoryContext.Update(customerCourse);
+               // this.RepositoryContext.SaveChanges();
+
+                var SubjectHiearchyIdList = this.RepositoryContext.CustomerCourseSubject
+                                          .Where(x => x.CustomerId == input.CustomerId && x.CustomerCourseId == customerCourse.Id);
+
+                foreach (var subj in SubjectHiearchyIdList)
+                {
+                    this.RepositoryContext.Remove(subj);
+                }
+                //this.RepositoryContext.SaveChanges();
+
+                foreach (int coursehierarchy in input.RequestParameter.CustomerSubjectHiearchyIdList)
+                {
+                    CustomerCourseSubjectMappingDB customerCourseSubject = new CustomerCourseSubjectMappingDB
+                    {
+                        CreatedBy = input.RequestParameter.UserId,
+                        CreatedDate = DateTime.Now,
+                        Active = CommonConstants.ActiveStatus,
+                        CustomerId = input.CustomerId.GetValueOrDefault(),
+                        CustomerCourseId = customerCourse.Id,
+                        CustomerSubjectHierarchyId = coursehierarchy
+                    };
+                    this.RepositoryContext.Add(customerCourseSubject);
+                }
+                //Save in database
+
+                this.RepositoryContext.SaveChanges();
+
             }
-
-            //Save in database
-            this.RepositoryContext.Update(customerCourse);
-            this.RepositoryContext.SaveChanges();
-
             return CommonConstants.Success;
         }
 

@@ -130,11 +130,15 @@ this.durationList.push({
   ID:3,
   Text:"Year"
 });
+
+let uom = this.durationList.filter(x => x.ID == this.model.durationUOM);
+uom = uom.length == 0 ? null : uom;
+
     this.courseForm = this.formBuilder.group({
       name: new FormControl(this.model.name, [Validators.required, Validators.minLength(3)]),
       courseCost: new FormControl(this.model.courseCost, [Validators.required, Validators.minLength(3)]),
-      duration: new FormControl(this.model.duration, [Validators.required, Validators.minLength(3)]),
-      durationUOM: new FormControl(this.model.durationUOM, [Validators.required, Validators.minLength(3)]),
+      duration: new FormControl(this.model.duration, [Validators.required, Validators.minLength(1)]),
+      durationUOM: new FormControl(uom, [Validators.required]),
       //courseDescription: new FormControl(this.model.courseDescription, [Validators.required, Validators.minLength(3)]),
 
     });
@@ -158,7 +162,7 @@ this.durationList.push({
       name: this.f.name.value,
       courseCost: this.f.courseCost.value,
       duration:this.f.duration.value,
-      durationUOM:this.f.durationUOM.value,
+      durationUOM:this.f.durationUOM.value.ID,
       userId: this.courseService.userSerice.loggedUser.id,
       id: this.model.id,
       customerSubjectHiearchyIdList: subj,

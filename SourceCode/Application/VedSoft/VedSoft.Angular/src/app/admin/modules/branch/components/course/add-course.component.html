@@ -48,7 +48,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6 showcase_row_area">
                         <mat-form-field class="example-full-width ">
-                          <input matInput numeric numericType="decimal" placeholder="Course Fees" [formControl]="f.duration" maxlength="10">
+                          <input matInput numeric numericType="decimal" placeholder="Course Duration" [formControl]="f.duration" maxlength="10">
                           <mat-error *ngIf="f.duration.errors?.required">
                             required
                           </mat-error>
@@ -61,7 +61,7 @@
                       <mat-form-field>
                         <mat-select placeholder="Duration" [formControl]="f.durationUOM">
       
-                          <mat-option *ngFor="let duration of durationList" [value]="duration.ID">{{duration.Text}}</mat-option>
+                          <mat-option *ngFor="let duration of durationList" [value]="duration">{{duration.Text}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="submitted && f.durationUOM.errors?.required">
                           Plese select course duration
