@@ -311,7 +311,18 @@ namespace VedSoft.Data.Repository.Repository.User
             return (Parameters.Get<Int32>("P_OUT_STUDENTID"));
         }
 
-        public int UpdateStudent(RequestModel<StudentModel_Old> input)
+
+        public int UpdateStudent(RequestModel<StudentAdmissionModel> input)
+        {
+            string studentJSON = Utility.SerializeObjects.SerializeJsonObject.GetJsonValue(input.RequestParameter);
+            var Parameters = new DynamicParameters();
+            Parameters.Add("P_STUDENT_OBJECT", studentJSON, DbType.String, ParameterDirection.Input);
+            Parameters.Add("P_OUT_FLAG", "", DbType.String, ParameterDirection.Output);
+            List<int> returnValue = this.RepositoryContext.ExecuteSP<int>(Parameters, "SP_EDIT_STUDENT").ToList();
+            return (Parameters.Get<Int32>("P_OUT_FLAG"));
+        }
+
+        public int UpdateStudent_old(RequestModel<StudentModel_Old> input)
         {
             var student = this.RepositoryContext.Student
                             .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
@@ -573,6 +584,11 @@ namespace VedSoft.Data.Repository.Repository.User
                                    && x.Active == CommonConstants.ActiveStatus
                                   )
                                   .Count() > 0;
+        }
+
+        public int UpdateStudent(RequestModel<StudentModel_Old> input)
+        {
+            throw new NotImplementedException();
         }
     }
 

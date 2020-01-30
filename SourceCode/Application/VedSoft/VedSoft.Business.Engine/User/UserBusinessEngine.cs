@@ -83,6 +83,21 @@ namespace VedSoft.Business.Engine.Master
             return responseModel;
         }
 
+
+        public ResponseModel<ResultModel> UpdateStudent(RequestModel<StudentAdmissionModel> input)
+        {
+            ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();
+            responseModel.ResponseData = new ResultModel();
+
+            var userId = UserBusiness.UpdateStudent(input);
+            responseModel.ResponseData.PrimaryKey = userId;
+            responseModel.ResponseData.ResponseValue = responseModel.ResponseData.PrimaryKey;
+            if (responseModel.ResponseData.PrimaryKey > 0)
+                responseModel.ResponseData.StatusId = CommonConstants.Success;
+
+            return responseModel;
+        }
+
         public ResponseModel<ResultModel> UpdateStudent(RequestModel<StudentModel_Old> input)
         {
             ResponseModel<ResultModel> responseModel = new ResponseModel<ResultModel>();

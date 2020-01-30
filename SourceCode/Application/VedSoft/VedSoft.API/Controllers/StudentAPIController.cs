@@ -61,7 +61,7 @@ namespace VedSoft.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(StudentAPIAction.ActionUpdateStudent)]
-        public async Task<ResponseModel<ResultModel>> UpdateStudent([FromBody] RequestModel<StudentModel_Old> input)
+        public async Task<ResponseModel<ResultModel>> UpdateStudent([FromBody] RequestModel<StudentAdmissionModel> input)
         {
             CurrentRequestParameter = input;
             CurrentUniqueID = input.RequestTxnID;

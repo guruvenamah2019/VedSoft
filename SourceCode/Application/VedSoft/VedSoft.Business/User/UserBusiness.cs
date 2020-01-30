@@ -76,6 +76,13 @@ namespace VedSoft.Business.Master
         {
             return RepositoryWrapper.StudentRepository.AddStudent(input);
         }
+
+        public int UpdateStudent(RequestModel<StudentAdmissionModel> input)
+        {
+            return RepositoryWrapper.StudentRepository.UpdateStudent(input);
+        }
+
+
         public int UpdateStudent(RequestModel<StudentModel_Old> input)
         {
             if (RepositoryWrapper.StudentRepository.DoesStudentIdExist(input))
