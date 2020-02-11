@@ -205,4 +205,50 @@ namespace VedSoft.Data.Contracts.Model
         [Column("CUSTOMER_SUBJECT_HIERACHY_ID")]
         public int CustomerSubjectHierarchyId { get; set; }
     }
+
+    [Table("BRANCH_BATCHES")]
+    public class BranchBatchesDB : CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("BRANCH_ID")]
+        public int BranchId { get; set; }
+        [Column("ACADEMIC_YEAR_ID")]
+        public int AcademicYearId { get; set; }
+        [Column("START_DATE")]
+        public Nullable<DateTime> StartDate { get; set; }
+        [Column("END_DATE")]
+        public Nullable<DateTime> EndDate { get; set; }
+        [Column("START_TIME")]
+        public int StartTime { get; set; }
+        [Column("END_TIME")]
+        public int EndTime { get; set; }
+    }
+    [Table("BRANCH_BATCH_SUBJECTS")]
+    public class BranchBatchSubjectsDB : CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("BRANCH_BATCHES_ID")]
+        public int BranchBatchesId { get; set; }
+        [Column("FACULTY_ID")]
+        public int FacultyId { get; set; }
+        [Column("CUSTOMER_SUBJECT_HIRARCHY_ID")]
+        public int CustomerSubjectHirarchyId { get; set; }
+        
+    }
+    [Table("BRANCH_BATCH_STUDENTS")]
+    public class BranchBatchStudentDB : CommonDBTableColumns
+    {
+        [Key]
+        [Column("ID")]
+        public int Id { get; set; }
+        [Column("BRANCH_BATCHES_ID")]
+        public int BranchBatchesId { get; set; }
+        [Column("STUDENT_ID")]
+        public int StudentId { get; set; }
+
+    }
 }
