@@ -483,4 +483,31 @@ namespace VedSoft.Business.Engine.Master
         }
         #endregion
     }
+
+    public class BatchBusinessEngine : BusinessEngineBase, IBatchBusinessEngine
+    {
+        public IBatchBusiness BatchBusiness { get; set; }
+
+        public ResponseModel<ResultModel> AddBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ResponseModel<List<BatchMasterModel>> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ResponseModel<ResultModel> MakeInActiveBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ResponseModel<ResultModel> UpdateBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+
 }

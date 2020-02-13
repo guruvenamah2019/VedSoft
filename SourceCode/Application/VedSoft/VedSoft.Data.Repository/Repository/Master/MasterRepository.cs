@@ -15,7 +15,7 @@ namespace VedSoft.Data.Repository.Repository.Master
     {
         public CustomerCourseHierarchyRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-            
+
         }
         public int AddCourseHierarchy(RequestModel<CourseHiearchyModel> input)
         {
@@ -27,7 +27,7 @@ namespace VedSoft.Data.Repository.Repository.Master
                 Active = CommonConstants.ActiveStatus,
                 CustomerId = input.CustomerId.GetValueOrDefault(),
                 Name = input.RequestParameter.Name,
-                HierarchyLevel=input.RequestParameter.HierarchyLevel,
+                HierarchyLevel = input.RequestParameter.HierarchyLevel,
                 ParentId = input.RequestParameter.ParentId == 0 ? null : input.RequestParameter.ParentId
             };
 
@@ -43,7 +43,7 @@ namespace VedSoft.Data.Repository.Repository.Master
         public int UpdateCourseHierarchy(RequestModel<CourseHiearchyModel> input)
         {
             var courseHierarchy = this.RepositoryContext.CustomerCourseHierarchy
-                            .Where(x => x.Id == input.RequestParameter.Id && x.Active==CommonConstants.ActiveStatus)
+                            .Where(x => x.Id == input.RequestParameter.Id && x.Active == CommonConstants.ActiveStatus)
                             .FirstOrDefault();
             if (courseHierarchy != null)
             {
@@ -64,13 +64,13 @@ namespace VedSoft.Data.Repository.Repository.Master
         {
             List<CourseHiearchyModel> courseHiearchyModelList = new List<CourseHiearchyModel>();
             var courseHierarchyList = this.RepositoryContext.CustomerCourseHierarchy
-                                      .Where(x => x.CustomerId == input.CustomerId 
-                                      && 
-                                        (input.RequestParameter.HierarchyLevel==0 
+                                      .Where(x => x.CustomerId == input.CustomerId
+                                      &&
+                                        (input.RequestParameter.HierarchyLevel == 0
                                         || input.RequestParameter.HierarchyLevel == null
-                                        || x.HierarchyLevel==input.RequestParameter.HierarchyLevel)
+                                        || x.HierarchyLevel == input.RequestParameter.HierarchyLevel)
                                       && x.Active == CommonConstants.ActiveStatus)
-                                      .Page(input.PageSize,input.PageNumber);
+                                      .Page(input.PageSize, input.PageNumber);
 
 
             foreach (var courseHierarchy in courseHierarchyList.ToList())
@@ -80,7 +80,7 @@ namespace VedSoft.Data.Repository.Repository.Master
                     Id = courseHierarchy.Id,
                     Name = courseHierarchy.Name,
                     ParentId = courseHierarchy.ParentId,
-                    HierarchyLevel=courseHierarchy.HierarchyLevel
+                    HierarchyLevel = courseHierarchy.HierarchyLevel
                 });
             }
 
@@ -103,24 +103,24 @@ namespace VedSoft.Data.Repository.Repository.Master
             this.RepositoryContext.Update(courseHierarchy);
             this.RepositoryContext.SaveChanges();
 
-            return CommonConstants.Success; 
+            return CommonConstants.Success;
         }
 
         public bool DoesCourseHieararchyExist(RequestModel<CourseHiearchyModel> input)
         {
             input.RequestParameter.ParentId = input.RequestParameter.ParentId == 0 ? null : input.RequestParameter.ParentId;
             return this.RepositoryContext.CustomerCourseHierarchy
-                                  .Where(x => x.CustomerId==input.CustomerId 
-                                  && x.Active== CommonConstants.ActiveStatus
-                                  && (x.ParentId == input.RequestParameter.ParentId || (x.ParentId==null && input.RequestParameter.ParentId==null))
+                                  .Where(x => x.CustomerId == input.CustomerId
+                                  && x.Active == CommonConstants.ActiveStatus
+                                  && (x.ParentId == input.RequestParameter.ParentId || (x.ParentId == null && input.RequestParameter.ParentId == null))
                                   && x.Name.ToLower() == input.RequestParameter.Name.ToLower())
-                                  .Count() >0;
+                                  .Count() > 0;
         }
 
         public bool DoesCourseHieararchyExistUpdate(RequestModel<CourseHiearchyModel> input)
         {
             return this.RepositoryContext.CustomerCourseHierarchy
-                                  .Where(x => x.CustomerId == input.CustomerId 
+                                  .Where(x => x.CustomerId == input.CustomerId
                                   && x.Name.ToLower() == input.RequestParameter.Name.ToLower()
                                   && x.Active == CommonConstants.ActiveStatus
                                   && (x.ParentId == input.RequestParameter.ParentId || (x.ParentId == null && input.RequestParameter.ParentId == null))
@@ -132,7 +132,7 @@ namespace VedSoft.Data.Repository.Repository.Master
         public bool DoesCourseHieararchyIdExist(RequestModel<CourseHiearchyModel> input)
         {
             return this.RepositoryContext.CustomerCourseHierarchy
-                                  .Where(x => x.CustomerId == input.CustomerId 
+                                  .Where(x => x.CustomerId == input.CustomerId
                                   && x.Id == input.RequestParameter.Id
                                    && x.Active == CommonConstants.ActiveStatus
                                   )
@@ -200,7 +200,7 @@ namespace VedSoft.Data.Repository.Repository.Master
                 academicYearModelList.Add(new AcademicYearModel
                 {
                     Id = academicYear.Id,
-                    AcademicYear= academicYear.AcademicYear
+                    AcademicYear = academicYear.AcademicYear
                 });
             }
 
@@ -540,7 +540,7 @@ namespace VedSoft.Data.Repository.Repository.Master
 
             //this.RepositoryContext.Database.CommitTransaction();
 
-            
+
 
             return customerCourse.Id;
         }
@@ -565,7 +565,7 @@ namespace VedSoft.Data.Repository.Repository.Master
 
                 //Save in database
                 this.RepositoryContext.Update(customerCourse);
-               // this.RepositoryContext.SaveChanges();
+                // this.RepositoryContext.SaveChanges();
 
                 var SubjectHiearchyIdList = this.RepositoryContext.CustomerCourseSubject
                                           .Where(x => x.CustomerId == input.CustomerId && x.CustomerCourseId == customerCourse.Id);
@@ -646,11 +646,11 @@ namespace VedSoft.Data.Repository.Repository.Master
                                       && x.Active == CommonConstants.ActiveStatus && x.CustomerCourseId == customerCourseList.Id).Select(x => x.CustomerSubjectHierarchyId).ToList();
             }
 
-            
+
 
             return customerCourseList;
         }
-        
+
 
         public int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input)
         {
@@ -793,8 +793,8 @@ namespace VedSoft.Data.Repository.Repository.Master
         {
             return this.RepositoryContext.CustomerCourseSubject
                                   .Where(x => x.CustomerId == input.CustomerId
-                                  && x.CustomerCourseId==input.RequestParameter.CustomerCourseId
-                                  && x.CustomerSubjectHierarchyId== input.RequestParameter.CustomerSubjectHiearchyId
+                                  && x.CustomerCourseId == input.RequestParameter.CustomerCourseId
+                                  && x.CustomerSubjectHierarchyId == input.RequestParameter.CustomerSubjectHiearchyId
                                   && x.Active == CommonConstants.ActiveStatus)
                                   .Count() > 0;
         }
@@ -818,6 +818,47 @@ namespace VedSoft.Data.Repository.Repository.Master
                                    && x.Active == CommonConstants.ActiveStatus
                                   )
                                   .Count() > 0;
+        }
+    }
+    public class BranchBatchRepository : RepositoryBase<BranchBatchesDB>, IBranchBatchRepository
+    {
+        public BranchBatchRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        {
+
+        }
+        public int AddBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DoesBatchSubjectExist(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DoesBatchSubjectExistUpdate(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DoesBatchSubjectIdExist(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BatchMasterModel> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int MakeInActiveBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
         }
     }
 }

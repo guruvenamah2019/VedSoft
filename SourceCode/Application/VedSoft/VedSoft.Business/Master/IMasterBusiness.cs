@@ -8,8 +8,8 @@ using VedSoft.Model.User;
 
 namespace VedSoft.Business.Master
 {
-   public interface IMasterBusiness:IBusinessBase
-   {
+    public interface IMasterBusiness : IBusinessBase
+    {
         #region Customer
         ResultModel AddCustomer(CustomerModel input);
         CustomerModel GetCustomerDetailsById(CustomerModel input);
@@ -65,7 +65,7 @@ namespace VedSoft.Business.Master
         CustomerCourseModel GetCustomerCourseInfo(RequestModel<ResultInputIdModel> input);
 
 
-        
+
         int MakeInActiveCustomerCourse(RequestModel<CustomerCourseModel> input);
         #endregion
 
@@ -75,5 +75,14 @@ namespace VedSoft.Business.Master
         List<CustomerCourseSubjectModel> GetCustomerCourseSubjectList(SearchRequestModel<CustomerCourseSubjectModel> input);
         int MakeInActiveCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input);
         #endregion
+    }
+
+    public interface IBatchBusiness : IBusinessBase
+    {
+        int AddBatch(RequestModel<BatchMasterModel> input);
+        int UpdateBatch(RequestModel<BatchMasterModel> input);
+        List<BatchMasterModel> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input);
+
+        int MakeInActiveBatch(RequestModel<BatchMasterModel> input);
     }
 }

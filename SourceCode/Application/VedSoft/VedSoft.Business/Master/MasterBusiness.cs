@@ -21,24 +21,25 @@ namespace VedSoft.Business.Master
         public ResultModel AddCustomer(CustomerModel input)
         {
             //Make db object
-            CustomerModelDB objCustomerModelDB = new CustomerModelDB {
-                 Active=input.Active,
-                 Address=input.Address,
-                 Code=input.Code,
-                 ContactNumber=input.ContactNumber,
-                 CreatedBy=input.CreatedBy,
-                 CreatedDate=input.CreatedDate,
-                 Description=input.Description,
-                 Name=input.Name,
-                 OtherInfo=input.OtherInfo,
-                 SubDomain=input.SubDomain
+            CustomerModelDB objCustomerModelDB = new CustomerModelDB
+            {
+                Active = input.Active,
+                Address = input.Address,
+                Code = input.Code,
+                ContactNumber = input.ContactNumber,
+                CreatedBy = input.CreatedBy,
+                CreatedDate = input.CreatedDate,
+                Description = input.Description,
+                Name = input.Name,
+                OtherInfo = input.OtherInfo,
+                SubDomain = input.SubDomain
             };
 
             //Save in database
             RepositoryWrapper.CustomerRepository.Create(objCustomerModelDB);
             RepositoryWrapper.CustomerRepository.Save();
 
-            return new ResultModel { PrimaryKey=input.CustomerId };
+            return new ResultModel { PrimaryKey = input.CustomerId };
         }
 
         //To get the customer details by Id
@@ -48,19 +49,20 @@ namespace VedSoft.Business.Master
                                     .CustomerRepository
                                     .FindByCondition(x => x.CustomerId == input.CustomerId)
                                     .FirstOrDefault();
-            
-            return new CustomerModel {
-                Code =customerDetails.Code,
-                Address =customerDetails.Address,
-                Active =customerDetails.Active,
-                ContactNumber =customerDetails.ContactNumber,
-                CreatedBy=customerDetails.CreatedBy,
-                CreatedDate =customerDetails.CreatedDate,
-                CustomerId =customerDetails.CustomerId,
-                Description =customerDetails.Description,
-                Name=customerDetails.Name,
-                OtherInfo =customerDetails.OtherInfo,
-                SubDomain =customerDetails.SubDomain
+
+            return new CustomerModel
+            {
+                Code = customerDetails.Code,
+                Address = customerDetails.Address,
+                Active = customerDetails.Active,
+                ContactNumber = customerDetails.ContactNumber,
+                CreatedBy = customerDetails.CreatedBy,
+                CreatedDate = customerDetails.CreatedDate,
+                CustomerId = customerDetails.CustomerId,
+                Description = customerDetails.Description,
+                Name = customerDetails.Name,
+                OtherInfo = customerDetails.OtherInfo,
+                SubDomain = customerDetails.SubDomain
             };
 
         }
@@ -93,7 +95,7 @@ namespace VedSoft.Business.Master
         #region CourseHierarchy
         public int AddCourseHierarchy(RequestModel<CourseHiearchyModel> input)
         {
-            if(!RepositoryWrapper.MasterRepository.DoesCourseHieararchyExist(input))
+            if (!RepositoryWrapper.MasterRepository.DoesCourseHieararchyExist(input))
             {
                 return RepositoryWrapper.MasterRepository.AddCourseHierarchy(input);
             }
@@ -420,7 +422,8 @@ namespace VedSoft.Business.Master
             return RepositoryWrapper.CustomerCourseRepository.GetCustomerCourseList(input);
         }
 
-        public CustomerCourseModel GetCustomerCourseInfo(RequestModel<ResultInputIdModel> input) {
+        public CustomerCourseModel GetCustomerCourseInfo(RequestModel<ResultInputIdModel> input)
+        {
             return RepositoryWrapper.CustomerCourseRepository.GetCustomerCourseInfo(input);
         }
 
@@ -486,6 +489,29 @@ namespace VedSoft.Business.Master
             }
         }
         #endregion
+    }
+
+    public class BatchBusiness : BusinessBase, IBatchBusiness
+    {
+        public int AddBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BatchMasterModel> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int MakeInActiveBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateBatch(RequestModel<BatchMasterModel> input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

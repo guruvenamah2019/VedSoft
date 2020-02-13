@@ -67,5 +67,33 @@ namespace VedSoft.Model.Master
         public int CustomerSubjectHiearchyId { get; set; }
         public int UserId { get; set; }
     }
+    public class BatchMasterModel
+    {
+        public int? Id { get; set; }
+        public string Name { get; set; }
+        public int BranchId { get; set; }
+        public int AcademicYearId { get; set; }
+        public Nullable<DateTime> StartDate { get; set; }
+        public Nullable<DateTime> EndDate { get; set; }
+        public int StartTime { get; set; }
+        public int EndTime { get; set; }
+        public int UserId { get; set; }
+        public List<int> CustomerSubjectHiearchyIdList { get; set; }
+    }
+
+    public class BatchSubjectsModel
+    {
+        public int? Id { get; set; }
+        public int BatchesId { get; set; }
+        public int FacultyId { get; set; }
+        public int SubjectHirarchyId { get; set; }
+    }
+    public class BatchStudentModel
+    {
+        public int? Id { get; set; }
+        public int BatchesId { get; set; }
+        public int StudentId { get; set; }
+     
+    }
 
 }

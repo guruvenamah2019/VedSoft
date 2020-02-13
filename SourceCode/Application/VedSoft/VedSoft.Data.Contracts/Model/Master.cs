@@ -214,6 +214,8 @@ namespace VedSoft.Data.Contracts.Model
         public int Id { get; set; }
         [Column("BRANCH_ID")]
         public int BranchId { get; set; }
+        [Column("NAME")]
+        public string Name { get; set; }
         [Column("ACADEMIC_YEAR_ID")]
         public int AcademicYearId { get; set; }
         [Column("START_DATE")]

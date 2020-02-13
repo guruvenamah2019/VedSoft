@@ -9,7 +9,7 @@ using VedSoft.Model.User;
 
 namespace VedSoft.Business.Engine.Master
 {
-    public interface IMasterBusinessEngine:IBusinessEngineBase
+    public interface IMasterBusinessEngine : IBusinessEngineBase
     {
         IMasterBusiness MasterBusiness { get; set; }
 
@@ -22,7 +22,7 @@ namespace VedSoft.Business.Engine.Master
         #region CourseHierarchy
         ResponseModel<ResultModel> AddCourseHierarchy(RequestModel<CourseHiearchyModel> input);
         ResponseModel<ResultModel> UpdateCourseHierarchy(RequestModel<CourseHiearchyModel> input);
-        ResponseModel<List<CourseHiearchyModel>>  GetCourseHierarchy(SearchRequestModel<CourseHiearchyModel> input);
+        ResponseModel<List<CourseHiearchyModel>> GetCourseHierarchy(SearchRequestModel<CourseHiearchyModel> input);
         ResponseModel<ResultModel> MakeInActiveCourseHierarchy(RequestModel<CourseHiearchyModel> input);
         #endregion
 
@@ -75,5 +75,16 @@ namespace VedSoft.Business.Engine.Master
         ResponseModel<List<CustomerCourseSubjectModel>> GetCustomerCourseSubjectList(SearchRequestModel<CustomerCourseSubjectModel> input);
         ResponseModel<ResultModel> MakeInActiveCustomerCourseSubject(RequestModel<CustomerCourseSubjectModel> input);
         #endregion
+    }
+
+    public interface IBatchBusinessEngine : IBusinessEngineBase
+    {
+        IBatchBusiness BatchBusiness { get; set; }
+
+        ResponseModel<ResultModel> AddBatch(RequestModel<BatchMasterModel> input);
+        ResponseModel<ResultModel> UpdateBatch(RequestModel<BatchMasterModel> input);
+        ResponseModel<List<BatchMasterModel>> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input);
+
+        ResponseModel<ResultModel> MakeInActiveBatch(RequestModel<BatchMasterModel> input);
     }
 }

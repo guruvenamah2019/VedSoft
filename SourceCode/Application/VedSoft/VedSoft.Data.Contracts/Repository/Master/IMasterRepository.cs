@@ -98,4 +98,22 @@ namespace VedSoft.Data.Contracts.Repository.Master
 
         bool DoesCustomerCourseSubjectIdExist(RequestModel<CustomerCourseSubjectModel> input);
     }
+
+    public interface IBranchBatchRepository : IRepositoryBase<BranchBatchesDB>
+    {
+        int AddBatch(RequestModel<BatchMasterModel> input);
+
+        bool DoesBatchSubjectExist(RequestModel<BatchMasterModel> input);
+
+        bool DoesBatchSubjectExistUpdate(RequestModel<BatchMasterModel> input);
+
+        bool DoesBatchSubjectIdExist(RequestModel<BatchMasterModel> input);
+
+        List<BatchMasterModel> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input);
+
+        int MakeInActiveBatch(RequestModel<BatchMasterModel> input);
+
+        int UpdateBatch(RequestModel<BatchMasterModel> input);
+
+    }
 }
