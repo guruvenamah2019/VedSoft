@@ -831,7 +831,7 @@ namespace VedSoft.Data.Repository.Repository.Master
             throw new NotImplementedException();
         }
 
-        public bool DoesBatchSubjectExist(RequestModel<BatchMasterModel> input)
+        public bool DoesBatchExist(RequestModel<BatchMasterModel> input)
         {
             throw new NotImplementedException();
         }
@@ -846,7 +846,7 @@ namespace VedSoft.Data.Repository.Repository.Master
             throw new NotImplementedException();
         }
 
-        public List<BatchMasterModel> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input)
+        public List<BatchMasterModel> GetBranchBatchList(SearchRequestModel<BatchMasterModel> input)
         {
             throw new NotImplementedException();
         }

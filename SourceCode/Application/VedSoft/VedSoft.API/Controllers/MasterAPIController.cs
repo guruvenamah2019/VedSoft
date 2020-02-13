@@ -20,15 +20,23 @@ namespace VedSoft.API.Controllers
     public partial class MasterAPIController : ApiBaseController
     {
 
-        private IMasterBusinessEngine _masterBusinessEngine;
+        private readonly IMasterBusinessEngine _masterBusinessEngine;
+        private readonly IBatchBusinessEngine _batchBusinessEngine;
+
 
         public MasterAPIController(IMasterBusinessEngine masterBusinessEngine, IMasterBusiness masterBusiness,
+            IBatchBusinessEngine batchBusinessEngine, IBatchBusiness batchBusiness,
             IVedSoftLogger iLogger, IRepositoryWrapper repoWrapper) : base(iLogger)
         {
             _masterBusinessEngine = masterBusinessEngine;
             _masterBusinessEngine.MasterBusiness = masterBusiness;
             _masterBusinessEngine.RepositoryWrapper = repoWrapper;
             masterBusiness.RepositoryWrapper = repoWrapper;
+
+            _batchBusinessEngine = batchBusinessEngine;
+            _batchBusinessEngine.BatchBusiness = batchBusiness;
+            _batchBusinessEngine.BatchBusiness.RepositoryWrapper = repoWrapper;
+            _batchBusinessEngine.RepositoryWrapper = repoWrapper;
         }
 
         /// <summary>

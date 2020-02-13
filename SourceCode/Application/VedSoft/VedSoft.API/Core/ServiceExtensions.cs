@@ -103,6 +103,8 @@ namespace VedSoft.API.Core
             services.AddScoped<IUserBusinessEngine, UserBusinessEngine>();
             services.AddScoped<ILoginBusinessEngine, LoginBusinessEngine>();
             services.AddScoped<ILoginBusiness, LoginBusiness>();
+            services.AddScoped<IBatchBusinessEngine, BatchBusinessEngine>();
+            services.AddScoped<IBatchBusiness, BatchBusiness>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddSingleton<IVedSoftLogger, Logger.Logger>();
         }

@@ -103,13 +103,13 @@ namespace VedSoft.Data.Contracts.Repository.Master
     {
         int AddBatch(RequestModel<BatchMasterModel> input);
 
-        bool DoesBatchSubjectExist(RequestModel<BatchMasterModel> input);
+        bool DoesBatchExist(RequestModel<BatchMasterModel> input);
 
         bool DoesBatchSubjectExistUpdate(RequestModel<BatchMasterModel> input);
 
         bool DoesBatchSubjectIdExist(RequestModel<BatchMasterModel> input);
 
-        List<BatchMasterModel> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input);
+        List<BatchMasterModel> GetBranchBatchList(SearchRequestModel<BatchMasterModel> input);
 
         int MakeInActiveBatch(RequestModel<BatchMasterModel> input);
 

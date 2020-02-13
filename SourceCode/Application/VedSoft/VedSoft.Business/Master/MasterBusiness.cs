@@ -495,12 +495,19 @@ namespace VedSoft.Business.Master
     {
         public int AddBatch(RequestModel<BatchMasterModel> input)
         {
-            throw new NotImplementedException();
+            if (!RepositoryWrapper.BatchRepository.DoesBatchExist(input))
+            {
+                return RepositoryWrapper.BatchRepository.AddBatch(input);
+            }
+            else
+            {
+                return CommonConstants.DuplicateRecord;
+            }
         }
 
         public List<BatchMasterModel> GetBarchBatchList(SearchRequestModel<BatchMasterModel> input)
         {
-            throw new NotImplementedException();
+            return RepositoryWrapper.BatchRepository.GetBranchBatchList(input);
         }
 
         public int MakeInActiveBatch(RequestModel<BatchMasterModel> input)

@@ -31,6 +31,7 @@ namespace VedSoft.Data.Repository
         private ICustomerCourseSubjectRepository _customerCourseSubjectRepository;
         private IStudentAdmisionDetailsRepository _studentAdmissionDetailsRepository;
         private IStudentCourseRepository _studentCourseRepository;
+        private IBranchBatchRepository _batchRepository;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -163,6 +164,13 @@ namespace VedSoft.Data.Repository
             get
             {
                 return _studentCourseRepository ?? new StudentCourseRepository(_repoContext);
+            }
+        }
+
+        public IBranchBatchRepository BatchRepository {
+            get
+            {
+                return _batchRepository ?? new BranchBatchRepository(_repoContext);
             }
         }
     }

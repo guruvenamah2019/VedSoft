@@ -109,4 +109,11 @@ namespace VedSoft.Utility.Constants
         public const string ActionGetEducationInstituteList = "GetEducationInstituteList";
         public const string ActionMakeInActiveEducationInstitute = "MakeInActiveEducationInstitute";
     }
+    public class CustomerBatchAPIAction
+    {
+        public const string ActionAddCustomerBatch = "AddBatch";
+        public const string ActionUpdateCustomerBatch = "UpdateBatch";
+        public const string ActionGetCustomerBatch = "GetBatches";
+        public const string ActionMakeInActiveCustomerBatch = "MakeInActiveBatch";
+    }
 }
